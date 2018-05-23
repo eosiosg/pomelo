@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/.m2/repository/com/squareup/okio/okio/1.13.0/okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_0bbfe98919bce8c60ef47e7b49950a2ce882eb2b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/jars/libs/infer-annotations-4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_4d450c19cd1409500fe76234e33c0c17d2948c7b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_fe0d811c603a521b7d91dec8adc6c78fbf345b84.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_e7eb490e4f388ce3d94ad0ffd48ffff738086d48.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_d2f1d6d0c8fe11ce6ffbeb0a86d5baecbbc5f8c1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/exploded-aar/eoswallet/react-native-randombytes/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="370e587b38f784c383ecef617088104a5486bdb3">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/eoswallet-react-native-randombytes-unspecified_2933e0e2dbf016cb23dc1240fadab2d42645821b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_1ad561d3fa33da691755e2a1a7e96b06d66b3b95.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1_0ed11cced466303325dba38b510fb9abeaff34aa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_c9a9e00226f0b764c0a8e01390eba5106b53d00a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.3.0_e207b66436ba131b42f0bfc85c01bbcb5dfe3bbb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.3.0_ff38762622451725a5940a4b9af579cda718b346.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_18a15001c1951e8bf090e1f9c0f23767423c3078.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.6.0/3f9b16b774f2c36cfd86dd2053d0b3059531dacc/okhttp-urlconnection-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_69f358de7cc58b05aec065934c9b24a83ce51c6d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_0f4980562f25b8841f3da788c593b861082a7ae6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_bb8c0433cebc28b4fbaa62261d744794cd0a7666.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="e31331bdf6b5952badadbfc171f04b95c55d3b16">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.55.4_731e81ec40a31fabbff2a4fe50254656286f4748.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_03ef8f4c9e8bcd26967b2215c422296711b7f3a6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_1b792840d7dac6a8852f2ea9bbb72e5fecc04d15.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_02c40c3edbea1eba4e8c2a18c67b77e0d7702b81.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_28009d4d8b8fa66177b9153032175e8e22eed263.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_b81a8fd3eb437048d791fbcf443978fe266ca04f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/xiechao/.m2/repository/com/google/code/findbugs/jsr305/3.0.0/jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/xiechao/codes/eos-wallet-app/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_74bfe9d1f22c0e3cb58290a2aff6276459574017.jar" />
+    </item>
+
+</items>

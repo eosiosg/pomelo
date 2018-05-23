@@ -1,0 +1,5 @@
+rootProject.name = 'eoswallet'
+include ':react-native-randombytes'
+project(':react-native-randombytes').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-randombytes/android')
+
+include ':app'
