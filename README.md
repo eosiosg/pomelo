@@ -1,4 +1,4 @@
-## An epic EOS wallet crafted by the joint force: eosio.sg + MEET.ONE + eos.cannon
+## An epic EOS wallet crafted by the joint force: eosio.sg + MEET.ONE + eoscannon
 
 ### Install
 ```
