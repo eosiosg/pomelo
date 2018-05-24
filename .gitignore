@@ -1,3 +1,5 @@
 .idea/*
 node_modules/*
 ios/Pods/Pods.xcodeproj/xcuserdata/*
+
+ios/build
