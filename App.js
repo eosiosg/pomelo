@@ -1,9 +1,11 @@
 // 引入公共组件
 import React, { Component } from "react";
-import {createStore, applyMiddleware } from "redux";
+import {createStore, compose, applyMiddleware } from "redux";
 import {Provider} from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import { StackNavigator } from "react-navigation";
+//import { persistStore, autoRehydrate } from "redux-persist";
+//import createEncryptor from "redux-persist-transform-encrypt";
 
 // 引入自定义组件
 import saga from "./src/utils/saga";
@@ -19,7 +21,7 @@ import WalletPage from "./src/pages/WalletPage";
 const Navigator = StackNavigator(
   {
     HomePage: { screen: HomePage },
-    WalletPage: { screen: WalletPage }
+    WalletPage: { screen: WalletPage },
   },
     {
         NodeListPage: { screen: NodeListPage },
