@@ -12,11 +12,14 @@ import reducers from "./src/utils/reducers";
 // 引入自定义组件
 import HomePage from "./src/pages/HomePage";
 import NodeListPage from "./src/pages/NodeListPage";
+import WalletPage from "./src/pages/WalletPage";
+
 
 // Navigator
 const Navigator = StackNavigator(
   {
     HomePage: { screen: HomePage },
+    WalletPage: { screen: WalletPage }
   },
     {
         NodeListPage: { screen: NodeListPage },
@@ -25,7 +28,7 @@ const Navigator = StackNavigator(
     navigationOptions: {
       header: null,
     },
-  },
+  }
 );
 // create SagaMiddleware
 const sagaMiddleware = createSagaMiddleware();

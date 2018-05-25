@@ -5,10 +5,18 @@ const styles = StyleSheet.create({
     position: "relative",
     flexBasis: "100%",
     minHeight: Dimensions.get("window").height,
-    backgroundColor: "#fff",
+    backgroundColor: "#fafafa",
+    paddingLeft : 10,
   },
   contentBox: {
-    paddingTop: 100,
+    paddingTop: 20,
+  },
+  contentBoxTitle :{
+    fontSize: 18,
+    color: "#000",
+    lineHeight: 25,
+    paddingTop : 15,
+    paddingBottom : 10,
   },
   titleBox: {
     position: "relative",
@@ -19,7 +27,33 @@ const styles = StyleSheet.create({
     color: "#222",
     textAlign: "center",
     lineHeight: 25,
+    paddingTop : 15,
+    paddingBottom : 10,
   },
+  conItemTextInput: {
+    flexGrow: 1,
+    fontSize : 18,
+    paddingTop : 5,
+    paddingBottom : 5,
+    backgroundColor: "#fff",
+    color: "#000",
+  },
+  bottomContent  :{
+    position : "absolute",
+    bottom : 20,
+    width : "100%",
+  },
+  buttonSubmit:{
+    width : "90%",
+    marginLeft : "5%",
+    backgroundColor: "#000",
+    color : "#fff",
+    textAlign: "center",
+    fontSize : 18,
+    paddingBottom : 10,
+    paddingTop  :10,
+    borderRadius: 3
+  }
 });
 export {
   styles
