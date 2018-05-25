@@ -3,14 +3,14 @@
  */
 
 const initState = {
-    allAsset: [],
+    votingList: [],
 };
 export default function VotePageReducer (state = initState, action) {
     switch (action.type) {
         case "VOTE_LIST_REDUCER":
             return Object.assign({}, state, {
                 "votingList": action.data
-            });
+            })
         default:
             return state;
     }

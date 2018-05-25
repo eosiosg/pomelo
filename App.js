@@ -1,9 +1,11 @@
 // 引入公共组件
 import React, { Component } from "react";
-import {createStore, applyMiddleware } from "redux";
+import {createStore, compose, applyMiddleware } from "redux";
 import {Provider} from "react-redux";
 import createSagaMiddleware from "redux-saga";
 import { StackNavigator } from "react-navigation";
+//import { persistStore, autoRehydrate } from "redux-persist";
+//import createEncryptor from "redux-persist-transform-encrypt";
 
 // 引入自定义组件
 import saga from "./src/utils/saga";
@@ -13,29 +15,23 @@ import reducers from "./src/utils/reducers";
 import HomePage from "./src/pages/HomePage";
 import VotePage from "./src/pages/VotePage";
 import NodeListPage from "./src/pages/NodeListPage";
+import WalletPage from "./src/pages/WalletPage";
+
 
 // Navigator
 const Navigator = StackNavigator(
-
-  // {
-  //   HomePage: { screen: HomePage },
-  // },
-  //   {
-  //       VotePage: { screen: VotePage },
-  //   },
-    {
-        NodeListPage: { screen: NodeListPage },
-    },
   {
-    navigationOptions: {
-      header: null,
-    },
+    HomePage: { screen: HomePage },
+    WalletPage: { screen: WalletPage },
+    NodeListPage: { screen: NodeListPage },
+    VotePage: { screen: VotePage },
   },
-  // {
-  //   navigationOptions: {
-  //     header: null,
-  //   },
-  // },
+{
+    navigationOptions: {
+        header: null,
+    }
+}
+
 );
 // create SagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
