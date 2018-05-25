@@ -11,10 +11,12 @@ import reducers from "./src/utils/reducers";
 
 // 引入自定义组件
 import HomePage from "./src/pages/HomePage";
+import VoteIndexPage from "./src/pages/VoteIndexPage";
 
 // Navigator
 const Navigator = StackNavigator(
   {
+    VoteIndexPage: { screen: VoteIndexPage },
     HomePage: { screen: HomePage },
   },
   {
