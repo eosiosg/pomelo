@@ -11,17 +11,21 @@ import reducers from "./src/utils/reducers";
 
 // 引入自定义组件
 import HomePage from "./src/pages/HomePage";
+import VotePage from "./src/pages/VotePage";
 
 // Navigator
 const Navigator = StackNavigator(
+  // {
+  //   HomePage: { screen: HomePage },
+  // },
   {
-    HomePage: { screen: HomePage },
+    VotePage: { screen: VotePage },
   },
-  {
-    navigationOptions: {
-      header: null,
-    },
-  },
+  // {
+  //   navigationOptions: {
+  //     header: null,
+  //   },
+  // },
 );
 // create SagaMiddleware
 const sagaMiddleware = createSagaMiddleware();

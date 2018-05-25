@@ -26,7 +26,7 @@ const initData = [
   },
   {
     id: 5,
-    title: "假数据5",
+    title: "假数据5a",
   },
 ];
 export function* getHomeAllAsset() {
