@@ -13,7 +13,7 @@ class HomePage extends Component {
         this.state = {};
     }
     componentWillReceiveProps( nextProps ) {
-      console.log(nextProps.allAsset);
+      console.log('home:',nextProps.allAsset);
     }
     componentDidMount() {
         // 获取数据

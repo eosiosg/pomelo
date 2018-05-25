@@ -12,14 +12,24 @@ import reducers from "./src/utils/reducers";
 // 引入自定义组件
 import HomePage from "./src/pages/HomePage";
 import VotePage from "./src/pages/VotePage";
+import NodeListPage from "./src/pages/NodeListPage";
 
 // Navigator
 const Navigator = StackNavigator(
+
   // {
   //   HomePage: { screen: HomePage },
   // },
+  //   {
+  //       VotePage: { screen: VotePage },
+  //   },
+    {
+        NodeListPage: { screen: NodeListPage },
+    },
   {
-    VotePage: { screen: VotePage },
+    navigationOptions: {
+      header: null,
+    },
   },
   // {
   //   navigationOptions: {

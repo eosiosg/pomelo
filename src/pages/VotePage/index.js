@@ -5,9 +5,8 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import LinearGradient from "react-native-linear-gradient";
 import { ScrollView, View, Text, Image, TouchableHighlight, Dimensions } from "react-native";
-import { getVotingList } from "./getVotingList";
+import { getVotingList } from "./saga";
 // 自定义组件
 import { styles } from "./style";
 
@@ -18,15 +17,14 @@ class VotePage extends Component {
     }
 
     componentWillReceiveProps( nextProps ) {
-        console.log('nextprops');
-        console.log(nextProps.allAsset);
+        console.log('nextprops: ',nextProps);
     }
     componentDidMount() {
         // 获取数据
         this.props.onDispatchGetAllVotingList();
     }
     render() {
-        console.log('==========');
+        console.log('=====vote props=====');
         console.log(this.props);
         return (
             <View style={styles.bodyBox}>
@@ -43,14 +41,12 @@ class VotePage extends Component {
 }
 
 // 挂载中间件到组件；
-function mapDispatchToProps() {
+function mapDispatchToProps(dispatch) {
     return {
-        onDispatchGetAllVotingList: getVotingList,
+        onDispatchGetAllVotingList: () => dispatch( { type: "VOTE_LIST_REDUCER" } ),
     };
 }
 function mapStateToProps(state) {
-    console.log('=======');
-    console.log(state.VotePageReducer);
     return {
         allAsset: state.VotePageReducer.votingList,
     };
