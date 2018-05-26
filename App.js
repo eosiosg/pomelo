@@ -14,6 +14,9 @@ import reducers from "./src/utils/reducers";
 // 引入自定义组件
 import HomePage from "./src/pages/HomePage";
 import VotePage from "./src/pages/VotePage";
+import VoteIndexPage from "./src/pages/VoteIndexPage";
+import DelegatebwPage from "./src/pages/DelegatebwPage";
+import UnDelegatebwPage from "./src/pages/UnDelegatebwPage";
 import NodeListPage from "./src/pages/NodeListPage";
 import WalletPage from "./src/pages/WalletPage";
 
@@ -21,9 +24,13 @@ import WalletPage from "./src/pages/WalletPage";
 // Navigator
 const Navigator = StackNavigator(
   {
-    // HomePage: { screen: HomePage },
-    // WalletPage: { screen: WalletPage },
-    // NodeListPage: { screen: NodeListPage },
+
+    VoteIndexPage: { screen: VoteIndexPage },
+    DelegatebwPage: { screen: DelegatebwPage },
+    UnDelegatebwPage: { screen: UnDelegatebwPage },
+    HomePage: { screen: HomePage },
+    WalletPage: { screen: WalletPage },
+    NodeListPage: { screen: NodeListPage },
     VotePage: { screen: VotePage },
   },
 {
