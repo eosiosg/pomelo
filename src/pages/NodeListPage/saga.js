@@ -1,35 +1,17 @@
-import { put, call} from "redux-saga/effects";
-import request from "../../utils/request";
-import service from "../../utils/service";
+import { put } from "redux-saga/effects";
 
-// 创建假数据
-const initData = [
-    {
-        id: 0,
-        title: "假数据01",
-    },
-    {
-        id: 1,
-        title: "假数据12",
-    },
-    {
-        id: 2,
-        title: "假数据23",
-    },
-    {
-        id: 3,
-        title: "假数据3",
-    },
-    {
-        id: 4,
-        title: "假数据4",
-    },
-    {
-        id: 5,
-        title: "假数据5",
-    },
-];
 export function* getNodeListAllAsset() {
+    const initData = [];
+
+    for ( let index = 0; index < 30; index++ ) {
+        initData.push( {
+            id: index,
+            title: "MEET.ONE " + index,
+            website: "http://meet.one",
+            description: '20% voter choose'
+        } )
+    }
+
     try {
         // 以下是正式的请求方式，暂不使用
         // // 组装请求数据
@@ -45,6 +27,7 @@ export function* getNodeListAllAsset() {
         // if (response.code === 0) {
         //     yield put({ type: "HOME_GETALLASSET_REDUCER", response.data });
         // }
-        yield put({ type: "HOME_GETALLASSET_REDUCER", data: initData });
-    } catch (err) {}
+        yield put( { type: "HOME_GETALLASSET_REDUCER", data: initData } );
+    } catch ( err ) {
+    }
 }
