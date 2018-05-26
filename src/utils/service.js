@@ -5,8 +5,8 @@
 const service = {
     ENV: "dev",
     ENVOption: {
-        dev: "http://192.168.1.104:1101/",
-        pro: "/dpos/v1/",
+        dev: "http://13.229.70.163:8888/",
+        pro: "http://13.229.70.163:8888/",
     },
     API: {
       HomePageGetAllAsset: "user/asset",

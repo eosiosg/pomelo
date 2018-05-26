@@ -9,41 +9,69 @@ const styles = StyleSheet.create({
     paddingLeft : 10,
   },
   contentBox: {
-    paddingTop: 10,
-    paddingBottom: 20,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems : "center"
-  },
-  contentBoxTitle :{
-    fontSize: 18,
-    color: "#000",
-    lineHeight: 25,
-    paddingTop : 15,
-    paddingBottom : 10,
+    paddingTop: 25,
   },
   titleBox: {
     position: "relative",
     marginBottom: 15,
   },
-  contentBoxImg :{
-    height :20,
-  },
   titleTextTop: {
-    fontSize: 22,
+    fontSize: 18,
     color: "#222",
-    textAlign: "center",
+    textAlign: "right",
     lineHeight: 25,
+    marginRight: 15,
+  },
+  contentMain :{
+    width : "90%",
+    marginLeft : "5%",
+    paddingTop: 30,
+  },
+  ContentTitleText:{
+    fontSize: 28,
+    color: "#000",
+    paddingBottom: 10,
+  },
+  ContentBg:{
+    backgroundColor: "#000",
+    borderRadius : 5,
+    padding : 15
+  },
+  ContentBgTopText:{
+    paddingTop: 20,
+    color : "#fff",
+    fontSize: 20,
+  },
+  ContentBgMid:{
+    paddingTop: 25,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems : "center"
+  },
+  ContentBgMidText:{
+    color : "#fafafa",
+    fontSize: 18,
+  },
+  ContentBgMidBack:{
 
   },
-  conItemTextInput: {
-    flexGrow: 1,
+  ContentBgMidAccount :{
+    color : "#fff",
+    fontSize : 26,
+    fontWeight: "bold",
+  },
+  ContentBgMidName :{
+    color : "#fff",
     fontSize : 18,
-    paddingTop : 10,
-    paddingBottom : 10,
-    backgroundColor: "#fff",
-    color: "#000",
+  },
+  ContentBgBottomText:{
+    color : "#fafafa",
+    fontSize : 18,
+    textAlign: "right"
+  },
+  ContentBgBottom :{
+    paddingTop: 15,
   },
   bottomContent  :{
     position : "absolute",
@@ -89,7 +117,9 @@ const styles = StyleSheet.create({
   },
   // 内容
   contentText:{
-    margin:8,
+    margin:10,
+    paddingBottom : 20,
+    paddingTop  :10,
     fontSize:14,
     textAlign:'center',
   },
@@ -121,6 +151,7 @@ const styles = StyleSheet.create({
     color:'#3393F2',
     textAlign:'center',
   },
+
 });
 export {
   styles

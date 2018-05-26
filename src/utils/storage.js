@@ -32,6 +32,9 @@ localSave.set = (key, data) => {
 localSave.setLoginUserPhone = (phone) => {
     localSave.set("LoginUserPhone", phone);
 };
+localSave.setAccountPublicKey = (key) => {
+    localSave.set("accountPublicKey", key);
+};
 localSave.setLoginUserId = (id) => {
     localSave.set("LoginUserId", id);
 };
