@@ -1,8 +1,6 @@
-// 引入公共组件
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { FlatList, InteractionManager, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
-// 自定义组件
 import { styles as style, styles } from "./style";
 import { getDpFromPx } from "../../utils/util";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -38,9 +36,9 @@ class NodeListPage extends Component {
     }
 
     componentDidMount() {
-        InteractionManager.runAfterInteractions( () => {
+        // InteractionManager.runAfterInteractions( () => {
             this.props.onDispatchGetAllAssetPost();
-        } );
+        // } );
     }
 
 
@@ -128,7 +126,7 @@ class NodeListPage extends Component {
 
         return (
             <SafeAreaView style={styles.wrapper}>
-                <View style={styles.wrapper}>
+                <View style={[styles.wrapper, {backgroundColor: '#fafafa',}]}>
                     <View style={styles.wrapper}>
                         <FlatList
                             data={this.props.allAsset}
@@ -195,7 +193,6 @@ class NodeListPage extends Component {
     }
 }
 
-// 挂载中间件到组件；
 function mapDispatchToProps( dispatch, ownProps ) {
     return {
         onDispatchGetAllAssetPost: () => dispatch( { type: "NODE_LIST_GET_ALL_ASSET_POST" } ),

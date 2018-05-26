@@ -28,7 +28,7 @@ export function* getNodeListAllAsset() {
         //     yield put({ type: "HOME_GETALLASSET_REDUCER", response.data });
         // }
 
-        yield put( { type: "HOME_GETALLASSET_REDUCER", data: initData } );
+        yield put( { type: "GET_ALL_NODE_LIST_REDUCER", data: initData } );
 
     } catch ( err ) {
     }

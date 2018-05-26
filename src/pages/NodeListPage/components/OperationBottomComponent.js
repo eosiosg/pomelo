@@ -2,12 +2,8 @@ import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import { SlideAnimation } from 'react-native-popup-dialog';
 import Icon from "react-native-vector-icons/Ionicons";
 import { styles as style } from "../style";
-
-const slideAnimation = new SlideAnimation( { slideFrom: 'bottom' } );
-
 
 class OperationBottomComponent extends React.Component {
     static propTypes = {
@@ -51,7 +47,7 @@ class OperationBottomComponent extends React.Component {
                             <Text style={[ style.commonSubTextColorStyle, {
                                 fontSize: 14,
                                 marginLeft: 10,
-                            } ]}>{this.props.selectData.length + '/' + this.props.totalData.length}</Text>
+                            } ]}>{(this.props.selectData && this.props.totalData) ? this.props.selectData.length + '/' + this.props.totalData.length : ''}</Text>
                             <Icon
                                 style={[ {
                                     marginLeft: 10,

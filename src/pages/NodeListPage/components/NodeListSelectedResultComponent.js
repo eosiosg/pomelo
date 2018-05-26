@@ -11,14 +11,11 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import PopupDialog, { SlideAnimation } from 'react-native-popup-dialog';
+import PopupDialog from 'react-native-popup-dialog';
 import Icon from "react-native-vector-icons/Ionicons";
 import { getDpFromPx } from "../../../utils/util";
 import { styles as style } from "../style";
 import OperationBottomComponent from "./OperationBottomComponent";
-
-const slideAnimation = new SlideAnimation( { slideFrom: 'bottom' } );
-
 
 class NodeListSelectedResultComponent extends React.Component {
     static propTypes = {
