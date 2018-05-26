@@ -3,13 +3,16 @@
  *
  */
 const initState = {
-    allAsset: [],
+  accountInfo: {
+    net_weight: 0,
+    cpu_weight: 0,
+  },
 };
-export default function NodeListPageReducer (state = initState, action) {
+export default function UnDelegatebwPageReducer (state = initState, action) {
     switch (action.type) {
-        case "HOME_GETALLASSET_REDUCER":
+        case "UNDELEGATEBW_SETACCOUNTINFO_REDUCER":
             return Object.assign({}, state, {
-                "allAsset": action.data
+                "accountInfo": action.data
             });
         default:
             return state;

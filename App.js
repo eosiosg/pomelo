@@ -19,19 +19,21 @@ import DelegatebwPage from "./src/pages/DelegatebwPage";
 import UnDelegatebwPage from "./src/pages/UnDelegatebwPage";
 import NodeListPage from "./src/pages/NodeListPage";
 import WalletPage from "./src/pages/WalletPage";
+import Api from "./Api";
 
 
 // Navigator
 const Navigator = StackNavigator(
   {
-      VotePage: { screen: VotePage },
     VoteIndexPage: { screen: VoteIndexPage },
+    Api: { screen: Api },
+    VotePage: { screen: VotePage },
     DelegatebwPage: { screen: DelegatebwPage },
     UnDelegatebwPage: { screen: UnDelegatebwPage },
     HomePage: { screen: HomePage },
     WalletPage: { screen: WalletPage },
+    VotePage: { screen: VotePage },
     NodeListPage: { screen: NodeListPage },
-
   },
 {
     navigationOptions: {

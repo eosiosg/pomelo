@@ -19,16 +19,31 @@ class UnDelegatebwPage extends Component {
     constructor( props ) {
         super( props );
         this.state = {
-          Network: 0,
-          CPU: 0,
+          Network: "",
+          CPU: "",
+          cpu_weight: 0,
+          net_weight: 0,
         };
     }
 
-    componentWillReceiveProps( nextProps ) {}
+    componentWillReceiveProps( nextProps ) {
+      if (nextProps.accountInfo) {
+        const { cpu_weight, net_weight, } = nextProps.accountInfo;
+        this.setState({
+          cpu_weight,
+          net_weight,
+        });
+      }
+    }
 
-    componentDidMount() {}
+    componentDidMount() {
+      this.props.onDispatchGetAccountInfoPost();
+    }
 
     render() {
+      const Stake = Number(this.state.CPU) + Number(this.state.Network);
+      const CPU_placeholder = "MAX "+ this.state.cpu_weight+" Stake";
+      const Network_placeholder = "MAX "+ this.state.net_weight+" Stake";
         return (
             <View style={styles.bodyBox}>
               <View style={navStyles.navBox}>
@@ -46,7 +61,7 @@ class UnDelegatebwPage extends Component {
                 <View style={[countStyles.countItem, {borderBottomWidth: 0,}]}>
                   <Text style={countStyles.countName}>Stake count</Text>
                   <Text style={countStyles.countValue}>
-                    233,434 <Text style={countStyles.countValueUnit}>EOS</Text>
+                    {Stake} <Text style={countStyles.countValueUnit}>EOS</Text>
                   </Text>
                 </View>
               </View>
@@ -63,11 +78,11 @@ class UnDelegatebwPage extends Component {
                     <View style={stakeStyles.stakeValue}>
                       <TextInput
                         style={stakeStyles.stakeValueInput}
-                        placeholder="MAX 234423 Stake"
-                        autoFocus={false}
-                        placeholderTextColor={"rgba(245, 203, 72, .4)"}
+                        placeholder={CPU_placeholder}
+                        placeholderTextColor={"#999"}
                         maxLength={11}
-                        onChangeText={(CPU) => this.setState({CPU})}
+                        onChangeText={(CPU) => this.SetStateCpu(CPU)}
+                        value={this.state.CPU}
                         underlineColorAndroid={"transparent"}
                       />
                     </View>
@@ -77,11 +92,11 @@ class UnDelegatebwPage extends Component {
                     <View style={stakeStyles.stakeValue}>
                       <TextInput
                         style={stakeStyles.stakeValueInput}
-                        placeholder="MAX 234423 Stake"
-                        autoFocus={false}
-                        placeholderTextColor={"rgba(245, 203, 72, .4)"}
+                        placeholder={Network_placeholder}
+                        placeholderTextColor={"#999"}
                         maxLength={11}
-                        onChangeText={(Network) => this.setState({Network})}
+                        onChangeText={(Network) => this.SetStateNetwork(Network)}
+                        value={this.state.Network}
                         underlineColorAndroid={"transparent"}
                       />
                     </View>
@@ -89,7 +104,7 @@ class UnDelegatebwPage extends Component {
                 </View>
               </View>
               <View style={btnStyles.btnBox}>
-                <Text style={btnStyles.btn} onPress={() => {}}>Confirm</Text>
+                <Text style={btnStyles.btn} onPress={() => this.UnDelegatebwConfirmFn()}>Confirm</Text>
               </View>
               <View style={styles.bodyFooterBox}>
                 <View style={styles.bodyFooterFlg}></View>
@@ -97,18 +112,47 @@ class UnDelegatebwPage extends Component {
             </View>
         );
     }
+  SetStateCpu = (val) => {
+    const CPU = String(Math.min(this.state.cpu_weight, val));
+    console.log(CPU);
+    this.setState({
+      CPU,
+    });
+  };
+  SetStateNetwork = (val) => {
+    const Network = String(Math.min(this.state.net_weight, val));
+    console.log(Network);
+    this.setState({
+      Network,
+    });
+  };
+  UnDelegatebwConfirmFn = () => {
+    if (!this.state.CPU || !this.state.Network) {
+      return;
+    }
+    const data = {
+      from: "eosiomeetone",
+      receiver:"eosiomeetone",
+      unstake_net_quantity: this.state.Network + " SYS",
+      unstake_cpu_quantity: this.state.CPU + " SYS",
+    };
+    // const nav = this.props.navigation;
+    this.props.onDispatchUnDelegateBwPost(data);
+  };
 }
 
 // 挂载中间件到组件；
 function mapDispatchToProps(  dispatch  ) {
     return {
-        onDispatchGetAllAssetPost: () => dispatch( { type: "NODE_LIST_GET_ALL_ASSET_POST" } ),
+      onDispatchGetAccountInfoPost: () => dispatch({ type: "UNDELEGATEBW_ACCOUNTINFO_POST" }),
+      onDispatchUnDelegateBwPost: (data) => dispatch({ type: "UNDELEGATEBW_CONFIRM_POST", data }),
     };
 }
 
 function mapStateToProps( state ) {
     return {
       state,
+      accountInfo: state.UnDelegatebwPageReducer.accountInfo,
     };
 }
 

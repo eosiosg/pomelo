@@ -3,7 +3,7 @@ import { Button, ScrollView, StyleSheet, View } from 'react-native';
 
 // import Eos from 'eosjs';
 
-export default class App extends React.Component {
+export default class Api extends React.Component {
     constructor( props ) {
         super( props );
 
@@ -19,8 +19,8 @@ export default class App extends React.Component {
         // private key to public key
         this.accountPublicKey = ecc.privateToPublic( this.accountPrivateKey );
         console.log( this.accountPublicKey );
-        let nodeAddress = 'http://13.229.70.163:8888';
-        var config = {
+        let nodeAddress = 'http://52.77.224.13:8888';
+        config = {
             keyProvider: this.accountPrivateKey, // WIF string or array of keys..
             httpEndpoint: nodeAddress,
 //    mockTransactions: () => 'pass', // or 'fail'

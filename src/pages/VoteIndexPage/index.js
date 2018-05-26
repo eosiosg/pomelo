@@ -23,9 +23,7 @@ class VoteIndexPage extends Component {
         this.state = {};
     }
 
-    componentWillReceiveProps( nextProps ) {
-      console.log(nextProps.accountInfo);
-    }
+    componentWillReceiveProps( nextProps ) {}
 
     componentDidMount() {
       this.props.onDispatchGetAccountInfoPost();
