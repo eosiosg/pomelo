@@ -8,6 +8,16 @@ import { ScrollView, View, Text, Image, TouchableOpacity } from "react-native";
 import { styles, assetStyles, voteStyles, voteBpsStales } from "./style";
 
 class VoteIndexPage extends Component {
+    static navigationOptions = ( props ) => {
+        const { navigation } = props;
+        const { state, setParams } = navigation;
+        const { params } = state;
+
+        return {
+            header: null
+        };
+    };
+
     constructor (props) {
         super(props);
         this.state = {};

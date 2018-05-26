@@ -10,6 +10,16 @@ import { localSave } from "../../utils/storage";
 import { styles } from "./style";
 
 class HomePage extends Component {
+    static navigationOptions = ( props ) => {
+        const { navigation } = props;
+        const { state, setParams } = navigation;
+        const { params } = state;
+
+        return {
+            header: null
+        };
+    };
+
     constructor (props) {
         super(props);
         this.state = {

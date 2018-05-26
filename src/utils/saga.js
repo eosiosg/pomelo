@@ -14,4 +14,5 @@ export default function* SagaInit() {
     yield takeLatest("VOTE_INDEX_CURRENCYBALANCE_POST", getVoteIndexPageCurrencyBalancePost);
     yield takeLatest("VOTE_INDEX_REFUNDS_POST", getVoteIndexPageRefundsPost);
     yield takeLatest("VOTE_INDEX_BPS_POST", getVoteIndexPageBpsPost);
+    yield takeLatest("VOTE_LIST_POST", getVotingList);
 }
