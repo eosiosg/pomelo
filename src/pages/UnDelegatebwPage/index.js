@@ -6,6 +6,16 @@ import { Text, View, Image, TouchableOpacity, TextInput } from "react-native";
 import { styles, navStyles, countStyles, stakeStyles, btnStyles } from "./style";
 
 class UnDelegatebwPage extends Component {
+    static navigationOptions = ( props ) => {
+        const { navigation } = props;
+        const { state, setParams } = navigation;
+        const { params } = state;
+
+        return {
+            header: null
+        };
+    };
+
     constructor( props ) {
         super( props );
         this.state = {

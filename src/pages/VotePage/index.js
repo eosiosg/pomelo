@@ -11,6 +11,16 @@ import { getVotingList } from "./saga";
 import { styles } from "./style";
 
 class VotePage extends Component {
+    static navigationOptions = ( props ) => {
+        const { navigation } = props;
+        const { state, setParams } = navigation;
+        const { params } = state;
+
+        return {
+            header: null
+        };
+    };
+
     constructor (props) {
         super(props);
 
