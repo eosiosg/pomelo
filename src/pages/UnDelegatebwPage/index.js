@@ -53,7 +53,7 @@ class UnDelegatebwPage extends Component {
                   </TouchableOpacity>
                 </View>
                 <View style={navStyles.navItem}>
-                  <Text style={navStyles.navTitle}>DelegatebwPage</Text>
+                  <Text style={navStyles.navTitle}>UnDelegatebwPage</Text>
                 </View>
                 <View style={navStyles.navItem}></View>
               </View>
@@ -132,12 +132,12 @@ class UnDelegatebwPage extends Component {
     }
     const data = {
       from: "eosiomeetone",
-      receiver:"eosiomeetone",
+      receiver:"eosiosg11111",
       unstake_net_quantity: this.state.Network + " SYS",
       unstake_cpu_quantity: this.state.CPU + " SYS",
     };
-    // const nav = this.props.navigation;
-    this.props.onDispatchUnDelegateBwPost(data);
+    const nav = this.props.navigation;
+    this.props.onDispatchUnDelegateBwPost(data, nav);
   };
 }
 
@@ -145,7 +145,7 @@ class UnDelegatebwPage extends Component {
 function mapDispatchToProps(  dispatch  ) {
     return {
       onDispatchGetAccountInfoPost: () => dispatch({ type: "UNDELEGATEBW_ACCOUNTINFO_POST" }),
-      onDispatchUnDelegateBwPost: (data) => dispatch({ type: "UNDELEGATEBW_CONFIRM_POST", data }),
+      onDispatchUnDelegateBwPost: (data, nav) => dispatch({ type: "UNDELEGATEBW_CONFIRM_POST", data, nav }),
     };
 }
 

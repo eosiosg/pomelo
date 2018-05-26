@@ -143,13 +143,13 @@ class DelegatebwPage extends Component {
       }
       const data = {
         from: "eosiomeetone",
-        receiver:"eosiomeetone",
+        receiver:"eosiosg11111",
         stake_net_quantity: this.state.Network + " SYS",
         stake_cpu_quantity: this.state.CPU + " SYS",
         transfer: 0,
       };
-      // const nav = this.props.navigation;
-      this.props.onDispatchDelegateBwPost(data);
+      const nav = this.props.navigation;
+      this.props.onDispatchDelegateBwPost(data, nav);
     };
 }
 
@@ -158,7 +158,7 @@ function mapDispatchToProps(  dispatch  ) {
     return {
       onDispatchGetAccountInfoPost: () => dispatch({ type: "DELEGATEBW_ACCOUNTINFO_POST" }),
       onDispatchGetCurrencyBalancePost: () => dispatch({ type: "DELEGATEBW_CURRENCYBALANCE_POST" }),
-      onDispatchDelegateBwPost: (data) => dispatch({ type: "DELEGATEBW_CONFIRM_POST", data }),
+      onDispatchDelegateBwPost: (data, nav) => dispatch({ type: "DELEGATEBW_CONFIRM_POST", data, nav }),
     };
 }
 

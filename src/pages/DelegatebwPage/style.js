@@ -135,6 +135,13 @@ const stakeStyles = StyleSheet.create({
     lineHeight: 60,
     color: "#222",
   },
+  checkBox: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    justifyContent: "flex-end",
+    alignItems: "center",
+  },
 });
 const ruleStyles = StyleSheet.create({
   ruleBox: {
