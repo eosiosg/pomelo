@@ -96,24 +96,23 @@ class VotePage extends Component {
                     <View style={styles.contentBodyVotingListHeader}>
                         <Text style={styles.contentBodyVotingListName}>Each node above will get</Text>
                     </View>
-                    <View style={styles.contentBodyStakeBody}>
-                        <View style={styles.contentBodyStakeCpu}>
-                            <Text style={styles.contentBodyStakeBodyTextLabel}>
-                                Eosio.SG
-                            </Text>
-                            <Text style={styles.contentBodyStakeBodyTextValue}>
-                                -
-                            </Text>
-                        </View>
-                        <View style={styles.contentBodyStakeNetwork}>
-                            <Text style={styles.contentBodyStakeBodyTextLabel}>
-                                Meet.One
-                            </Text>
-                            <Text style={styles.contentBodyStakeBodyTextValue}>
-                                -
-                            </Text>
-                        </View>
-                    </View>
+
+                    {
+                        this.props.votingList.map((votingC)=>{
+                            return <View key = {votingC.id}
+                                         style={styles.contentBodyStakeBody}>
+                                <View style={styles.contentBodyStakeCpu}>
+                                    <Text style={styles.contentBodyStakeBodyTextLabel}>
+                                        { votingC.title }
+                                    </Text>
+                                    <Text style={styles.contentBodyStakeBodyTextValue}>
+                                        -
+                                    </Text>
+                                </View>
+                            </View>
+                        })
+                    }
+
                 </View>
             </View>
 
@@ -209,13 +208,12 @@ class VotePage extends Component {
 // 挂载中间件到组件；
 function mapDispatchToProps(dispatch) {
     return {
-        onDispatchGetAllVotingList: () => dispatch( { type: "VOTE_LIST_REDUCER" } ),
+         onDispatchGetAllVotingList: () => dispatch({ type: "VOTE_LIST_POST" }),
     };
 }
 function mapStateToProps(state) {
-    console.log('data', state);
     return {
-        allAsset: state.VotePageReducer.votingList,
+        votingList: state.VotePageReducer.votingList,
     };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(VotePage);

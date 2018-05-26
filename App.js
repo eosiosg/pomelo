@@ -21,9 +21,9 @@ import WalletPage from "./src/pages/WalletPage";
 // Navigator
 const Navigator = StackNavigator(
   {
-    HomePage: { screen: HomePage },
-    WalletPage: { screen: WalletPage },
-    NodeListPage: { screen: NodeListPage },
+    // HomePage: { screen: HomePage },
+    // WalletPage: { screen: WalletPage },
+    // NodeListPage: { screen: NodeListPage },
     VotePage: { screen: VotePage },
   },
 {
