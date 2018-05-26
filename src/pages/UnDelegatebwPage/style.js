@@ -134,9 +134,10 @@ const stakeStyles = StyleSheet.create({
     position: "relative",
   },
   stakeValueInput: {
-    width: 60,
+    width: 160,
     height: 60,
     lineHeight: 60,
+    color: "#222",
   },
 });
 const btnStyles = StyleSheet.create({
