@@ -25,13 +25,13 @@ import WalletPage from "./src/pages/WalletPage";
 const Navigator = StackNavigator(
   {
 
+      VotePage: { screen: VotePage },
     VoteIndexPage: { screen: VoteIndexPage },
     DelegatebwPage: { screen: DelegatebwPage },
     UnDelegatebwPage: { screen: UnDelegatebwPage },
     HomePage: { screen: HomePage },
     WalletPage: { screen: WalletPage },
     NodeListPage: { screen: NodeListPage },
-    VotePage: { screen: VotePage },
   },
 {
     navigationOptions: {

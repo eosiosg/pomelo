@@ -17,20 +17,67 @@ class VotePage extends Component {
         this.state = {
             noticeShow:false,
             ruleShow:false,
+            votingList : [
+
+                {
+                    id: 4,
+                    title: "canon",
+                },
+                {
+                    id: 5,
+                    title: "eos shenzhen",
+                },
+                {
+                    id: 0,
+                    title: "eosio.sg",
+                },
+                {
+                    id: 1,
+                    title: "meet.one",
+                },
+                {
+                    id: 2,
+                    title: "canon",
+                },
+                {
+                    id: 3,
+                    title: "eoscananda",
+                },
+            ]
         };
+
+        this._setDeleteBPC = this._setDeleteBPC.bind(this);
+
     }
 
     componentWillReceiveProps( nextProps ) {
-        console.log('nextprops: ',nextProps);
+        console.log('nextprops: ',nextProps.votingList);
+        let votingList = nextProps.votingList;
+        this.setState({
+            votingList,
+        })
     }
+
     componentDidMount() {
         // 获取数据
         this.props.onDispatchGetAllVotingList();
     }
+
+
     render() {
+
         return (
-            <ScrollView>
             <View style={styles.bodyBox}>
+
+                <View style={styles.header}>
+                    <Text style={styles.pageTitle}>
+                        Vote
+                    </Text>
+                </View>
+
+
+            <View style={styles.scrollBodyBox}>
+                <ScrollView>
                 <View style={styles.contentHeader}>
                     <View style={styles.contentHeaderAccountName}>
                         <Text style={styles.contentHeaderAccountNameLabel}>
@@ -67,10 +114,15 @@ class VotePage extends Component {
                 <View style={styles.contentBodyStake}>
                     <View style={styles.contentBodyStakeHeader}>
                         <Text style={styles.contentBodyStakeHeaderName}>Delegatebw</Text>
-                        <Text style={styles.contentBodyStakeHeaderQuestion}
-                              onPress={this._setRuleModalVisible.bind(this)}>
-                            ?
-                        </Text>
+                        <View  style={styles.contentBodyStakeHeaderQuestionContainer}>
+                            <TouchableHighlight onPress={this._setRuleModalVisible.bind(this)} >
+                            <View style={styles.contentBodyStakeHeaderQuestionBox}>
+                                <Text style={styles.contentBodyStakeHeaderQuestion}>
+                                    ?
+                                </Text>
+                            </View>
+                            </TouchableHighlight>
+                        </View>
                     </View>
                     <View style={styles.contentBodyStakeBody}>
                         <View style={styles.contentBodyStakeCpu}>
@@ -96,26 +148,31 @@ class VotePage extends Component {
                     <View style={styles.contentBodyVotingListHeader}>
                         <Text style={styles.contentBodyVotingListName}>Each node above will get</Text>
                     </View>
-
+                    <View style={styles.contentBodyBPListContainer}>
                     {
-                        this.props.votingList.map((votingC)=>{
+                        this.state.votingList.map((votingC, index)=>{
                             return <View key = {votingC.id}
-                                         style={styles.contentBodyStakeBody}>
-                                <View style={styles.contentBodyStakeCpu}>
-                                    <Text style={styles.contentBodyStakeBodyTextLabel}>
-                                        { votingC.title }
-                                    </Text>
-                                    <Text style={styles.contentBodyStakeBodyTextValue}>
-                                        -
-                                    </Text>
+                                         style={styles.contentBodyBP}>
+                                <Text style={styles.contentBodyBPName}>
+                                    { votingC.title }
+                                </Text>
+                                <View style={styles.contentBodyBPDeleteContainer}>
+                                    <TouchableHighlight id={index}
+                                                        onPress={()=>this._setDeleteBPC(index)}>
+                                        <View style={styles.contentBodyBPDeleteButton}>
+                                            <View style={styles.contentBodyBPDeleteButtonInner}></View>
+                                        </View>
+                                    </TouchableHighlight>
                                 </View>
                             </View>
                         })
                     }
-
+                    </View>
                 </View>
-            </View>
 
+
+            </ScrollView>
+            </View>
 
                 <Modal
                     animationType='slide'
@@ -185,8 +242,31 @@ class VotePage extends Component {
                         </View>
                     </View>
                 </Modal>
-            </ScrollView>
+
+                <View style = {styles.footerView}>
+                    <TouchableHighlight onPress={this._submitList.bind(this)}>
+                        <Text style={styles.footerSubmit}>
+                            Submit
+                        </Text>
+                    </TouchableHighlight>
+                </View>
+            </View>
         );
+    }
+
+
+
+    _submitList() {
+        console.log(this.state.votingList);
+        this.props.onDispatchVoteVotingList();
+    }
+
+    _setDeleteBPC(index){
+        let votingList = [].concat(this.state.votingList);
+        votingList.splice(index,1);
+        this.setState({
+            votingList
+        })
     }
 
     // 显示/隐藏 modal
@@ -203,12 +283,14 @@ class VotePage extends Component {
             noticeShow:!isShow,
         });
     }
+
 }
 
 // 挂载中间件到组件；
 function mapDispatchToProps(dispatch) {
     return {
-         onDispatchGetAllVotingList: () => dispatch({ type: "VOTE_LIST_POST" }),
+         onDispatchGetAllVotingList: () => dispatch({ type: "VOTE_GETLIST_POST" ,data: [{id:1,title:'hi'}]}),
+         // onDispatchVoteVotingList: () => dispatch({ type: "VOTE_LIST_POST", data: this.state.votingList }),
     };
 }
 function mapStateToProps(state) {

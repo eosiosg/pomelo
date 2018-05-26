@@ -8,5 +8,5 @@ import { getVotingList } from "../pages/VotePage/saga";
 export default function* SagaInit() {
     yield takeLatest("HOME_GETALLASSET_POST", getHomeAllAsset);
     yield takeLatest("NODE_LIST_GET_ALL_ASSET_POST", getNodeListAllAsset);
-    yield takeLatest("VOTE_LIST_POST", getVotingList);
+    yield takeLatest("VOTE_GETLIST_POST", getVotingList);
 }

@@ -26,8 +26,9 @@ const votingList = [
         title: "eoscananda",
     },
 ];
-export function* getVotingList() {
+export function* getVotingList(action) {
 
+    console.log('action/saga', action);
     try {
         // 以下是正式的请求方式，暂不使用
         // // 组装请求数据
@@ -43,7 +44,7 @@ export function* getVotingList() {
         // if (response.code === 0) {
         //     yield put({ type: "HOME_GETALLASSET_REDUCER", response.data });
         // }
-        yield put({ type: "VOTE_LIST_REDUCER", data: votingList });
+        yield put({ type: "VOTE_GETLIST_REDUCER", data: votingList });
 
     } catch (err) {}
 }
