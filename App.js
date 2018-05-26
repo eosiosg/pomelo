@@ -35,7 +35,23 @@ const Navigator = StackNavigator(
   },
 {
     navigationOptions: {
-        header: null,
+        headerMode: 'screen',
+        initialRouteName: 'VoteIndexPage',
+        initialRouteParams: {},
+        navigationOptions: {
+            headerStyle: {
+                backgroundColor: '#fafafa',
+                borderBottomWidth: 0,
+                elevation: 0,
+            },
+            headerTitleStyle: {
+                color: '#323232',
+                fontSize: 19,
+                fontWeight: 'bold'
+            },
+            headerTintColor: '#323232',
+            headerBackTitle: null
+        }
     }
 }
 
