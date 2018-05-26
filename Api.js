@@ -30,7 +30,8 @@ export default class Api extends React.Component {
             expireInSeconds: 60,
             broadcast: true,
             debug: false,
-            sign: true
+            sign: true,
+          chainId: '706a7ddd808de9fc2b8879904f3b392256c83104c1d544b38302cc07d9fca477',
         };
         this.eos = Eos.Testnet( config );
         console.log( this.eos );
@@ -296,9 +297,9 @@ export default class Api extends React.Component {
             tr.delegatebw( {
                 from: this.accountName,
                 receiver:this. accountName,
-                stake_net_quantity: '10.0000 EOS',
-                stake_cpu_quantity: '10.0000 EOS',
-                transfer: 0
+                stake_net_quantity: '10.0000 SYS',
+                stake_cpu_quantity: '10.0000 SYS',
+                transfer: 0,
             } );
         } ).then( function ( result ) {
             console.log( result );
