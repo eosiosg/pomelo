@@ -97,7 +97,7 @@ class VoteIndexPage extends Component {
                         <Text style={voteStyles.voteItemName}>add delegatebw</Text>
                         <Image style={[voteStyles.voteItemActionIcon, {width: 16, height: 20,}]} source={require("./images/arrow-right-account.png")} />
                       </TouchableOpacity>
-                      <TouchableOpacity style={voteStyles.voteItem} onPress={() => {this.props.navigation.navigate("VotePage")}}>
+                      <TouchableOpacity style={voteStyles.voteItem} onPress={() => {this.props.navigation.navigate("NodeListPage")}}>
                         <Text style={voteStyles.voteItemName}>revote</Text>
                         <Image style={[voteStyles.voteItemActionIcon, {width: 16, height: 20,}]} source={require("./images/arrow-right-account.png")} />
                       </TouchableOpacity>
