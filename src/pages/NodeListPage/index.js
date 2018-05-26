@@ -46,10 +46,7 @@ class NodeListPage extends Component {
                     paddingBottom: 10,
                 } ]}>
                     <View style={[ {}, ]}>
-
-                    </View>
-                    <View>
-                        <
+                        <Text>asdasd</Text>
                     </View>
                 </View>
             </TouchableOpacity>
