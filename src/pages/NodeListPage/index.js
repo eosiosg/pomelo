@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FlatList, InteractionManager, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { styles as style, styles } from "./style";
 import { getDpFromPx } from "../../utils/util";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -37,12 +37,16 @@ class NodeListPage extends Component {
 
     componentDidMount() {
         // InteractionManager.runAfterInteractions( () => {
-            this.props.onDispatchGetAllAssetPost();
+        this.props.onDispatchGetAllAssetPost();
         // } );
     }
 
 
     onVote() {
+        if ( this.state.selectData.length <= 0 ) {
+            Toast.show( 'Please select Node' );
+            return;
+        }
         Toast.show( 'Vote' )
     }
 
@@ -126,7 +130,7 @@ class NodeListPage extends Component {
 
         return (
             <SafeAreaView style={styles.wrapper}>
-                <View style={[styles.wrapper, {backgroundColor: '#fafafa',}]}>
+                <View style={[ styles.wrapper, { backgroundColor: '#fafafa', } ]}>
                     <View style={styles.wrapper}>
                         <FlatList
                             data={this.props.allAsset}
