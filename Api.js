@@ -20,7 +20,7 @@ export default class App extends React.Component {
         this.accountPublicKey = ecc.privateToPublic( this.accountPrivateKey );
         console.log( this.accountPublicKey );
         let nodeAddress = 'http://13.229.70.163:8888';
-        config = {
+        var config = {
             keyProvider: this.accountPrivateKey, // WIF string or array of keys..
             httpEndpoint: nodeAddress,
 //    mockTransactions: () => 'pass', // or 'fail'

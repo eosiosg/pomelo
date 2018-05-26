@@ -10,13 +10,11 @@ const initState = {
 export default function VotePageReducer (state = initState, action) {
     switch (action.type) {
         case "VOTE_GETLIST_REDUCER":
-            console.log('data/reducer: ', action.data);
             return Object.assign({}, state, {
                 "votingList": action.data
             })
-        // case "VOTE_LIST_POST":
-        //     console.log('data...', action.data);
-        //     return
+        case "VOTE_SUBMITLIST_REDUCER":
+            return Object.assign({}, state)
         default:
             return state;
     }

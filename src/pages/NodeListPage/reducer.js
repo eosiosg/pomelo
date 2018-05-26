@@ -7,7 +7,7 @@ const initState = {
 };
 export default function NodeListPageReducer (state = initState, action) {
     switch (action.type) {
-        case "HOME_GETALLASSET_REDUCER":
+        case "GET_ALL_NODE_LIST_REDUCER":
             console.log('node list get all');
             return Object.assign({}, state, {
                 "allAsset": action.data

@@ -7,6 +7,8 @@ import {Dimensions, StyleSheet} from "react-native";
 const leftFirstBase = 13;
 const deleteButtonRadius = 12;
 const voteItemHeight = 45;
+const footerHeight = 66;
+
 
 const styles = StyleSheet.create({
 
@@ -35,7 +37,7 @@ const styles = StyleSheet.create({
 
     scrollBodyBox:{
         paddingTop:50,
-        paddingBottom:100,
+        paddingBottom:footerHeight,
         overflow:'hidden',
     },
 
@@ -298,11 +300,16 @@ const styles = StyleSheet.create({
 
     footerView:{
         position:'absolute',
-        height:100,
+        height:footerHeight,
         width:'100%',
         backgroundColor:'#736d75',
         bottom:0,
     },
+
+    footerViewTouchArea:{
+        height:footerHeight,
+    },
+
     footerSubmit:{
         width:'100%',
         color:'#ffffff',

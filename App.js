@@ -24,7 +24,6 @@ import WalletPage from "./src/pages/WalletPage";
 // Navigator
 const Navigator = StackNavigator(
   {
-
       VotePage: { screen: VotePage },
     VoteIndexPage: { screen: VoteIndexPage },
     DelegatebwPage: { screen: DelegatebwPage },
@@ -32,10 +31,22 @@ const Navigator = StackNavigator(
     HomePage: { screen: HomePage },
     WalletPage: { screen: WalletPage },
     NodeListPage: { screen: NodeListPage },
+
   },
 {
     navigationOptions: {
-        header: null,
+        headerStyle: {
+            backgroundColor: '#fafafa',
+            borderBottomWidth: 0,
+            elevation: 0,
+        },
+        headerTitleStyle: {
+            color: '#323232',
+            fontSize: 19,
+            fontWeight: 'bold'
+        },
+        headerTintColor: '#323232',
+        headerBackTitle: null
     }
 }
 

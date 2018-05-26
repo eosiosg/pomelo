@@ -11,39 +11,23 @@ import { getVotingList } from "./saga";
 import { styles } from "./style";
 
 class VotePage extends Component {
+    static navigationOptions = ( props ) => {
+        const { navigation } = props;
+        const { state, setParams } = navigation;
+        const { params } = state;
+
+        return {
+            header: null
+        };
+    };
+
     constructor (props) {
         super(props);
 
         this.state = {
             noticeShow:false,
             ruleShow:false,
-            votingList : [
-
-                {
-                    id: 4,
-                    title: "canon",
-                },
-                {
-                    id: 5,
-                    title: "eos shenzhen",
-                },
-                {
-                    id: 0,
-                    title: "eosio.sg",
-                },
-                {
-                    id: 1,
-                    title: "meet.one",
-                },
-                {
-                    id: 2,
-                    title: "canon",
-                },
-                {
-                    id: 3,
-                    title: "eoscananda",
-                },
-            ]
+            votingList : []
         };
 
         this._setDeleteBPC = this._setDeleteBPC.bind(this);
@@ -244,7 +228,8 @@ class VotePage extends Component {
                 </Modal>
 
                 <View style = {styles.footerView}>
-                    <TouchableHighlight onPress={this._submitList.bind(this)}>
+                    <TouchableHighlight  style = {styles.footerViewTouchArea}
+                                         onPress={this._submitList.bind(this)}>
                         <Text style={styles.footerSubmit}>
                             Submit
                         </Text>
@@ -255,10 +240,8 @@ class VotePage extends Component {
     }
 
 
-
     _submitList() {
-        console.log(this.state.votingList);
-        this.props.onDispatchVoteVotingList();
+        this.props.onDispatchVoteVotingList(this.state.votingList);
     }
 
     _setDeleteBPC(index){
@@ -290,7 +273,7 @@ class VotePage extends Component {
 function mapDispatchToProps(dispatch) {
     return {
          onDispatchGetAllVotingList: () => dispatch({ type: "VOTE_GETLIST_POST" ,data: [{id:1,title:'hi'}]}),
-         // onDispatchVoteVotingList: () => dispatch({ type: "VOTE_LIST_POST", data: this.state.votingList }),
+         onDispatchVoteVotingList: (data) => dispatch({ type: "VOTE_SUBMITLIST_POST", data }),
     };
 }
 function mapStateToProps(state) {
