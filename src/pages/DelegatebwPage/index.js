@@ -19,15 +19,33 @@ class DelegatebwPage extends Component {
     constructor( props ) {
         super( props );
         this.state = {
-          Balance: 0,
+          CPU: "",
+          Network: "",
+          cpu_weight: 0,
+          net_weight: 0,
         };
     }
 
-    componentWillReceiveProps( nextProps ) {}
+    componentWillReceiveProps( nextProps ) {
+      if (nextProps.accountInfo) {
+        const { cpu_weight, net_weight, } = nextProps.accountInfo;
+        this.setState({
+          cpu_weight,
+          net_weight,
+        });
+      }
+    }
 
-    componentDidMount() {}
+    componentDidMount() {
+      this.props.onDispatchGetAccountInfoPost();
+      this.props.onDispatchGetCurrencyBalancePost();
+    }
 
     render() {
+      const stake = Number(this.state.CPU) + Number(this.state.Network);
+      const CurrencyBalance = this.props.CurrencyBalance;
+      const CPU_placeholder = "MAX "+ this.state.cpu_weight+" Stake";
+      const Network_placeholder = "MAX "+ this.state.net_weight+" Stake";
         return (
             <View style={styles.bodyBox}>
               <View style={navStyles.navBox}>
@@ -45,13 +63,13 @@ class DelegatebwPage extends Component {
                 <View style={countStyles.countItem}>
                   <Text style={countStyles.countName}>Balance</Text>
                   <Text style={countStyles.countValue}>
-                    233,434 <Text style={countStyles.countValueUnit}>EOS</Text>
+                    {CurrencyBalance} <Text style={countStyles.countValueUnit}>EOS</Text>
                   </Text>
                 </View>
                 <View style={[countStyles.countItem, {borderBottomWidth: 0,}]}>
                   <Text style={countStyles.countName}>Stake count</Text>
-                  <Text style={countStyles.countValue}>
-                    233,434 <Text style={countStyles.countValueUnit}>EOS</Text>
+                  <Text style={countStyles.countStakeValue}>
+                    {stake} <Text style={countStyles.countValueUnit}>EOS</Text>
                   </Text>
                 </View>
               </View>
@@ -65,11 +83,12 @@ class DelegatebwPage extends Component {
                     <View style={stakeStyles.stakeValue}>
                       <TextInput
                         style={stakeStyles.stakeValueInput}
-                        placeholder="MAX 12233 Stake"
+                        placeholder={CPU_placeholder}
                         autoFocus={false}
-                        placeholderTextColor={"rgba(245, 203, 72, .4)"}
-                        maxLength={11}
-                        onChangeText={(CPU) => this.setState({CPU})}
+                        placeholderTextColor={"#999"}
+                        maxLength={20}
+                        onChangeText={(CPU) => this.SetStateCpu(CPU)}
+                        value={this.state.CPU}
                         underlineColorAndroid={"transparent"}
                       />
                     </View>
@@ -79,11 +98,11 @@ class DelegatebwPage extends Component {
                     <View style={stakeStyles.stakeValue}>
                       <TextInput
                         style={stakeStyles.stakeValueInput}
-                        placeholder="MAX 12233 Stake"
+                        placeholder={Network_placeholder}
                         autoFocus={false}
-                        placeholderTextColor={"rgba(245, 203, 72, .4)"}
-                        maxLength={11}
-                        onChangeText={(Network) => this.setState({Network})}
+                        placeholderTextColor={"#999"}
+                        maxLength={20}
+                        onChangeText={(Network) => this.SetStateNetwork(Network)}
                         underlineColorAndroid={"transparent"}
                       />
                     </View>
@@ -92,11 +111,10 @@ class DelegatebwPage extends Component {
               </View>
               <View style={ruleStyles.ruleBox}>
                 <Text style={ruleStyles.ruleTitle}>Rule*:</Text>
-                <Text style={ruleStyles.ruleDesc}>·Vote Will use a little CPU + Network Stake;</Text>
-                <Text style={ruleStyles.ruleDesc}>·Vote Will use a little CPU + Network Stake;</Text>
-                <Text style={ruleStyles.ruleDesc}>·Vote Will use a little CPU + Network Stake;</Text>
-                <Text style={ruleStyles.ruleDesc}>·Vote Will use a little CPU + Network Stake;</Text>
-                <Text style={ruleStyles.ruleDesc}>·Vote Will use a little CPU + Network Stake;</Text>
+                <Text style={ruleStyles.ruleDesc}>· Vote will use a little CPU + Network stake;</Text>
+                <Text style={ruleStyles.ruleDesc}>· Weight  = seconds_count_since_year_2000/ seconds_count_per_year，means increase by second;</Text>
+                <Text style={ruleStyles.ruleDesc}>· Vote = (CPU stake + Network stake) * 2^weight;</Text>
+                <Text style={ruleStyles.ruleDesc}>· Could undelegatebw anytime，whitch will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later;</Text>
               </View>
               <View style={btnStyles.btnBox}>
                 <Text style={btnStyles.btn} onPress={() => {}}>Confirm</Text>
@@ -107,18 +125,36 @@ class DelegatebwPage extends Component {
             </View>
         );
     }
+
+  SetStateCpu = (val) => {
+    const CPU = String(Math.min(this.state.cpu_weight, val));
+    console.log(CPU);
+    this.setState({
+      CPU: CPU,
+    });
+  };
+  SetStateNetwork = (val) => {
+    const Network = String(Math.min(this.state.net_weight, val));
+    console.log(Network);
+    this.setState({
+      Network,
+    });
+  };
 }
 
 // 挂载中间件到组件；
 function mapDispatchToProps(  dispatch  ) {
     return {
-        onDispatchGetAllAssetPost: () => dispatch( { type: "NODE_LIST_GET_ALL_ASSET_POST" } ),
+      onDispatchGetAccountInfoPost: () => dispatch({ type: "DELEGATEBW_ACCOUNTINFO_POST" }),
+      onDispatchGetCurrencyBalancePost: () => dispatch({ type: "DELEGATEBW_CURRENCYBALANCE_POST" }),
     };
 }
 
 function mapStateToProps( state ) {
     return {
       state,
+      accountInfo: state.DelegatebwPageReducer.accountInfo,
+      CurrencyBalance: state.DelegatebwPageReducer.CurrencyBalance,
     };
 }
 
