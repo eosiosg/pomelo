@@ -15,7 +15,7 @@ function getAccount() {
   this.accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
   this.accountName = 'eosiomeetone';
   this.accountPublicKey = ecc.privateToPublic( this.accountPrivateKey );
-  let nodeAddress = 'http://52.77.224.13:8888';
+  let nodeAddress = 'http://13.229.70.163:8888';
   const config = {
     keyProvider: this.accountPrivateKey,
     httpEndpoint: nodeAddress,
@@ -46,7 +46,7 @@ function undelegatebw(action) {
   this.accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
   this.accountName = 'eosiomeetone';
   this.accountPublicKey = ecc.privateToPublic( this.accountPrivateKey );
-  let nodeAddress = 'http://52.77.224.13:8888';
+  let nodeAddress = 'http://13.229.70.163:8888';
   const config = {
     keyProvider: this.accountPrivateKey,
     httpEndpoint: nodeAddress,
@@ -62,7 +62,9 @@ function undelegatebw(action) {
     tr.undelegatebw(action.data);
   } ).then( function ( result ) {
     console.log( result );
-    // action.nav.navigate("VoteIndexPage");
+    if (result.broadcast) {
+      action.nav.goBack();
+    }
   } );
 }
 
