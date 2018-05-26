@@ -80,8 +80,15 @@ const countStyles = StyleSheet.create({
     fontWeight: "600",
     lineHeight: 60,
   },
+  countStakeValue: {
+    color: "#F65858",
+    fontSize: 20,
+    fontWeight: "600",
+    lineHeight: 60,
+  },
   countValueUnit: {
     fontSize: 16,
+    color: "#222",
   },
 });
 const stakeStyles = StyleSheet.create({
@@ -123,9 +130,10 @@ const stakeStyles = StyleSheet.create({
     position: "relative",
   },
   stakeValueInput: {
-    width: 60,
+    width: 160,
     height: 60,
     lineHeight: 60,
+    color: "#222",
   },
 });
 const ruleStyles = StyleSheet.create({
