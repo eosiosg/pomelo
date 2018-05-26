@@ -170,7 +170,9 @@ class NodeListPage extends Component {
                                     isOpenAccountSelect: false
                                 } );
                             }}
-                            onVote={this.onVote}
+                            onVote={()=>{
+                                this.onVote()
+                            }}
                             onRemoveNode={( nodeItem ) => {
                                 this.removeNode( nodeItem )
                             }}
@@ -186,7 +188,9 @@ class NodeListPage extends Component {
                                 isOpenAccountSelect: true
                             } );
                         }}
-                        onVote={this.onVote}
+                        onVote={()=>{
+                            this.onVote()
+                        }}
                     />
                 </View>
 
