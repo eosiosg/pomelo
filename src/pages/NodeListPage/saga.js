@@ -27,7 +27,9 @@ export function* getNodeListAllAsset() {
         // if (response.code === 0) {
         //     yield put({ type: "HOME_GETALLASSET_REDUCER", response.data });
         // }
+
         yield put( { type: "HOME_GETALLASSET_REDUCER", data: initData } );
+
     } catch ( err ) {
     }
 }
