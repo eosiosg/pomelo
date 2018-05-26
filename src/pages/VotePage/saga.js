@@ -26,7 +26,8 @@ const votingList = [
         title: "eoscananda",
     },
 ];
-export function* getVotingList() {
+
+export function* getVotingList(action) {
 
     try {
         // 以下是正式的请求方式，暂不使用
@@ -43,7 +44,29 @@ export function* getVotingList() {
         // if (response.code === 0) {
         //     yield put({ type: "HOME_GETALLASSET_REDUCER", response.data });
         // }
-        yield put({ type: "VOTE_LIST_REDUCER", data: votingList });
+        yield put({ type: "VOTE_GETLIST_REDUCER", data: votingList });
+
+    } catch (err) {}
+}
+
+export function* postVotingList(action) {
+
+    try {
+        // 以下是正式的请求方式，暂不使用
+        // // 组装请求数据
+        // const requestOption = {
+        //     url: service.API.HomePageGetAllAsset,
+        //     body: {
+        //         method: "get",
+        //     },
+        // };
+        // // 发起异步请求
+        // const response = yield call(request, requestOption);
+        // // 根据返回数据，渲染结果
+        // if (response.code === 0) {
+        //     yield put({ type: "HOME_GETALLASSET_REDUCER", response.data });
+        // }
+        yield put({ type: "VOTE_SUBMITLIST_REDUCER", data: action.data });
 
     } catch (err) {}
 }
