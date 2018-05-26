@@ -11,16 +11,20 @@ import reducers from "./src/utils/reducers";
 
 // 引入自定义组件
 import HomePage from "./src/pages/HomePage";
+import VoteIndexPage from "./src/pages/VoteIndexPage";
+import DelegatebwPage from "./src/pages/DelegatebwPage";
+import UnDelegatebwPage from "./src/pages/UnDelegatebwPage";
 import NodeListPage from "./src/pages/NodeListPage";
 
 // Navigator
 const Navigator = StackNavigator(
   {
+    DelegatebwPage: { screen: DelegatebwPage },
+    UnDelegatebwPage: { screen: UnDelegatebwPage },
+    VoteIndexPage: { screen: VoteIndexPage },
     HomePage: { screen: HomePage },
+    NodeListPage: { screen: NodeListPage },
   },
-    {
-        NodeListPage: { screen: NodeListPage },
-    },
   {
     navigationOptions: {
       header: null,
