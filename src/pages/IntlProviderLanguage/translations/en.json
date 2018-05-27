@@ -35,5 +35,14 @@
   "VotePage stake" : "Stake count",
   "VotePage cancel" : "Cancel",
   "VotePage rule" : "safasddfsa",
-  "VotePage delegatebw" : "Delegatebw"
+  "VotePage delegatebw" : "Delegatebw",
+
+  "HomePage importWallet": "Import EOS wallet",
+  "HomePage privateKey": "Your Private Key",
+  "HomePage choiceAccount" : "Choice an account name",
+  "HomePage submit":"submit",
+  "HomePage PleaseEnterComplete":"Please enter the complete",
+  "HomePage PleaseSure" : "sure",
+  "HomePage PleaseCancel" : "cancel"
+
 }

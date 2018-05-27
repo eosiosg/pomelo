@@ -6,7 +6,7 @@ import { getVotingList,postVotingList } from "../pages/VotePage/saga";
 import { getVoteIndexPageAccountInfoPost, getVoteIndexPageCurrencyBalancePost, getVoteIndexPageRefundsPost, getVoteIndexPageBpsPost, getVoteIndexPageUsdPricePost } from "../pages/VoteIndexPage/saga";
 import { getDelegatebwPageAccountInfoPost, getDelegatebwPageCurrencyBalancePost, getDelegatebwPageConfirmPost } from "../pages/DelegatebwPage/saga";
 import { getUnDelegatebwPageAccountPost, getUnDelegatebwPageConfirmPost } from "../pages/UnDelegatebwPage/saga";
-import { getEOSPrice } from "../pages/WalletPage/saga";
+import { getEOSPrice ,getWalletPageAccountInfoPost, getWalletPageCurrencyBalancePost, getWalletPageRefundsPost } from "../pages/WalletPage/saga";
 
 /**
  * saga根函数，注册到store中；
@@ -27,4 +27,7 @@ export default function* SagaInit() {
     yield takeLatest("UNDELEGATEBW_ACCOUNTINFO_POST", getUnDelegatebwPageAccountPost);
     yield takeLatest("UNDELEGATEBW_CONFIRM_POST", getUnDelegatebwPageConfirmPost);
     yield takeLatest("EOS_PRICE_GET", getEOSPrice);
+    yield takeLatest("WALLET_ACCOUNTINFO_POST", getWalletPageAccountInfoPost);
+    yield takeLatest("WALLET_CURRENCYBALANCE_POST", getWalletPageCurrencyBalancePost);
+    yield takeLatest("WALLET_REFUNDS_POST", getWalletPageRefundsPost);
 }

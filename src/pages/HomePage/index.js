@@ -4,12 +4,14 @@ import {connect} from "react-redux";
 import Eos from "eosjs"
 import LinearGradient from "react-native-linear-gradient";
 import { ScrollView, View, Text, TextInput, Image, TouchableHighlight, Dimensions ,Modal ,CheckBox ,TouchableOpacity} from "react-native";
-import { localSave } from "../../utils/storage";
+import { localSave  ,storage} from "../../utils/storage";
 import { EOSInit ,  } from "./../../actions/EosAction"
 import TouchID from 'react-native-touch-id'
+import { injectIntl } from 'react-intl';
 
 // 自定义组件
 import { styles } from "./style";
+import messages from './messages';
 
 class HomePage extends Component {
     static navigationOptions = ( props ) => {
@@ -30,7 +32,8 @@ class HomePage extends Component {
           key : "" ,
           show : false,
           ItemData :[],
-
+          accountPrivateKey : "",
+          walletValue : ""
         };
     }
     componentWillReceiveProps( nextProps ) {
@@ -43,38 +46,57 @@ class HomePage extends Component {
     }
     componentDidMount() {
         // 获取数据
-      const optionalConfigObject = {
-        title: "Authentication Required", // Android
-        color: "#e00606", // Android,
-        fallbackLabel: "Show Passcode" // iOS (if empty, then label is hidden)
-      }
+      storage.load({key: "accountPrivateKey"}).then((ret) => {
+        if (ret) {
+          this.props.navigation.navigate("WalletPage");
+        } else {
+          console.log("ret:",ret)
+        }
+      }).catch(err => {
+        console.log("err:",err)
+      });
 
-      TouchID.authenticate('to demo this react-native component', optionalConfigObject)
-        .then(success => {
-          //AlertIOS.alert('Authenticated Successfully');
-        })
-        .catch(error => {
-          //AlertIOS.alert('Authentication Failed');
-        });
+      //尝试调试TouchID
+      //const optionalConfigObject = {
+      //  title: "Authentication Required", // Android
+      //  color: "#e00606", // Android,
+      //  fallbackLabel: "Show Passcode" // iOS (if empty, then label is hidden)
+      //}
+      //
+      //TouchID.authenticate('to demo this react-native component', optionalConfigObject)
+      //  .then(success => {
+      //    AlertIOS.alert('Authenticated Successfully');
+      //  })
+      //  .catch(error => {
+      //    AlertIOS.alert('Authentication Failed');
+      //  });
     }
     render() {
+      const { intl } = this.props;
+      const importWalletIntl = intl.formatMessage(messages.importWallet);
+      const privateKeyIntl = intl.formatMessage(messages.privateKey);
+      const choiceAccountIntl = intl.formatMessage(messages.choiceAccount);
+      const submitKey = intl.formatMessage(messages.submitKey);
+      const PleaseEnterComplete = intl.formatMessage(messages.PleaseEnterComplete);
+      const PleaseSure = intl.formatMessage(messages.PleaseSure);
+      const PleaseCancel = intl.formatMessage(messages.PleaseCancel);
 
       return (
             <View style={styles.bodyBox}>
               <ScrollView>
                 <View style={styles.contentBox}>
-                  <TouchableHighlight onPress={() => {this.props.navigation.goBack();}} style={{flex : 1}}>
+                  <TouchableHighlight onPress={() => {this.props.navigation.goBack()}} style={{flex : 1}}>
                     <Image source={require("./image/arrow-left-account.png")}  style={styles.contentBoxImg}/>
                   </TouchableHighlight>
                   <View  style={{flex : 3}}>
-                    <Text style={styles.titleTextTop}>Import EOS wallet</Text>
+                    <Text style={styles.titleTextTop}>{importWalletIntl}</Text>
                   </View>
                   <View style={{flex : 1}}>
 
                   </View>
                 </View>
                 <View>
-                  <Text style={styles.contentBoxTitle}>Your Private Key</Text>
+                  <Text style={styles.contentBoxTitle}>{privateKeyIntl}</Text>
                   <TextInput
                     style={styles.conItemTextInput}
                     placeholder="Please enter"
@@ -84,7 +106,7 @@ class HomePage extends Component {
                   />
                 </View>
                 <View  style={{display : this.state.ItemData.length > 0 ? "flex" : "none"}}>
-                  <Text style={styles.contentItemTitle}>Choice an account name</Text>
+                  <Text style={styles.contentItemTitle}>{choiceAccountIntl}</Text>
                   <View style={styles.contentItemBox}>
                     {this.state.ItemData.map((v , i) => (
                       <View style={styles.contentItem} key={ i}>
@@ -93,6 +115,13 @@ class HomePage extends Component {
                         </Text>
                         <View>
                           <TouchableHighlight onPress={() => {this.goWallet(v)}}>
+                            {/*
+                             <RadioForm
+                             radio_props={this.state.ItemData}
+                             initial={0}
+                             onPress={(value) => {this.setState({walletValue:v})}}
+                             />
+                            */}
                             <Image source={require("./image/arrow-right-account.png")}  style={styles.contentBoxImg}/>
                           </TouchableHighlight>
                         </View>
@@ -107,7 +136,6 @@ class HomePage extends Component {
 
 
                 </View>
-
                 <Modal
                   animationType='slide'
                   transparent={true}
@@ -120,7 +148,7 @@ class HomePage extends Component {
                         Notice
                       </Text>
                       <Text style={styles.contentText}>
-                        Please enter the complete
+                        {PleaseEnterComplete}
                       </Text>
                       <View style={styles.horizontalLine} />
                       <View style={styles.buttonView}>
@@ -128,7 +156,7 @@ class HomePage extends Component {
                                             style={styles.buttonStyle}
                                             onPress={this._setModalVisible.bind(this)}>
                           <Text style={styles.buttonText}>
-                            cancle
+                            {PleaseCancel}
                           </Text>
                         </TouchableHighlight>
                         <View style={styles.verticalLine} />
@@ -136,7 +164,7 @@ class HomePage extends Component {
                                             style={styles.buttonStyle}
                                             onPress={this._setModalVisible.bind(this)}>
                           <Text style={styles.buttonText}>
-                            ok
+                            {PleaseSure}
                           </Text>
                         </TouchableHighlight>
                       </View>
@@ -146,7 +174,7 @@ class HomePage extends Component {
               </ScrollView>
               <View>
                 <TouchableOpacity onPress={this.goSubmit} style={styles.bottomContent}>
-                  <Text style={styles.buttonSubmit}>Submit</Text>
+                  <Text style={styles.buttonSubmit}>{submitKey}</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -156,18 +184,29 @@ class HomePage extends Component {
 
   //back last page
   goback = () =>{
-    window.history.back();
+    if(this.state.accountPrivateKey){
+      this.props.navigation.navigate("WalletPage");
+    }
   }
 
-
+  //go WalletPage
   goWallet = (data) =>{
     console.log("data:",data)
     localSave.setAccountName(data);
     //this.props.navigation.replace("WalletPage");
-    this.props.navigation.navigate("WalletPage", {data});
+    this.props.navigation.navigate("WalletPage");
   }
+
   //submit wallet data
   goSubmit = () =>{
+    TouchID.authenticate('to Authenticated')
+      .then(success => {
+        AlertIOS.alert('Authenticated Successfully');
+      })
+      .catch(error => {
+        AlertIOS.alert('Authentication Failed');
+        return;
+      });
     if (!this.state.key){
       this.setState({
         show : true
@@ -188,7 +227,6 @@ class HomePage extends Component {
 
 }
 
-
 // 挂载中间件到组件；
 function mapDispatchToProps(dispatch) {
     return {
@@ -200,4 +238,4 @@ function mapStateToProps(state) {
       accountNames: state.HomePageReducer.accountNames,
     };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(HomePage));

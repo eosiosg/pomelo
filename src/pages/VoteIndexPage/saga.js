@@ -49,6 +49,7 @@ function getRefunds() {
     'table': 'refunds',
     'table_key': 'owner'
   }).then(function (result) {
+    console.log(result);
     const refunds = result.rows[0] ? Number(result.rows[0].cpu_amount.replace(" SYS", ""))+Number(result.rows[0].net_amount.replace(" SYS", "")) : 0;
     return refunds;
   });
@@ -85,7 +86,6 @@ export function* getVoteIndexPageUsdPricePost () {
         .catch((err) => err);
     };
     const response = yield call(_fetch);
-    console.log(response.data.quotes.USD.price);
     yield put({ type: "VOTEINDEX_SETUSD_REDUCER", data: response.data.quotes.USD.price });
   } catch (err) {}
 }
