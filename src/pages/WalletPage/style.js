@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
   bottomContent  :{
     position : "absolute",
-    bottom : 80,
+    bottom : 40,
     width : "100%",
   },
   buttonSubmit:{

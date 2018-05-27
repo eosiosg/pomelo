@@ -1,6 +1,5 @@
 import { put, call} from "redux-saga/effects";
-import request from "../../utils/request";
-import service from "../../utils/service";
+
 export function* getVoteIndexPageAccountInfoPost() {
   try {
     const response = yield call(getAccount);
@@ -8,6 +7,16 @@ export function* getVoteIndexPageAccountInfoPost() {
   } catch (err) {}
 }
 function getAccount() {
+  //storage.load({key: "LoginState"}).then((ret) => {
+  //  if (!ret) {
+  //    this.props.navigation.replace("RegIndexPage");
+  //  } else {
+  //    this.props.onDispatchGetAllAssetPost();
+  //  }
+  //}).catch(err => {
+  //  this.props.navigation.replace("RegIndexPage");
+  //});
+
   const Eos = require( 'eosjs' );
   const { ecc } = Eos.modules;
 

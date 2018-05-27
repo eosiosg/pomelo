@@ -164,7 +164,7 @@ const ruleStyles = StyleSheet.create({
 const btnStyles = StyleSheet.create({
   btnBox: {
     position: "absolute",
-    bottom: 25,
+    bottom: 15,
     width: Dimensions.get("window").width,
     display: "flex",
     flexDirection: "row",

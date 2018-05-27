@@ -1,12 +1,14 @@
 import {Dimensions, StyleSheet} from "react-native";
 
 const styles = StyleSheet.create({
+
   bodyBox: {
     position: "relative",
     flexBasis: "100%",
     minHeight: Dimensions.get("window").height,
     backgroundColor: "#fafafa",
     paddingLeft : 10,
+
   },
   contentBox: {
     paddingTop: 40,
@@ -14,7 +16,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems : "center"
+    alignItems : "center",
   },
   contentBoxTitle :{
     fontSize: 18,
@@ -35,7 +37,6 @@ const styles = StyleSheet.create({
     color: "#222",
     textAlign: "center",
     lineHeight: 25,
-
   },
   conItemTextInput: {
     flexGrow: 1,
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   },
   bottomContent  :{
     position : "absolute",
-    bottom : 80,
+    bottom : 40,
     width : "100%",
   },
   buttonSubmit:{
@@ -139,6 +140,10 @@ const styles = StyleSheet.create({
     //fontSize : 18,
     paddingTop : 15,
     paddingBottom : 15,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems : "center"
   },
   contentItemBox:{
     backgroundColor:'#fff',
