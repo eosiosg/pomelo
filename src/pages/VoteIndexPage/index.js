@@ -1,16 +1,18 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-// import LinearGradient from "react-native-linear-gradient";
+import { injectIntl } from 'react-intl'
 import { ScrollView, View, Text, Image, TouchableOpacity } from "react-native";
 
 // 自定义组件
 import { styles, assetStyles, voteStyles, voteBpsStales } from "./style";
+import messages from './messages';
 
 class VoteIndexPage extends Component {
     static navigationOptions = ( props ) => {
         const { navigation } = props;
         const { state, setParams } = navigation;
+
         const { params } = state;
 
         return {
@@ -30,6 +32,11 @@ class VoteIndexPage extends Component {
       this.props.onDispatchGetCurrencyBalancePost();
       this.props.onDispatchGetRefundsPost();
       this.props.onDispatchGetVoteBpsPost();
+      // 测试国际化语言
+      const { intl } = this.props;
+      const hello = intl.formatMessage(messages.Hello);
+      console.log("======formatMessage======");
+      console.log(hello);
     }
 
     render() {
@@ -141,4 +148,4 @@ function mapStateToProps(state) {
         BPs: state.VoteIndexPageReducer.BPs,
     };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(VoteIndexPage);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(VoteIndexPage));

@@ -20,16 +20,17 @@ import UnDelegatebwPage from "./src/pages/UnDelegatebwPage";
 import NodeListPage from "./src/pages/NodeListPage";
 import WalletPage from "./src/pages/WalletPage";
 import Api from "./Api";
+import IntlProviderLanguage from "./src/pages/IntlProviderLanguage";
 
 
 // Navigator
 const Navigator = StackNavigator(
   {
     VoteIndexPage: { screen: VoteIndexPage },
-    Api: { screen: Api },
-    VotePage: { screen: VotePage },
     DelegatebwPage: { screen: DelegatebwPage },
     UnDelegatebwPage: { screen: UnDelegatebwPage },
+    Api: { screen: Api },
+    VotePage: { screen: VotePage },
     HomePage: { screen: HomePage },
     WalletPage: { screen: WalletPage },
     VotePage: { screen: VotePage },
@@ -69,9 +70,11 @@ export default class App extends Component {
   }
   render() {
     return (
-      <Provider store={myStore}>
-        <Navigator/>
-      </Provider>
+        <Provider store={myStore}>
+          <IntlProviderLanguage>
+          <Navigator/>
+          </IntlProviderLanguage>
+        </Provider>
     );
   }
 }
