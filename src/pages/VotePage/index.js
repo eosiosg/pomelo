@@ -5,10 +5,11 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
+import { injectIntl } from 'react-intl';
 import { ScrollView, View, Text, Image, TouchableHighlight, Dimensions, Modal } from "react-native";
-import { getVotingList } from "./saga";
 // 自定义组件
 import { styles } from "./style";
+import messages from './messages';
 
 class VotePage extends Component {
     static navigationOptions = ( props ) => {
@@ -49,6 +50,26 @@ class VotePage extends Component {
 
 
     render() {
+        const { account_name, cpu_weight, net_weight, total_resources, } = this.props.accountInfo;
+        const { ram_bytes } = total_resources;
+        const stake = net_weight + cpu_weight;
+        const CurrencyBalance = this.props.CurrencyBalance;
+        const BPs = this.props.BPs;
+        const { intl } = this.props;
+        const account = intl.formatMessage(messages.account);
+        const balance = intl.formatMessage(messages.balance);
+        const stakeN = intl.formatMessage(messages.stake);
+        const cancel = intl.formatMessage(messages.cancel);
+        const rule = intl.formatMessage(messages.rule);
+        const delegatebw = intl.formatMessage(messages.delegatebw);
+
+        // const VoteDescIntl = intl.formatMessage(messages.VoteDesc);
+        // const UndelegatebwIntl = intl.formatMessage(messages.Undelegatebw);
+        // const AddDelegatebwIntl = intl.formatMessage(messages.AddDelegatebw);
+        // const RevoteIntl = intl.formatMessage(messages.Revote);
+        // const VotedBpsIntl = intl.formatMessage(messages.VotedBps);
+
+
 
         return (
             <View style={styles.bodyBox}>
@@ -65,39 +86,47 @@ class VotePage extends Component {
                 <View style={styles.contentHeader}>
                     <View style={styles.contentHeaderAccountName}>
                         <Text style={styles.contentHeaderAccountNameLabel}>
-                            Account
+                            {account}
                         </Text>
                         <Text style={styles.contentHeaderAccountNameValue}>
-                            username1324
+                            {account_name||'default'}
                         </Text>
                     </View>
-                    <View style={styles.contentHeaderAccountName}>
+                    <View style={styles.contentHeaderBalance}>
                         <Text style={styles.contentHeaderAccountNameLabel}>
-                            Balance
+                            {balance}
                         </Text>
-                        <Text style={styles.contentHeaderAccountNameValue}>
-                            249.5827
-                            <Text>
-                                EOS
+                        <Text style={styles.contentHeaderBalanceValueContainer}>
+                            <Text style={styles.contentHeaderBalanceValue}>
+                                {CurrencyBalance||123345}
                             </Text>
+                            <View style={styles.contentHeaderEOSSignContainer}>
+                                <Text style={styles.contentHeaderEOSSign}>
+                                    EOS
+                                </Text>
+                            </View>
                         </Text>
                     </View>
-                    <View style={styles.contentHeaderAccountName}>
+                    <View style={styles.contentHeaderStake}>
                         <Text style={styles.contentHeaderAccountNameLabel}>
-                            Stake Count
+                            {stakeN}
                         </Text>
-                        <Text style={styles.contentHeaderAccountNameValue}>
-                            0
-                            <Text>
-                                EOS
+                        <Text style={styles.contentHeaderBalanceValueContainer}>
+                            <Text style={styles.contentHeaderBalanceValue}>
+                                {stake||0}
                             </Text>
+                            <View style={styles.contentHeaderEOSSignContainer}>
+                                <Text style={styles.contentHeaderEOSSign}>
+                                    EOS
+                                </Text>
+                            </View>
                         </Text>
                     </View>
                 </View>
 
                 <View style={styles.contentBodyStake}>
                     <View style={styles.contentBodyStakeHeader}>
-                        <Text style={styles.contentBodyStakeHeaderName}>Delegatebw</Text>
+                        <Text style={styles.contentBodyStakeHeaderName}>{delegatebw}</Text>
                         <View  style={styles.contentBodyStakeHeaderQuestionContainer}>
                             <TouchableHighlight onPress={this._setRuleModalVisible.bind(this)} >
                             <View style={styles.contentBodyStakeHeaderQuestionBox}>
@@ -111,10 +140,10 @@ class VotePage extends Component {
                     <View style={styles.contentBodyStakeBody}>
                         <View style={styles.contentBodyStakeCpu}>
                             <Text style={styles.contentBodyStakeBodyTextLabel}>
-                                Cpu
+                                CPU
                             </Text>
                             <Text style={styles.contentBodyStakeBodyTextValue}>
-                                Cpu value
+                                {cpu_weight}
                             </Text>
                         </View>
                         <View style={styles.contentBodyStakeNetwork}>
@@ -122,7 +151,7 @@ class VotePage extends Component {
                                 Network
                             </Text>
                             <Text style={styles.contentBodyStakeBodyTextValue}>
-                                Network value
+                                {net_weight}
                             </Text>
                         </View>
                     </View>
@@ -130,7 +159,7 @@ class VotePage extends Component {
 
                 <View style={styles.contentBodyVotingList}>
                     <View style={styles.contentBodyVotingListHeader}>
-                        <Text style={styles.contentBodyVotingListName}>Each node above will get</Text>
+                        <Text style={styles.contentBodyVotingListName}>Each node bellow will get {1234*2**((new Date().getTime() - new Date(2000,0,1).getTime())/1000/(3600*24*365))} votes</Text>
                     </View>
                     <View style={styles.contentBodyBPListContainer}>
                     {
@@ -167,22 +196,14 @@ class VotePage extends Component {
                     <View style={styles.ruleModalStyle}>
                         <View style={styles.ruleSubView}>
                             <Text style={styles.ruleContentText}>
-                                You could revote, delegatebw or undelegatebw anytime. Vote will use CPU+Network stake.
-                                You could revote, delegatebw or undelegatebw anytime. Vote will use CPU+Network stake.
-                                You could revote, delegatebw or undelegatebw anytime. Vote will use CPU+Network stake.
-                                You could revote, delegatebw or undelegatebw anytime. Vote will use CPU+Network stake.
-                                You could revote, delegatebw or undelegatebw anytime. Vote will use CPU+Network stake.
-                                You could revote, delegatebw or undelegatebw anytime. Vote will use CPU+Network stake.
-                                You could revote, delegatebw or undelegatebw anytime. Vote will use CPU+Network stake.
-                                You could revote, delegatebw or undelegatebw anytime. Vote will use CPU+Network stake.
-                                You could revote, delegatebw or undelegatebw anytime. Vote will use CPU+Network stake.
+                                {rule}
                             </Text>
                             <View style={styles.buttonView}>
                                 <TouchableHighlight underlayColor='transparent'
                                                     style={styles.buttonStyle}
                                                     onPress={this._setRuleModalVisible.bind(this)}>
                                     <Text style={styles.buttonText}>
-                                        Cancel
+                                        {cancel}
                                     </Text>
                                 </TouchableHighlight>
                             </View>
@@ -211,13 +232,13 @@ class VotePage extends Component {
                                                     style={styles.buttonStyle}
                                                     onPress={this._setNoticeModalVisible.bind(this)}>
                                     <Text style={styles.buttonText}>
-                                        Cancel
+                                        {cancel}
                                     </Text>
                                 </TouchableHighlight>
                                 <View style={styles.verticalLine} />
                                 <TouchableHighlight underlayColor='transparent'
                                                     style={styles.buttonStyle}
-                                                    onPress={this.goImport}>
+                                                    onPress={this._submitList.bind(this)}>
                                     <Text style={styles.buttonText}>
                                         OK
                                     </Text>
@@ -229,7 +250,7 @@ class VotePage extends Component {
 
                 <View style = {styles.footerView}>
                     <TouchableHighlight  style = {styles.footerViewTouchArea}
-                                         onPress={this._submitList.bind(this)}>
+                                         onPress={this._setNoticeModalShow.bind(this)}>
                         <Text style={styles.footerSubmit}>
                             Submit
                         </Text>
@@ -240,8 +261,17 @@ class VotePage extends Component {
     }
 
 
+    _setNoticeModalShow(){
+        this.setState({
+            noticeShow:true,
+        });
+    }
+
     _submitList() {
         this.props.onDispatchVoteVotingList(this.state.votingList);
+        this.setState({
+            noticeShow:false,
+        });
     }
 
     _setDeleteBPC(index){
@@ -278,7 +308,13 @@ function mapDispatchToProps(dispatch) {
 }
 function mapStateToProps(state) {
     return {
+        accountInfo: state.VoteIndexPageReducer.accountInfo,
+        CurrencyBalance: state.VoteIndexPageReducer.CurrencyBalance,
+        Refunds: state.VoteIndexPageReducer.Refunds,
+        BPs: state.VoteIndexPageReducer.BPs,
+        USD: state.VoteIndexPageReducer.USD,
+
         votingList: state.VotePageReducer.votingList,
     };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(VotePage);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(VotePage));

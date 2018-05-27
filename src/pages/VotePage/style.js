@@ -60,6 +60,26 @@ const styles = StyleSheet.create({
         marginRight:8,
     },
 
+    contentHeaderBalance:{
+        flexDirection:'row',
+        flexWrap:'wrap',
+        paddingLeft: 5,
+        paddingRight: 5,
+        borderBottomWidth: 0.5,
+        borderBottomColor:'#ccc',
+        marginLeft:8,
+        marginRight:8,
+    },
+
+    contentHeaderStake:{
+        flexDirection:'row',
+        flexWrap:'wrap',
+        paddingLeft: 5,
+        paddingRight: 5,
+        marginLeft:8,
+        marginRight:8,
+    },
+
 
     contentHeaderAccountNameLabel: {
         width:'50%',
@@ -74,6 +94,28 @@ const styles = StyleSheet.create({
         fontSize:18,
         lineHeight: 45,
         color:'grey',
+    },
+
+    contentHeaderBalanceValueContainer:{
+        width:'50%',
+        textAlign:'right',
+        // fontSize:18,
+        // lineHeight: 45,
+        // color:'grey',
+    },
+
+    contentHeaderBalanceValue:{
+        fontSize:22,
+        lineHeight: 45,
+    },
+
+    contentHeaderEOSSignContainer:{
+        // paddingTop:2.5,
+        // marginLeft:10,
+    },
+
+    contentHeaderEOSSign:{
+        fontSize:14,
     },
 
     contentBodyStake : {

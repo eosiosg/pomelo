@@ -28,5 +28,12 @@
   "UnDelegatebwPage StakeQuantity": "Stake Quantity",
   "UnDelegatebwPage CPU": "CPU",
   "UnDelegatebwPage Network": "Network",
-  "UnDelegatebwPage Confirm": "Confirm"
+  "UnDelegatebwPage Confirm": "Confirm",
+
+  "VotePage account" : "Account",
+  "VotePage balance" : "Balance",
+  "VotePage stake" : "Stake count",
+  "VotePage cancel" : "Cancel",
+  "VotePage rule" : "safasddfsa",
+  "VotePage delegatebw" : "Delegatebw"
 }

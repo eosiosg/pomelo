@@ -28,5 +28,12 @@
   "UnDelegatebwPage StakeQuantity": "资源数量",
   "UnDelegatebwPage CPU": "CPU",
   "UnDelegatebwPage Network": "Network",
-  "UnDelegatebwPage Confirm": "确认"
+  "UnDelegatebwPage Confirm": "确认",
+
+  "VotePage account" : "账户名",
+  "VotePage balance" : "余额",
+  "VotePage stake" : "权重",
+  "VotePage cancel" : "取消",
+  "VotePage rule" : "safasddfsa",
+  "VotePage delegatebw" : "设置权重"
 }

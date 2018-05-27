@@ -14,7 +14,6 @@ import { getEOSPrice } from "../pages/WalletPage/saga";
 export default function* SagaInit() {
     yield takeLatest("HOME_ACCOUNT_NAME", getHomeAccountName);
     yield takeLatest("NODE_LIST_GET_ALL_ASSET_POST", getNodeListAllAsset);
-    yield takeLatest("VOTE_LIST_REDUCER", getVotingList);
     yield takeLatest("VOTE_INDEX_ACCOUNTINFO_POST", getVoteIndexPageAccountInfoPost);
     yield takeLatest("VOTE_INDEX_CURRENCYBALANCE_POST", getVoteIndexPageCurrencyBalancePost);
     yield takeLatest("VOTE_INDEX_REFUNDS_POST", getVoteIndexPageRefundsPost);
