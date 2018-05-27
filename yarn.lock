@@ -2335,6 +2335,14 @@ eosjs-api@6.0.1:
     is-browser "^2.0.1"
     isomorphic-fetch "^2.2.1"
 
+eosjs-api@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/eosjs-api/-/eosjs-api-6.0.2.tgz#4fb6d437778a6a779314e3fbed982002d9ea5a21"
+  dependencies:
+    camel-case "^3.0.0"
+    is-browser "^2.0.1"
+    isomorphic-fetch "^2.2.1"
+
 eosjs-ecc@4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/eosjs-ecc/-/eosjs-ecc-4.0.1.tgz#0a118000d3a78b9eab1432dd758f705810461adf"

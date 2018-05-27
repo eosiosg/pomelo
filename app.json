@@ -1,7 +1,4 @@
 {
-  "expo": {
-    "sdkVersion": "27.0.0"
-  },
   "name": "eoswallet",
-  "displayName": "Eos Wallet"
+  "displayName": "eoswallet"
 }

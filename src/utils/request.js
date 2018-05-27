@@ -1,4 +1,4 @@
-import "whatwg-fetch";
+// import "whatwg-fetch";
 import service from "./service";
 import {localSave, storage} from "./storage";
 

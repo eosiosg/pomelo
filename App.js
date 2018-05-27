@@ -25,6 +25,7 @@ import Api from "./Api";
 // Navigator
 const Navigator = StackNavigator(
   {
+      VotePage: { screen: VotePage },
     VoteIndexPage: { screen: VoteIndexPage },
     Api: { screen: Api },
     VotePage: { screen: VotePage },
@@ -32,7 +33,6 @@ const Navigator = StackNavigator(
     UnDelegatebwPage: { screen: UnDelegatebwPage },
     HomePage: { screen: HomePage },
     WalletPage: { screen: WalletPage },
-    VotePage: { screen: VotePage },
     NodeListPage: { screen: NodeListPage },
   },
 {
