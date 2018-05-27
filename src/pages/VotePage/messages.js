@@ -41,6 +41,10 @@ export default defineMessages({
         id: 'VotePage delegatebw',
         defaultMessage: 'Delegatebw',
     },
+    bpList: {
+        id: 'VotePage bpList',
+        defaultMessage: 'Candidates you selected',
+    },
     notice: {
         id: 'VotePage notice',
         defaultMessage: 'Notice',

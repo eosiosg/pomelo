@@ -5,7 +5,7 @@
 import {Dimensions, StyleSheet} from "react-native";
 
 const leftFirstBase = 13;
-const deleteButtonRadius = 12;
+const deleteButtonRadius = 10;
 const voteItemHeight = 45;
 const footerHeight = 66;
 const spaceTop = 40;
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginLeft:leftFirstBase,
         marginRight:leftFirstBase,
-        borderRadius:2,
+        borderRadius:5,
         backgroundColor: "#ffffff",
     },
 
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         flexWrap:'wrap',
         paddingLeft: 5,
         paddingRight: 5,
-        borderBottomWidth: 0.5,
+        borderBottomWidth: 0.3,
         borderBottomColor:'#ccc',
         marginLeft:8,
         marginRight:8,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         flexWrap:'wrap',
         paddingLeft: 5,
         paddingRight: 5,
-        borderBottomWidth: 0.5,
+        borderBottomWidth: 0.3,
         borderBottomColor:'#ccc',
         marginLeft:8,
         marginRight:8,
@@ -106,17 +106,19 @@ const styles = StyleSheet.create({
 
     contentHeaderAccountNameLabel: {
         width:'50%',
-        fontSize:18,
+        fontSize:16,
         lineHeight: 45,
-        color:'grey',
+        color:'black',
+        fontWeight:'200',
     },
 
     contentHeaderAccountNameValue: {
         width:'50%',
         textAlign:'right',
-        fontSize:18,
+        fontSize:16,
         lineHeight: 45,
-        color:'grey',
+        color:'black',
+        fontWeight:'200',
     },
 
     contentHeaderBalanceValueContainer:{
@@ -128,18 +130,20 @@ const styles = StyleSheet.create({
     },
 
     contentHeaderBalanceValue:{
-        fontSize:22,
+        fontSize:21,
+        fontWeight:'400',
         lineHeight: 45,
     },
 
     contentHeaderEOSSignContainer:{
         // paddingTop:2.5,
-        paddingLeft:3,
+        paddingLeft:4,
     },
 
     contentHeaderEOSSign:{
         fontSize:14,
         lineHeight:35,
+        fontWeight:'400',
     },
 
     contentBodyStake : {
@@ -156,7 +160,8 @@ const styles = StyleSheet.create({
     contentBodyStakeHeaderName:{
         color:'grey',
         width:'50%',
-        fontSize:18,
+        fontSize:16,
+        fontWeight:'200',
         lineHeight:42,
     },
 
@@ -189,21 +194,22 @@ const styles = StyleSheet.create({
     contentBodyStakeCpu:{
         flexDirection:'row',
         flexWrap:'wrap',
-        borderBottomWidth: 0.5,
+        borderBottomWidth: 0.3,
         borderBottomColor:'#ccc',
     },
 
     contentBodyStakeBodyTextLabel:{
         width:'50%',
-        fontSize:18,
+        fontSize:17,
         lineHeight: 45,
+        fontWeight:'200',
         paddingLeft: leftFirstBase,
     },
 
     contentBodyStakeBodyTextValue:{
         width:'50%',
         textAlign:'right',
-        fontSize:18,
+        fontSize:17,
         lineHeight: 45,
         paddingRight: leftFirstBase,
     },
@@ -226,7 +232,8 @@ const styles = StyleSheet.create({
 
     contentBodyVotingListName:{
         color:'grey',
-        fontSize:18,
+        fontSize:16,
+        fontWeight:'200',
         lineHeight:35,
     },
 
@@ -239,13 +246,14 @@ const styles = StyleSheet.create({
         flexWrap:'wrap',
         marginLeft: leftFirstBase,
         marginRight: leftFirstBase,
-        borderBottomWidth:0.5,
+        borderBottomWidth:0.3,
         borderBottomColor:'#ccc',
     },
 
     contentBodyBPName:{
         width:'50%',
         fontSize:18,
+        fontWeight:'200',
         lineHeight: 45,
     },
 
@@ -258,7 +266,7 @@ const styles = StyleSheet.create({
         width:deleteButtonRadius*2,
         height: deleteButtonRadius*2,
         borderRadius: deleteButtonRadius,
-        borderWidth: deleteButtonRadius/10,
+        borderWidth: deleteButtonRadius/20,
         borderColor:'#000',
         marginTop:voteItemHeight/2-deleteButtonRadius,
         marginRight:0,
@@ -268,7 +276,7 @@ const styles = StyleSheet.create({
         marginTop:deleteButtonRadius/10*8.5,
         marginLeft:deleteButtonRadius/10*2,
         width:deleteButtonRadius/10*14,
-        borderBottomWidth: deleteButtonRadius/10*2,
+        borderBottomWidth: deleteButtonRadius/10,
         borderColor:'#000',
     },
 

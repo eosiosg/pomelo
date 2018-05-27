@@ -62,6 +62,7 @@ class VotePage extends Component {
         const cancel = intl.formatMessage(messages.cancel);
         const gotIt = intl.formatMessage(messages.gotIt);
         const confirm = intl.formatMessage(messages.confirm);
+        const bpList = intl.formatMessage(messages.bpList);
         const submit = intl.formatMessage(messages.submit);
         const delegatebw = intl.formatMessage(messages.delegatebw);
         const notice = intl.formatMessage(messages.notice);
@@ -174,7 +175,10 @@ class VotePage extends Component {
 
                 <View style={styles.contentBodyVotingList}>
                     <View style={styles.contentBodyVotingListHeader}>
-                        <Text style={styles.contentBodyVotingListName}>Each node bellow will get {1234*2**((new Date().getTime() - new Date(2000,0,1).getTime())/1000/(3600*24*365))} votes</Text>
+                        <Text style={styles.contentBodyVotingListName}>
+                            {bpList}
+                            {/*Each node bellow will get {1234*2**((new Date().getTime() - new Date(2000,0,1).getTime())/1000/(3600*24*365))} votes*/}
+                        </Text>
                     </View>
                     <View style={styles.contentBodyBPListContainer}>
                     {
