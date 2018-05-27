@@ -5,16 +5,44 @@
 import {Dimensions, StyleSheet} from "react-native";
 
 const leftFirstBase = 13;
+const deleteButtonRadius = 12;
+const voteItemHeight = 45;
+const footerHeight = 66;
+
 
 const styles = StyleSheet.create({
+
+
     bodyBox: {
         position: "relative",
         flexBasis: "100%",
         minHeight: Dimensions.get("window").height,
         backgroundColor: "#f0f1f1",
     },
+
+    header:{
+        position:"absolute",
+        height:50,
+        width:'100%',
+    },
+
+    pageTitle:{
+        width:'100%',
+        fontSize:17,
+        marginTop:30,
+        lineHeight:20,
+        textAlign:'center',
+    },
+
+
+    scrollBodyBox:{
+        paddingTop:50,
+        paddingBottom:footerHeight,
+        overflow:'hidden',
+    },
+
     contentHeader: {
-        marginTop: 100,
+        marginTop: 20,
         marginLeft:leftFirstBase,
         marginRight:leftFirstBase,
         borderRadius:2,
@@ -63,14 +91,27 @@ const styles = StyleSheet.create({
         color:'grey',
         width:'50%',
         fontSize:18,
-        lineHeight:35,
+        lineHeight:42,
     },
-    contentBodyStakeHeaderQuestion:{
-        textAlign:'right',
-        color:'grey',
+
+    contentBodyStakeHeaderQuestionContainer:{
         width:'50%',
-        fontSize:18,
-        lineHeight:35,
+        alignItems:'flex-end',
+    },
+
+    contentBodyStakeHeaderQuestionBox:{
+        backgroundColor:'#a0a0a0',
+        width:24,
+        height:24,
+        borderRadius:12,
+        marginTop:9,
+    },
+
+    contentBodyStakeHeaderQuestion:{
+        textAlign:'center',
+        color:'black',
+        fontSize:16,
+        lineHeight:24,
     },
 
     contentBodyStakeBody : {
@@ -123,6 +164,47 @@ const styles = StyleSheet.create({
         lineHeight:35,
     },
 
+    contentBodyBPListContainer:{
+        backgroundColor: "#ffffff",
+    },
+
+    contentBodyBP:{
+        flexDirection:'row',
+        flexWrap:'wrap',
+        marginLeft: leftFirstBase,
+        marginRight: leftFirstBase,
+        borderBottomWidth:0.5,
+        borderBottomColor:'#ccc',
+    },
+
+    contentBodyBPName:{
+        width:'50%',
+        fontSize:18,
+        lineHeight: 45,
+    },
+
+    contentBodyBPDeleteContainer:{
+        alignItems: 'flex-end',
+        width:'50%',
+    },
+
+    contentBodyBPDeleteButton:{
+        width:deleteButtonRadius*2,
+        height: deleteButtonRadius*2,
+        borderRadius: deleteButtonRadius,
+        borderWidth: deleteButtonRadius/10,
+        borderColor:'#000',
+        marginTop:voteItemHeight/2-deleteButtonRadius,
+        marginRight:0,
+    },
+
+    contentBodyBPDeleteButtonInner:{
+        marginTop:deleteButtonRadius/10*8.5,
+        marginLeft:deleteButtonRadius/10*2,
+        width:deleteButtonRadius/10*14,
+        borderBottomWidth: deleteButtonRadius/10*2,
+        borderColor:'#000',
+    },
 
     ruleModalStyle:{
         alignItems: 'center',
@@ -214,6 +296,27 @@ const styles = StyleSheet.create({
         textAlign:'center',
     },
 
+
+
+    footerView:{
+        position:'absolute',
+        height:footerHeight,
+        width:'100%',
+        backgroundColor:'#736d75',
+        bottom:0,
+    },
+
+    footerViewTouchArea:{
+        height:footerHeight,
+    },
+
+    footerSubmit:{
+        width:'100%',
+        color:'#ffffff',
+        fontSize:20,
+        paddingTop:4,
+        textAlign:'center',
+    },
 });
 export {
     styles

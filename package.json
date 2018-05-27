@@ -33,6 +33,7 @@
     "dns.js": "^1.0.1",
     "domain-browser": "^1.2.0",
     "eosjs": "^13.0.0",
+    "eosjs-api": "^6.0.2",
     "events": "^1.1.1",
     "https-browserify": "0.0.1",
     "path-browserify": "0.0.0",

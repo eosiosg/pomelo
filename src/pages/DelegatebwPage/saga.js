@@ -14,7 +14,7 @@ function getAccount() {
   this.accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
   this.accountName = 'eosiomeetone';
   this.accountPublicKey = ecc.privateToPublic( this.accountPrivateKey );
-  let nodeAddress = 'http://52.77.224.13:8888';
+  let nodeAddress = 'http://13.229.70.163:8888';
   const config = {
     keyProvider: this.accountPrivateKey,
     httpEndpoint: nodeAddress,
@@ -43,7 +43,7 @@ function getCurrencyBalance() {
   this.accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
   this.accountName = 'eosiomeetone';
   this.accountPublicKey = ecc.privateToPublic( this.accountPrivateKey );
-  let nodeAddress = 'http://52.77.224.13:8888';
+  let nodeAddress = 'http://13.229.70.163:8888';
   const config = {
     keyProvider: this.accountPrivateKey,
     httpEndpoint: nodeAddress,
@@ -59,7 +59,40 @@ function getCurrencyBalance() {
     "account": this.accountName,
   } ).then( ( res ) => {
     console.log( res );
-    const balance = Number(res[0].replace("EOS", ""));
+    const balance = Number(res[0].replace(" SYS", ""));
     return balance;
+  } );
+}
+export function* getDelegatebwPageConfirmPost (action) {
+  try {
+    yield call(delegatebw, action);
+  } catch (err) {}
+}
+function delegatebw(action) {
+  const Eos = require( 'eosjs' );
+  const { ecc } = Eos.modules;
+
+  this.accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
+  this.accountName = 'eosiomeetone';
+  this.accountPublicKey = ecc.privateToPublic( this.accountPrivateKey );
+  let nodeAddress = 'http://13.229.70.163:8888';
+  const config = {
+    keyProvider: this.accountPrivateKey,
+    httpEndpoint: nodeAddress,
+    expireInSeconds: 60,
+    broadcast: true,
+    debug: false,
+    sign: true,
+    chainId: '706a7ddd808de9fc2b8879904f3b392256c83104c1d544b38302cc07d9fca477',
+  };
+  this.eos = Eos.Testnet( config );
+  console.log( '============== delegatebw ==================' );
+  return this.eos.transaction( tr => {
+    tr.delegatebw(action.data);
+  } ).then( function ( result ) {
+    console.log( result );
+    if (result.broadcast) {
+      action.nav.goBack();
+    }
   } );
 }

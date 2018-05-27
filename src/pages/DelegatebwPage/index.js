@@ -84,9 +84,7 @@ class DelegatebwPage extends Component {
                       <TextInput
                         style={stakeStyles.stakeValueInput}
                         placeholder={CPU_placeholder}
-                        autoFocus={false}
                         placeholderTextColor={"#999"}
-                        maxLength={20}
                         onChangeText={(CPU) => this.SetStateCpu(CPU)}
                         value={this.state.CPU}
                         underlineColorAndroid={"transparent"}
@@ -99,10 +97,9 @@ class DelegatebwPage extends Component {
                       <TextInput
                         style={stakeStyles.stakeValueInput}
                         placeholder={Network_placeholder}
-                        autoFocus={false}
                         placeholderTextColor={"#999"}
-                        maxLength={20}
                         onChangeText={(Network) => this.SetStateNetwork(Network)}
+                        value={this.state.Network}
                         underlineColorAndroid={"transparent"}
                       />
                     </View>
@@ -117,7 +114,7 @@ class DelegatebwPage extends Component {
                 <Text style={ruleStyles.ruleDesc}>· Could undelegatebw anytime，whitch will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later;</Text>
               </View>
               <View style={btnStyles.btnBox}>
-                <Text style={btnStyles.btn} onPress={() => {}}>Confirm</Text>
+                <Text style={btnStyles.btn} onPress={() => this.DelegatebwConfirmFn()}>Confirm</Text>
               </View>
               <View style={styles.bodyFooterBox}>
                 <View style={styles.bodyFooterFlg}></View>
@@ -126,20 +123,34 @@ class DelegatebwPage extends Component {
         );
     }
 
-  SetStateCpu = (val) => {
-    const CPU = String(Math.min(this.state.cpu_weight, val));
-    console.log(CPU);
-    this.setState({
-      CPU: CPU,
-    });
-  };
-  SetStateNetwork = (val) => {
-    const Network = String(Math.min(this.state.net_weight, val));
-    console.log(Network);
-    this.setState({
-      Network,
-    });
-  };
+    SetStateCpu = (val) => {
+      const CPU = String(Math.min(this.state.cpu_weight, val));
+      console.log(CPU);
+      this.setState({
+        CPU,
+      });
+    };
+    SetStateNetwork = (val) => {
+      const Network = String(Math.min(this.state.net_weight, val));
+      console.log(Network);
+      this.setState({
+        Network,
+      });
+    };
+    DelegatebwConfirmFn = () => {
+      if (!this.state.CPU || !this.state.Network) {
+        return;
+      }
+      const data = {
+        from: "eosiomeetone",
+        receiver:"eosiosg11111",
+        stake_net_quantity: this.state.Network + " SYS",
+        stake_cpu_quantity: this.state.CPU + " SYS",
+        transfer: 0,
+      };
+      const nav = this.props.navigation;
+      this.props.onDispatchDelegateBwPost(data, nav);
+    };
 }
 
 // 挂载中间件到组件；
@@ -147,6 +158,7 @@ function mapDispatchToProps(  dispatch  ) {
     return {
       onDispatchGetAccountInfoPost: () => dispatch({ type: "DELEGATEBW_ACCOUNTINFO_POST" }),
       onDispatchGetCurrencyBalancePost: () => dispatch({ type: "DELEGATEBW_CURRENCYBALANCE_POST" }),
+      onDispatchDelegateBwPost: (data, nav) => dispatch({ type: "DELEGATEBW_CONFIRM_POST", data, nav }),
     };
 }
 

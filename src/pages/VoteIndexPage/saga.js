@@ -14,7 +14,7 @@ function getAccount() {
   this.accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
   this.accountName = 'eosiomeetone';
   this.accountPublicKey = ecc.privateToPublic( this.accountPrivateKey );
-  let nodeAddress = 'http://52.77.224.13:8888';
+  let nodeAddress = 'http://13.229.70.163:8888';
   const config = {
     keyProvider: this.accountPrivateKey,
     httpEndpoint: nodeAddress,
@@ -24,8 +24,8 @@ function getAccount() {
     sign: true
   };
   this.eos = Eos.Testnet( config );
-  console.log( '==============get account info==================' );
   return this.eos.getAccount( { 'account_name': this.accountName } ).then( result => {
+    console.log( '==============get account info==================' );
     console.log( result );
     return result;
   } );
@@ -43,7 +43,7 @@ function getCurrencyBalance() {
   this.accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
   this.accountName = 'eosiomeetone';
   this.accountPublicKey = ecc.privateToPublic( this.accountPrivateKey );
-  let nodeAddress = 'http://52.77.224.13:8888';
+  let nodeAddress = 'http://13.229.70.163:8888';
   const config = {
     keyProvider: this.accountPrivateKey,
     httpEndpoint: nodeAddress,
@@ -53,13 +53,13 @@ function getCurrencyBalance() {
     sign: true
   };
   this.eos = Eos.Testnet( config );
-  console.log( '==============get currency balance==================' );
   return this.eos.getCurrencyBalance( {
     "code": "eosio.token",
     "account": this.accountName,
   } ).then( ( res ) => {
+    console.log( '==============get currency balance==================' );
     console.log( res );
-    const balance = Number(res[0].replace("EOS", ""));
+    const balance = Number(res[0].replace(" SYS", ""));
     return balance;
   } );
 }
@@ -76,7 +76,7 @@ function getRefunds() {
   this.accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
   this.accountName = 'eosiomeetone';
   this.accountPublicKey = ecc.privateToPublic( this.accountPrivateKey );
-  let nodeAddress = 'http://52.77.224.13:8888';
+  let nodeAddress = 'http://13.229.70.163:8888';
   const config = {
     keyProvider: this.accountPrivateKey,
     httpEndpoint: nodeAddress,
@@ -86,7 +86,6 @@ function getRefunds() {
     sign: true
   };
   this.eos = Eos.Testnet( config );
-  console.log( '==============get Refunds==================' );
   return this.eos.getTableRows({
     'json': true,
     'code': 'eosio',
@@ -94,9 +93,9 @@ function getRefunds() {
     'table': 'refunds',
     'table_key': 'owner'
   }).then(function (result) {
-    //这个是refunds
+    console.log( '==============get Refunds==================' );
     console.log(result);
-    const refunds = result.rows[0].amount ? result.rows[0].amount : 0;
+    const refunds = result.rows[0] ? Number(result.rows[0].cpu_amount.replace(" SYS", ""))+Number(result.rows[0].net_amount.replace(" SYS", "")) : 0;
     return refunds;
   });
 }
@@ -114,7 +113,7 @@ function getBps() {
   this.accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
   this.accountName = 'eosiomeetone';
   this.accountPublicKey = ecc.privateToPublic( this.accountPrivateKey );
-  let nodeAddress = 'http://52.77.224.13:8888';
+  let nodeAddress = 'http://13.229.70.163:8888';
   const config = {
     keyProvider: this.accountPrivateKey,
     httpEndpoint: nodeAddress,
@@ -124,8 +123,8 @@ function getBps() {
     sign: true
   };
   this.eos = Eos.Testnet( config );
-  console.log( '============== get block producer list==================' );
   return this.eos.getProducers( { json: true } ).then( result => {
+    console.log( '============== get block producer list==================' );
     console.log( result );
     return result.rows;
   } );
