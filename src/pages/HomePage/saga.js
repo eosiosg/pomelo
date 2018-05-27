@@ -10,16 +10,22 @@ export function* getHomeAccountName (action) {
   console.log("action====",action)
   try {
     const response = yield call(getAccountName , action.data)
-    yield put({ type: "HOME_SETACCOUNTNAMES_REDUCER", data: response });
-  } catch (err) {}
+    console.log("response:",response)
+    yield put({ type: "HOME_SETACCOUNTNAMES_REDUCER", data: response.account_names });
+
+  } catch (err) {
+    console.log("err:",err)
+
+  }
 }
 //get privateKey
 function getAccountName(Key){
   console.log("Key:",Key)
-  let nodeAddress = 'http://13.229.70.163:8888';
+  let nodeAddress = 'http://52.74.197.107:8888';
   let {ecc} = Eos.modules
   let accountPublicKey = ecc.privateToPublic(Key);
   localSave.setAccountPublicKey(accountPublicKey);
+  localSave.setAccountPrivateKey(Key);
   let config = {
     keyProvider: Key, // WIF string or array of keys..
     httpEndpoint: nodeAddress,
@@ -34,20 +40,17 @@ function getAccountName(Key){
   };
 
   let eos = Eos.Testnet(config);
-  console.log("eos:",eos);
 
   //try {
   //  const response = yield call(getPrivateKey,privateKey);
   //  yield put({ type: "HOME_SETPRIVATE_REDUCER", data: response });
   //} catch (err) {}
 
-  eos.getKeyAccounts({'public_key':accountPublicKey}).then((error,result) =>{
+  return eos.getKeyAccounts({'public_key':accountPublicKey}).then((result , error) =>{
       console.log("result:" ,result );
+      console.log("error:" ,error );
       return result;
     })
-    .catch((err)=>{
-      console.log(err)
-    });
 
 }
 

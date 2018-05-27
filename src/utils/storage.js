@@ -29,21 +29,17 @@ const localSave = {};
 localSave.set = (key, data) => {
     storage.save({key, data,});
 };
-localSave.setLoginUserPhone = (phone) => {
-    localSave.set("LoginUserPhone", phone);
+
+localSave.setAccountPublicKey = (PublicKey) => {
+    localSave.set("accountPublicKey", PublicKey);
 };
-localSave.setAccountPublicKey = (key) => {
-    localSave.set("accountPublicKey", key);
+localSave.setAccountName = (Name) => {
+    localSave.set("accountName", Name);
 };
-localSave.setLoginUserId = (id) => {
-    localSave.set("LoginUserId", id);
+localSave.setAccountPrivateKey = (PrivateKey) => {
+    localSave.set("accountPrivateKey", PrivateKey);
 };
-localSave.setLoginState = (state) => {
-    localSave.set("LoginState", state);
-};
-localSave.setLoginAuthorization = (data) => {
-    localSave.set("Authorization", data);
-};
+
 // localSave.setLoginState(false);
 export {
     storage,

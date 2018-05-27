@@ -17,6 +17,6 @@ const reducers = combineReducers({
     DelegatebwPageReducer,
     UnDelegatebwPageReducer,
     IntlProviderLanguageReducer,
-    WalletPageReducer
+    WalletPageReducer,
 });
 export default reducers;

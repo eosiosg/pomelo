@@ -36,7 +36,6 @@ class WalletPage extends Component {
 
     }
     render() {
-      console.log("EOSPrice:",this.props.EOSPrice)
       const { account_name, cpu_weight, net_weight, total_resources, } = this.props.accountInfo;
       const { ram_bytes } = total_resources;
       const stake = net_weight + cpu_weight;
@@ -129,7 +128,6 @@ class WalletPage extends Component {
 
   goVote=()=>{
     this.props.navigation.replace("VoteIndexPage");
-
   }
 
 
