@@ -1,7 +1,4 @@
 import { put, call} from "redux-saga/effects";
-import request from "../../utils/request";
-import service from "../../utils/service";
-
 export function* getUnDelegatebwPageAccountPost() {
   try {
     const response = yield call(getAccount);

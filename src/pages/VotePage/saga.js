@@ -4,8 +4,8 @@
 
 
 import { put, call} from "redux-saga/effects";
-import request from "../../utils/request";
-import service from "../../utils/service";
+
+
 
 // 创建假数据
 const votingList = [

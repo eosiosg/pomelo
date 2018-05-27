@@ -1,6 +1,25 @@
 const chainId = '706a7ddd808de9fc2b8879904f3b392256c83104c1d544b38302cc07d9fca477';
 const nodeAddress = 'http://13.229.70.163:8888';
 
+export function GetEOS( accountPrivateKey ) {
+  try {
+    const Eos = require( 'eosjs' );
+    const config = {
+      keyProvider: accountPrivateKey, // WIF string or array of keys..
+      httpEndpoint: nodeAddress,
+      expireInSeconds: 60,
+      broadcast: true,
+      debug: false,
+      sign: true,
+      chainId: chainId,
+    };
+    let eos = Eos.Testnet( config );
+    return eos;
+  } catch ( error ) {
+    return null;
+  }
+}
+
 export function EOSGetPublicKey( privateKey, callback ) {
     console.log( '============== EOSGetPublicKey ==================' );
 

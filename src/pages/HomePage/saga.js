@@ -1,6 +1,4 @@
 import { put, call} from "redux-saga/effects";
-import request from "../../utils/request";
-import service from "../../utils/service";
 import { localSave } from "../../utils/storage";
 import Eos from "eosjs"
 
