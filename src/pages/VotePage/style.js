@@ -8,7 +8,32 @@ const leftFirstBase = 13;
 const deleteButtonRadius = 12;
 const voteItemHeight = 45;
 const footerHeight = 66;
+const spaceTop = 40;
 
+const navStyles = StyleSheet.create({
+    navBox: {
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "nowrap",
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingTop:spaceTop,
+        paddingLeft: 15,
+        paddingRight: 15,
+        position:'absolute',
+    },
+    navItem: {
+        position:'absolute',
+        top:spaceTop,
+        left:leftFirstBase,
+        flex: 0,
+    },
+    navTitle: {
+        color: "#222",
+        fontSize: 18,
+        fontWeight: "600",
+    },
+});
 
 const styles = StyleSheet.create({
 
@@ -29,14 +54,12 @@ const styles = StyleSheet.create({
     pageTitle:{
         width:'100%',
         fontSize:17,
-        marginTop:30,
-        lineHeight:20,
+        lineHeight:23,
         textAlign:'center',
     },
 
-
     scrollBodyBox:{
-        paddingTop:50,
+        paddingTop:spaceTop+20,
         paddingBottom:footerHeight,
         overflow:'hidden',
     },
@@ -111,11 +134,12 @@ const styles = StyleSheet.create({
 
     contentHeaderEOSSignContainer:{
         // paddingTop:2.5,
-        // marginLeft:10,
+        paddingLeft:3,
     },
 
     contentHeaderEOSSign:{
         fontSize:14,
+        lineHeight:35,
     },
 
     contentBodyStake : {
@@ -142,7 +166,7 @@ const styles = StyleSheet.create({
     },
 
     contentBodyStakeHeaderQuestionBox:{
-        backgroundColor:'#a0a0a0',
+        backgroundColor:'#dcdcdc',
         width:24,
         height:24,
         borderRadius:12,
@@ -270,7 +294,7 @@ const styles = StyleSheet.create({
     },
 
     ruleContentText:{
-
+        marginBottom:5,
     },
 
 
@@ -361,7 +385,7 @@ const styles = StyleSheet.create({
     },
 });
 export {
-    styles
+    styles, navStyles
 };
 
 

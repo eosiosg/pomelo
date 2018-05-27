@@ -27,6 +27,22 @@ const votingList = [
         id: 3,
         title: "eoscananda",
     },
+    {
+        id: 0,
+        title: "eosio.sg",
+    },
+    {
+        id: 1,
+        title: "meet.one",
+    },
+    {
+        id: 2,
+        title: "canon",
+    },
+    {
+        id: 3,
+        title: "eoscananda",
+    },
 ];
 
 
@@ -35,7 +51,7 @@ export function* getVotingList(action) {
 
     try {
         const response = yield call(getInfo);
-        yield put({ type: "VOTE_GETLIST_REDUCER", data: [{id: 3, title: "eoscananda",}] });
+        yield put({ type: "VOTE_GETLIST_REDUCER", data: votingList });
     } catch (err) {}
 
 
@@ -66,8 +82,7 @@ function getInfo() {
 export function* postVotingList(action) {
     try {
         console.log(action.data);
-        let votingLis = action.data.length==0?votingList:action.data;
-        const response = yield call(()=>votePorducers('eosiomeetone', ['eosiomeetone']));
+        yield call(()=>votePorducers(action.data.account_name, action.data.votingList));
         yield put({ type: "VOTE_GETLIST_REDUCER", data: votingList });
     } catch (err) {}
 

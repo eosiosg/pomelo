@@ -6,9 +6,9 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
 import { injectIntl } from 'react-intl';
-import { ScrollView, View, Text, Image, TouchableHighlight, Dimensions, Modal } from "react-native";
+import { ScrollView, View, Text, Image, TouchableHighlight, TouchableOpacity, Dimensions, Modal } from "react-native";
 // 自定义组件
-import { styles } from "./style";
+import { styles, navStyles } from "./style";
 import messages from './messages';
 
 class VotePage extends Component {
@@ -60,8 +60,17 @@ class VotePage extends Component {
         const balance = intl.formatMessage(messages.balance);
         const stakeN = intl.formatMessage(messages.stake);
         const cancel = intl.formatMessage(messages.cancel);
-        const rule = intl.formatMessage(messages.rule);
+        const gotIt = intl.formatMessage(messages.gotIt);
+        const confirm = intl.formatMessage(messages.confirm);
+        const submit = intl.formatMessage(messages.submit);
         const delegatebw = intl.formatMessage(messages.delegatebw);
+        const notice = intl.formatMessage(messages.notice);
+        const noticeC = intl.formatMessage(messages.noticeC);
+        const RuleT = intl.formatMessage(messages.RuleT);
+        const Rule1 = intl.formatMessage(messages.Rule1);
+        const Rule2 = intl.formatMessage(messages.Rule2);
+        const Rule3 = intl.formatMessage(messages.Rule3);
+        const Rule4 = intl.formatMessage(messages.Rule4);
 
         // const VoteDescIntl = intl.formatMessage(messages.VoteDesc);
         // const UndelegatebwIntl = intl.formatMessage(messages.Undelegatebw);
@@ -69,16 +78,22 @@ class VotePage extends Component {
         // const RevoteIntl = intl.formatMessage(messages.Revote);
         // const VotedBpsIntl = intl.formatMessage(messages.VotedBps);
 
-
+        this.account_name = account_name;
 
         return (
             <View style={styles.bodyBox}>
 
-                <View style={styles.header}>
+                <View style={navStyles.navBox}>
+                    <View style={navStyles.navItem}>
+                        <TouchableOpacity onPress={() => {this.props.navigation.goBack()}}>
+                            <Image style={{width: 24, height: 24,}} source={require("../../images/arrow-left-account.png")} />
+                        </TouchableOpacity>
+                    </View>
                     <Text style={styles.pageTitle}>
                         Vote
                     </Text>
                 </View>
+
 
 
             <View style={styles.scrollBodyBox}>
@@ -164,7 +179,7 @@ class VotePage extends Component {
                     <View style={styles.contentBodyBPListContainer}>
                     {
                         this.state.votingList.map((votingC, index)=>{
-                            return <View key = {votingC.id}
+                            return <View key = {index}
                                          style={styles.contentBodyBP}>
                                 <Text style={styles.contentBodyBPName}>
                                     { votingC.title }
@@ -196,14 +211,26 @@ class VotePage extends Component {
                     <View style={styles.ruleModalStyle}>
                         <View style={styles.ruleSubView}>
                             <Text style={styles.ruleContentText}>
-                                {rule}
+                                {RuleT}
+                            </Text>
+                            <Text style={styles.ruleContentText}>
+                                {Rule1}
+                            </Text>
+                            <Text style={styles.ruleContentText}>
+                                {Rule2}
+                            </Text>
+                            <Text style={styles.ruleContentText}>
+                                {Rule3}
+                            </Text>
+                            <Text style={styles.ruleContentText}>
+                                {Rule4}
                             </Text>
                             <View style={styles.buttonView}>
                                 <TouchableHighlight underlayColor='transparent'
                                                     style={styles.buttonStyle}
                                                     onPress={this._setRuleModalVisible.bind(this)}>
                                     <Text style={styles.buttonText}>
-                                        {cancel}
+                                        {gotIt}
                                     </Text>
                                 </TouchableHighlight>
                             </View>
@@ -221,10 +248,10 @@ class VotePage extends Component {
                     <View style={styles.modalStyle}>
                         <View style={styles.subView}>
                             <Text style={styles.titleText}>
-                                Notice
+                                {notice}
                             </Text>
                             <Text style={styles.contentText}>
-                                You could revote, delegatebw or undelegatebw anytime. Vote will use CPU+Network stake.
+                                {noticeC}
                             </Text>
                             <View style={styles.horizontalLine} />
                             <View style={styles.buttonView}>
@@ -240,7 +267,7 @@ class VotePage extends Component {
                                                     style={styles.buttonStyle}
                                                     onPress={this._submitList.bind(this)}>
                                     <Text style={styles.buttonText}>
-                                        OK
+                                        {confirm}
                                     </Text>
                                 </TouchableHighlight>
                             </View>
@@ -252,7 +279,7 @@ class VotePage extends Component {
                     <TouchableHighlight  style = {styles.footerViewTouchArea}
                                          onPress={this._setNoticeModalShow.bind(this)}>
                         <Text style={styles.footerSubmit}>
-                            Submit
+                            {submit}
                         </Text>
                     </TouchableHighlight>
                 </View>
@@ -268,7 +295,12 @@ class VotePage extends Component {
     }
 
     _submitList() {
-        this.props.onDispatchVoteVotingList(this.state.votingList);
+        let votingList = [];
+        this.state.votingList.map((one)=>{
+            votingList.push(one.title)
+        })
+        let account_name = this.account_name;
+        this.props.onDispatchVoteVotingList({account_name,votingList});
         this.setState({
             noticeShow:false,
         });
@@ -276,6 +308,7 @@ class VotePage extends Component {
 
     _setDeleteBPC(index){
         let votingList = [].concat(this.state.votingList);
+        console.log(this.state);
         votingList.splice(index,1);
         this.setState({
             votingList
