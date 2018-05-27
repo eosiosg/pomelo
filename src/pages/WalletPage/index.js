@@ -29,9 +29,21 @@ class WalletPage extends Component {
     }
     componentDidMount() {
         // 获取数据
-        this.props.onDispatchGetAllAssetPost();
+      this.props.onDispatchGetAccountInfoPost();
+      this.props.onDispatchGetCurrencyBalancePost();
+      this.props.onDispatchGetRefundsPost();
+      this.props.onDispatchGetEOSPrice();
+
     }
     render() {
+      console.log("EOSPrice:",this.props.EOSPrice)
+      const { account_name, cpu_weight, net_weight, total_resources, } = this.props.accountInfo;
+      const { ram_bytes } = total_resources;
+      const stake = net_weight + cpu_weight;
+      const CurrencyBalance = this.props.CurrencyBalance;
+      const Refunds = this.props.Refunds;
+      const TotalAsset = stake + CurrencyBalance + Refunds;
+      const TotalAssetByUsd = TotalAsset * 12;
         return (
             <View style={styles.bodyBox}>
               <View style={styles.contentBox}>
@@ -42,20 +54,22 @@ class WalletPage extends Component {
               <View style={styles.contentMain}>
                 <Text style={styles.ContentTitleText}>EOS</Text>
                 <View style={styles.ContentBg}>
-                  <Text style={styles.ContentBgTopText}>userName1213</Text>
+                  <Text style={styles.ContentBgTopText}>{account_name}</Text>
                   <View style={styles.ContentBgMid}>
                     <Text style={styles.ContentBgMidText}>Total Assets</Text>
                     <View style={styles.ContentBgMidBack}>
-                      <Text style={styles.ContentBgMidAccount}>3223.00&nbsp;
+                      <Text style={styles.ContentBgMidAccount}>{TotalAsset}&nbsp;
                         <Text style={styles.ContentBgMidName}>EOS</Text>
                       </Text>
                     </View>
                   </View>
                   <View style={styles.ContentBgBottom}>
-                    <Text style={styles.ContentBgBottomText}>= $23132</Text>
+                    <Text style={styles.ContentBgBottomText}>= ${TotalAssetByUsd}</Text>
                   </View>
                 </View>
               </View>
+
+
               <View style={styles.bottomContent}>
                 <TouchableHighlight onPress={this.goVote} >
                   <Text style={styles.buttonSubmit}>Vote</Text>
@@ -114,6 +128,7 @@ class WalletPage extends Component {
   }
 
   goVote=()=>{
+    this.props.navigation.replace("VoteIndexPage");
 
   }
 
@@ -123,12 +138,19 @@ class WalletPage extends Component {
 // 挂载中间件到组件；
 function mapDispatchToProps(dispatch) {
     return {
-        onDispatchGetAllAssetPost: () => dispatch({ type: "HOME_GETALLASSET_POST" }),
+      onDispatchGetAccountInfoPost: () => dispatch({ type: "VOTE_INDEX_ACCOUNTINFO_POST" }),
+      onDispatchGetCurrencyBalancePost: () => dispatch({ type: "VOTE_INDEX_CURRENCYBALANCE_POST" }),
+      onDispatchGetRefundsPost: () => dispatch({ type: "VOTE_INDEX_REFUNDS_POST" }),
+      onDispatchGetEOSPrice: () => dispatch({ type: "EOS_PRICE_GET" }),
     };
 }
 function mapStateToProps(state) {
     return {
-        allAsset: state.HomePageReducer.allAsset,
+        allAsset: state.WalletPageReducer.allAsset,
+        accountInfo: state.WalletPageReducer.accountInfo,
+        CurrencyBalance: state.WalletPageReducer.CurrencyBalance,
+        Refunds: state.WalletPageReducer.Refunds,
+        EOSPrice: state.WalletPageReducer.EOSPrice,
     };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(WalletPage);
