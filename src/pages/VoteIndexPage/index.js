@@ -70,7 +70,7 @@ class VoteIndexPage extends Component {
                     <View style={assetStyles.assetItemBox}>
                       <View style={assetStyles.itemBox}>
                         <Text style={assetStyles.itemName}>
-                          {RefundingIntl} <Text style={assetStyles.refundingTime}>2d23h</Text>
+                          {RefundingIntl}
                         </Text>
                         <Text style={assetStyles.itemValue}>
                           {Refunds} <Text style={assetStyles.itemValueUnit}>EOS</Text>
@@ -128,6 +128,18 @@ class VoteIndexPage extends Component {
             </View>
         );
     }
+    // RefundingCountdown = (creatTime) => {
+    //   const totalTime = 3*24*60*60;
+    //   let newCreatTime = new Date(creatTime);
+    //   newCreatTime = newCreatTime.getTime();
+    //   let cuntDownTime = totalTime - newCreatTime;
+    //   setInterval(()=> {
+    //     cuntDownTime--;
+    //     this.setState({
+    //
+    //     });
+    //   },1000);
+    // };
 }
 
 // 挂载中间件到组件；
