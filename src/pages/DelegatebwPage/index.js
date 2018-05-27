@@ -8,15 +8,6 @@ import { styles, navStyles, countStyles, stakeStyles, ruleStyles, btnStyles } fr
 import messages from './messages';
 
 class DelegatebwPage extends Component {
-    static navigationOptions = ( props ) => {
-        const { navigation } = props;
-        const { state, setParams } = navigation;
-        const { params } = state;
-
-        return {
-            header: null
-        };
-    };
 
     constructor( props ) {
         super( props );
@@ -48,29 +39,42 @@ class DelegatebwPage extends Component {
       const CurrencyBalance = this.props.CurrencyBalance;
       const CPU_placeholder = "MAX "+ this.state.cpu_weight+" Stake";
       const Network_placeholder = "MAX "+ this.state.net_weight+" Stake";
+      const { intl } = this.props;
+      const DelegatebwPageIntl = intl.formatMessage(messages.DelegatebwPage);
+      const BalanceIntl = intl.formatMessage(messages.Balance);
+      const StakeCountIntl = intl.formatMessage(messages.StakeCount);
+      const StakeQuantityIntl = intl.formatMessage(messages.StakeQuantity);
+      const CPUIntl = intl.formatMessage(messages.CPU);
+      const NetworkIntl = intl.formatMessage(messages.Network);
+      const RuleIntl = intl.formatMessage(messages.Rule);
+      const Rule1Intl = intl.formatMessage(messages.Rule1);
+      const Rule2Intl = intl.formatMessage(messages.Rule2);
+      const Rule3Intl = intl.formatMessage(messages.Rule3);
+      const Rule4Intl = intl.formatMessage(messages.Rule4);
+      const ConfirmIntl = intl.formatMessage(messages.Confirm);
         return (
             <View style={styles.bodyBox}>
-              <View style={navStyles.navBox}>
-                <View style={navStyles.navItem}>
-                  <TouchableOpacity onPress={() => {this.props.navigation.goBack()}}>
-                    <Image style={{width: 24, height: 24,}} source={require("./images/arrow-left-account.png")} />
-                  </TouchableOpacity>
-                </View>
-                <View style={navStyles.navItem}>
-                  <Text style={navStyles.navTitle}>DelegatebwPage</Text>
-                </View>
-                <View style={navStyles.navItem}></View>
-              </View>
               <ScrollView>
+                <View style={navStyles.navBox}>
+                  <View style={navStyles.navItem}>
+                    <TouchableOpacity onPress={() => {this.props.navigation.goBack()}}>
+                      <Image style={{width: 24, height: 24,}} source={require("./images/arrow-left-account.png")} />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={navStyles.navItem}>
+                    <Text style={navStyles.navTitle}>{DelegatebwPageIntl}</Text>
+                  </View>
+                  <View style={navStyles.navItem}></View>
+                </View>
                 <View style={countStyles.countBox}>
                   <View style={countStyles.countItem}>
-                    <Text style={countStyles.countName}>Balance</Text>
+                    <Text style={countStyles.countName}>{BalanceIntl}</Text>
                     <Text style={countStyles.countValue}>
                       {CurrencyBalance} <Text style={countStyles.countValueUnit}>EOS</Text>
                     </Text>
                   </View>
                   <View style={[countStyles.countItem, {borderBottomWidth: 0,}]}>
-                    <Text style={countStyles.countName}>Stake count</Text>
+                    <Text style={countStyles.countName}>{StakeCountIntl}</Text>
                     <Text style={countStyles.countStakeValue}>
                       {stake} <Text style={countStyles.countValueUnit}>EOS</Text>
                     </Text>
@@ -78,11 +82,11 @@ class DelegatebwPage extends Component {
                 </View>
                 <View style={stakeStyles.stakeBox}>
                   <View style={stakeStyles.titleTipBox}>
-                    <Text style={stakeStyles.titleTip}>Stake quantity</Text>
+                    <Text style={stakeStyles.titleTip}>{StakeQuantityIntl}</Text>
                   </View>
                   <View style={stakeStyles.stakeConBox}>
                     <View style={stakeStyles.stakeItem}>
-                      <Text style={stakeStyles.stakeName}>CPU</Text>
+                      <Text style={stakeStyles.stakeName}>{CPUIntl}</Text>
                       <View style={stakeStyles.stakeValue}>
                         <TextInput
                           style={stakeStyles.stakeValueInput}
@@ -95,7 +99,7 @@ class DelegatebwPage extends Component {
                       </View>
                     </View>
                     <View style={stakeStyles.stakeItem}>
-                      <Text style={stakeStyles.stakeName}>Network</Text>
+                      <Text style={stakeStyles.stakeName}>{NetworkIntl}</Text>
                       <View style={stakeStyles.stakeValue}>
                         <TextInput
                           style={stakeStyles.stakeValueInput}
@@ -110,15 +114,16 @@ class DelegatebwPage extends Component {
                   </View>
                 </View>
                 <View style={ruleStyles.ruleBox}>
-                  <Text style={ruleStyles.ruleTitle}>Rule*:</Text>
-                  <Text style={ruleStyles.ruleDesc}>· Vote will use a little CPU + Network stake;</Text>
-                  <Text style={ruleStyles.ruleDesc}>· Weight  = seconds_count_since_year_2000/ seconds_count_per_year，means increase by second;</Text>
-                  <Text style={ruleStyles.ruleDesc}>· Vote = (CPU stake + Network stake) * 2^weight;</Text>
-                  <Text style={ruleStyles.ruleDesc}>· Could undelegatebw anytime，whitch will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later;</Text>
+                  <Text style={ruleStyles.ruleTitle}>{RuleIntl}:</Text>
+                  <Text style={ruleStyles.ruleDesc}>{Rule1Intl}</Text>
+                  <Text style={ruleStyles.ruleDesc}>{Rule2Intl}</Text>
+                  <Text style={ruleStyles.ruleDesc}>{Rule3Intl}</Text>
+                  <Text style={ruleStyles.ruleDesc}>{Rule4Intl}</Text>
                 </View>
+                <View style={{height: 100}}></View>
               </ScrollView>
               <View style={btnStyles.btnBox}>
-                <Text style={btnStyles.btn} onPress={() => this.DelegatebwConfirmFn()}>Confirm</Text>
+                <Text style={btnStyles.btn} onPress={() => this.DelegatebwConfirmFn()}>{ConfirmIntl}</Text>
               </View>
               <View style={styles.bodyFooterBox}>
                 <View style={styles.bodyFooterFlg}></View>

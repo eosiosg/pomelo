@@ -23,14 +23,13 @@ const styles = StyleSheet.create({
   },
   bodyFooterBox: {
     position: "absolute",
-    bottom: 15,
+    bottom: 115,
     width: Dimensions.get("window").width,
     display: "flex",
     flexDirection: "row",
     flexWrap: "nowrap",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff",
   },
   bodyFooterFlg: {
     flex: 0,

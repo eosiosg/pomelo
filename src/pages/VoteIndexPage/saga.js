@@ -68,3 +68,25 @@ function getBps() {
   } );
 }
 
+// getVoteIndexPageBpsPost
+export function* getVoteIndexPageUsdPricePost () {
+  try {
+    // 组装请求数据
+    const requestOption = {
+      url: "https://api.coinmarketcap.com/v2/ticker/1765/?convert=USD",
+      body: {
+        method: 'get',
+      },
+    };
+    const _fetch = () => {
+      return fetch(requestOption.url, requestOption.body)
+        .then((response) => response.json())
+        .then((response) => response)
+        .catch((err) => err);
+    };
+    const response = yield call(_fetch);
+    console.log(response.data.quotes.USD.price);
+    yield put({ type: "VOTEINDEX_SETUSD_REDUCER", data: response.data.quotes.USD.price });
+  } catch (err) {}
+}
+
