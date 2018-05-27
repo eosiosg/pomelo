@@ -15,7 +15,6 @@ import DelegatebwPage from "./src/pages/DelegatebwPage";
 import UnDelegatebwPage from "./src/pages/UnDelegatebwPage";
 import NodeListPage from "./src/pages/NodeListPage";
 import WalletPage from "./src/pages/WalletPage";
-import Api from "./Api";
 import TestPage from "./src/pages/TestPage";
 //import { persistStore, autoRehydrate } from "redux-persist";
 //import createEncryptor from "redux-persist-transform-encrypt";
@@ -25,7 +24,6 @@ import TestPage from "./src/pages/TestPage";
 const Navigator = StackNavigator(
     {
         VoteIndexPage: { screen: VoteIndexPage },
-        Api: { screen: Api },
         VotePage: { screen: VotePage },
         DelegatebwPage: { screen: DelegatebwPage },
         UnDelegatebwPage: { screen: UnDelegatebwPage },
