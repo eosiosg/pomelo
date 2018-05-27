@@ -3,8 +3,7 @@ import React, { Component } from "react";
 import {connect} from "react-redux";
 import Eos from "eosjs"
 import LinearGradient from "react-native-linear-gradient";
-import { ScrollView, View, Text, TextInput, Image, TouchableHighlight, Dimensions ,Modal } from "react-native";
-import { localSave } from "../../utils/storage";
+import { ScrollView, View, Text, TextInput, Image, TouchableHighlight, Dimensions ,Modal ,CheckBox} from "react-native";
 
 // 自定义组件
 import { styles } from "./style";
@@ -26,41 +25,40 @@ class HomePage extends Component {
           TextInputAutoFocus : true,
           name : "",
           key : "" ,
-          show : false
+          show : false,
+          ItemData :[],
+
         };
     }
     componentWillReceiveProps( nextProps ) {
-      console.log('home:',nextProps.allAsset);
+      console.log('home:',nextProps.accountNames);
+     if(nextProps.accountNames){
+       this.setState({
+         ItemData :  nextProps.accountNames
+       })
+     }
     }
     componentDidMount() {
         // 获取数据
-        this.props.onDispatchGetAllAssetPost();
+
     }
     render() {
-        return (
+
+      return (
             <View style={styles.bodyBox}>
               <View style={styles.contentBox}>
-                <TouchableHighlight onPress={() => {this.props.navigation.goBack();}}>
+                <TouchableHighlight onPress={() => {this.props.navigation.goBack();}} style={{flex : 1}}>
                   <Image source={require("./image/arrow-left-account.png")}  style={styles.contentBoxImg}/>
                 </TouchableHighlight>
-                <TouchableHighlight onPress={this.goback}>
+                <TouchableHighlight onPress={this.goback} style={{flex : 3}}>
                   <Text style={styles.titleTextTop}>Import EOS wallet</Text>
                 </TouchableHighlight>
-                <TouchableHighlight onPress={this.go}>
-                  <Text></Text>
-                </TouchableHighlight>
+                <View style={{flex : 1}}>
+
+                </View>
               </View>
               <View>
-                <Text style={styles.contentBoxTitle}>Your Account Name</Text>
-                <TextInput
-                  style={styles.conItemTextInput}
-                  placeholder="Please enter"
-                  autoFocus={this.state.TextInputAutoFocus}
-                  placeholderTextColor={"#222"}
-                  maxLength={11}
-                  onChangeText={(name) => this.setState({name})}
-                  underlineColorAndroid={"transparent"}
-                />
+
                 <Text style={styles.contentBoxTitle}>Your Private Key</Text>
                 <TextInput
                   style={styles.conItemTextInput}
@@ -69,6 +67,26 @@ class HomePage extends Component {
                   onChangeText={(key) => this.setState({key})}
                   underlineColorAndroid={"transparent"}
                 />
+              </View>
+              <View>
+                <Text style={styles.contentItemTitle}>Choice an account name</Text>
+                <View style={styles.contentItemBox}>
+                  {this.state.ItemData.map((v , i) => (<Text style={styles.contentItem} value={v|| ""} key={ i}>{v|| ""}</Text>))}
+                  <View style={styles.contentItem}>
+                    <Text  style={styles.contentItemText}>
+                      12312
+                    </Text>
+                  </View>
+                  <View style={styles.contentItem} >
+                    <Text  style={styles.contentItemText}>
+                      12312
+                    </Text>
+                  </View>
+                  <Text style={styles.contentItemNo}>
+                      No account name
+                  </Text>
+
+                </View>
               </View>
               <View style={styles.bottomContent}>
                 <TouchableHighlight onPress={this.goSubmit} >
@@ -118,40 +136,23 @@ class HomePage extends Component {
 
   //back last page
   goback = () =>{
-    "use strict";
+
+  }
+
+  checkName= () =>{
 
   }
   //submit wallet data
   goSubmit = () =>{
-    "use strict";
-    if (!this.state.key || !this.state.name){
+    if (!this.state.key){
       this.setState({
         show : true
       })
       return
     }
-    let {ecc} = Eos.modules
-    let accountPublicKey = ecc.privateToPublic(this.state.key);
-    let nodeAddress = 'http://13.229.70.163:8888';
 
-    console.log("accountPublicKey：",accountPublicKey);
-    localSave.setAccountPublicKey(accountPublicKey);
-
-//    let config = {
-//      keyProvider: this.state.key, // WIF string or array of keys..
-//      httpEndpoint: nodeAddress,
-////    mockTransactions: () => 'pass', // or 'fail'
-////    transactionHeaders: (expireInSeconds, callback) => {
-////      callback(null/*error*/, headers)
-////    },
-//      expireInSeconds: 60,
-//      broadcast: true,
-//      debug: false,
-//      sign: true
-//    };
-//
-//    let eos = Eos.Testnet(config);
-//    console.log("eos:",eos);
+    console.log("key======:",this.state.key)
+    this.props.onDispatchGetAccountNames(this.state.key);
 
     //this.props.navigation.replace("WalletPage");
 
@@ -173,12 +174,12 @@ class HomePage extends Component {
 // 挂载中间件到组件；
 function mapDispatchToProps(dispatch) {
     return {
-        onDispatchGetAllAssetPost: () => dispatch({ type: "HOME_GETALLASSET_POST" }),
+        onDispatchGetAccountNames: (data) => dispatch({ type: "HOME_ACCOUNT_NAME" ,data}),
     };
 }
 function mapStateToProps(state) {
     return {
-        allAsset: state.HomePageReducer.allAsset,
+      accountNames: state.HomePageReducer.accountNames,
     };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

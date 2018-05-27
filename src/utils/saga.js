@@ -1,15 +1,18 @@
 import { takeLatest } from "redux-saga/effects";
-import { getHomeAllAsset } from "../pages/HomePage/saga";
+import { getHomeAccountName } from "../pages/HomePage/saga";
 import { getNodeListAllAsset } from "../pages/NodeListPage/saga";
+
 import { getVotingList,postVotingList } from "../pages/VotePage/saga";
 import { getVoteIndexPageAccountInfoPost, getVoteIndexPageCurrencyBalancePost, getVoteIndexPageRefundsPost, getVoteIndexPageBpsPost } from "../pages/VoteIndexPage/saga";
 import { getDelegatebwPageAccountInfoPost, getDelegatebwPageCurrencyBalancePost, getDelegatebwPageConfirmPost } from "../pages/DelegatebwPage/saga";
 import { getUnDelegatebwPageAccountPost, getUnDelegatebwPageConfirmPost } from "../pages/UnDelegatebwPage/saga";
+import { getEOSPrice } from "../pages/WalletPage/saga";
+
 /**
  * saga根函数，注册到store中；
  */
 export default function* SagaInit() {
-    yield takeLatest("HOME_GETALLASSET_POST", getHomeAllAsset);
+    yield takeLatest("HOME_ACCOUNT_NAME", getHomeAccountName);
     yield takeLatest("NODE_LIST_GET_ALL_ASSET_POST", getNodeListAllAsset);
     yield takeLatest("VOTE_LIST_REDUCER", getVotingList);
     yield takeLatest("VOTE_INDEX_ACCOUNTINFO_POST", getVoteIndexPageAccountInfoPost);
@@ -23,4 +26,5 @@ export default function* SagaInit() {
     yield takeLatest("DELEGATEBW_CONFIRM_POST", getDelegatebwPageConfirmPost);
     yield takeLatest("UNDELEGATEBW_ACCOUNTINFO_POST", getUnDelegatebwPageAccountPost);
     yield takeLatest("UNDELEGATEBW_CONFIRM_POST", getUnDelegatebwPageConfirmPost);
+    yield takeLatest("EOS_PRICE_GET", getEOSPrice);
 }

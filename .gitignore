@@ -5,3 +5,4 @@ ios/build/*
 ios/build
 ios/Pods/*
 ios/Pods
+/node_modules/

@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     paddingLeft : 10,
   },
   contentBox: {
-    paddingTop: 10,
-    paddingBottom: 20,
+    paddingTop: 40,
+    paddingBottom: 30,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -117,10 +117,48 @@ const styles = StyleSheet.create({
     backgroundColor:'#ccc',
   },
   buttonText:{
+    fontSize:18,
+    color:'#3393F2',
+    textAlign:'center',
+  },
+  // 竖直的分割线
+  verticalLine:{
+    width:0.5,
+    height:44,
+    backgroundColor:'#ccc',
+  },
+  buttonText:{
     fontSize:16,
     color:'#3393F2',
     textAlign:'center',
   },
+  //item
+  contentItem:{
+    borderBottomColor: '#eee',
+    borderBottomWidth :  1 ,
+    //fontSize : 18,
+    paddingTop : 15,
+    paddingBottom : 15,
+  },
+  contentItemBox:{
+    backgroundColor:'#fff',
+    marginRight : 10,
+  },
+  contentItemTitle:{
+    paddingBottom : 15,
+    paddingTop : 25,
+    fontSize:18,
+    color : "#323232",
+  },
+  contentItemNo:{
+    fontSize : 22,
+    paddingTop : 30,
+    paddingBottom : 30,
+    textAlign : "center",
+  },
+  contentItemText:{
+    fontSize:18,
+  }
 });
 export {
   styles
