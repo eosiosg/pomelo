@@ -3,7 +3,7 @@
  *
  */
 const initState = {
-  Language: "en",
+  Language: "zh",
 };
 export default function IntlProviderLanguageReducer (state = initState, action) {
     switch (action.type) {

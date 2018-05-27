@@ -9,16 +9,6 @@ import { styles, assetStyles, voteStyles, voteBpsStales } from "./style";
 import messages from './messages';
 
 class VoteIndexPage extends Component {
-    static navigationOptions = ( props ) => {
-        const { navigation } = props;
-        const { state, setParams } = navigation;
-
-        const { params } = state;
-
-        return {
-            header: null
-        };
-    };
 
     constructor (props) {
         super(props);
@@ -32,11 +22,6 @@ class VoteIndexPage extends Component {
       this.props.onDispatchGetCurrencyBalancePost();
       this.props.onDispatchGetRefundsPost();
       this.props.onDispatchGetVoteBpsPost();
-      // 测试国际化语言
-      const { intl } = this.props;
-      const hello = intl.formatMessage(messages.Hello);
-      console.log("======formatMessage======");
-      console.log(hello);
     }
 
     render() {
@@ -48,6 +33,18 @@ class VoteIndexPage extends Component {
       const TotalAsset = stake + CurrencyBalance + Refunds;
       const TotalAssetByUsd = TotalAsset * 12;
       const BPs = this.props.BPs;
+      const { intl } = this.props;
+      const userNameIntl = intl.formatMessage(messages.userName);
+      const TotalAssetIntl = intl.formatMessage(messages.TotalAsset);
+      const RefundingIntl = intl.formatMessage(messages.Refunding);
+      const BalanceIntl = intl.formatMessage(messages.Balance);
+      const RAMBytesIntl = intl.formatMessage(messages.RAMBytes);
+      const VoteIntl = intl.formatMessage(messages.Vote);
+      const VoteDescIntl = intl.formatMessage(messages.VoteDesc);
+      const UndelegatebwIntl = intl.formatMessage(messages.Undelegatebw);
+      const AddDelegatebwIntl = intl.formatMessage(messages.AddDelegatebw);
+      const RevoteIntl = intl.formatMessage(messages.Revote);
+      const VotedBpsIntl = intl.formatMessage(messages.VotedBps);
         return (
             <View style={styles.bodyBox}>
                 <ScrollView style={styles.contentBox}>
@@ -58,11 +55,11 @@ class VoteIndexPage extends Component {
                     <View style={assetStyles.totalAssetBox}>
                       <View style={assetStyles.userNameBox}>
                         <Text style={assetStyles.userNameTip}>
-                          userName:  <Text style={assetStyles.userName}>{account_name}</Text>
+                          {userNameIntl}:  <Text style={assetStyles.userName}>{account_name}</Text>
                         </Text>
                       </View>
                       <View style={assetStyles.userTotalAssetBox}>
-                        <Text style={assetStyles.userTotalAssetTip}>Total Asset</Text>
+                        <Text style={assetStyles.userTotalAssetTip}>{TotalAssetIntl}</Text>
                         <Text style={assetStyles.userTotalAssetValue}>
                           {TotalAsset} <Text style={assetStyles.userTotalAssetValueUnit}>EOS</Text>
                         </Text>
@@ -72,38 +69,38 @@ class VoteIndexPage extends Component {
                     <View style={assetStyles.assetItemBox}>
                       <View style={assetStyles.itemBox}>
                         <Text style={assetStyles.itemName}>
-                          Refunding <Text style={assetStyles.refundingTime}>2d23h</Text>
+                          {RefundingIntl} <Text style={assetStyles.refundingTime}>2d23h</Text>
                         </Text>
                         <Text style={assetStyles.itemValue}>
                           {Refunds} <Text style={assetStyles.itemValueUnit}>EOS</Text>
                         </Text>
                       </View>
                       <View style={assetStyles.itemBox}>
-                        <Text style={assetStyles.itemName}>Balance</Text>
+                        <Text style={assetStyles.itemName}>{BalanceIntl}</Text>
                         <Text style={assetStyles.itemValue}>
                           {CurrencyBalance} <Text style={assetStyles.itemValueUnit}>EOS</Text>
                         </Text>
                       </View>
                       <View style={[assetStyles.itemBox, {borderBottomWidth: 0,}]}>
-                        <Text style={assetStyles.itemName}>RAM bytes</Text>
+                        <Text style={assetStyles.itemName}>{RAMBytesIntl}</Text>
                         <Text style={assetStyles.itemValue}>{ram_bytes}</Text>
                       </View>
                     </View>
                   </View>
                   <View style={voteStyles.contentVoteBox}>
-                    <Text style={voteStyles.voteTitle}>Vote</Text>
-                    <Text style={voteStyles.voteDesc}>Undelegatebw will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later.</Text>
+                    <Text style={voteStyles.voteTitle}>{VoteIntl}</Text>
+                    <Text style={voteStyles.voteDesc}>{VoteDescIntl}</Text>
                     <View style={voteStyles.voteItemList}>
                       <TouchableOpacity style={voteStyles.voteItem} onPress={() => {this.props.navigation.navigate("UnDelegatebwPage")}}>
-                        <Text style={voteStyles.voteItemName}>undelegatebw</Text>
+                        <Text style={voteStyles.voteItemName}>{UndelegatebwIntl}</Text>
                         <Image style={[voteStyles.voteItemActionIcon, {width: 16, height: 20,}]} source={require("./images/arrow-right-account.png")} />
                       </TouchableOpacity>
                       <TouchableOpacity style={voteStyles.voteItem} onPress={() => {this.props.navigation.navigate("DelegatebwPage")}}>
-                        <Text style={voteStyles.voteItemName}>add delegatebw</Text>
+                        <Text style={voteStyles.voteItemName}>{AddDelegatebwIntl}</Text>
                         <Image style={[voteStyles.voteItemActionIcon, {width: 16, height: 20,}]} source={require("./images/arrow-right-account.png")} />
                       </TouchableOpacity>
                       <TouchableOpacity style={voteStyles.voteItem} onPress={() => {this.props.navigation.navigate("NodeListPage")}}>
-                        <Text style={voteStyles.voteItemName}>revote</Text>
+                        <Text style={voteStyles.voteItemName}>{RevoteIntl}</Text>
                         <Image style={[voteStyles.voteItemActionIcon, {width: 16, height: 20,}]} source={require("./images/arrow-right-account.png")} />
                       </TouchableOpacity>
                     </View>
@@ -111,7 +108,7 @@ class VoteIndexPage extends Component {
                   <View style={voteBpsStales.contentVoteBpsBox}>
                     <View style={voteBpsStales.VoteBpsTitleBox}>
                       <View style={voteBpsStales.VoteBpsTitleFlg}></View>
-                      <Text style={voteBpsStales.VoteBpsTitle}>Voted Bps</Text>
+                      <Text style={voteBpsStales.VoteBpsTitle}>{VotedBpsIntl}</Text>
                     </View>
                     <View style={voteBpsStales.VoteBpsList}>
                       {BPs.map((item) => (
@@ -125,6 +122,7 @@ class VoteIndexPage extends Component {
                   <View style={styles.bodyFooterBox}>
                     <View style={styles.bodyFooterFlg}></View>
                   </View>
+                  <View style={{height: 100}}></View>
                 </ScrollView>
             </View>
         );

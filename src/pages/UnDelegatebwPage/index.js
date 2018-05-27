@@ -8,15 +8,6 @@ import { styles, navStyles, countStyles, stakeStyles, btnStyles } from "./style"
 import messages from './messages';
 
 class UnDelegatebwPage extends Component {
-    static navigationOptions = ( props ) => {
-        const { navigation } = props;
-        const { state, setParams } = navigation;
-        const { params } = state;
-
-        return {
-            header: null
-        };
-    };
 
     constructor( props ) {
         super( props );
@@ -46,6 +37,14 @@ class UnDelegatebwPage extends Component {
       const Stake = Number(this.state.CPU) + Number(this.state.Network);
       const CPU_placeholder = "MAX "+ this.state.cpu_weight+" Stake";
       const Network_placeholder = "MAX "+ this.state.net_weight+" Stake";
+      const { intl } = this.props;
+      const UnDelegatebwPageIntl = intl.formatMessage(messages.UnDelegatebwPage);
+      const StakeCountIntl = intl.formatMessage(messages.StakeCount);
+      const StakeCountInfoIntl = intl.formatMessage(messages.StakeCountInfo);
+      const StakeQuantityIntl = intl.formatMessage(messages.StakeQuantity);
+      const CPUIntl = intl.formatMessage(messages.CPU);
+      const NetworkIntl = intl.formatMessage(messages.Network);
+      const ConfirmIntl = intl.formatMessage(messages.Confirm);
         return (
             <View style={styles.bodyBox}>
               <View style={navStyles.navBox}>
@@ -55,29 +54,29 @@ class UnDelegatebwPage extends Component {
                   </TouchableOpacity>
                 </View>
                 <View style={navStyles.navItem}>
-                  <Text style={navStyles.navTitle}>UnDelegatebwPage</Text>
+                  <Text style={navStyles.navTitle}>{UnDelegatebwPageIntl}</Text>
                 </View>
                 <View style={navStyles.navItem}></View>
               </View>
               <ScrollView>
                 <View style={countStyles.countBox}>
                   <View style={[countStyles.countItem, {borderBottomWidth: 0,}]}>
-                    <Text style={countStyles.countName}>Stake count</Text>
+                    <Text style={countStyles.countName}>{StakeCountIntl}</Text>
                     <Text style={countStyles.countValue}>
                       {Stake} <Text style={countStyles.countValueUnit}>EOS</Text>
                     </Text>
                   </View>
                 </View>
                 <View style={countStyles.countInfoBox}>
-                  <Text style={countStyles.countInfo}>* EOS will return to account 3 days later</Text>
+                  <Text style={countStyles.countInfo}>{StakeCountInfoIntl}</Text>
                 </View>
                 <View style={stakeStyles.stakeBox}>
                   <View style={stakeStyles.titleTipBox}>
-                    <Text style={stakeStyles.titleTip}>Stake quantity</Text>
+                    <Text style={stakeStyles.titleTip}>{StakeQuantityIntl}</Text>
                   </View>
                   <View style={stakeStyles.stakeConBox}>
                     <View style={stakeStyles.stakeItem}>
-                      <Text style={stakeStyles.stakeName}>CPU</Text>
+                      <Text style={stakeStyles.stakeName}>{CPUIntl}</Text>
                       <View style={stakeStyles.stakeValue}>
                         <TextInput
                           style={stakeStyles.stakeValueInput}
@@ -91,7 +90,7 @@ class UnDelegatebwPage extends Component {
                       </View>
                     </View>
                     <View style={stakeStyles.stakeItem}>
-                      <Text style={stakeStyles.stakeName}>Network</Text>
+                      <Text style={stakeStyles.stakeName}>{NetworkIntl}</Text>
                       <View style={stakeStyles.stakeValue}>
                         <TextInput
                           style={stakeStyles.stakeValueInput}
@@ -106,9 +105,10 @@ class UnDelegatebwPage extends Component {
                     </View>
                   </View>
                 </View>
+                <View style={{height: 100}}></View>
               </ScrollView>
               <View style={btnStyles.btnBox}>
-                <Text style={btnStyles.btn} onPress={() => this.UnDelegatebwConfirmFn()}>Confirm</Text>
+                <Text style={btnStyles.btn} onPress={() => this.UnDelegatebwConfirmFn()}>{ConfirmIntl}</Text>
               </View>
               <View style={styles.bodyFooterBox}>
                 <View style={styles.bodyFooterFlg}></View>

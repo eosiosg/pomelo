@@ -45,7 +45,8 @@ const Navigator = StackNavigator(
                 fontWeight: 'bold'
             },
             headerTintColor: '#323232',
-            headerBackTitle: null
+            headerBackTitle: null,
+            header: null
         }
     }
 );
