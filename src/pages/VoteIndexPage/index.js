@@ -1,7 +1,7 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { injectIntl } from 'react-intl'
+import { injectIntl } from 'react-intl';
 import { ScrollView, View, Text, Image, TouchableOpacity } from "react-native";
 
 // 自定义组件

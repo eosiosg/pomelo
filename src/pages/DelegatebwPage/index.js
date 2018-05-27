@@ -1,9 +1,11 @@
 // 引入公共组件
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { injectIntl } from 'react-intl';
 import { ScrollView, Text, View, Image, TouchableOpacity, TextInput } from "react-native";
 // 自定义组件
 import { styles, navStyles, countStyles, stakeStyles, ruleStyles, btnStyles } from "./style";
+import messages from './messages';
 
 class DelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
@@ -172,4 +174,4 @@ function mapStateToProps( state ) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DelegatebwPage);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(DelegatebwPage));
