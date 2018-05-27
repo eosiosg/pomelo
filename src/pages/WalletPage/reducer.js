@@ -44,6 +44,7 @@ export default function WalletPageReducer (state = initState, action) {
             return Object.assign({}, state, {
                 "EOSPrice": action.data
             });
+
         default:
             return state;
     }

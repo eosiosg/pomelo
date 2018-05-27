@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import {connect} from "react-redux";
 import LinearGradient from "react-native-linear-gradient";
 import { ScrollView, View, Text, Image, TouchableHighlight, Dimensions, Modal } from "react-native";
+import {  storage } from "../../utils/storage";
+import { injectIntl } from 'react-intl';
 
 // 自定义组件
 import { styles } from "./style";
@@ -22,6 +24,7 @@ class WalletPage extends Component {
         super(props);
         this.state = {
           show  :false,
+          accountName : ""
         };
     }
     componentWillReceiveProps( nextProps ) {
@@ -33,16 +36,32 @@ class WalletPage extends Component {
       this.props.onDispatchGetCurrencyBalancePost();
       this.props.onDispatchGetRefundsPost();
       this.props.onDispatchGetEOSPrice();
+      storage.load({key: "accountName"}).then((ret) => {
+        console.log("ret:",ret)
+        if (ret) {
+          this.setState({
+            accountName : ret
+        })
+        } else {
+          console.log("ret:",ret)
+        }
+      }).catch(err => {
+        console.log("err:",err)
+      });
 
     }
     render() {
+
+//===============
+// 缓存中获取  accountName
+
       const { account_name, cpu_weight, net_weight, total_resources, } = this.props.accountInfo;
       const { ram_bytes } = total_resources;
       const stake = net_weight + cpu_weight;
       const CurrencyBalance = this.props.CurrencyBalance;
       const Refunds = this.props.Refunds;
       const TotalAsset = stake + CurrencyBalance + Refunds;
-      const TotalAssetByUsd = TotalAsset * 12;
+      const TotalAssetByUsd = TotalAsset * this.props.EOSPrice;
         return (
             <View style={styles.bodyBox}>
               <View style={styles.contentBox}>
@@ -53,7 +72,7 @@ class WalletPage extends Component {
               <View style={styles.contentMain}>
                 <Text style={styles.ContentTitleText}>EOS</Text>
                 <View style={styles.ContentBg}>
-                  <Text style={styles.ContentBgTopText}>{account_name}</Text>
+                  <Text style={styles.ContentBgTopText}>{this.state.accountName}</Text>
                   <View style={styles.ContentBgMid}>
                     <Text style={styles.ContentBgMidText}>Total Assets</Text>
                     <View style={styles.ContentBgMidBack}>
@@ -130,15 +149,14 @@ class WalletPage extends Component {
     this.props.navigation.replace("VoteIndexPage");
   }
 
-
 }
 
 // 挂载中间件到组件；
 function mapDispatchToProps(dispatch) {
     return {
-      onDispatchGetAccountInfoPost: () => dispatch({ type: "VOTE_INDEX_ACCOUNTINFO_POST" }),
-      onDispatchGetCurrencyBalancePost: () => dispatch({ type: "VOTE_INDEX_CURRENCYBALANCE_POST" }),
-      onDispatchGetRefundsPost: () => dispatch({ type: "VOTE_INDEX_REFUNDS_POST" }),
+      onDispatchGetAccountInfoPost: () => dispatch({ type: "WALLET_ACCOUNTINFO_POST" }),
+      onDispatchGetCurrencyBalancePost: () => dispatch({ type: "WALLET_CURRENCYBALANCE_POST" }),
+      onDispatchGetRefundsPost: () => dispatch({ type: "WALLET_REFUNDS_POST" }),
       onDispatchGetEOSPrice: () => dispatch({ type: "EOS_PRICE_GET" }),
     };
 }
@@ -151,4 +169,4 @@ function mapStateToProps(state) {
         EOSPrice: state.WalletPageReducer.EOSPrice,
     };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(WalletPage);
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(WalletPage));
