@@ -1,7 +1,7 @@
 // 引入公共组件
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Text, View, Image, TouchableOpacity, TextInput } from "react-native";
+import { ScrollView, Text, View, Image, TouchableOpacity, TextInput } from "react-native";
 // 自定义组件
 import { styles, navStyles, countStyles, stakeStyles, btnStyles } from "./style";
 
@@ -57,52 +57,54 @@ class UnDelegatebwPage extends Component {
                 </View>
                 <View style={navStyles.navItem}></View>
               </View>
-              <View style={countStyles.countBox}>
-                <View style={[countStyles.countItem, {borderBottomWidth: 0,}]}>
-                  <Text style={countStyles.countName}>Stake count</Text>
-                  <Text style={countStyles.countValue}>
-                    {Stake} <Text style={countStyles.countValueUnit}>EOS</Text>
-                  </Text>
-                </View>
-              </View>
-              <View style={countStyles.countInfoBox}>
-                <Text style={countStyles.countInfo}>* EOS will return to account 3 days later</Text>
-              </View>
-              <View style={stakeStyles.stakeBox}>
-                <View style={stakeStyles.titleTipBox}>
-                  <Text style={stakeStyles.titleTip}>Stake quantity</Text>
-                </View>
-                <View style={stakeStyles.stakeConBox}>
-                  <View style={stakeStyles.stakeItem}>
-                    <Text style={stakeStyles.stakeName}>CPU</Text>
-                    <View style={stakeStyles.stakeValue}>
-                      <TextInput
-                        style={stakeStyles.stakeValueInput}
-                        placeholder={CPU_placeholder}
-                        placeholderTextColor={"#999"}
-                        maxLength={11}
-                        onChangeText={(CPU) => this.SetStateCpu(CPU)}
-                        value={this.state.CPU}
-                        underlineColorAndroid={"transparent"}
-                      />
-                    </View>
-                  </View>
-                  <View style={stakeStyles.stakeItem}>
-                    <Text style={stakeStyles.stakeName}>Network</Text>
-                    <View style={stakeStyles.stakeValue}>
-                      <TextInput
-                        style={stakeStyles.stakeValueInput}
-                        placeholder={Network_placeholder}
-                        placeholderTextColor={"#999"}
-                        maxLength={11}
-                        onChangeText={(Network) => this.SetStateNetwork(Network)}
-                        value={this.state.Network}
-                        underlineColorAndroid={"transparent"}
-                      />
-                    </View>
+              <ScrollView>
+                <View style={countStyles.countBox}>
+                  <View style={[countStyles.countItem, {borderBottomWidth: 0,}]}>
+                    <Text style={countStyles.countName}>Stake count</Text>
+                    <Text style={countStyles.countValue}>
+                      {Stake} <Text style={countStyles.countValueUnit}>EOS</Text>
+                    </Text>
                   </View>
                 </View>
-              </View>
+                <View style={countStyles.countInfoBox}>
+                  <Text style={countStyles.countInfo}>* EOS will return to account 3 days later</Text>
+                </View>
+                <View style={stakeStyles.stakeBox}>
+                  <View style={stakeStyles.titleTipBox}>
+                    <Text style={stakeStyles.titleTip}>Stake quantity</Text>
+                  </View>
+                  <View style={stakeStyles.stakeConBox}>
+                    <View style={stakeStyles.stakeItem}>
+                      <Text style={stakeStyles.stakeName}>CPU</Text>
+                      <View style={stakeStyles.stakeValue}>
+                        <TextInput
+                          style={stakeStyles.stakeValueInput}
+                          placeholder={CPU_placeholder}
+                          placeholderTextColor={"#999"}
+                          maxLength={11}
+                          onChangeText={(CPU) => this.SetStateCpu(CPU)}
+                          value={this.state.CPU}
+                          underlineColorAndroid={"transparent"}
+                        />
+                      </View>
+                    </View>
+                    <View style={stakeStyles.stakeItem}>
+                      <Text style={stakeStyles.stakeName}>Network</Text>
+                      <View style={stakeStyles.stakeValue}>
+                        <TextInput
+                          style={stakeStyles.stakeValueInput}
+                          placeholder={Network_placeholder}
+                          placeholderTextColor={"#999"}
+                          maxLength={11}
+                          onChangeText={(Network) => this.SetStateNetwork(Network)}
+                          value={this.state.Network}
+                          underlineColorAndroid={"transparent"}
+                        />
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </ScrollView>
               <View style={btnStyles.btnBox}>
                 <Text style={btnStyles.btn} onPress={() => this.UnDelegatebwConfirmFn()}>Confirm</Text>
               </View>
@@ -112,21 +114,22 @@ class UnDelegatebwPage extends Component {
             </View>
         );
     }
-  SetStateCpu = (val) => {
+
+    SetStateCpu = (val) => {
     const CPU = String(Math.min(this.state.cpu_weight, val));
-    console.log(CPU);
     this.setState({
       CPU,
     });
   };
-  SetStateNetwork = (val) => {
+
+    SetStateNetwork = (val) => {
     const Network = String(Math.min(this.state.net_weight, val));
-    console.log(Network);
     this.setState({
       Network,
     });
   };
-  UnDelegatebwConfirmFn = () => {
+
+    UnDelegatebwConfirmFn = () => {
     if (!this.state.CPU || !this.state.Network) {
       return;
     }

@@ -140,6 +140,7 @@ function mapDispatchToProps(dispatch) {
         onDispatchGetVoteBpsPost: () => dispatch({ type: "VOTE_INDEX_BPS_POST" }),
     };
 }
+
 function mapStateToProps(state) {
     return {
         accountInfo: state.VoteIndexPageReducer.accountInfo,
@@ -148,4 +149,5 @@ function mapStateToProps(state) {
         BPs: state.VoteIndexPageReducer.BPs,
     };
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(VoteIndexPage));
