@@ -20,6 +20,7 @@ const initState = {
       producer_key: "1",
     },
   ],
+  USD: 6.2,
 };
 export default function VoteIndexPageReducer (state = initState, action) {
     switch (action.type) {
@@ -39,6 +40,10 @@ export default function VoteIndexPageReducer (state = initState, action) {
         return Object.assign({}, state, {
           "BPs": action.data
         });
+    case "VOTEINDEX_SETUSD_REDUCER":
+      return Object.assign({}, state, {
+        "USD": action.data
+      });
     default:
         return state;
     }

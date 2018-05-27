@@ -3,7 +3,7 @@ import { getHomeAccountName } from "../pages/HomePage/saga";
 import { getNodeListAllAsset } from "../pages/NodeListPage/saga";
 
 import { getVotingList,postVotingList } from "../pages/VotePage/saga";
-import { getVoteIndexPageAccountInfoPost, getVoteIndexPageCurrencyBalancePost, getVoteIndexPageRefundsPost, getVoteIndexPageBpsPost } from "../pages/VoteIndexPage/saga";
+import { getVoteIndexPageAccountInfoPost, getVoteIndexPageCurrencyBalancePost, getVoteIndexPageRefundsPost, getVoteIndexPageBpsPost, getVoteIndexPageUsdPricePost } from "../pages/VoteIndexPage/saga";
 import { getDelegatebwPageAccountInfoPost, getDelegatebwPageCurrencyBalancePost, getDelegatebwPageConfirmPost } from "../pages/DelegatebwPage/saga";
 import { getUnDelegatebwPageAccountPost, getUnDelegatebwPageConfirmPost } from "../pages/UnDelegatebwPage/saga";
 import { getEOSPrice } from "../pages/WalletPage/saga";
@@ -19,6 +19,7 @@ export default function* SagaInit() {
     yield takeLatest("VOTE_INDEX_CURRENCYBALANCE_POST", getVoteIndexPageCurrencyBalancePost);
     yield takeLatest("VOTE_INDEX_REFUNDS_POST", getVoteIndexPageRefundsPost);
     yield takeLatest("VOTE_INDEX_BPS_POST", getVoteIndexPageBpsPost);
+    yield takeLatest("VOTE_INDEX_GETUSDPRICE_POST", getVoteIndexPageUsdPricePost);
     yield takeLatest("VOTE_GETLIST_POST", getVotingList);
     yield takeLatest("VOTE_SUBMITLIST_POST", postVotingList);
     yield takeLatest("DELEGATEBW_ACCOUNTINFO_POST", getDelegatebwPageAccountInfoPost);

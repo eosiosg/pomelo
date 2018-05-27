@@ -22,6 +22,7 @@ class VoteIndexPage extends Component {
       this.props.onDispatchGetCurrencyBalancePost();
       this.props.onDispatchGetRefundsPost();
       this.props.onDispatchGetVoteBpsPost();
+      this.props.onDispatchGetVoteUsdPost();
     }
 
     render() {
@@ -31,7 +32,7 @@ class VoteIndexPage extends Component {
       const CurrencyBalance = this.props.CurrencyBalance;
       const Refunds = this.props.Refunds;
       const TotalAsset = stake + CurrencyBalance + Refunds;
-      const TotalAssetByUsd = TotalAsset * 12;
+      const TotalAssetByUsd = TotalAsset * this.props.USD;
       const BPs = this.props.BPs;
       const { intl } = this.props;
       const userNameIntl = intl.formatMessage(messages.userName);
@@ -136,6 +137,7 @@ function mapDispatchToProps(dispatch) {
         onDispatchGetCurrencyBalancePost: () => dispatch({ type: "VOTE_INDEX_CURRENCYBALANCE_POST" }),
         onDispatchGetRefundsPost: () => dispatch({ type: "VOTE_INDEX_REFUNDS_POST" }),
         onDispatchGetVoteBpsPost: () => dispatch({ type: "VOTE_INDEX_BPS_POST" }),
+        onDispatchGetVoteUsdPost: () => dispatch({ type: "VOTE_INDEX_GETUSDPRICE_POST" }),
     };
 }
 
@@ -145,6 +147,7 @@ function mapStateToProps(state) {
         CurrencyBalance: state.VoteIndexPageReducer.CurrencyBalance,
         Refunds: state.VoteIndexPageReducer.Refunds,
         BPs: state.VoteIndexPageReducer.BPs,
+        USD: state.VoteIndexPageReducer.USD,
     };
 }
 
