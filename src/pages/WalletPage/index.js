@@ -135,7 +135,7 @@ class WalletPage extends Component {
     }
 
   goImport= ()=>{
-    this.props.navigation.replace("HomePage");
+    this.props.navigation.replace("HomePage",{id:1});
   }
   // 显示/隐藏 modal
   _setModalVisible() {

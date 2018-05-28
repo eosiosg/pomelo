@@ -28,8 +28,6 @@ storage.load({key: "accountName"}).then((ret) => {
 //const accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
 //const accountName = "meetone33333";
 //===============
-console.log("accountPrivateKey:",accountPrivateKey)
-console.log("accountName:",accountName)
 
 export function* getEOSPrice () {
   try {
@@ -47,10 +45,8 @@ export function* getEOSPrice () {
         .catch((err) => err);
     };
     const response = yield call(_fetch);
-    console.log(response.data.quotes.USD.price);
     yield put({ type: "EOSPRICE_REDUCER", data: response.data.quotes.USD.price });
   } catch (err) {}
-  //fetch("https://api.coinmarketcap.com/v2/ticker/1765/?convert=USD")
 }
 
 
