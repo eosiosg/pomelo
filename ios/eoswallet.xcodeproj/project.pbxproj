@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -12,6 +13,7 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* eoswalletTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* eoswalletTests.m */; };
+		091A2010CDC746BF9373A00D /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3C6DB4181549C9BE61E19D /* libRNI18n.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -52,11 +54,10 @@
 		B33469C9A5040634BCF6DCA2 /* libPods-eoswallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D60B592D09542CDDCE395B7F /* libPods-eoswallet.a */; };
 		BAFF3B35621A4CC9BBD4E4D3 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E101A78089094A71AE845EC4 /* Foundation.ttf */; };
 		BFC021AACD034D189DB2FB6F /* libRNRandomBytes-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEAA3DD585D44FC8E4834A6 /* libRNRandomBytes-tvOS.a */; };
+		C5BA0DA08F3244F4B8335C41 /* libRNI18n-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6130BCED5D6D4871A1BDBE53 /* libRNI18n-tvOS.a */; };
 		D6AEFD98281E49C68E8DEA27 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72FE9B829D584235958C8B6C /* Octicons.ttf */; };
 		F2E04C33B2DA4B39A1D1BA27 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A89FF216E619439DA1482D58 /* Ionicons.ttf */; };
 		FB6A23AEEADC40DBB1E5F331 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C62F197D04EF59D29CEB5 /* Feather.ttf */; };
-		091A2010CDC746BF9373A00D /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B3C6DB4181549C9BE61E19D /* libRNI18n.a */; };
-		C5BA0DA08F3244F4B8335C41 /* libRNI18n-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6130BCED5D6D4871A1BDBE53 /* libRNI18n-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -354,6 +355,20 @@
 			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
 			remoteInfo = RNVectorIcons;
 		};
+		F4F15FE820BC563F00B36D5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71830E1E28C1441A9D98F1E5 /* RNI18n.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNI18n;
+		};
+		F4F15FEA20BC563F00B36D5A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 71830E1E28C1441A9D98F1E5 /* RNI18n.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6476C4051EEAA69700B10F51;
+			remoteInfo = "RNI18n-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -366,6 +381,7 @@
 		00E356EE1AD99517003FC87E /* eoswalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = eoswalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* eoswalletTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = eoswalletTests.m; sourceTree = "<group>"; };
+		0B3C6DB4181549C9BE61E19D /* libRNI18n.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNI18n.a; sourceTree = "<group>"; };
 		0D7FD61AD67B4D759AC6ACC3 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		0FCFBA7CD04F9126D64F07B5 /* Pods-eoswallet-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eoswallet-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eoswallet-tvOS/Pods-eoswallet-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		11176E8D823DDC92AF006B71 /* Pods-eoswalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eoswalletTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eoswalletTests/Pods-eoswalletTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -389,11 +405,13 @@
 		44C428EA52CA425997CE8846 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		499A9DF30EF4408CA2002DB4 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		6130BCED5D6D4871A1BDBE53 /* libRNI18n-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNI18n-tvOS.a"; sourceTree = "<group>"; };
 		63DBBD0BEBC24A6E8D71468B /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		68DDE94391714F3A9DA6BC24 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		6B464C701EF64E231FB1B9EC /* Pods-eoswallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eoswallet.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eoswallet/Pods-eoswallet.debug.xcconfig"; sourceTree = "<group>"; };
 		6EEAA3DD585D44FC8E4834A6 /* libRNRandomBytes-tvOS.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = "libRNRandomBytes-tvOS.a"; sourceTree = "<group>"; };
 		6FF48AA6D5CD8B5524114B3C /* libPods-eoswalletTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eoswalletTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		71830E1E28C1441A9D98F1E5 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/ios/RNI18n.xcodeproj"; sourceTree = "<group>"; };
 		72FE9B829D584235958C8B6C /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -411,9 +429,6 @@
 		F0904CEC21F7465FB3E04F8D /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		F804F33025EE4ABF9C466F51 /* RNRandomBytes.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNRandomBytes.xcodeproj; path = "../node_modules/react-native-randombytes/RNRandomBytes.xcodeproj"; sourceTree = "<group>"; };
 		FC24C88D1108E719FAE77CE5 /* libPods-eoswallet-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eoswallet-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		71830E1E28C1441A9D98F1E5 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; name = "RNI18n.xcodeproj"; path = "../node_modules/react-native-i18n/ios/RNI18n.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		0B3C6DB4181549C9BE61E19D /* libRNI18n.a */ = {isa = PBXFileReference; name = "libRNI18n.a"; path = "libRNI18n.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		6130BCED5D6D4871A1BDBE53 /* libRNI18n-tvOS.a */ = {isa = PBXFileReference; name = "libRNI18n-tvOS.a"; path = "libRNI18n-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -733,6 +748,8 @@
 				3905363B3A4741ACAD7A6702 /* libRNRandomBytes.a */,
 				6EEAA3DD585D44FC8E4834A6 /* libRNRandomBytes-tvOS.a */,
 				499A9DF30EF4408CA2002DB4 /* libRNVectorIcons.a */,
+				0B3C6DB4181549C9BE61E19D /* libRNI18n.a */,
+				6130BCED5D6D4871A1BDBE53 /* libRNI18n-tvOS.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -750,6 +767,15 @@
 			isa = PBXGroup;
 			children = (
 				F424C55520BBE7890025E22D /* libRNVectorIcons.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F4F15FE420BC563F00B36D5A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F4F15FE920BC563F00B36D5A /* libRNI18n.a */,
+				F4F15FEB20BC563F00B36D5A /* libRNI18n-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -916,6 +942,10 @@
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = F4F15FE420BC563F00B36D5A /* Products */;
+					ProjectRef = 71830E1E28C1441A9D98F1E5 /* RNI18n.xcodeproj */;
 				},
 				{
 					ProductGroup = F41C851A20B694D000E8516C /* Products */;
@@ -1215,6 +1245,20 @@
 			fileType = archive.ar;
 			path = libRNVectorIcons.a;
 			remoteRef = F424C55420BBE7890025E22D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F4F15FE920BC563F00B36D5A /* libRNI18n.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNI18n.a;
+			remoteRef = F4F15FE820BC563F00B36D5A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F4F15FEB20BC563F00B36D5A /* libRNI18n-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRNI18n-tvOS.a";
+			remoteRef = F4F15FEA20BC563F00B36D5A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
