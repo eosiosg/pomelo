@@ -5,6 +5,15 @@ import {IntlProvider} from 'react-intl';
 import { translationMessages } from "./i18n"
 
 class IntlProviderLanguage extends PureComponent {
+    static navigationOptions = ( props ) => {
+        const { navigation } = props;
+        const { state, setParams } = navigation;
+        const { params } = state;
+        return {
+            header: null
+        };
+    }
+
     constructor (props) {
         super(props);
         this.state = {};

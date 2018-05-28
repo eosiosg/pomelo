@@ -11,6 +11,16 @@ import LoadingView from "./components/LoadingView";
 import Spinner from 'react-native-loading-spinner-overlay';
 
 class NodeListPage extends Component {
+    static navigationOptions = ( props ) => {
+        const { navigation } = props;
+        const { state, setParams } = navigation;
+        const { params } = state;
+
+        return {
+            title: 'Node List',
+        };
+    };
+
     constructor( props ) {
         super( props );
         this.state = {
@@ -76,9 +86,9 @@ class NodeListPage extends Component {
                 height: 76
             } ]}>
                 <View style={[ {}, style.wrapper ]}>
-                    <Text style={[ style.commonTextColorStyle, { fontWeight: 'bold', fontSize: 18 } ]}>{item.owner}</Text>
-                    <Text style={[ style.commonSubTextColorStyle, { fontSize: 14 } ]}>http://{item.url}</Text>
-                    <Text style={[ style.commonSubTextColorStyle, { fontSize: 14 } ]}>{item.total_votes} Voter Choise</Text>
+                    <Text numberOfLines={1} style={[ style.commonTextColorStyle, { fontWeight: 'bold', fontSize: 18 } ]}>{item.owner}</Text>
+                    <Text numberOfLines={1} style={[ style.commonSubTextColorStyle, { fontSize: 14 } ]}>http://{item.url}</Text>
+                    <Text numberOfLines={1} style={[ style.commonSubTextColorStyle, { fontSize: 14 } ]}>{item.total_votes} Voter Choise</Text>
                 </View>
 
                 <View style={[ { marginTop: 25 } ]}>
