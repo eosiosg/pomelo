@@ -113,7 +113,7 @@ class VoteIndexPage extends Component {
                     </View>
                     <View style={voteBpsStales.VoteBpsList}>
                       {BPs.map((item) => (
-                        <View key={item.producer_key} style={voteBpsStales.VoteBpsItem}>
+                        <View key={item.total_votes} style={voteBpsStales.VoteBpsItem}>
                           <Text style={voteBpsStales.VoteBpsItemName}>{item.owner}</Text>
                           <Text style={voteBpsStales.VoteBpsItemDesc}>{item.total_votes} Voter Choise</Text>
                         </View>
