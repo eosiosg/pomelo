@@ -46,6 +46,19 @@
   "VotePage Rule1": "· Vote will use a little CPU + Network stake;",
   "VotePage Rule2": "· Weight  = seconds_count_since_year_2000/ seconds_count_per_year，means increase by second;",
   "VotePage Rule3": "· Vote = (CPU stake + Network stake) * 2^weight;",
-  "VotePage Rule4": "· Could undelegatebw anytime，whitch will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later;"
+  "VotePage Rule4": "· Could undelegatebw anytime，whitch will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later;",
+
+  "HomePage importWallet": "导入钱包",
+  "HomePage privateKey": "个人私钥",
+  "HomePage choiceAccount" : "选择账户",
+  "HomePage submit":"提交",
+  "HomePage PleaseEnterComplete":"请填写完整",
+  "HomePage PleaseSure" : "是",
+  "HomePage PleaseCancel" : "否",
+  "WalletPage changeWallet" : "更换账户",
+  "WalletPage totalAssets" : "总余额",
+  "WalletPage confirmContent" : "请在更换账户钱备份EOS钱包",
+  "WalletPage PleaseSure" : "是",
+  "WalletPage PleaseCancel" : "否"
 
 }

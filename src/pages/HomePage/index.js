@@ -6,8 +6,9 @@ import LinearGradient from "react-native-linear-gradient";
 import { ScrollView, View, Text, TextInput, Image, TouchableHighlight, Dimensions ,Modal ,CheckBox ,TouchableOpacity , AlertIOS} from "react-native";
 import { localSave  ,storage} from "../../utils/storage";
 import { EOSInit ,  } from "./../../actions/EosAction"
-import TouchID from 'react-native-touch-id'
+//import TouchID from 'react-native-touch-id'
 import { injectIntl } from 'react-intl';
+import Toast from "react-native-root-toast";
 
 // 自定义组件
 import { styles } from "./style";
@@ -18,11 +19,10 @@ class HomePage extends Component {
         const { navigation } = props;
         const { state, setParams } = navigation;
         const { params } = state;
-
         return {
             header: null
         };
-    };
+    }
 
     constructor (props) {
         super(props);
@@ -37,22 +37,27 @@ class HomePage extends Component {
           biometryType: null
         };
     }
+
     componentWillReceiveProps( nextProps ) {
-      console.log('home:',nextProps.accountNames);
+      if(nextProps.accountNamesErr == false){
+        Toast.show("NO DATA",{
+          position: 200,
+        })
+      }
      if(nextProps.accountNames){
        this.setState({
-         ItemData :  nextProps.accountNames
+         ItemData :  nextProps.accountNames.account_names
        })
      }
     }
+
     componentDidMount() {
 
-        // 获取数据
       storage.load({key: "accountPrivateKey"}).then((ret) => {
         if (ret) {
           //判断来自哪个页面的跳转
           if(this.props.navigation.state.params){
-            return;
+            this.setState({key : ""})
           }else{
             this.props.navigation.navigate("WalletPage");
           }
@@ -63,20 +68,6 @@ class HomePage extends Component {
         console.log("err:",err)
       });
 
-      //尝试调试TouchID
-      //const optionalConfigObject = {
-      //  title: "Authentication Required", // Android
-      //  color: "#e00606", // Android,
-      //  fallbackLabel: "Show Passcode" // iOS (if empty, then label is hidden)
-      //}
-      //
-      //TouchID.authenticate('to demo this react-native component', optionalConfigObject)
-      //  .then(success => {
-      //    AlertIOS.alert('Authenticated Successfully');
-      //  })
-      //  .catch(error => {
-      //    AlertIOS.alert('Authentication Failed');
-      //  });
     }
     render() {
       const { intl } = this.props;
@@ -116,31 +107,19 @@ class HomePage extends Component {
                   <Text style={styles.contentItemTitle}>{choiceAccountIntl}</Text>
                   <View style={styles.contentItemBox}>
                     {this.state.ItemData.map((v , i) => (
-                      <View style={styles.contentItem} key={ i}>
-                        <Text  style={styles.contentItemText}>
+                    <TouchableHighlight onPress={() => {this.goWallet(v)}}  key={ i}>
+                      <View style={styles.contentItem} >
+                        <Text  style={styles.contentItemText} >
                           {v|| ""}
                         </Text>
                         <View>
-                          <TouchableHighlight onPress={() => {this.goWallet(v)}}>
-                            {/*
-                             <RadioForm
-                             radio_props={this.state.ItemData}
-                             initial={0}
-                             onPress={(value) => {this.setState({walletValue:v})}}
-                             />
-                            */}
                             <Image source={require("./image/arrow-right-account.png")}  style={styles.contentBoxImg}/>
-                          </TouchableHighlight>
                         </View>
                       </View>
-                    ))}
-                    {/*
-                     <Text style={styles.contentItemNo}>
-                     No account name
-                     </Text>
-                    */}
-                  </View>
+                    </TouchableHighlight>
 
+                    ))}
+                  </View>
 
                 </View>
                 <Modal
@@ -178,11 +157,15 @@ class HomePage extends Component {
                     </View>
                   </View>
                 </Modal>
+                <View style={{height : 80}}></View>
               </ScrollView>
               <View>
                 <TouchableOpacity onPress={this.goSubmit} style={styles.bottomContent}>
                   <Text style={styles.buttonSubmit}>{submitKey}</Text>
                 </TouchableOpacity>
+              </View>
+              <View style={styles.bodyFooterBox}>
+                <View style={styles.bodyFooterFlg}></View>
               </View>
             </View>
         );
@@ -198,19 +181,12 @@ class HomePage extends Component {
 
   //go WalletPage
   goWallet = (data) =>{
-    console.log("data:",data)
     localSave.setAccountName(data);
-    //this.props.navigation.replace("WalletPage");
     this.props.navigation.navigate("WalletPage");
   }
 
   //submit wallet data
   goSubmit = () =>{
-    //TouchID.isSupported()
-    //  .then(biometryType => {
-    //    this.setState({ biometryType });
-    //    console.log("biometryType:",biometryType)
-    //  })
 
     //TouchID.isSupported()
     //  .then(this.authenticate)
@@ -219,6 +195,9 @@ class HomePage extends Component {
     //
     //    AlertIOS.alert('TouchID not supported');
     //  });
+    this.setState({
+      ItemData : []
+    })
 
     if (!this.state.key){
       this.setState({
@@ -227,28 +206,27 @@ class HomePage extends Component {
       return
     }
     this.props.onDispatchGetAccountNames(this.state.key);
-    //this.props.navigation.replace("WalletPage");
   }
 
-  // 显示/隐藏 modal
+  //  modal
   _setModalVisible() {
     let isShow = this.state.show;
     this.setState({
       show:!isShow,
     });
   }
-  authenticate(){
-    TouchID.authenticate('to Authenticated')
-      .then(success => {
-      console.log("success:",success)
-        AlertIOS.alert('Authenticated Successfully');
-      })
-      .catch(error => {
-        console.log("error:",error)
-        AlertIOS.alert('Authentication Failed');
-
-      });
-  }
+  //authenticate(){
+  //  TouchID.authenticate('to Authenticated')
+  //    .then(success => {
+  //    console.log("success:",success)
+  //      AlertIOS.alert('Authenticated Successfully');
+  //    })
+  //    .catch(error => {
+  //      console.log("error:",error)
+  //      AlertIOS.alert('Authentication Failed');
+  //
+  //    });
+  //}
 
 }
 
@@ -261,6 +239,7 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     return {
       accountNames: state.HomePageReducer.accountNames,
+      accountNamesErr: state.HomePageReducer.accountNamesErr,
     };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(HomePage));

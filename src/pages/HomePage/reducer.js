@@ -20,6 +20,11 @@ export default function HomePageReducer (state = initState, action) {
         return Object.assign({}, state, {
             "accountNames": action.data
         });
+    case "HOME_SETACCOUNTNAMESERR_REDUCER":
+        console.log("action:",action)
+        return Object.assign({}, state, {
+            "accountNamesErr": action.data
+        });
     default:
         return state;
     }

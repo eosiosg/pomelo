@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   buttonSubmit:{
     width : "90%",
-    marginLeft : "5%",
+    marginLeft : "3%",
     backgroundColor: "#000",
     color : "#fff",
     textAlign: "center",
@@ -163,7 +163,24 @@ const styles = StyleSheet.create({
   },
   contentItemText:{
     fontSize:18,
-  }
+  },
+  bodyFooterBox: {
+    position: "absolute",
+    bottom: 5,
+    width: Dimensions.get("window").width,
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  bodyFooterFlg: {
+    flex: 0,
+    height: 5,
+    width: Dimensions.get("window").width/2.5,
+    borderRadius: 3,
+    backgroundColor: "#222",
+  },
 });
 export {
   styles

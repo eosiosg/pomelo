@@ -52,7 +52,12 @@
   "HomePage choiceAccount" : "Choice an account name",
   "HomePage submit":"submit",
   "HomePage PleaseEnterComplete":"Please enter the complete",
-  "HomePage PleaseSure" : "sure",
-  "HomePage PleaseCancel" : "cancel"
+  "HomePage PleaseSure" : "OK",
+  "HomePage PleaseCancel" : "Cancel",
+  "WalletPage changeWallet" : "Change Wallet",
+  "WalletPage totalAssets" : "Total Assets",
+  "WalletPage confirmContent" : "Please confirm that backup the EOS wallet before change it.",
+  "WalletPage PleaseSure" : "OK",
+  "WalletPage PleaseCancel" : "Cancel"
 
 }

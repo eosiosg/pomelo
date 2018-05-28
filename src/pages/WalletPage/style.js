@@ -6,10 +6,11 @@ const styles = StyleSheet.create({
     flexBasis: "100%",
     minHeight: Dimensions.get("window").height,
     backgroundColor: "#fafafa",
-    paddingLeft : 10,
+    paddingLeft : 15,
   },
   contentBox: {
     paddingTop: 25,
+    paddingRight:10,
   },
   titleBox: {
     position: "relative",
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
   },
   contentMain :{
     width : "90%",
-    marginLeft : "5%",
+    marginLeft : "3%",
     paddingTop: 30,
   },
   ContentTitleText:{
@@ -140,8 +141,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent:'center',
   },
-
-
+  bodyFooterBox: {
+    position: "absolute",
+    bottom: 5,
+    width: Dimensions.get("window").width,
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  bodyFooterFlg: {
+    flex: 0,
+    height: 5,
+    width: Dimensions.get("window").width/2.5,
+    borderRadius: 3,
+    backgroundColor: "#222",
+  },
 });
 export {
   styles

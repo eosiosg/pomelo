@@ -8,6 +8,7 @@ import { injectIntl } from 'react-intl';
 
 // 自定义组件
 import { styles } from "./style";
+import messages from './messages';
 
 class WalletPage extends Component {
     static navigationOptions = ( props ) => {
@@ -32,16 +33,17 @@ class WalletPage extends Component {
     }
     componentDidMount() {
         // 获取数据
-      this.props.onDispatchGetAccountInfoPost();
-      this.props.onDispatchGetCurrencyBalancePost();
-      this.props.onDispatchGetRefundsPost();
-      this.props.onDispatchGetEOSPrice();
       storage.load({key: "accountName"}).then((ret) => {
         console.log("ret:",ret)
         if (ret) {
           this.setState({
             accountName : ret
         })
+        this.props.onDispatchGetAccountInfoPost();
+        this.props.onDispatchGetCurrencyBalancePost();
+        this.props.onDispatchGetRefundsPost();
+        this.props.onDispatchGetEOSPrice();
+
         } else {
           console.log("ret:",ret)
         }
@@ -54,7 +56,7 @@ class WalletPage extends Component {
 
 //===============
 // 缓存中获取  accountName
-
+      const { intl } = this.props;
       const { account_name, cpu_weight, net_weight, total_resources, } = this.props.accountInfo;
       const { ram_bytes } = total_resources;
       const stake = net_weight + cpu_weight;
@@ -62,27 +64,34 @@ class WalletPage extends Component {
       const Refunds = this.props.Refunds;
       const TotalAsset = stake + CurrencyBalance + Refunds;
       const TotalAssetByUsd = TotalAsset * this.props.EOSPrice;
-        return (
+
+      const changeWalletIntl = intl.formatMessage(messages.changeWallet);
+      const totalAssetsIntl = intl.formatMessage(messages.totalAssets);
+      const confirmContentIntl = intl.formatMessage(messages.confirmContent);
+      const PleaseSure = intl.formatMessage(messages.PleaseSure);
+      const PleaseCancel = intl.formatMessage(messages.PleaseCancel);
+
+      return (
             <View style={styles.bodyBox}>
               <View style={styles.contentBox}>
                 <TouchableHighlight onPress={this._setModalVisible.bind(this)}>
-                  <Text style={styles.titleTextTop}>Change Wallet</Text>
+                  <Text style={styles.titleTextTop}>{changeWalletIntl}</Text>
                 </TouchableHighlight>
               </View>
               <View style={styles.contentMain}>
                 <Text style={styles.ContentTitleText}>EOS</Text>
                 <View style={styles.ContentBg}>
-                  <Text style={styles.ContentBgTopText}>{this.state.accountName}</Text>
+                  <Text style={styles.ContentBgTopText}>{this.state.accountName || "No data"}</Text>
                   <View style={styles.ContentBgMid}>
-                    <Text style={styles.ContentBgMidText}>Total Assets</Text>
+                    <Text style={styles.ContentBgMidText}>{totalAssetsIntl}</Text>
                     <View style={styles.ContentBgMidBack}>
-                      <Text style={styles.ContentBgMidAccount}>{TotalAsset}&nbsp;
+                      <Text style={styles.ContentBgMidAccount}>{TotalAsset || 0}&nbsp;
                         <Text style={styles.ContentBgMidName}>EOS</Text>
                       </Text>
                     </View>
                   </View>
                   <View style={styles.ContentBgBottom}>
-                    <Text style={styles.ContentBgBottomText}>= ${TotalAssetByUsd}</Text>
+                    <Text style={styles.ContentBgBottomText}>≈ ${TotalAssetByUsd}</Text>
                   </View>
                 </View>
               </View>
@@ -105,7 +114,7 @@ class WalletPage extends Component {
                       Notice
                     </Text>
                     <Text style={styles.contentText}>
-                        Please confirm that backup the EOS wallet before change it.
+                      {confirmContentIntl}
                     </Text>
                     <View style={styles.horizontalLine} />
                     <View style={styles.buttonView}>
@@ -113,7 +122,7 @@ class WalletPage extends Component {
                                           style={styles.buttonStyle}
                                           onPress={this._setModalVisible.bind(this)}>
                         <Text style={styles.buttonText}>
-                          cancle
+                          {PleaseCancel}
                         </Text>
                       </TouchableHighlight>
                       <View style={styles.verticalLine} />
@@ -121,32 +130,38 @@ class WalletPage extends Component {
                                           style={styles.buttonStyle}
                                           onPress={this.goImport}>
                         <Text style={styles.buttonText}>
-                          ok
+                          {PleaseSure}
                         </Text>
                       </TouchableHighlight>
                     </View>
                   </View>
                 </View>
               </Modal>
-
+              <View style={styles.bodyFooterBox}>
+                <View style={styles.bodyFooterFlg}></View>
+              </View>
             </View>
 
         );
     }
 
   goImport= ()=>{
-    this.props.navigation.replace("HomePage",{id:1});
+    this.props.navigation.navigate("HomePage",{id:1});
+    this.setState({
+      show:false,
+    });
   }
   // 显示/隐藏 modal
-  _setModalVisible() {
+  _setModalVisible= ()=>{
     let isShow = this.state.show;
     this.setState({
       show:!isShow,
     });
   }
 
-  goVote=()=>{
-    this.props.navigation.replace("VoteIndexPage");
+  goVote= ()=>{
+    this.props.navigation.navigate("VoteIndexPage");
+
   }
 
 }
