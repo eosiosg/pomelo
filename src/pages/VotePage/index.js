@@ -11,11 +11,13 @@ import { ScrollView, View, Text, Image, TouchableHighlight,SafeAreaView, Touchab
 import { styles, navStyles } from "./style";
 import messages from './messages';
 
+import LoadingView from './components/loading'
+
 class VotePage extends Component {
     static navigationOptions = ( props ) => {
-        const { navigation } = props;
-        const { state, setParams } = navigation;
-        const { params } = state;
+        // const { navigation } = props;
+        // const { state, setParams } = navigation;
+        // const { params } = state;
 
         return {
             title: 'Vote'
@@ -86,7 +88,6 @@ class VotePage extends Component {
 
 
         return (
-            <SafeAreaView style={styles.wrapper}>
             <View style={styles.bodyBox}>
                 {/*<View style={navStyles.navBox}>*/}
                     {/*<View style={navStyles.navItem}>*/}
@@ -293,7 +294,6 @@ class VotePage extends Component {
                     </TouchableHighlight>
                 </View>
             </View>
-            </SafeAreaView>
         );
     }
 

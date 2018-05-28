@@ -23,9 +23,9 @@ import TestPage from "./src/pages/TestPage";
 // Navigator
 const Navigator = StackNavigator(
     {
-        VotePage: { screen: VotePage },
         HomePage: { screen: HomePage },
         NodeListPage: { screen: NodeListPage },
+        VotePage: { screen: VotePage },
         DelegatebwPage: { screen: DelegatebwPage },
         VoteIndexPage: { screen: VoteIndexPage },
         UnDelegatebwPage: { screen: UnDelegatebwPage },

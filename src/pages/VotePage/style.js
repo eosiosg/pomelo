@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     },
 
     scrollBodyBox:{
-        marginTop:spaceTop+20,
+        // marginTop:spaceTop+20,
         paddingBottom:footerHeight,
         overflow:'hidden',
     },
