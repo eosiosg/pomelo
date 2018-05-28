@@ -11,17 +11,6 @@ import LoadingView from "./components/LoadingView";
 import Spinner from 'react-native-loading-spinner-overlay';
 
 class NodeListPage extends Component {
-    static navigationOptions = ( props ) => {
-        const { navigation } = props;
-        const { state, setParams } = navigation;
-        const { params } = state;
-
-        return {
-            title: 'Node List',
-        };
-    };
-
-
     constructor( props ) {
         super( props );
         this.state = {
@@ -30,16 +19,7 @@ class NodeListPage extends Component {
             isRequesting: false
         };
     }
-
-    componentWillReceiveProps( nextProps ) {
-        console.log( nextProps.allAsset );
-    }
-
-    componentDidMount() {
-        // InteractionManager.runAfterInteractions( () => {
-        this.props.onDispatchGetAllAssetPost();
-        // } );
-    }
+    componentDidMount() {}
 
 
     onVote() {
@@ -47,7 +27,8 @@ class NodeListPage extends Component {
             Toast.show( 'Please select Node' );
             return;
         }
-        Toast.show( 'Vote' )
+        this.props.onDispatchSetSelectedNodeListDataPost(this.state.selectData);
+        this.props.navigation.navigate("VotePage", {selectedNodeList: this.state.selectData});
     }
 
     addNode( nodeItem ) {
@@ -95,10 +76,9 @@ class NodeListPage extends Component {
                 height: 76
             } ]}>
                 <View style={[ {}, style.wrapper ]}>
-                    <Text
-                        style={[ style.commonTextColorStyle, { fontWeight: 'bold', fontSize: 18 } ]}>{item.title}</Text>
-                    <Text style={[ style.commonSubTextColorStyle, { fontSize: 14 } ]}>{item.website}</Text>
-                    <Text style={[ style.commonSubTextColorStyle, { fontSize: 14 } ]}>{item.description}</Text>
+                    <Text style={[ style.commonTextColorStyle, { fontWeight: 'bold', fontSize: 18 } ]}>{item.owner}</Text>
+                    <Text style={[ style.commonSubTextColorStyle, { fontSize: 14 } ]}>http://{item.url}</Text>
+                    <Text style={[ style.commonSubTextColorStyle, { fontSize: 14 } ]}>{item.total_votes} Voter Choise</Text>
                 </View>
 
                 <View style={[ { marginTop: 25 } ]}>
@@ -201,15 +181,16 @@ class NodeListPage extends Component {
     }
 }
 
-function mapDispatchToProps( dispatch, ownProps ) {
+function mapDispatchToProps( dispatch ) {
     return {
-        onDispatchGetAllAssetPost: () => dispatch( { type: "NODE_LIST_GET_ALL_ASSET_POST" } ),
+      dispatch,
+      onDispatchSetSelectedNodeListDataPost: (data) => dispatch({ type: "NODELIST_SETSELECTEDNODELISTDATA_REDUCER", data }),
     };
 }
 
 function mapStateToProps( state ) {
     return {
-        allAsset: state.NodeListPageReducer.allAsset,
+        allAsset: state.VoteIndexPageReducer.BPs,
     };
 }
 

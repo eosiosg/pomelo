@@ -3,14 +3,13 @@
  *
  */
 const initState = {
-    allAsset: [],
+    selectedNodeList: [],
 };
 export default function NodeListPageReducer (state = initState, action) {
     switch (action.type) {
-        case "GET_ALL_NODE_LIST_REDUCER":
-            console.log('node list get all');
+        case "NODELIST_SETSELECTEDNODELISTDATA_REDUCER":
             return Object.assign({}, state, {
-                "allAsset": action.data
+                "selectedNodeList": action.data
             });
         default:
             return state;
