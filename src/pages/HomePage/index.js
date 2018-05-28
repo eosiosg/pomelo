@@ -3,12 +3,13 @@ import React, { Component } from "react";
 import {connect} from "react-redux";
 import Eos from "eosjs"
 import LinearGradient from "react-native-linear-gradient";
-import { ScrollView, View, Text, TextInput, Image, TouchableHighlight, Dimensions ,Modal ,CheckBox ,TouchableOpacity , AlertIOS} from "react-native";
+import { ScrollView, View, Text, TextInput, Image, TouchableHighlight, Dimensions ,Modal ,CheckBox ,TouchableOpacity , AlertIOS, SafeAreaView} from "react-native";
 import { localSave  ,storage} from "../../utils/storage";
 import { EOSInit ,  } from "./../../actions/EosAction"
 //import TouchID from 'react-native-touch-id'
 import { injectIntl } from 'react-intl';
 import Toast from "react-native-root-toast";
+import I18n from "../../../I18n";
 
 // 自定义组件
 import { styles } from "./style";
@@ -20,7 +21,7 @@ class HomePage extends Component {
         const { state, setParams } = navigation;
         const { params } = state;
         return {
-            header: null
+            title: I18n.t( "HomePage_importWallet" ),
         };
     }
 
@@ -71,28 +72,18 @@ class HomePage extends Component {
     }
     render() {
       const { intl } = this.props;
-      const importWalletIntl = intl.formatMessage(messages.importWallet);
-      const privateKeyIntl = intl.formatMessage(messages.privateKey);
-      const choiceAccountIntl = intl.formatMessage(messages.choiceAccount);
-      const submitKey = intl.formatMessage(messages.submitKey);
-      const PleaseEnterComplete = intl.formatMessage(messages.PleaseEnterComplete);
-      const PleaseSure = intl.formatMessage(messages.PleaseSure);
-      const PleaseCancel = intl.formatMessage(messages.PleaseCancel);
+      const importWalletIntl = I18n.t( "HomePage_importWallet" );
+      const privateKeyIntl = I18n.t( "HomePage_privateKey" );
+      const choiceAccountIntl = I18n.t( "HomePage_choiceAccount" );
+      const submitKey = I18n.t( "HomePage_submitKey" );
+      const PleaseEnterComplete = I18n.t( "HomePage_PleaseEnterComplete" );
+      const PleaseSure = I18n.t( "HomePage_PleaseSure" );
+      const PleaseCancel = I18n.t( "HomePage_PleaseCancel" );
 
       return (
+          <SafeAreaView style={[{flex:1}]}>
             <View style={styles.bodyBox}>
               <ScrollView>
-                <View style={styles.contentBox}>
-                  <TouchableHighlight onPress={() => {this.props.navigation.goBack()}} style={{flex : 1}}>
-                    <Image source={require("./image/arrow-left-account.png")}  style={styles.contentBoxImg}/>
-                  </TouchableHighlight>
-                  <View  style={{flex : 3}}>
-                    <Text style={styles.titleTextTop}>{importWalletIntl}</Text>
-                  </View>
-                  <View style={{flex : 1}}>
-
-                  </View>
-                </View>
                 <View>
                   <Text style={styles.contentBoxTitle}>{privateKeyIntl}</Text>
                   <TextInput
@@ -164,10 +155,8 @@ class HomePage extends Component {
                   <Text style={styles.buttonSubmit}>{submitKey}</Text>
                 </TouchableOpacity>
               </View>
-              <View style={styles.bodyFooterBox}>
-                <View style={styles.bodyFooterFlg}></View>
-              </View>
             </View>
+          </SafeAreaView>
         );
     }
 
@@ -242,4 +231,4 @@ function mapStateToProps(state) {
       accountNamesErr: state.HomePageReducer.accountNamesErr,
     };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(HomePage));
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
