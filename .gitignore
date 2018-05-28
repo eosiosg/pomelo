@@ -6,3 +6,7 @@ ios/build
 ios/Pods/*
 ios/Pods
 /node_modules/
+
+android/build
+android/app/build
+android/.gradle/*
