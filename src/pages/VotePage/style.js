@@ -12,6 +12,7 @@ const spaceTop = 40;
 
 const navStyles = StyleSheet.create({
     navBox: {
+        zIndex:999,
         display: "flex",
         flexDirection: "row",
         flexWrap: "nowrap",
@@ -23,6 +24,7 @@ const navStyles = StyleSheet.create({
         position:'absolute',
     },
     navItem: {
+        zIndex:998,
         position:'absolute',
         top:spaceTop,
         left:leftFirstBase,
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     },
 
     scrollBodyBox:{
-        paddingTop:spaceTop+20,
+        marginTop:spaceTop+20,
         paddingBottom:footerHeight,
         overflow:'hidden',
     },

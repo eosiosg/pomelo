@@ -36,25 +36,29 @@ class VotePage extends Component {
     }
 
     componentWillReceiveProps( nextProps ) {
-        console.log('nextprops: ',nextProps.votingList);
-        let votingList = nextProps.votingList;
+        console.log('next prosp: ', nextProps.selectedNodeList)
+        let votingList = nextProps.selectedNodeList;
         this.setState({
             votingList,
         })
     }
 
     componentDidMount() {
-        // 获取数据
-        this.props.onDispatchGetAllVotingList();
+        console.log('next prosp: ', this.props.selectedNodeList[0])
+        let votingList = this.props.selectedNodeList;
+        this.setState({
+            votingList,
+        })
     }
 
 
     render() {
-        const { account_name, cpu_weight, net_weight, total_resources, } = this.props.accountInfo;
-        const { ram_bytes } = total_resources;
-        const stake = net_weight + cpu_weight;
+        let { account_name, cpu_weight, net_weight } = this.props.accountInfo;
+        let stake = parseFloat((net_weight + cpu_weight)/10000).toFixed(4);
+        cpu_weight = parseFloat(cpu_weight/10000).toFixed(4);
+        net_weight = parseFloat(net_weight/10000).toFixed(4);
         const CurrencyBalance = this.props.CurrencyBalance;
-        const BPs = this.props.BPs;
+
         const { intl } = this.props;
         const account = intl.formatMessage(messages.account);
         const balance = intl.formatMessage(messages.balance);
@@ -81,13 +85,14 @@ class VotePage extends Component {
 
         this.account_name = account_name;
 
+
         return (
             <View style={styles.bodyBox}>
-
                 <View style={navStyles.navBox}>
                     <View style={navStyles.navItem}>
-                        <TouchableOpacity onPress={() => {this.props.navigation.goBack()}}>
-                            <Image style={{width: 24, height: 24,}} source={require("../../images/arrow-left-account.png")} />
+                        <TouchableOpacity onPress={() => {this.props.navigation.goBack();}}>
+                            <Image style={{width: 24, height: 24,}}
+                                   source={require("../../images/arrow-left-account.png")} />
                         </TouchableOpacity>
                     </View>
                     <Text style={styles.pageTitle}>
@@ -96,16 +101,16 @@ class VotePage extends Component {
                 </View>
 
 
-
             <View style={styles.scrollBodyBox}>
                 <ScrollView>
+
                 <View style={styles.contentHeader}>
                     <View style={styles.contentHeaderAccountName}>
                         <Text style={styles.contentHeaderAccountNameLabel}>
                             {account}
                         </Text>
                         <Text style={styles.contentHeaderAccountNameValue}>
-                            {account_name||'default'}
+                            {account_name||'none'}
                         </Text>
                     </View>
                     <View style={styles.contentHeaderBalance}>
@@ -186,7 +191,7 @@ class VotePage extends Component {
                             return <View key = {index}
                                          style={styles.contentBodyBP}>
                                 <Text style={styles.contentBodyBPName}>
-                                    { votingC.title }
+                                    { votingC.owner }
                                 </Text>
                                 <View style={styles.contentBodyBPDeleteContainer}>
                                     <TouchableHighlight id={index}
@@ -299,9 +304,10 @@ class VotePage extends Component {
     }
 
     _submitList() {
+
         let votingList = [];
         this.state.votingList.map((one)=>{
-            votingList.push(one.title)
+            votingList.push(one.owner)
         })
         let account_name = this.account_name;
         this.props.onDispatchVoteVotingList({account_name,votingList});
@@ -312,7 +318,6 @@ class VotePage extends Component {
 
     _setDeleteBPC(index){
         let votingList = [].concat(this.state.votingList);
-        console.log(this.state);
         votingList.splice(index,1);
         this.setState({
             votingList
@@ -339,7 +344,6 @@ class VotePage extends Component {
 // 挂载中间件到组件；
 function mapDispatchToProps(dispatch) {
     return {
-         onDispatchGetAllVotingList: () => dispatch({ type: "VOTE_GETLIST_POST" ,data: [{id:1,title:'hi'}]}),
          onDispatchVoteVotingList: (data) => dispatch({ type: "VOTE_SUBMITLIST_POST", data }),
     };
 }
@@ -347,9 +351,8 @@ function mapStateToProps(state) {
     return {
         accountInfo: state.VoteIndexPageReducer.accountInfo,
         CurrencyBalance: state.VoteIndexPageReducer.CurrencyBalance,
-        Refunds: state.VoteIndexPageReducer.Refunds,
         BPs: state.VoteIndexPageReducer.BPs,
-        USD: state.VoteIndexPageReducer.USD,
+        selectedNodeList : state.NodeListPageReducer.selectedNodeList,
 
         votingList: state.VotePageReducer.votingList,
     };
