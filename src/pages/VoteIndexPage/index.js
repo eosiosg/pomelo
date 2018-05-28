@@ -65,7 +65,7 @@ class VoteIndexPage extends Component {
                           {TotalAsset} <Text style={assetStyles.userTotalAssetValueUnit}>EOS</Text>
                         </Text>
                       </View>
-                      <Text style={assetStyles.userTotalAssetByUsd}>~${TotalAssetByUsd}</Text>
+                      <Text style={assetStyles.userTotalAssetByUsd}>≈ ${TotalAssetByUsd}</Text>
                     </View>
                     <View style={assetStyles.assetItemBox}>
                       <View style={assetStyles.itemBox}>
