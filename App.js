@@ -19,7 +19,7 @@ import IntlProviderLanguage from "./src/pages/IntlProviderLanguage";
 import TestPage from "./src/pages/TestPage";
 //import { persistStore, autoRehydrate } from "redux-persist";
 //import createEncryptor from "redux-persist-transform-encrypt";
-
+import I18n from "./I18n";
 // Navigator
 const Navigator = StackNavigator(
     {
@@ -56,6 +56,8 @@ const myStore = createStore(
     applyMiddleware( sagaMiddleware )
 );
 sagaMiddleware.run( saga );
+
+I18n.locale = 'zh';
 
 // main component
 export default class App extends Component {
