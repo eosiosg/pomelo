@@ -6,7 +6,7 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
 import { injectIntl } from 'react-intl';
-import { ScrollView, View, Text, Image, TouchableHighlight, TouchableOpacity, Dimensions, Modal } from "react-native";
+import { ScrollView, View, Text, Image, TouchableHighlight,SafeAreaView, TouchableOpacity, Dimensions, Modal } from "react-native";
 // 自定义组件
 import { styles, navStyles } from "./style";
 import messages from './messages';
@@ -18,9 +18,10 @@ class VotePage extends Component {
         const { params } = state;
 
         return {
-            header: null
+            title: 'Vote'
         };
     };
+
 
     constructor (props) {
         super(props);
@@ -36,7 +37,6 @@ class VotePage extends Component {
     }
 
     componentWillReceiveProps( nextProps ) {
-        console.log('next prosp: ', nextProps.selectedNodeList)
         let votingList = nextProps.selectedNodeList;
         this.setState({
             votingList,
@@ -44,7 +44,6 @@ class VotePage extends Component {
     }
 
     componentDidMount() {
-        console.log('next prosp: ', this.props.selectedNodeList[0])
         let votingList = this.props.selectedNodeList;
         this.setState({
             votingList,
@@ -87,18 +86,19 @@ class VotePage extends Component {
 
 
         return (
+            <SafeAreaView style={styles.wrapper}>
             <View style={styles.bodyBox}>
-                <View style={navStyles.navBox}>
-                    <View style={navStyles.navItem}>
-                        <TouchableOpacity onPress={() => {this.props.navigation.goBack();}}>
-                            <Image style={{width: 24, height: 24,}}
-                                   source={require("../../images/arrow-left-account.png")} />
-                        </TouchableOpacity>
-                    </View>
-                    <Text style={styles.pageTitle}>
-                        Vote
-                    </Text>
-                </View>
+                {/*<View style={navStyles.navBox}>*/}
+                    {/*<View style={navStyles.navItem}>*/}
+                        {/*<TouchableOpacity onPress={() => {this.props.navigation.goBack();}}>*/}
+                            {/*<Image style={{width: 24, height: 24,}}*/}
+                                   {/*source={require("../../images/arrow-left-account.png")} />*/}
+                        {/*</TouchableOpacity>*/}
+                    {/*</View>*/}
+                    {/*<Text style={styles.pageTitle}>*/}
+                        {/*Vote*/}
+                    {/*</Text>*/}
+                {/*</View>*/}
 
 
             <View style={styles.scrollBodyBox}>
@@ -293,6 +293,7 @@ class VotePage extends Component {
                     </TouchableHighlight>
                 </View>
             </View>
+            </SafeAreaView>
         );
     }
 

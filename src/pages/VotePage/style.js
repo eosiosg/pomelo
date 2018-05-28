@@ -3,6 +3,7 @@
  */
 
 import {Dimensions, StyleSheet} from "react-native";
+import { getDpFromPx } from "../../utils/util";
 
 const leftFirstBase = 13;
 const deleteButtonRadius = 10;
@@ -18,7 +19,7 @@ const navStyles = StyleSheet.create({
         flexWrap: "nowrap",
         justifyContent: "space-between",
         alignItems: "center",
-        paddingTop:spaceTop,
+        paddingTop:-spaceTop,
         paddingLeft: 15,
         paddingRight: 15,
         position:'absolute',
@@ -26,7 +27,7 @@ const navStyles = StyleSheet.create({
     navItem: {
         zIndex:998,
         position:'absolute',
-        top:spaceTop,
+        top:-spaceTop,
         left:leftFirstBase,
         flex: 0,
     },
@@ -39,6 +40,26 @@ const navStyles = StyleSheet.create({
 
 const styles = StyleSheet.create({
 
+    wrapper: {
+        flex: 1
+    },
+    mgl_normal: {
+        marginLeft: 15
+    },
+    justAlignCenter: {
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    commonTextColorStyle: {
+        color: '#323232'
+    },
+    commonSubTextColorStyle: {
+        color: '#999999'
+    },
+    commonIntervalStyle: {
+        height: getDpFromPx( 1 ),
+        backgroundColor: '#e8e8e8'
+    },
 
     bodyBox: {
         position: "relative",
