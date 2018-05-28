@@ -23,13 +23,13 @@ import TestPage from "./src/pages/TestPage";
 // Navigator
 const Navigator = StackNavigator(
     {
+        NodeListPage: { screen: NodeListPage },
         HomePage: { screen: HomePage },
         VotePage: { screen: VotePage },
         DelegatebwPage: { screen: DelegatebwPage },
         VoteIndexPage: { screen: VoteIndexPage },
         UnDelegatebwPage: { screen: UnDelegatebwPage },
         WalletPage: { screen: WalletPage },
-        NodeListPage: { screen: NodeListPage },
         TestPage: { screen: TestPage },
     },
     {
@@ -46,7 +46,6 @@ const Navigator = StackNavigator(
             },
             headerTintColor: '#323232',
             headerBackTitle: null,
-            header: null
         }
     }
 );

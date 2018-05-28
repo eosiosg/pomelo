@@ -11,6 +11,16 @@ import LoadingView from "./components/LoadingView";
 import Spinner from 'react-native-loading-spinner-overlay';
 
 class NodeListPage extends Component {
+    static navigationOptions = ( props ) => {
+        const { navigation } = props;
+        const { state, setParams } = navigation;
+        const { params } = state;
+
+        return {
+            title: 'Node List',
+        };
+    };
+
     constructor( props ) {
         super( props );
         this.state = {
