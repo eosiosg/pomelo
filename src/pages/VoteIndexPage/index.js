@@ -26,9 +26,10 @@ class VoteIndexPage extends Component {
     }
 
     render() {
-      const { account_name, cpu_weight, net_weight, total_resources, } = this.props.accountInfo;
+      const { account_name, total_resources, delegated_bandwidth } = this.props.accountInfo;
       const { ram_bytes } = total_resources;
-      const stake = net_weight + cpu_weight;
+      const { cpu_weight, net_weight } = delegated_bandwidth;
+      const stake = Number(net_weight.replace(" SYS", "")) + Number(cpu_weight.replace(" SYS", ""));
       const CurrencyBalance = this.props.CurrencyBalance;
       const Refunds = this.props.Refunds;
       const TotalAsset = stake + CurrencyBalance + Refunds;

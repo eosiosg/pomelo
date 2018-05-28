@@ -34,6 +34,7 @@ export function* getVoteIndexPageAccountInfoPost() {
 function getAccountByEos() {
   const eos = GetEOS(accountPrivateKey);
   return eos.getAccount( { 'account_name': accountName } ).then(( result ) => {
+    console.log(result);
       return result;
     });
 }
@@ -49,6 +50,7 @@ function getCurrencyBalance() {
   const eos = GetEOS(accountPrivateKey);
   return eos.getCurrencyBalance( { "code": "eosio.token", "account": accountName }).then(( res ) => {
     const balance = Number(res[0].replace(" SYS", ""));
+    console.log(balance);
     return balance;
   });
 }
