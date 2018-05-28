@@ -40,7 +40,6 @@ const navStyles = StyleSheet.create({
     paddingRight: 15,
   },
   navItem: {
-      position:'absolute',
       flex: 0,
   },
   navTitle: {

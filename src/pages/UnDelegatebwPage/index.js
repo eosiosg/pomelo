@@ -47,18 +47,18 @@ class UnDelegatebwPage extends Component {
       const ConfirmIntl = intl.formatMessage(messages.Confirm);
         return (
             <View style={styles.bodyBox}>
-              <View style={navStyles.navBox}>
-                <View style={navStyles.navItem}>
-                  <TouchableOpacity onPress={() => {this.props.navigation.goBack()}}>
-                    <Image style={{width: 24, height: 24,}} source={require("./images/arrow-left-account.png")} />
-                  </TouchableOpacity>
-                </View>
-                <View style={navStyles.navItem}>
-                  <Text style={navStyles.navTitle}>{UnDelegatebwPageIntl}</Text>
-                </View>
-                <View style={navStyles.navItem}></View>
-              </View>
               <ScrollView>
+                <View style={navStyles.navBox}>
+                  <View style={navStyles.navItem}>
+                    <TouchableOpacity onPress={() => {this.props.navigation.goBack()}}>
+                      <Image style={{width: 24, height: 24,}} source={require("./images/arrow-left-account.png")} />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={navStyles.navItem}>
+                    <Text style={navStyles.navTitle}>{UnDelegatebwPageIntl}</Text>
+                  </View>
+                  <View style={navStyles.navItem}></View>
+                </View>
                 <View style={countStyles.countBox}>
                   <View style={[countStyles.countItem, {borderBottomWidth: 0,}]}>
                     <Text style={countStyles.countName}>{StakeCountIntl}</Text>

@@ -1,8 +1,28 @@
 import { put, call} from "redux-saga/effects";
 import { GetEOS } from "../../actions/EosAction";
+import {storage} from "../../utils/storage";
 
-const accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
-const accountName = "meetone33333";
+let accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
+let accountName = "meetone33333";
+// 缓存中获取accountPublicKey 和 accountName
+storage.load({key: "accountPrivateKey"}).then((ret) => {
+  if (ret) {
+    accountPrivateKey = ret
+  } else {
+    console.log("ret:",ret)
+  }
+}).catch(err => {
+  console.log("err:",err)
+});
+storage.load({key: "accountName"}).then((ret) => {
+  if (ret) {
+    accountName = ret
+  } else {
+    console.log("ret:",ret)
+  }
+}).catch(err => {
+  console.log("err:",err)
+});
 
 // getDelegatebwPageAccountInfoPost
 export function* getDelegatebwPageAccountInfoPost() {

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import {connect} from "react-redux";
 import Eos from "eosjs"
 import LinearGradient from "react-native-linear-gradient";
-import { ScrollView, View, Text, TextInput, Image, TouchableHighlight, Dimensions ,Modal ,CheckBox ,TouchableOpacity} from "react-native";
+import { ScrollView, View, Text, TextInput, Image, TouchableHighlight, Dimensions ,Modal ,CheckBox ,TouchableOpacity , AlertIOS} from "react-native";
 import { localSave  ,storage} from "../../utils/storage";
 import { EOSInit ,  } from "./../../actions/EosAction"
 import TouchID from 'react-native-touch-id'
@@ -33,7 +33,8 @@ class HomePage extends Component {
           show : false,
           ItemData :[],
           accountPrivateKey : "",
-          walletValue : ""
+          walletValue : "",
+          biometryType: null
         };
     }
     componentWillReceiveProps( nextProps ) {
@@ -45,10 +46,16 @@ class HomePage extends Component {
      }
     }
     componentDidMount() {
+
         // 获取数据
       storage.load({key: "accountPrivateKey"}).then((ret) => {
         if (ret) {
-          this.props.navigation.navigate("WalletPage");
+          //判断来自哪个页面的跳转
+          if(this.props.navigation.state.params){
+            return;
+          }else{
+            this.props.navigation.navigate("WalletPage");
+          }
         } else {
           console.log("ret:",ret)
         }
@@ -199,14 +206,20 @@ class HomePage extends Component {
 
   //submit wallet data
   goSubmit = () =>{
-    TouchID.authenticate('to Authenticated')
-      .then(success => {
-        AlertIOS.alert('Authenticated Successfully');
-      })
-      .catch(error => {
-        AlertIOS.alert('Authentication Failed');
-        return;
-      });
+    //TouchID.isSupported()
+    //  .then(biometryType => {
+    //    this.setState({ biometryType });
+    //    console.log("biometryType:",biometryType)
+    //  })
+
+    //TouchID.isSupported()
+    //  .then(this.authenticate)
+    //  .catch(error => {
+    //    console.log("error:",error)
+    //
+    //    AlertIOS.alert('TouchID not supported');
+    //  });
+
     if (!this.state.key){
       this.setState({
         show : true
@@ -223,6 +236,18 @@ class HomePage extends Component {
     this.setState({
       show:!isShow,
     });
+  }
+  authenticate(){
+    TouchID.authenticate('to Authenticated')
+      .then(success => {
+      console.log("success:",success)
+        AlertIOS.alert('Authenticated Successfully');
+      })
+      .catch(error => {
+        console.log("error:",error)
+        AlertIOS.alert('Authentication Failed');
+
+      });
   }
 
 }
