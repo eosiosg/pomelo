@@ -6,18 +6,21 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
 import { injectIntl } from 'react-intl';
-import { ScrollView, View, Text, Image, TouchableHighlight,SafeAreaView, TouchableOpacity, Dimensions, Modal } from "react-native";
+import { ScrollView, View, Text, Image, TouchableHighlight, SafeAreaView, TouchableOpacity, Dimensions, Modal } from "react-native";
 // 自定义组件
-import { styles, navStyles } from "./style";
+import { styles } from "./style";
 import messages from './messages';
+import I18n from "../../../I18n";
 
 import LoadingView from './components/loading'
 
 class VotePage extends Component {
     static navigationOptions = ( props ) => {
-        // const { navigation } = props;
-        // const { state, setParams } = navigation;
-        // const { params } = state;
+        console.log('=---votepage=-=-=');
+        console.log(props);
+        const { navigation } = props;
+        const { state, setParams } = navigation;
+        const { params } = state;
 
         return {
             title: 'Vote'
@@ -60,35 +63,38 @@ class VotePage extends Component {
         net_weight = parseFloat(net_weight/10000).toFixed(4);
         const CurrencyBalance = this.props.CurrencyBalance;
 
-        const { intl } = this.props;
-        const account = intl.formatMessage(messages.account);
-        const balance = intl.formatMessage(messages.balance);
-        const stakeN = intl.formatMessage(messages.stake);
-        const cancel = intl.formatMessage(messages.cancel);
-        const gotIt = intl.formatMessage(messages.gotIt);
-        const confirm = intl.formatMessage(messages.confirm);
-        const bpList = intl.formatMessage(messages.bpList);
-        const submit = intl.formatMessage(messages.submit);
-        const delegatebw = intl.formatMessage(messages.delegatebw);
-        const notice = intl.formatMessage(messages.notice);
-        const noticeC = intl.formatMessage(messages.noticeC);
-        const RuleT = intl.formatMessage(messages.RuleT);
-        const Rule1 = intl.formatMessage(messages.Rule1);
-        const Rule2 = intl.formatMessage(messages.Rule2);
-        const Rule3 = intl.formatMessage(messages.Rule3);
-        const Rule4 = intl.formatMessage(messages.Rule4);
+        const account = I18n.t(messages.account.id);
+        const balance = I18n.t(messages.balance.id);
+        const stakeN = I18n.t(messages.stake.id);
+        const cancel = I18n.t(messages.cancel.id);
+        const gotIt = I18n.t(messages.gotIt.id);
+        const confirm = I18n.t(messages.confirm.id);
+        const bpList = I18n.t(messages.bpList.id);
+        const submit = I18n.t(messages.submit.id);
+        const delegatebw = I18n.t(messages.delegatebw.id);
+        const notice = I18n.t(messages.notice.id);
+        const noticeC = I18n.t(messages.noticeC.id);
+        const RuleT = I18n.t(messages.RuleT.id);
+        const Rule1 = I18n.t(messages.Rule1.id);
+        const Rule2 = I18n.t(messages.Rule2.id);
+        const Rule3 = I18n.t(messages.Rule3.id);
+        const Rule4 = I18n.t(messages.Rule4.id);
 
-        // const VoteDescIntl = intl.formatMessage(messages.VoteDesc);
-        // const UndelegatebwIntl = intl.formatMessage(messages.Undelegatebw);
-        // const AddDelegatebwIntl = intl.formatMessage(messages.AddDelegatebw);
-        // const RevoteIntl = intl.formatMessage(messages.Revote);
-        // const VotedBpsIntl = intl.formatMessage(messages.VotedBps);
+        // const VoteDescIntl = I18n.t(messages.VoteDesc);
+        // const UndelegatebwIntl = I18n.t(messages.Undelegatebw);
+        // const AddDelegatebwIntl = I18n.t(messages.AddDelegatebw);
+        // const RevoteIntl = I18n.t(messages.Revote);
+        // const VotedBpsIntl = I18n.t(messages.VotedBps);
 
         this.account_name = account_name;
 
 
         return (
-            <View style={styles.bodyBox}>
+            <SafeAreaView style={[{flex:1}]}>
+
+                <ScrollView>
+            <View style={[styles.bodyBox,{flex:1,backgroundColor: '#000'},]}>
+
                 {/*<View style={navStyles.navBox}>*/}
                     {/*<View style={navStyles.navItem}>*/}
                         {/*<TouchableOpacity onPress={() => {this.props.navigation.goBack();}}>*/}
@@ -102,8 +108,6 @@ class VotePage extends Component {
                 {/*</View>*/}
 
 
-            <View style={styles.scrollBodyBox}>
-                <ScrollView>
 
                 <View style={styles.contentHeader}>
                     <View style={styles.contentHeaderAccountName}>
@@ -209,8 +213,19 @@ class VotePage extends Component {
                 </View>
 
 
-            </ScrollView>
+
+
+
+
+
             </View>
+            </ScrollView>
+                <View style = {styles.footerView}>
+                    <Text style={styles.footerSubmit}
+                          onPress={this._setNoticeModalShow.bind(this)}>
+                        {submit}
+                    </Text>
+                </View>
 
                 <Modal
                     animationType='slide'
@@ -248,7 +263,6 @@ class VotePage extends Component {
                     </View>
                 </Modal>
 
-
                 <Modal
                     animationType='slide'
                     transparent={true}
@@ -284,16 +298,7 @@ class VotePage extends Component {
                         </View>
                     </View>
                 </Modal>
-
-                <View style = {styles.footerView}>
-                    <TouchableHighlight  style = {styles.footerViewTouchArea}
-                                         onPress={this._setNoticeModalShow.bind(this)}>
-                        <Text style={styles.footerSubmit}>
-                            {submit}
-                        </Text>
-                    </TouchableHighlight>
-                </View>
-            </View>
+            </SafeAreaView>
         );
     }
 
@@ -358,4 +363,4 @@ function mapStateToProps(state) {
         votingList: state.VotePageReducer.votingList,
     };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(VotePage));
+export default connect(mapStateToProps, mapDispatchToProps)(VotePage);

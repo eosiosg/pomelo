@@ -17,6 +17,9 @@ import messages from './messages';
 
 class HomePage extends Component {
     static navigationOptions = ( props ) => {
+        console.log('=----==-=-=');
+        console.log(props);
+
         const { navigation } = props;
         const { state, setParams } = navigation;
         const { params } = state;

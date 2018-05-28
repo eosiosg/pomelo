@@ -4,7 +4,6 @@ const styles = StyleSheet.create({
   bodyBox: {
     position: "relative",
     flexBasis: "100%",
-    minHeight: Dimensions.get("window").height,
     backgroundColor: "#fafafa",
     paddingLeft : 15,
   },

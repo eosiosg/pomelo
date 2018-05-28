@@ -12,6 +12,8 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 class NodeListPage extends Component {
     static navigationOptions = ( props ) => {
+        console.log('=----node lsit-=-=');
+        console.log(props);
         const { navigation } = props;
         const { state, setParams } = navigation;
         const { params } = state;

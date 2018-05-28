@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
 import { injectIntl } from 'react-intl';
-import { ScrollView, View, Text, Image, TouchableOpacity } from "react-native";
+import { ScrollView, View, Text, Image, TouchableOpacity,SafeAreaView } from "react-native";
 
 // 自定义组件
 import { styles, assetStyles, voteStyles, voteBpsStales } from "./style";
@@ -14,7 +14,7 @@ class VoteIndexPage extends Component {
         const { state, setParams } = navigation;
         const { params } = state;
         return {
-            header: null
+            header: 'hi'
         };
     }
 
@@ -56,6 +56,7 @@ class VoteIndexPage extends Component {
       const RevoteIntl = intl.formatMessage(messages.Revote);
       const VotedBpsIntl = intl.formatMessage(messages.VotedBps);
         return (
+            <SafeAreaView style={[{flex:1}]}>
             <View style={styles.bodyBox}>
                 <ScrollView style={styles.contentBox}>
                   <View style={styles.contentTitleBox}>
@@ -129,12 +130,13 @@ class VoteIndexPage extends Component {
                       ))}
                     </View>
                   </View>
-                  <View style={styles.bodyFooterBox}>
-                    <View style={styles.bodyFooterFlg}></View>
-                  </View>
+                  {/*<View style={styles.bodyFooterBox}>*/}
+                    {/*<View style={styles.bodyFooterFlg}></View>*/}
+                  {/*</View>*/}
                   <View style={{height: 100}}></View>
                 </ScrollView>
             </View>
+            </SafeAreaView>
         );
     }
     // RefundingCountdown = (creatTime) => {

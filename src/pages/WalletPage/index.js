@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
 import LinearGradient from "react-native-linear-gradient";
-import { ScrollView, View, Text, Image, TouchableHighlight, Dimensions, Modal } from "react-native";
+import { ScrollView, View, Text, Image, TouchableHighlight, Dimensions, Modal, SafeAreaView } from "react-native";
 import {  storage } from "../../utils/storage";
 import { injectIntl } from 'react-intl';
 
@@ -72,7 +72,8 @@ class WalletPage extends Component {
       const PleaseCancel = intl.formatMessage(messages.PleaseCancel);
 
       return (
-            <View style={styles.bodyBox}>
+          <SafeAreaView style={[{flex:1}]}>
+          <View style={styles.bodyBox}>
               <View style={styles.contentBox}>
                 <TouchableHighlight onPress={this._setModalVisible.bind(this)}>
                   <Text style={styles.titleTextTop}>{changeWalletIntl}</Text>
@@ -137,10 +138,11 @@ class WalletPage extends Component {
                   </View>
                 </View>
               </Modal>
-              <View style={styles.bodyFooterBox}>
-                <View style={styles.bodyFooterFlg}></View>
-              </View>
+              {/*<View style={styles.bodyFooterBox}>*/}
+                {/*<View style={styles.bodyFooterFlg}></View>*/}
+              {/*</View>*/}
             </View>
+          </SafeAreaView>
 
         );
     }

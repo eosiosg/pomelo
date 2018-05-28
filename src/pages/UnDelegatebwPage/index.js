@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { injectIntl } from 'react-intl';
-import { ScrollView, Text, View, Image, TouchableOpacity, TextInput } from "react-native";
+import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaView } from "react-native";
 // 自定义组件
 import { styles, navStyles, countStyles, stakeStyles, btnStyles } from "./style";
 import messages from './messages';
@@ -54,6 +54,7 @@ class UnDelegatebwPage extends Component {
       const NetworkIntl = intl.formatMessage(messages.Network);
       const ConfirmIntl = intl.formatMessage(messages.Confirm);
         return (
+            <SafeAreaView style={[{flex:1}]}>
             <View style={styles.bodyBox}>
               <ScrollView>
                 <View style={navStyles.navBox}>
@@ -118,10 +119,11 @@ class UnDelegatebwPage extends Component {
               <View style={btnStyles.btnBox}>
                 <Text style={btnStyles.btn} onPress={() => this.UnDelegatebwConfirmFn()}>{ConfirmIntl}</Text>
               </View>
-              <View style={styles.bodyFooterBox}>
-                <View style={styles.bodyFooterFlg}></View>
-              </View>
+              {/*<View style={styles.bodyFooterBox}>*/}
+                {/*<View style={styles.bodyFooterFlg}></View>*/}
+              {/*</View>*/}
             </View>
+            </SafeAreaView>
         );
     }
 

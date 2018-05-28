@@ -8,35 +8,10 @@ import { getDpFromPx } from "../../utils/util";
 const leftFirstBase = 13;
 const deleteButtonRadius = 10;
 const voteItemHeight = 45;
-const footerHeight = 66;
+const footerHeight = 45;
 const spaceTop = 40;
 
-const navStyles = StyleSheet.create({
-    navBox: {
-        zIndex:999,
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "nowrap",
-        justifyContent: "space-between",
-        alignItems: "center",
-        paddingTop:-spaceTop,
-        paddingLeft: 15,
-        paddingRight: 15,
-        position:'absolute',
-    },
-    navItem: {
-        zIndex:998,
-        position:'absolute',
-        top:-spaceTop,
-        left:leftFirstBase,
-        flex: 0,
-    },
-    navTitle: {
-        color: "#222",
-        fontSize: 18,
-        fontWeight: "600",
-    },
-});
+
 
 const styles = StyleSheet.create({
 
@@ -61,31 +36,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#e8e8e8'
     },
 
+
+
     bodyBox: {
         position: "relative",
         flexBasis: "100%",
-        minHeight: Dimensions.get("window").height,
         backgroundColor: "#f0f1f1",
     },
 
-    header:{
-        position:"absolute",
-        height:50,
-        width:'100%',
-    },
 
-    pageTitle:{
-        width:'100%',
-        fontSize:17,
-        lineHeight:23,
-        textAlign:'center',
-    },
 
-    scrollBodyBox:{
-        // marginTop:spaceTop+20,
-        paddingBottom:footerHeight,
-        overflow:'hidden',
-    },
 
     contentHeader: {
         marginTop: 20,
@@ -399,24 +359,27 @@ const styles = StyleSheet.create({
         position:'absolute',
         height:footerHeight,
         width:'100%',
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "nowrap",
+        justifyContent: "center",
+        alignItems: "center",
         backgroundColor:'#736d75',
-        bottom:0,
+        bottom:20,
     },
 
-    footerViewTouchArea:{
-        height:footerHeight,
-    },
 
     footerSubmit:{
         width:'100%',
         color:'#ffffff',
         fontSize:20,
-        paddingTop:4,
+        lineHeight:45,
+        // paddingTop:4,
         textAlign:'center',
     },
 });
 export {
-    styles, navStyles
+    styles
 };
 
 

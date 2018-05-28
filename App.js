@@ -24,10 +24,10 @@ import I18n from "./I18n";
 const Navigator = StackNavigator(
     {
         HomePage: { screen: HomePage },
-        NodeListPage: { screen: NodeListPage },
-        VotePage: { screen: VotePage },
-        DelegatebwPage: { screen: DelegatebwPage },
         VoteIndexPage: { screen: VoteIndexPage },
+        VotePage: { screen: VotePage },
+        NodeListPage: { screen: NodeListPage },
+        DelegatebwPage: { screen: DelegatebwPage },
         UnDelegatebwPage: { screen: UnDelegatebwPage },
         WalletPage: { screen: WalletPage },
         TestPage: { screen: TestPage },
