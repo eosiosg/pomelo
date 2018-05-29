@@ -1,55 +1,32 @@
 import { put, call} from "redux-saga/effects";
 import { GetEOS } from "../../actions/EosAction";
-import {storage} from "../../utils/storage";
-
-let accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
-let accountName = "meetone33333";
-// 缓存中获取accountPublicKey 和 accountName
-storage.load({key: "accountPrivateKey"}).then((ret) => {
-  if (ret) {
-    accountPrivateKey = ret
-  } else {
-    console.log("ret:",ret)
-  }
-}).catch(err => {
-  console.log("err:",err)
-});
-storage.load({key: "accountName"}).then((ret) => {
-  if (ret) {
-    accountName = ret
-  } else {
-    console.log("ret:",ret)
-  }
-}).catch(err => {
-  console.log("err:",err)
-});
 
 // getDelegatebwPageAccountInfoPost
-export function* getDelegatebwPageAccountInfoPost() {
+export function* getDelegatebwPageAccountInfoPost(action) {
   try {
-    const response = yield call(getAccount);
+    const response = yield call(getAccount, action);
     yield put({ type: "DELEGATEBW_SETACCOUNTINFO_REDUCER", data: response });
   } catch (err) {}
 }
-function getAccount() {
-  const eos = GetEOS(accountPrivateKey);
-  return eos.getAccount( { 'account_name': accountName } ).then( result => {
+function getAccount(action) {
+  const eos = GetEOS(action.data.accountPrivateKey);
+  return eos.getAccount( { 'account_name': action.data.accountName } ).then( result => {
     return result;
   } );
 }
 
 // getDelegatebwPageCurrencyBalancePost
-export function* getDelegatebwPageCurrencyBalancePost () {
+export function* getDelegatebwPageCurrencyBalancePost (action) {
   try {
-    const response = yield call(getCurrencyBalance);
+    const response = yield call(getCurrencyBalance, action);
     yield put({ type: "DELEGATEBW_SETCURRENCYBALANCE_REDUCER", data: response });
   } catch (err) {}
 }
-function getCurrencyBalance() {
-  const eos = GetEOS(accountPrivateKey);
+function getCurrencyBalance(action) {
+  const eos = GetEOS(action.data.accountPrivateKey);
   return eos.getCurrencyBalance( {
     "code": "eosio.token",
-    "account": accountName,
+    "account": action.data.accountName,
   } ).then( ( res ) => {
     const balance = Number(res[0].replace(" SYS", ""));
     return balance;
@@ -63,7 +40,7 @@ export function* getDelegatebwPageConfirmPost (action) {
   } catch (err) {}
 }
 function delegatebw(action) {
-  const eos = GetEOS(accountPrivateKey);
+  const eos = GetEOS(action.accountPrivateKey);
   return eos.transaction( tr => {
     tr.delegatebw(action.data);
   } ).then( function ( result ) {
