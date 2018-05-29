@@ -120,19 +120,6 @@ class VotePage extends Component {
                 <ScrollView>
             <View style={[styles.bodyBox,{flex:1}]}>
 
-                {/*<View style={navStyles.navBox}>*/}
-                    {/*<View style={navStyles.navItem}>*/}
-                        {/*<TouchableOpacity onPress={() => {this.props.navigation.goBack();}}>*/}
-                            {/*<Image style={{width: 24, height: 24,}}*/}
-                                   {/*source={require("../../images/arrow-left-account.png")} />*/}
-                        {/*</TouchableOpacity>*/}
-                    {/*</View>*/}
-                    {/*<Text style={styles.pageTitle}>*/}
-                        {/*Vote*/}
-                    {/*</Text>*/}
-                {/*</View>*/}
-
-
 
                 <View style={styles.contentHeader}>
                     <View style={styles.contentHeaderAccountName}>
@@ -334,7 +321,7 @@ class VotePage extends Component {
             votingList.push(one.owner)
         });
         votingList.sort();
-        this.props.onDispatchVoteVotingList({account:this.state.accountPri,votingList});
+        this.props.onDispatchVoteVotingList({account:this.state.accountPri, votingList, nav: this.props.navigation});
         this.setState({
             noticeShow:false,
         });
@@ -371,8 +358,8 @@ function mapDispatchToProps(dispatch) {
         onDispatchGetVoteBpsPost: (data) => dispatch({ type: "VOTE_INDEX_BPS_POST", data }),
 
         onDispatchVoteVotingList: (data) => dispatch({ type: "VOTE_SUBMITLIST_POST", data }),
-         getAccountInfo: (data) => dispatch({ type: "VOTE_INDEX_ACCOUNTINFO_POST", data }),
-         resetIsSubmitSuccess: () => dispatch({ type: "VOTE_SUBMITLIST_POST", data:{submitSuccess:false}  }),
+        getAccountInfo: (data) => dispatch({ type: "VOTE_INDEX_ACCOUNTINFO_POST", data }),
+        resetIsSubmitSuccess: () => dispatch({ type: "VOTE_SUBMITLIST_POST", data:{submitSuccess:false}  }),
     };
 }
 function mapStateToProps(state) {

@@ -4,12 +4,14 @@
 import { put, call} from "redux-saga/effects";
 import { GetEOS, EOSVoteProducer, EOSGetInfo } from "../../actions/EosAction";
 
-
 export function* postVotingList(action) {
     if(action.data && action.data.account){
         try {
             const response = yield call(votePorducers, action.data.account, action.data.votingList);
-            yield put({ type: "VOTE_SUBMITLIST_REDUCER", data:{ submitSuccess:response.broadcast }});
+            yield put({ type: "VOTE_SUBMITLIST_REDUCER", data:{ submitSuccess: response.broadcast }});
+            if(response){
+                action.data.nav.navigate('VoteIndexPage');
+            }
         } catch (err) {}
     }else{
         yield put({ type: "VOTE_SUBMITLIST_REDUCER", data:{ submitSuccess:false }});

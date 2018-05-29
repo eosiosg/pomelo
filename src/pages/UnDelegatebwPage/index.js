@@ -27,8 +27,6 @@ class UnDelegatebwPage extends Component {
     componentWillReceiveProps( nextProps ) {
       if (nextProps.accountInfo) {
         const { cpu_weight, net_weight } = nextProps.accountInfo.delegated_bandwidth ? nextProps.accountInfo.delegated_bandwidth : { cpu_weight: '0 SYS', net_weight: '0 SYS' };
-        console.log(cpu_weight, net_weight);
-        console.log('=======================');
         const cpu_weight_number = cpu_weight.replace(" SYS", "");
         const net_weight_number = net_weight.replace(" SYS", "");
         this.setState({

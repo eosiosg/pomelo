@@ -36,7 +36,11 @@ function getCurrencyBalance(action) {
 // getDelegatebwPageConfirmPost
 export function* getDelegatebwPageConfirmPost (action) {
   try {
-    yield call(delegatebw, action);
+    let result = yield call(delegatebw, action);
+    if(result){
+        yield put({ type: "DELEGATEBW_SUCCESS_REDUCER", data:{ needGetUserInfo:true }});
+        action.nav.goBack();
+      }
   } catch (err) {}
 }
 function delegatebw(action) {
@@ -44,8 +48,6 @@ function delegatebw(action) {
   return eos.transaction( tr => {
     tr.delegatebw(action.data);
   } ).then( function ( result ) {
-    if (result.broadcast) {
-      action.nav.goBack();
-    }
-  } );
+    return result
+  });
 }
