@@ -7,7 +7,6 @@ import VoteIndexPageReducer from "../pages/VoteIndexPage/reducer";
 import DelegatebwPageReducer from "../pages/DelegatebwPage/reducer";
 import UnDelegatebwPageReducer from "../pages/UnDelegatebwPage/reducer";
 import IntlProviderLanguageReducer from "../pages/IntlProviderLanguage/reducer";
-import WalletPageReducer from "../pages/WalletPage/reducer";
 
 const reducers = combineReducers({
     HomePageReducer,
@@ -17,6 +16,5 @@ const reducers = combineReducers({
     DelegatebwPageReducer,
     UnDelegatebwPageReducer,
     IntlProviderLanguageReducer,
-    WalletPageReducer,
 });
 export default reducers;

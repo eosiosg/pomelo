@@ -103,8 +103,7 @@ const btnStyles = StyleSheet.create({
   btnBox: {
     position : "absolute",
     bottom : 0,
-    width : "94%",
-    left: "3%",
+    width : "100%",
     backgroundColor: "#000",
   },
   btn: {

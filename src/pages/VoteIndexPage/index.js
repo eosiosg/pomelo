@@ -168,7 +168,7 @@ class VoteIndexPage extends Component {
 
     getBpsByAccountInfoFilter = () => {
       const BPs = this.props.BPs;
-      const { producers } = this.props.accountInfo.voter_info;
+      const { producers } = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info : [];
       const newBpsTem = [];
       const newBps = [];
       let totalWeight = 0;
@@ -188,7 +188,7 @@ class VoteIndexPage extends Component {
       }
       return newBps;
     }
-    
+
     // RefundingCountdown = (creatTime) => {
     //   const totalTime = 3*24*60*60;
     //   let newCreatTime = new Date(creatTime);

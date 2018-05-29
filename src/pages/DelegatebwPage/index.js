@@ -52,8 +52,8 @@ class DelegatebwPage extends Component {
     render() {
       const stake = Number(this.state.CPU) + Number(this.state.Network);
       const CurrencyBalance = this.props.CurrencyBalance;
-      const CPU_placeholder = "MAX "+ this.state.cpu_weight+" Stake";
-      const Network_placeholder = "MAX "+ this.state.net_weight+" Stake";
+      const CPU_placeholder = "CPU Stake";
+      const Network_placeholder = "NetWork Stake";
       const BalanceIntl = I18n.t("DelegatebwPage Balance");
       const StakeCountIntl = I18n.t("DelegatebwPage StakeCount");
       const StakeQuantityIntl = I18n.t("DelegatebwPage StakeQuantity");
@@ -134,21 +134,23 @@ class DelegatebwPage extends Component {
     }
 
     SetStateCpu = (val) => {
-      const CPU = String(Math.min(this.state.cpu_weight, val));
+      const cpuSurplus = this.props.CurrencyBalance - this.state.Network;
+      const CPU = String(Math.min(cpuSurplus, val));
       this.setState({
         CPU,
       });
     };
 
     SetStateNetwork = (val) => {
-      const Network = String(Math.min(this.state.net_weight, val));
+      const networkSurplus = this.props.CurrencyBalance - this.state.CPU;
+      const Network = String(Math.min(networkSurplus, val));
       this.setState({
         Network,
       });
     };
 
     DelegatebwConfirmFn = () => {
-      if (!this.state.CPU || !this.state.Network) {
+      if (!this.state.CPU && !this.state.Network) {
         return;
       }
       storage.load({key: "HomePageStorage"}).then((ret) => {

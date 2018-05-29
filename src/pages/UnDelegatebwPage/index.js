@@ -26,10 +26,12 @@ class UnDelegatebwPage extends Component {
 
     componentWillReceiveProps( nextProps ) {
       if (nextProps.accountInfo) {
-        const { cpu_weight, net_weight, } = nextProps.accountInfo;
+        const { cpu_weight, net_weight, } = nextProps.accountInfo.delegated_bandwidth ? nextProps.accountInfo.delegated_bandwidth : { cpu_weight: 0, net_weight: 0 };
+        const cpu_weight_number = cpu_weight.replace(" SYS", "");
+        const net_weight_number = net_weight.replace(" SYS", "");
         this.setState({
-          cpu_weight,
-          net_weight,
+          cpu_weight: cpu_weight_number,
+          net_weight: net_weight_number,
         });
       }
     }
@@ -49,9 +51,9 @@ class UnDelegatebwPage extends Component {
     }
 
     render() {
-      const Stake = Number(this.state.CPU) + Number(this.state.Network);
-      const CPU_placeholder = "MAX "+ this.state.cpu_weight+" Stake";
-      const Network_placeholder = "MAX "+ this.state.net_weight+" Stake";
+      const Stake = Number(this.state.cpu_weight) + Number(this.state.net_weight);
+      const CPU_placeholder = "CPU Stake";
+      const Network_placeholder = "NetWork Stake";
       const StakeCountIntl = I18n.t("UnDelegatebwPage StakeCount");
       const StakeCountInfoIntl = I18n.t("UnDelegatebwPage StakeCountInfo");
       const StakeQuantityIntl = I18n.t("UnDelegatebwPage StakeQuantity");
@@ -133,7 +135,7 @@ class UnDelegatebwPage extends Component {
   };
 
     UnDelegatebwConfirmFn = () => {
-    if (!this.state.CPU || !this.state.Network) {
+    if (!this.state.CPU && !this.state.Network) {
       return;
     }
     storage.load({key: "HomePageStorage"}).then((ret) => {
