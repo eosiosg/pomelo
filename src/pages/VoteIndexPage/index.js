@@ -6,6 +6,7 @@ import { ScrollView, View, Text, Image, TouchableOpacity,SafeAreaView } from "re
 // 自定义组件
 import I18n from "../../../I18n";
 import { styles, assetStyles, voteStyles, voteBpsStales } from "./style";
+import {storage} from "../../utils/storage";
 
 class VoteIndexPage extends Component {
     static navigationOptions = ( props ) => {
@@ -22,11 +23,21 @@ class VoteIndexPage extends Component {
     componentWillReceiveProps( nextProps ) {}
 
     componentDidMount() {
-      this.props.onDispatchGetAccountInfoPost();
-      this.props.onDispatchGetCurrencyBalancePost();
-      this.props.onDispatchGetRefundsPost();
-      this.props.onDispatchGetVoteBpsPost();
-      this.props.onDispatchGetVoteUsdPost();
+      storage.load({key: "HomePageStorage"}).then((ret) => {
+        if (ret) {
+          const accountPrivateKey = ret.accountPrivateKey;
+          const accountName = ret.accountName;
+          const data = {
+            accountPrivateKey,
+            accountName,
+          };
+          this.props.onDispatchGetAccountInfoPost(data);
+          this.props.onDispatchGetCurrencyBalancePost(data);
+          this.props.onDispatchGetRefundsPost(data);
+          this.props.onDispatchGetVoteBpsPost(data);
+          this.props.onDispatchGetVoteUsdPost();
+        }
+      });
     }
 
     render() {
@@ -148,10 +159,10 @@ class VoteIndexPage extends Component {
 // 挂载中间件到组件；
 function mapDispatchToProps(dispatch) {
     return {
-        onDispatchGetAccountInfoPost: () => dispatch({ type: "VOTE_INDEX_ACCOUNTINFO_POST" }),
-        onDispatchGetCurrencyBalancePost: () => dispatch({ type: "VOTE_INDEX_CURRENCYBALANCE_POST" }),
-        onDispatchGetRefundsPost: () => dispatch({ type: "VOTE_INDEX_REFUNDS_POST" }),
-        onDispatchGetVoteBpsPost: () => dispatch({ type: "VOTE_INDEX_BPS_POST" }),
+        onDispatchGetAccountInfoPost: (data) => dispatch({ type: "VOTE_INDEX_ACCOUNTINFO_POST", data }),
+        onDispatchGetCurrencyBalancePost: (data) => dispatch({ type: "VOTE_INDEX_CURRENCYBALANCE_POST", data }),
+        onDispatchGetRefundsPost: (data) => dispatch({ type: "VOTE_INDEX_REFUNDS_POST", data }),
+        onDispatchGetVoteBpsPost: (data) => dispatch({ type: "VOTE_INDEX_BPS_POST", data }),
         onDispatchGetVoteUsdPost: () => dispatch({ type: "VOTE_INDEX_GETUSDPRICE_POST" }),
     };
 }
