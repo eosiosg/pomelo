@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     bodyBox: {
         position: "relative",
         flexBasis: "100%",
-        backgroundColor: "#f0f1f1",
+        backgroundColor: "#e8e8e8",
     },
 
 
@@ -365,7 +365,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor:'#736d75',
-        bottom:20,
+        bottom:0,
     },
 
 

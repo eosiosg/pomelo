@@ -34,7 +34,7 @@ const Navigator = StackNavigator(
     {
         navigationOptions: {
             headerStyle: {
-                backgroundColor: '#fafafa',
+                backgroundColor: '#E8E8E8',
                 borderBottomWidth: 0,
                 elevation: 0,
             },

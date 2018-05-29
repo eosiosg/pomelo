@@ -236,13 +236,6 @@ class VotePage extends Component {
                     }
                     </View>
                 </View>
-
-
-
-
-
-
-
             </View>
             </ScrollView>
                 <View style = {styles.footerView}>
@@ -258,7 +251,7 @@ class VotePage extends Component {
                     visible={this.state.ruleShow}
                     onShow={() => {}}
                     onRequestClose={() => {}} >
-                    <View style={styles.ruleModalStyle}>
+                    <View style={[styles.ruleModalStyle]}>
                         <View style={styles.ruleSubView}>
                             <Text style={styles.ruleContentText}>
                                 {RuleT}

@@ -32,7 +32,8 @@ class NodeListPage extends Component {
     }
 
     componentDidMount() {
-        let iVoterProducers = this.props.accountInfo.voter_info.producers;
+
+        let iVoterProducers = this.props.accountInfo.voter_info?this.props.accountInfo.voter_info.producers:[];
         let allAsset = [].concat(this.props.allAsset);
         this.copyBpList(allAsset,iVoterProducers)
     }

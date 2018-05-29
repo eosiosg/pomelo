@@ -10,3 +10,4 @@ ios/Pods
 android/build
 android/app/build
 android/.gradle/*
+!/yarn.lock
