@@ -48,9 +48,8 @@ const styles = StyleSheet.create({
   },
   bottomContent  :{
     position : "absolute",
-    bottom : 22,
-    width : "94%",
-    left: "3%",
+    bottom : 0,
+    width : "100%",
     backgroundColor: "#000",
   },
   buttonSubmit:{

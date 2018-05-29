@@ -36,7 +36,7 @@ class HomePage extends Component {
     }
 
   componentWillReceiveProps( nextProps ) {
-    if(!nextProps.accountNamesErr){
+    if(nextProps.accountNamesErr && nextProps.accountNamesErr != this.props.accountNamesErr){
       Toast.show("NO DATA",{
         position: 200,
       });
@@ -116,17 +116,13 @@ class HomePage extends Component {
                     </Text>
                     <View style={styles.horizontalLine} />
                     <View style={styles.buttonView}>
-                      <TouchableOpacity underlayColor='transparent'
-                                          style={styles.buttonStyle}
-                                          onPress={this._setModalVisible.bind(this)}>
+                      <TouchableOpacity underlayColor='transparent' style={styles.buttonStyle} onPress={() => {this._setModalVisible()}}>
                         <Text style={styles.buttonText}>
                           {PleaseCancel}
                         </Text>
                       </TouchableOpacity>
                       <View style={styles.verticalLine} />
-                      <TouchableOpacity underlayColor='transparent'
-                                          style={styles.buttonStyle}
-                                          onPress={this._setModalVisible.bind(this)}>
+                      <TouchableOpacity underlayColor='transparent' style={styles.buttonStyle} onPress={() => {this._setModalVisible()}}>>
                         <Text style={styles.buttonText}>
                           {PleaseSure}
                         </Text>
@@ -146,13 +142,6 @@ class HomePage extends Component {
         </SafeAreaView>
       );
   }
-
-  //back last page
-  goback = () =>{
-    if(this.state.accountPrivateKey){
-      this.props.navigation.navigate("VoteIndexPage");
-    }
-  };
 
   //go VoteIndexPage
   goWallet = (data) =>{
