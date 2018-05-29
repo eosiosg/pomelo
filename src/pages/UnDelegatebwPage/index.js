@@ -5,7 +5,7 @@ import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaVie
 // 自定义组件
 import I18n from "../../../I18n";
 import { styles, countStyles, stakeStyles, btnStyles } from "./style";
-import {storage} from "../../utils/storage";
+import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 
 class UnDelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
@@ -37,8 +37,9 @@ class UnDelegatebwPage extends Component {
     }
 
     componentDidMount() {
-      storage.load({key: "HomePageStorage"}).then((ret) => {
-        if (ret) {
+      storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
+          if ( ret1 ) {
+              const ret = decryptObject( ret1 );
           const accountPrivateKey = ret.accountPrivateKey;
           const accountName = ret.accountName;
           const data = {
@@ -136,8 +137,9 @@ class UnDelegatebwPage extends Component {
     if (!this.state.CPU && !this.state.Network) {
       return;
     }
-    storage.load({key: "HomePageStorage"}).then((ret) => {
-      if (ret) {
+    storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
+        if ( ret1 ) {
+            const ret = decryptObject( ret1 );
         const accountPrivateKey = ret.accountPrivateKey;
         const accountName = ret.accountName;
         const data = {

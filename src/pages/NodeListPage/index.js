@@ -4,11 +4,11 @@ import { FlatList, SafeAreaView, Text, TouchableOpacity, View } from "react-nati
 import { styles as style, styles } from "./style";
 import { getDpFromPx } from "../../utils/util";
 import Icon from "react-native-vector-icons/Ionicons";
-import Toast from "react-native-root-toast";
 import NodeListSelectedResultComponent from "./components/NodeListSelectedResultComponent";
 import OperationBottomComponent from "./components/OperationBottomComponent";
 import LoadingView from "./components/LoadingView";
 import Spinner from 'react-native-loading-spinner-overlay';
+import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 
 class NodeListPage extends Component {
     static navigationOptions = ( props ) => {
@@ -27,98 +27,98 @@ class NodeListPage extends Component {
             isOpenAccountSelect: false,
             selectData: 1,
             isRequesting: false,
-            allAsset:[],
+            allAsset: [],
         };
     }
 
     componentDidMount() {
-
-        let iVoterProducers = this.props.accountInfo.voter_info?this.props.accountInfo.voter_info.producers:[];
-        let allAsset = [].concat(this.props.allAsset);
-        this.copyBpList(allAsset,iVoterProducers)
+        let iVoterProducers = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info.producers : [];
+        let allAsset = [].concat( this.props.allAsset );
+        this.copyBpList( allAsset, iVoterProducers )
     }
 
-    componentWillReceiveProps(nextProps){
+    componentWillReceiveProps( nextProps ) {
         // console.log('hi， new prosp', nextProps);
-        let allAsset = [].concat(nextProps.allAsset);
+        let allAsset = [].concat( nextProps.allAsset );
         let iVoterProducers = this.props.accountInfo.voter_info.producers;
-        this.copyBpList(allAsset,iVoterProducers);
+        this.copyBpList( allAsset, iVoterProducers );
     }
 
-    copyBpList = (allAsset, iVoterProducers) =>{
-        allAsset.map((bp)=>{
-            if(iVoterProducers.indexOf(bp.owner)!==-1){
+    copyBpList = ( allAsset, iVoterProducers ) => {
+        allAsset.map( ( bp ) => {
+            if ( iVoterProducers.indexOf( bp.owner ) !== -1 ) {
                 bp.voting = true;
-            }else{
+            } else {
                 bp.voting = false;
             }
-        });
+        } );
 
-        this.setState({
+        this.setState( {
             allAsset,
             iVoterProducers
-        });
+        } );
     }
 
 
     onVote() {
         let selectedNodes = []
-        this.state.allAsset.map((bp)=>{
-            if(bp.voting){
-                selectedNodes.push(bp)
+        this.state.allAsset.map( ( bp ) => {
+            if ( bp.voting ) {
+                selectedNodes.push( bp )
             }
-        });
+        } );
         // if ( selectedNodes.length <= 0 ) {
         //     Toast.show( 'Please select Node' );
         //     return;
         // }
-        this.props.onDispatchSetSelectedNodeListDataPost(selectedNodes);
-        this.props.navigation.navigate("VotePage", {selectedNodeList: selectedNodes});
+        this.props.onDispatchSetSelectedNodeListDataPost( selectedNodes );
+        this.props.navigation.navigate( "VotePage", { selectedNodeList: selectedNodes } );
     }
 
     addNode( nodeItem, index ) {
-        let allAsset = [].concat(this.state.allAsset);
-        allAsset[index].voting = true;
-        let selectedData = this.state.selectedData +1;
+        let allAsset = [].concat( this.state.allAsset );
+        allAsset[ index ].voting = true;
+        let selectedData = this.state.selectedData + 1;
         this.setState( {
             allAsset,
             selectedData
-        });
+        } );
     }
 
     removeNode( nodeItem, index ) {
-        let allAsset = [].concat(this.state.allAsset);
-        allAsset[index].voting = false;
+        let allAsset = [].concat( this.state.allAsset );
+        allAsset[ index ].voting = false;
         let selectedData = this.state.selectedData - 1;
 
         this.setState( {
             allAsset,
             selectedData
-        });
+        } );
     }
 
     renderItem( { item, index } ) {
         return (
             <View key={index}
-                style={[ {
-                flex: 1,
-                backgroundColor: '#fafafa',
-                paddingLeft: 15,
-                paddingRight: 15,
-                paddingTop: 10,
-                paddingBottom: 10,
-                flexDirection: 'row',
-            } ]}>
+                  style={[ {
+                      flex: 1,
+                      backgroundColor: '#fafafa',
+                      paddingLeft: 15,
+                      paddingRight: 15,
+                      paddingTop: 10,
+                      paddingBottom: 10,
+                      flexDirection: 'row',
+                  } ]}>
                 <View style={[ {}, style.wrapper ]}>
                     <Text numberOfLines={1}
                           style={[
                               style.commonTextColorStyle,
-                              { fontWeight: 'bold',
+                              {
+                                  fontWeight: 'bold',
                                   fontSize: 20,
-                                  lineHeight:28,
+                                  lineHeight: 28,
                                   fontFamily: 'PingFangSC-Semibold',
                                   color: '#323232',
-                          } ]}>
+                              } ]}>
                         {item.owner}
                     </Text>
                     <Text numberOfLines={1}
@@ -127,11 +127,11 @@ class NodeListPage extends Component {
                               {
                                   fontSize: 16,
                                   marginTop: 8,
-                                  lineHeight:20,
+                                  lineHeight: 20,
                                   fontFamily: 'PingFangSC-Regular',
                                   color: '#999999',
                                   letterSpacing: 0,
-                              }]
+                              } ]
                           }>
                         http://{item.url}
                     </Text>
@@ -141,11 +141,11 @@ class NodeListPage extends Component {
                               {
                                   fontSize: 14,
                                   marginTop: 10,
-                                  lineHeight:20,
+                                  lineHeight: 20,
                                   fontFamily: 'PingFangSC-Regular',
                                   color: '#999999',
                                   letterSpacing: 0,
-                              }]
+                              } ]
                           }>
                         {item.total_votes} Voter Choise
                     </Text>
@@ -154,9 +154,9 @@ class NodeListPage extends Component {
                 <View style={[ { marginBottom: 45 } ]}>
                     <TouchableOpacity
                         onPress={() => {
-                            if(item.voting){
+                            if ( item.voting ) {
                                 this.removeNode( item, index )
-                            }else{
+                            } else {
                                 this.addNode( item, index )
                             }
                         }}>
@@ -219,7 +219,7 @@ class NodeListPage extends Component {
                                     isOpenAccountSelect: false
                                 } );
                             }}
-                            onVote={()=>{
+                            onVote={() => {
                                 this.onVote()
                             }}
                             onRemoveNode={( nodeItem, index ) => {
@@ -237,7 +237,7 @@ class NodeListPage extends Component {
                                 isOpenAccountSelect: true
                             } );
                         }}
-                        onVote={()=>{
+                        onVote={() => {
                             this.onVote()
                         }}
                     />
@@ -252,8 +252,11 @@ class NodeListPage extends Component {
 
 function mapDispatchToProps( dispatch ) {
     return {
-      dispatch,
-      onDispatchSetSelectedNodeListDataPost: (data) => dispatch({ type: "NODELIST_SETSELECTEDNODELISTDATA_REDUCER", data }),
+        dispatch,
+        onDispatchSetSelectedNodeListDataPost: ( data ) => dispatch( {
+            type: "NODELIST_SETSELECTEDNODELISTDATA_REDUCER",
+            data
+        } ),
     };
 }
 
@@ -261,6 +264,7 @@ function mapStateToProps( state ) {
     return {
         allAsset: state.VoteIndexPageReducer.BPs,
         accountInfo: state.VoteIndexPageReducer.accountInfo,
+        testData2: state.NodeListPageReducer.testData2
     };
 }
 

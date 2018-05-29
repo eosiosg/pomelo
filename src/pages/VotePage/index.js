@@ -11,7 +11,7 @@ import { ScrollView, View, Text, Image, TouchableHighlight, SafeAreaView, Toucha
 import { styles } from "./style";
 import messages from './messages';
 import I18n from "../../../I18n";
-import {storage} from "../../utils/storage";
+import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 
 import LoadingView from './components/loading'
 
@@ -59,8 +59,9 @@ class VotePage extends Component {
     componentDidMount() {
 
         let votingList = this.props.selectedNodeList;
-        storage.load({key: "HomePageStorage"}).then((ret) => {
-            if (ret) {
+        storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
+            if ( ret1 ) {
+                const ret = decryptObject( ret1 );
                 const accountPrivateKey = ret.accountPrivateKey;
                 const accountName = ret.accountName;
                 data = {

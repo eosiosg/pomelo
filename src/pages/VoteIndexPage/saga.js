@@ -1,6 +1,6 @@
 import { put, call} from "redux-saga/effects";
 import { GetEOS } from "../../actions/EosAction";
-import {storage} from "../../utils/storage";
+import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 
 // getVoteIndexPageAccountInfoPost
 export function* getVoteIndexPageAccountInfoPost(action) {
