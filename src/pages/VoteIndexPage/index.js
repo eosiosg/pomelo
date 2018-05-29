@@ -44,6 +44,7 @@ class VoteIndexPage extends Component {
     }
 
     render() {
+
       const { account_name, total_resources, delegated_bandwidth } = this.props.accountInfo;
       const { ram_bytes } = total_resources;
       const { cpu_weight, net_weight } = delegated_bandwidth ? delegated_bandwidth : { cpu_weight: "", net_weight: ""};
@@ -131,8 +132,8 @@ class VoteIndexPage extends Component {
                       <Text style={voteBpsStales.VoteBpsTitle}>{VotedBpsIntl}</Text>
                     </View>
                     <View style={voteBpsStales.VoteBpsList}>
-                      {BPs.map((item) => (
-                        <View key={item.total_votes} style={voteBpsStales.VoteBpsItem}>
+                      {BPs.map((item,index) => (
+                        <View key={index} style={voteBpsStales.VoteBpsItem}>
                           <Text style={voteBpsStales.VoteBpsItemName}>{item.owner}</Text>
                           <Text style={voteBpsStales.VoteBpsItemDesc}>{item.total_votes} Voter Choise</Text>
                         </View>

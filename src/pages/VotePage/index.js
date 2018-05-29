@@ -11,17 +11,15 @@ import { ScrollView, View, Text, Image, TouchableHighlight, SafeAreaView, Toucha
 import { styles } from "./style";
 import messages from './messages';
 import I18n from "../../../I18n";
+import {storage} from "../../utils/storage";
 
 import LoadingView from './components/loading'
 
 class VotePage extends Component {
     static navigationOptions = ( props ) => {
-        console.log('=---votepage=-=-=');
-        console.log(props.navigation);
         const { navigation } = props;
         const { state, setParams } = navigation;
         const { params } = state;
-
         return {
             title: 'Vote'
         };
@@ -47,19 +45,39 @@ class VotePage extends Component {
             votingList,
         });
       let IsSubmitSuccess = nextProps.IsSubmitSuccess;
-      IsSubmitSuccess ? this.props.getAccountInfo() : null;
-      if (IsSubmitSuccess && IsSubmitSuccess != this.porps.IsSubmitSuccess) {
+      // IsSubmitSuccess ? this.props.getAccountInfo() : null;
+        console.log('issubmitSucccess', IsSubmitSuccess, this.props.IsSubmitSuccess);
+
+      if (IsSubmitSuccess && IsSubmitSuccess != this.props.IsSubmitSuccess) {
         // 投票成功，重新获取AccountInfo，重置IsSubmitSuccess
-        this.props.getAccountInfo();
-        this.props.resetIsSubmitSuccess();
+          this.props.resetIsSubmitSuccess();
+          this.props.onDispatchGetVoteBpsPost({...this.state.accountPri})
+          this.props.getAccountInfo();
       }
     }
 
     componentDidMount() {
+
         let votingList = this.props.selectedNodeList;
-        this.setState({
-            votingList,
-        })
+        storage.load({key: "HomePageStorage"}).then((ret) => {
+            if (ret) {
+                const accountPrivateKey = ret.accountPrivateKey;
+                const accountName = ret.accountName;
+                data = {
+                    accountPrivateKey,
+                    accountName,
+                };
+                this.setState({
+                    accountPri: data,
+                    votingList
+                })
+            }else{
+                this.setState({
+                    accountPri: {},
+                    votingList
+                })
+            }
+        });
     }
 
 
@@ -323,9 +341,7 @@ class VotePage extends Component {
             votingList.push(one.owner)
         });
         votingList.sort();
-        let account_name = this.account_name;
-        this.props.onDispatchVoteVotingList({account_name,votingList});
-        this.props.getAccountInfo();
+        this.props.onDispatchVoteVotingList({account:this.state.accountPri,votingList});
         this.setState({
             noticeShow:false,
         });
@@ -359,9 +375,11 @@ class VotePage extends Component {
 // 挂载中间件到组件；
 function mapDispatchToProps(dispatch) {
     return {
-         onDispatchVoteVotingList: (data) => dispatch({ type: "VOTE_SUBMITLIST_POST", data }),
+        onDispatchGetVoteBpsPost: (data) => dispatch({ type: "VOTE_INDEX_BPS_POST", data }),
+
+        onDispatchVoteVotingList: (data) => dispatch({ type: "VOTE_SUBMITLIST_POST", data }),
          getAccountInfo: () => dispatch({ type: "WALLET_ACCOUNTINFO_POST" }),
-         resetIsSubmitSuccess: () => dispatch({ type: "VOTE_SUBMITLIST_REDUCER", data: false }),
+         resetIsSubmitSuccess: () => dispatch({ type: "VOTE_SUBMITLIST_POST", data:{submitSuccess:false}  }),
     };
 }
 function mapStateToProps(state) {
@@ -371,6 +389,7 @@ function mapStateToProps(state) {
         BPs: state.VoteIndexPageReducer.BPs,
         selectedNodeList : state.NodeListPageReducer.selectedNodeList,
 
+        IsSubmitSuccess : state.VotePageReducer.IsSubmitSuccess,
         votingList: state.VotePageReducer.votingList,
     };
 }

@@ -10,13 +10,9 @@ const initState = {
 
 export default function VotePageReducer (state = initState, action) {
     switch (action.type) {
-        case "VOTE_GETLIST_REDUCER":
-            return Object.assign({}, state, {
-                "votingList": action.data
-            });
         case "VOTE_SUBMITLIST_REDUCER":
             return Object.assign({}, state, {
-                "IsSubmitSuccess": action.data
+                "IsSubmitSuccess": action.data&&action.data.submitSuccess
             });
         default:
             return state;

@@ -38,18 +38,16 @@ class NodeListPage extends Component {
     }
 
     componentWillReceiveProps(nextProps){
-        console.log('hi， new prosp', nextProps);
+        // console.log('hi， new prosp', nextProps);
         let allAsset = [].concat(nextProps.allAsset);
         let iVoterProducers = this.props.accountInfo.voter_info.producers;
         this.copyBpList(allAsset,iVoterProducers);
     }
 
     copyBpList = (allAsset, iVoterProducers) =>{
-        let selectedData = this.state.selectedData;
         allAsset.map((bp)=>{
             if(iVoterProducers.indexOf(bp.owner)!==-1){
                 bp.voting = true;
-                selectedData += 1;
             }else{
                 bp.voting = false;
             }
@@ -57,7 +55,6 @@ class NodeListPage extends Component {
 
         this.setState({
             allAsset,
-            selectedData,
             iVoterProducers
         });
     }
@@ -79,9 +76,6 @@ class NodeListPage extends Component {
     }
 
     addNode( nodeItem, index ) {
-
-        console.log('----addd   -=-=====');
-        console.log(this.state.allAsset[index]);
         let allAsset = [].concat(this.state.allAsset);
         allAsset[index].voting = true;
         let selectedData = this.state.selectedData +1;
@@ -92,10 +86,6 @@ class NodeListPage extends Component {
     }
 
     removeNode( nodeItem, index ) {
-
-        console.log('----remove   -=-=====');
-        console.log(this.state.allAsset[index]);
-
         let allAsset = [].concat(this.state.allAsset);
         allAsset[index].voting = false;
         let selectedData = this.state.selectedData - 1;
@@ -186,9 +176,6 @@ class NodeListPage extends Component {
     render() {
         const viewHeight = 76;
         const separatorHeight = getDpFromPx( 1 );
-
-        console.log('selected tate',this.state.selectData);
-
 
         return (
             <SafeAreaView style={styles.wrapper}>
