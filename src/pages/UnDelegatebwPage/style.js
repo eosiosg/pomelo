@@ -97,6 +97,7 @@ const stakeStyles = StyleSheet.create({
     height: 60,
     lineHeight: 60,
     color: "#222",
+    textAlign: "right",
   },
 });
 const btnStyles = StyleSheet.create({

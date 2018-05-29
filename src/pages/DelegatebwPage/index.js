@@ -96,7 +96,6 @@ class DelegatebwPage extends Component {
                           placeholder={CPU_placeholder}
                           placeholderTextColor={"#999"}
                           onChangeText={(CPU) => this.SetStateCpu(CPU)}
-                          value={this.state.CPU}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
@@ -109,7 +108,6 @@ class DelegatebwPage extends Component {
                           placeholder={Network_placeholder}
                           placeholderTextColor={"#999"}
                           onChangeText={(Network) => this.SetStateNetwork(Network)}
-                          value={this.state.Network}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>

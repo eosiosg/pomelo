@@ -140,7 +140,7 @@ class VoteIndexPage extends Component {
                         <View key={index} style={voteBpsStales.VoteBpsItem}>
 
                           <Text style={voteBpsStales.VoteBpsItemName}>{item.owner}</Text>
-                          <Text style={voteBpsStales.VoteBpsItemDesc}>{item.votePersent}% Voter Choise</Text>
+                          <Text style={voteBpsStales.VoteBpsItemDesc}>total vote percentage：{item.votePersent}% </Text>
                         </View>
                       ))}
                     </View>
@@ -175,7 +175,7 @@ class VoteIndexPage extends Component {
       for (let i = 0; i < BPs.length; i++) {
         for (let j = 0; j < producers.length; j++) {
           if (BPs[i].owner == producers[j]) {
-            totalWeight += BPs[i].total_votes;
+            totalWeight += Number(BPs[i].total_votes);
             newBpsTem.push(BPs[i]);
           }
         }
@@ -183,7 +183,7 @@ class VoteIndexPage extends Component {
       for (let i = 0; i < newBpsTem.length; i++) {
         newBps.push({
           owner: newBpsTem[i].owner,
-          votePersent: (newBpsTem[i].total_votes/totalWeight * 100),
+          votePersent: (Number(newBpsTem[i].total_votes)/totalWeight * 100),
         });
       }
       return newBps;

@@ -89,7 +89,6 @@ class UnDelegatebwPage extends Component {
                           placeholderTextColor={"#999"}
                           maxLength={11}
                           onChangeText={(CPU) => this.SetStateCpu(CPU)}
-                          value={this.state.CPU}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
@@ -103,7 +102,6 @@ class UnDelegatebwPage extends Component {
                           placeholderTextColor={"#999"}
                           maxLength={11}
                           onChangeText={(Network) => this.SetStateNetwork(Network)}
-                          value={this.state.Network}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
