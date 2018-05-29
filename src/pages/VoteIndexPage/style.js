@@ -4,39 +4,19 @@ const styles = StyleSheet.create({
   bodyBox: {
     position: "relative",
     flexBasis: "100%",
-    // minHeight: Dimensions.get("window").height,
     backgroundColor: "#eee",
-  },
-  contentBox: {
-    paddingTop: 25,
   },
   contentTitleBox: {
     position: "relative",
     marginLeft: 15,
     marginRight: 15,
-    marginBottom: 15,
+    marginTop: 10,
+    marginBottom: 10,
   },
   contentTitle: {
     fontSize: 32,
     fontWeight: "bold",
     color: "#222",
-  },
-  bodyFooterBox: {
-    position: "absolute",
-    bottom: 115,
-    width: Dimensions.get("window").width,
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  bodyFooterFlg: {
-    flex: 0,
-    height: 5,
-    width: Dimensions.get("window").width/2.5,
-    borderRadius: 3,
-    backgroundColor: "#222",
   },
 });
 const assetStyles = StyleSheet.create({
