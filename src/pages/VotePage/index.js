@@ -52,7 +52,7 @@ class VotePage extends Component {
         // 投票成功，重新获取AccountInfo，重置IsSubmitSuccess
           this.props.resetIsSubmitSuccess();
           this.props.onDispatchGetVoteBpsPost({...this.state.accountPri})
-          this.props.getAccountInfo();
+          this.props.getAccountInfo({...this.state.accountPri});
       }
     }
 
@@ -371,7 +371,7 @@ function mapDispatchToProps(dispatch) {
         onDispatchGetVoteBpsPost: (data) => dispatch({ type: "VOTE_INDEX_BPS_POST", data }),
 
         onDispatchVoteVotingList: (data) => dispatch({ type: "VOTE_SUBMITLIST_POST", data }),
-         getAccountInfo: () => dispatch({ type: "WALLET_ACCOUNTINFO_POST" }),
+         getAccountInfo: (data) => dispatch({ type: "VOTE_INDEX_ACCOUNTINFO_POST", data }),
          resetIsSubmitSuccess: () => dispatch({ type: "VOTE_SUBMITLIST_POST", data:{submitSuccess:false}  }),
     };
 }

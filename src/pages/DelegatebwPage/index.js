@@ -5,6 +5,7 @@ import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaVie
 // 自定义组件
 import I18n from "../../../I18n";
 import { styles, countStyles, stakeStyles, ruleStyles, btnStyles } from "./style";
+import {storage} from "../../utils/storage";
 
 class DelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
@@ -34,10 +35,18 @@ class DelegatebwPage extends Component {
     }
 
     componentDidMount() {
-      setTimeout(() => {
-        this.props.onDispatchGetAccountInfoPost();
-        this.props.onDispatchGetCurrencyBalancePost();
-      }, 2000);
+      storage.load({key: "HomePageStorage"}).then((ret) => {
+        if (ret) {
+          const accountPrivateKey = ret.accountPrivateKey;
+          const accountName = ret.accountName;
+          const data = {
+            accountPrivateKey,
+            accountName,
+          };
+          this.props.onDispatchGetAccountInfoPost(data);
+          this.props.onDispatchGetCurrencyBalancePost(data);
+        }
+      });
     }
 
     render() {
@@ -142,24 +151,30 @@ class DelegatebwPage extends Component {
       if (!this.state.CPU || !this.state.Network) {
         return;
       }
-      const data = {
-        from: "eosiomeetone",
-        receiver:"eosiosg11111",
-        stake_net_quantity: this.state.Network + " SYS",
-        stake_cpu_quantity: this.state.CPU + " SYS",
-        transfer: 0,
-      };
-      const nav = this.props.navigation;
-      this.props.onDispatchDelegateBwPost(data, nav);
+      storage.load({key: "HomePageStorage"}).then((ret) => {
+        if (ret) {
+          const accountPrivateKey = ret.accountPrivateKey;
+          const accountName = ret.accountName;
+          const data = {
+            from: accountName,
+            receiver: accountName,
+            stake_net_quantity: this.state.Network + " SYS",
+            stake_cpu_quantity: this.state.CPU + " SYS",
+            transfer: 0,
+          };
+          const nav = this.props.navigation;
+          this.props.onDispatchDelegateBwPost(data, nav, accountPrivateKey);
+        }
+      });
     };
 }
 
 // 挂载中间件到组件；
 function mapDispatchToProps(  dispatch  ) {
     return {
-      onDispatchGetAccountInfoPost: () => dispatch({ type: "DELEGATEBW_ACCOUNTINFO_POST" }),
-      onDispatchGetCurrencyBalancePost: () => dispatch({ type: "DELEGATEBW_CURRENCYBALANCE_POST" }),
-      onDispatchDelegateBwPost: (data, nav) => dispatch({ type: "DELEGATEBW_CONFIRM_POST", data, nav }),
+      onDispatchGetAccountInfoPost: (data) => dispatch({ type: "DELEGATEBW_ACCOUNTINFO_POST", data }),
+      onDispatchGetCurrencyBalancePost: (data) => dispatch({ type: "DELEGATEBW_CURRENCYBALANCE_POST", data }),
+      onDispatchDelegateBwPost: (data, nav, accountPrivateKey) => dispatch({ type: "DELEGATEBW_CONFIRM_POST", data, navaccountPrivateKey,  }),
     };
 }
 

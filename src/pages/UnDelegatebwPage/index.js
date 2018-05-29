@@ -5,6 +5,7 @@ import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaVie
 // 自定义组件
 import I18n from "../../../I18n";
 import { styles, countStyles, stakeStyles, btnStyles } from "./style";
+import {storage} from "../../utils/storage";
 
 class UnDelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
@@ -34,7 +35,17 @@ class UnDelegatebwPage extends Component {
     }
 
     componentDidMount() {
-      this.props.onDispatchGetAccountInfoPost();
+      storage.load({key: "HomePageStorage"}).then((ret) => {
+        if (ret) {
+          const accountPrivateKey = ret.accountPrivateKey;
+          const accountName = ret.accountName;
+          const data = {
+            accountPrivateKey,
+            accountName,
+          };
+          this.props.onDispatchGetAccountInfoPost(data);
+        }
+      });
     }
 
     render() {
@@ -125,22 +136,28 @@ class UnDelegatebwPage extends Component {
     if (!this.state.CPU || !this.state.Network) {
       return;
     }
-    const data = {
-      from: "eosiomeetone",
-      receiver:"eosiosg11111",
-      unstake_net_quantity: this.state.Network + " SYS",
-      unstake_cpu_quantity: this.state.CPU + " SYS",
-    };
-    const nav = this.props.navigation;
-    this.props.onDispatchUnDelegateBwPost(data, nav);
+    storage.load({key: "HomePageStorage"}).then((ret) => {
+      if (ret) {
+        const accountPrivateKey = ret.accountPrivateKey;
+        const accountName = ret.accountName;
+        const data = {
+          from: accountName,
+          receiver: accountName,
+          unstake_net_quantity: this.state.Network + " SYS",
+          unstake_cpu_quantity: this.state.CPU + " SYS",
+        };
+        const nav = this.props.navigation;
+        this.props.onDispatchUnDelegateBwPost(data, nav, accountPrivateKey);
+      }
+    });
   };
 }
 
 // 挂载中间件到组件；
 function mapDispatchToProps(  dispatch  ) {
     return {
-      onDispatchGetAccountInfoPost: () => dispatch({ type: "UNDELEGATEBW_ACCOUNTINFO_POST" }),
-      onDispatchUnDelegateBwPost: (data, nav) => dispatch({ type: "UNDELEGATEBW_CONFIRM_POST", data, nav }),
+      onDispatchGetAccountInfoPost: (data) => dispatch({ type: "UNDELEGATEBW_ACCOUNTINFO_POST", data }),
+      onDispatchUnDelegateBwPost: (data, nav, accountPrivateKey) => dispatch({ type: "UNDELEGATEBW_CONFIRM_POST", data, nav, accountPrivateKey }),
     };
 }
 
