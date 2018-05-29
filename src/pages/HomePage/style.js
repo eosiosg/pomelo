@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     position: "relative",
     flexBasis: "100%",
     backgroundColor: "#fafafa",
-    paddingLeft : 10,
 
   },
   contentBox: {
@@ -23,6 +22,7 @@ const styles = StyleSheet.create({
     lineHeight: 25,
     paddingTop : 15,
     paddingBottom : 10,
+    paddingLeft: 10,
   },
   titleBox: {
     position: "relative",
@@ -42,24 +42,22 @@ const styles = StyleSheet.create({
     fontSize : 18,
     paddingTop : 10,
     paddingBottom : 10,
+    paddingLeft: 10,
     backgroundColor: "#fff",
     color: "#000",
   },
   bottomContent  :{
     position : "absolute",
-    bottom : 40,
-    width : "100%",
+    bottom : 22,
+    width : "94%",
+    left: "3%",
   },
   buttonSubmit:{
-    width : "90%",
-    marginLeft : "3%",
-    backgroundColor: "#000",
+    fontSize : 16,
+    lineHeight: 44,
     color : "#fff",
     textAlign: "center",
-    fontSize : 18,
-    paddingBottom : 10,
-    paddingTop  :10,
-    borderRadius: 3
+    backgroundColor: "#000",
   },
   // modal的样式
   modalStyle: {
@@ -146,11 +144,14 @@ const styles = StyleSheet.create({
   },
   contentItemBox:{
     backgroundColor:'#fff',
-    marginRight : 10,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   contentItemTitle:{
     paddingBottom : 15,
     paddingTop : 25,
+    paddingLeft: 10,
+    paddingRight: 10,
     fontSize:18,
     color : "#323232",
   },
@@ -162,23 +163,6 @@ const styles = StyleSheet.create({
   },
   contentItemText:{
     fontSize:18,
-  },
-  bodyFooterBox: {
-    position: "absolute",
-    bottom: 5,
-    width: Dimensions.get("window").width,
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  bodyFooterFlg: {
-    flex: 0,
-    height: 5,
-    width: Dimensions.get("window").width/2.5,
-    borderRadius: 3,
-    backgroundColor: "#222",
   },
 });
 export {

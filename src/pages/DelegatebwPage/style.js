@@ -127,19 +127,19 @@ const ruleStyles = StyleSheet.create({
 const btnStyles = StyleSheet.create({
   btnBox: {
     position: "absolute",
-    bottom: 0,
+    bottom: 22,
     width: Dimensions.get("window").width,
     display: "flex",
     flexDirection: "row",
     flexWrap: "nowrap",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#222",
+    backgroundColor: "#000",
   },
   btn: {
     color: "#fff",
     fontSize: 16,
-    lineHeight: 60,
+    lineHeight: 44,
   },
 });
 export {
