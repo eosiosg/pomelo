@@ -63,7 +63,7 @@ class HomePage extends Component {
           if(this.props.navigation.state.params){
             this.setState({key : ""})
           }else{
-            this.props.navigation.navigate("WalletPage");
+            this.props.navigation.navigate("VoteIndexPage");
           }
         } else {
           console.log("ret:",ret)
@@ -171,7 +171,7 @@ class HomePage extends Component {
     }
   }
 
-  //go WalletPage
+  //go VoteIndexPage
   goWallet = (data) =>{
     localSave.setAccountName(data);
     this.props.navigation.navigate("VoteIndexPage");
