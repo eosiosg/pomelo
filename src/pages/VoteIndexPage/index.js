@@ -11,7 +11,10 @@ import {storage} from "../../utils/storage";
 class VoteIndexPage extends Component {
     static navigationOptions = ( props ) => {
         return {
-          title: 'Total Asset'
+          title: 'Total Asset',
+          headerRight: (
+            <Text style={{paddingRight: 10}} onPress={() => (props.navigation.navigate("HomePage", {aaa:"aaa"}))}>Change Wallet</Text>
+          ),
         };
     };
 
