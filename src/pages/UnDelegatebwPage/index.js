@@ -5,7 +5,7 @@ import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaVie
 // 自定义组件
 import I18n from "../../../I18n";
 import { styles, countStyles, stakeStyles, btnStyles } from "./style";
-import {storage} from "../../utils/storage";
+import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 
 class UnDelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
@@ -27,6 +27,7 @@ class UnDelegatebwPage extends Component {
     componentWillReceiveProps( nextProps ) {}
 
     componentDidMount() {}
+
 
     render() {
 

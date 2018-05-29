@@ -5155,10 +5155,6 @@ react-native-tcp@^3.3.0:
     process "^0.11.9"
     util "^0.10.3"
 
-react-native-touch-id@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/react-native-touch-id/-/react-native-touch-id-4.0.1.tgz#f284410d16ae142c1bd539284bebf92f5ff6a8e2"
-
 react-native-udp@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/react-native-udp/-/react-native-udp-2.3.1.tgz#88eb0f548ed8c7e35065392526ecf8ce2e2be91e"
@@ -5384,7 +5380,7 @@ redux-persist-transform-encrypt@^2.0.1:
     json-stringify-safe "^5.0.1"
     readable-stream "^2.2.6"
 
-redux-persist@^5.9.1:
+redux-persist@^5.3.4:
   version "5.9.1"
   resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-5.9.1.tgz#83bd4abd526ef768f63fceee338fa9d8ed6552d6"
 

@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import {connect} from "react-redux";
 import { ScrollView, View, Text, TextInput, Image, TouchableOpacity, Dimensions ,Modal ,CheckBox , AlertIOS, SafeAreaView} from "react-native";
-import { storage } from "../../utils/storage";
+import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 //import TouchID from 'react-native-touch-id'
 import Toast from "react-native-root-toast";
 import I18n from "../../../I18n";
@@ -49,15 +49,18 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    storage.load({key: "HomePageStorage"}).then((ret) => {
-      if (ret && ret.accountPrivateKey) {
-        //判断来自哪个页面的跳转
-        if(this.props.navigation.state.params){
-          this.setState({key : ""})
-        }else{
-          this.props.navigation.navigate("VoteIndexPage");
+    storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
+        if ( ret1 ) {
+            const ret = decryptObject( ret1 );
+            if ( ret && ret.accountPrivateKey ) {
+                //判断来自哪个页面的跳转
+                if ( this.props.navigation.state.params ) {
+                    this.setState( { key: "" } )
+                } else {
+                    this.props.navigation.navigate( "VoteIndexPage" );
+                }
+            }
         }
-      }
     });
   }
 
@@ -147,10 +150,10 @@ class HomePage extends Component {
   goWallet = (data) =>{
     storage.save({
       key: 'HomePageStorage',
-      data: {
+      data: encryptObjectToString({
         accountName: data,
         accountPrivateKey: this.state.key,
-      },
+      }),
     }).then(() => {
       this.props.navigation.navigate("VoteIndexPage");
     });

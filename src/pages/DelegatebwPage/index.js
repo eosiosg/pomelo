@@ -5,7 +5,7 @@ import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaVie
 // 自定义组件
 import I18n from "../../../I18n";
 import { styles, countStyles, stakeStyles, ruleStyles, btnStyles } from "./style";
-import {storage} from "../../utils/storage";
+import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 
 class DelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
@@ -25,6 +25,7 @@ class DelegatebwPage extends Component {
     componentWillReceiveProps( nextProps ) {}
 
     componentDidMount() {}
+
 
     render() {
       const stake = Number(this.state.CPU) + Number(this.state.Network);

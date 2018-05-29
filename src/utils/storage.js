@@ -1,7 +1,12 @@
 import Storage from "react-native-storage";
 import { AsyncStorage } from "react-native";
+
+var CryptoJS = require( "crypto-js" );
+
+const localStorageAESKey = "eos_wallet_jhagdhasgdahjdgash";
+
 // 设置本地存储方法对象；
-const storage = new Storage({
+const storage = new Storage( {
     // 最大容量，默认值1000条数据循环存储
     size: 1000,
 
@@ -23,25 +28,40 @@ const storage = new Storage({
     // 或是写到另一个文件里，这里require引入
     sync: () => null,
 
-});
+} );
 // 自定义存储对象
 const localSave = {};
-localSave.set = (key, data) => {
-    storage.save({key, data,});
+localSave.set = ( key, data ) => {
+    storage.save( { key, data, } );
 };
 
-localSave.setAccountPublicKey = (PublicKey) => {
-    localSave.set("accountPublicKey", PublicKey);
+localSave.setAccountPublicKey = ( PublicKey ) => {
+    localSave.set( "accountPublicKey", PublicKey );
 };
-localSave.setAccountName = (Name) => {
-    localSave.set("accountName", Name);
+localSave.setAccountName = ( Name ) => {
+    localSave.set( "accountName", Name );
 };
-localSave.setAccountPrivateKey = (PrivateKey) => {
-    localSave.set("accountPrivateKey", PrivateKey);
+localSave.setAccountPrivateKey = ( PrivateKey ) => {
+    localSave.set( "accountPrivateKey", PrivateKey );
 };
+
+function encryptObjectToString( object ) {
+    const ciphertext = CryptoJS.AES.encrypt( JSON.stringify( object ), localStorageAESKey );
+
+    return ciphertext.toString();
+}
+
+function decryptObject( str ) {
+    const bytes = CryptoJS.AES.decrypt( str, localStorageAESKey );
+    const decryptedData = JSON.parse( bytes.toString( CryptoJS.enc.Utf8 ) );
+
+    return decryptedData;
+}
 
 // localSave.setLoginState(false);
 export {
     storage,
     localSave,
+    encryptObjectToString,
+    decryptObject
 };
