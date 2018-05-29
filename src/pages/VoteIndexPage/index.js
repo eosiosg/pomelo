@@ -168,7 +168,7 @@ class VoteIndexPage extends Component {
 
     getBpsByAccountInfoFilter = () => {
       const BPs = this.props.BPs;
-      const { producers } = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info : [];
+      let producers = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info.producers : [];
       const newBpsTem = [];
       const newBps = [];
       let totalWeight = 0;
