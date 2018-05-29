@@ -45,9 +45,9 @@ function getRefunds(action) {
   return eos.getTableRows({
     'json': true,
     'code': 'eosio',
-    'scope': 'eosiomeetone',
+    'scope': action.data.accountName,
     'table': 'refunds',
-    'table_key': 'owner'
+    'table_key': 'active'
   }).then(function (result) {
     console.log(result);
     const refunds = result.rows[0] ? Number(result.rows[0].cpu_amount.replace(" SYS", ""))+Number(result.rows[0].net_amount.replace(" SYS", "")) : 0;
