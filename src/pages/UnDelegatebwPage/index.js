@@ -1,7 +1,6 @@
 // 引入公共组件
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { injectIntl } from 'react-intl';
 import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaView } from "react-native";
 // 自定义组件
 import I18n from "../../../I18n";
@@ -9,9 +8,9 @@ import { styles, countStyles, stakeStyles, btnStyles } from "./style";
 
 class UnDelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
-        return {
-            header: null
-        };
+      return {
+        title: 'UnDelegatebw'
+      };
     };
 
     constructor( props ) {

@@ -5,8 +5,10 @@
 const initState = {
   accountInfo: {
     account_name: "",
-    net_weight: 0,
-    cpu_weight: 0,
+    delegated_bandwidth: {
+      cpu_weight: "",
+      net_weight: "",
+    },
     total_resources: {
       ram_bytes: 0,
     },

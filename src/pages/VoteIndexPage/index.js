@@ -1,7 +1,6 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { injectIntl } from 'react-intl';
 import { ScrollView, View, Text, Image, TouchableOpacity,SafeAreaView } from "react-native";
 
 // 自定义组件
@@ -33,7 +32,7 @@ class VoteIndexPage extends Component {
     render() {
       const { account_name, total_resources, delegated_bandwidth } = this.props.accountInfo;
       const { ram_bytes } = total_resources;
-      const { cpu_weight, net_weight } = delegated_bandwidth;
+      const { cpu_weight, net_weight } = delegated_bandwidth ? delegated_bandwidth : { cpu_weight: "", net_weight: ""};
       const stake = Number(net_weight.replace(" SYS", "")) + Number(cpu_weight.replace(" SYS", ""));
       const CurrencyBalance = this.props.CurrencyBalance;
       const Refunds = this.props.Refunds;
