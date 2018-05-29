@@ -5,18 +5,15 @@ import { injectIntl } from 'react-intl';
 import { ScrollView, View, Text, Image, TouchableOpacity,SafeAreaView } from "react-native";
 
 // 自定义组件
+import I18n from "../../../I18n";
 import { styles, assetStyles, voteStyles, voteBpsStales } from "./style";
-import messages from './messages';
 
 class VoteIndexPage extends Component {
     static navigationOptions = ( props ) => {
-        const { navigation } = props;
-        const { state, setParams } = navigation;
-        const { params } = state;
         return {
-            header: 'hi'
+          title: 'Total Asset'
         };
-    }
+    };
 
     constructor (props) {
         super(props);
@@ -43,22 +40,21 @@ class VoteIndexPage extends Component {
       const TotalAsset = stake + CurrencyBalance + Refunds;
       const TotalAssetByUsd = TotalAsset * this.props.USD;
       const BPs = this.props.BPs;
-      const { intl } = this.props;
-      const userNameIntl = intl.formatMessage(messages.userName);
-      const TotalAssetIntl = intl.formatMessage(messages.TotalAsset);
-      const RefundingIntl = intl.formatMessage(messages.Refunding);
-      const BalanceIntl = intl.formatMessage(messages.Balance);
-      const RAMBytesIntl = intl.formatMessage(messages.RAMBytes);
-      const VoteIntl = intl.formatMessage(messages.Vote);
-      const VoteDescIntl = intl.formatMessage(messages.VoteDesc);
-      const UndelegatebwIntl = intl.formatMessage(messages.Undelegatebw);
-      const AddDelegatebwIntl = intl.formatMessage(messages.AddDelegatebw);
-      const RevoteIntl = intl.formatMessage(messages.Revote);
-      const VotedBpsIntl = intl.formatMessage(messages.VotedBps);
+      const userNameIntl = I18n.t("VoteIndexPage userName");
+      const TotalAssetIntl = I18n.t("VoteIndexPage TotalAsset");
+      const RefundingIntl = I18n.t("VoteIndexPage Refunding");
+      const BalanceIntl = I18n.t("VoteIndexPage Balance");
+      const RAMBytesIntl = I18n.t("VoteIndexPage RAMBytes");
+      const VoteIntl = I18n.t("VoteIndexPage Vote");
+      const VoteDescIntl = I18n.t("VoteIndexPage VoteDesc");
+      const UndelegatebwIntl = I18n.t("VoteIndexPage Undelegatebw");
+      const AddDelegatebwIntl = I18n.t("VoteIndexPage AddDelegatebw");
+      const RevoteIntl = I18n.t("VoteIndexPage Revote");
+      const VotedBpsIntl = I18n.t("VoteIndexPage VotedBps");
         return (
             <SafeAreaView style={[{flex:1}]}>
             <View style={styles.bodyBox}>
-                <ScrollView style={styles.contentBox}>
+                <ScrollView>
                   <View style={styles.contentTitleBox}>
                     <Text style={styles.contentTitle}>EOS</Text>
                   </View>
@@ -130,10 +126,7 @@ class VoteIndexPage extends Component {
                       ))}
                     </View>
                   </View>
-                  {/*<View style={styles.bodyFooterBox}>*/}
-                    {/*<View style={styles.bodyFooterFlg}></View>*/}
-                  {/*</View>*/}
-                  <View style={{height: 100}}></View>
+                  <View style={{height: 50}}></View>
                 </ScrollView>
             </View>
             </SafeAreaView>

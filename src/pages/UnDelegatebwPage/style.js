@@ -4,49 +4,12 @@ const styles = StyleSheet.create({
     bodyBox: {
         position: "relative",
         flexBasis: "100%",
-        // minHeight: Dimensions.get("window").height,
         backgroundColor: "#eee",
       // paddingTop: 35,
     },
     contentBox: {
       // minHeight: Dimensions.get("window").height,
     },
-    bodyFooterBox: {
-      position: "absolute",
-      bottom: 5,
-      width: Dimensions.get("window").width,
-      display: "flex",
-      flexDirection: "row",
-      flexWrap: "nowrap",
-      justifyContent: "center",
-      alignItems: "center",
-    },
-    bodyFooterFlg: {
-      flex: 0,
-      height: 5,
-      width: Dimensions.get("window").width/2.5,
-      borderRadius: 3,
-      backgroundColor: "#222",
-    },
-});
-const navStyles = StyleSheet.create({
-  navBox: {
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingLeft: 15,
-    paddingRight: 15,
-  },
-  navItem: {
-      flex: 0,
-  },
-  navTitle: {
-    color: "#222",
-    fontSize: 18,
-    fontWeight: "600",
-  },
 });
 const countStyles = StyleSheet.create({
   countBox: {
@@ -160,7 +123,6 @@ const btnStyles = StyleSheet.create({
 });
 export {
   styles,
-  navStyles,
   countStyles,
   stakeStyles,
   btnStyles,

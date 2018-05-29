@@ -1,12 +1,4 @@
 {
-  "HomePage_importWallet": "Import EOS wallet",
-  "HomePage_privateKey": "Your Private Key",
-  "HomePage_choiceAccount": "Choice an account name",
-  "HomePage_submitKey": "Submit",
-  "HomePage_PleaseEnterComplete": "Please enter the complete",
-  "HomePage_PleaseSure": "sure",
-  "HomePage_PleaseCancel": "cancel",
-
   "VoteIndexPage userName": "userName",
   "VoteIndexPage TotalAsset": "Total Asset",
   "VoteIndexPage Refunding": "Refunding",

@@ -4,18 +4,15 @@ import { connect } from "react-redux";
 import { injectIntl } from 'react-intl';
 import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaView } from "react-native";
 // 自定义组件
-import { styles, navStyles, countStyles, stakeStyles, btnStyles } from "./style";
-import messages from './messages';
+import I18n from "../../../I18n";
+import { styles, countStyles, stakeStyles, btnStyles } from "./style";
 
 class UnDelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
-        const { navigation } = props;
-        const { state, setParams } = navigation;
-        const { params } = state;
         return {
             header: null
         };
-    }
+    };
 
     constructor( props ) {
         super( props );
@@ -45,29 +42,16 @@ class UnDelegatebwPage extends Component {
       const Stake = Number(this.state.CPU) + Number(this.state.Network);
       const CPU_placeholder = "MAX "+ this.state.cpu_weight+" Stake";
       const Network_placeholder = "MAX "+ this.state.net_weight+" Stake";
-      const { intl } = this.props;
-      const UnDelegatebwPageIntl = intl.formatMessage(messages.UnDelegatebwPage);
-      const StakeCountIntl = intl.formatMessage(messages.StakeCount);
-      const StakeCountInfoIntl = intl.formatMessage(messages.StakeCountInfo);
-      const StakeQuantityIntl = intl.formatMessage(messages.StakeQuantity);
-      const CPUIntl = intl.formatMessage(messages.CPU);
-      const NetworkIntl = intl.formatMessage(messages.Network);
-      const ConfirmIntl = intl.formatMessage(messages.Confirm);
+      const StakeCountIntl = I18n.t("UnDelegatebwPage StakeCount");
+      const StakeCountInfoIntl = I18n.t("UnDelegatebwPage StakeCountInfo");
+      const StakeQuantityIntl = I18n.t("UnDelegatebwPage StakeQuantity");
+      const CPUIntl = I18n.t("UnDelegatebwPage CPU");
+      const NetworkIntl = I18n.t("UnDelegatebwPage Network");
+      const ConfirmIntl = I18n.t("UnDelegatebwPage Confirm");
         return (
             <SafeAreaView style={[{flex:1}]}>
             <View style={styles.bodyBox}>
               <ScrollView>
-                <View style={navStyles.navBox}>
-                  <View style={navStyles.navItem}>
-                    <TouchableOpacity onPress={() => {this.props.navigation.goBack()}}>
-                      <Image style={{width: 24, height: 24,}} source={require("./images/arrow-left-account.png")} />
-                    </TouchableOpacity>
-                  </View>
-                  <View style={navStyles.navItem}>
-                    <Text style={navStyles.navTitle}>{UnDelegatebwPageIntl}</Text>
-                  </View>
-                  <View style={navStyles.navItem}></View>
-                </View>
                 <View style={countStyles.countBox}>
                   <View style={[countStyles.countItem, {borderBottomWidth: 0,}]}>
                     <Text style={countStyles.countName}>{StakeCountIntl}</Text>
@@ -119,9 +103,6 @@ class UnDelegatebwPage extends Component {
               <View style={btnStyles.btnBox}>
                 <Text style={btnStyles.btn} onPress={() => this.UnDelegatebwConfirmFn()}>{ConfirmIntl}</Text>
               </View>
-              {/*<View style={styles.bodyFooterBox}>*/}
-                {/*<View style={styles.bodyFooterFlg}></View>*/}
-              {/*</View>*/}
             </View>
             </SafeAreaView>
         );
@@ -171,4 +152,4 @@ function mapStateToProps( state ) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(UnDelegatebwPage));
+export default connect(mapStateToProps, mapDispatchToProps)(UnDelegatebwPage);

@@ -1,21 +1,17 @@
 // 引入公共组件
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { injectIntl } from 'react-intl';
 import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaView } from "react-native";
 // 自定义组件
-import { styles, navStyles, countStyles, stakeStyles, ruleStyles, btnStyles } from "./style";
-import messages from './messages';
+import I18n from "../../../I18n";
+import { styles, countStyles, stakeStyles, ruleStyles, btnStyles } from "./style";
 
 class DelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
-        const { navigation } = props;
-        const { state, setParams } = navigation;
-        const { params } = state;
         return {
-            header: 'test'
+          title: 'Delegatebw'
         };
-    }
+    };
 
     constructor( props ) {
         super( props );
@@ -47,35 +43,21 @@ class DelegatebwPage extends Component {
       const CurrencyBalance = this.props.CurrencyBalance;
       const CPU_placeholder = "MAX "+ this.state.cpu_weight+" Stake";
       const Network_placeholder = "MAX "+ this.state.net_weight+" Stake";
-      const { intl } = this.props;
-      const DelegatebwPageIntl = intl.formatMessage(messages.DelegatebwPage);
-      const BalanceIntl = intl.formatMessage(messages.Balance);
-      const StakeCountIntl = intl.formatMessage(messages.StakeCount);
-      const StakeQuantityIntl = intl.formatMessage(messages.StakeQuantity);
-      const CPUIntl = intl.formatMessage(messages.CPU);
-      const NetworkIntl = intl.formatMessage(messages.Network);
-      const RuleIntl = intl.formatMessage(messages.Rule);
-      const Rule1Intl = intl.formatMessage(messages.Rule1);
-      const Rule2Intl = intl.formatMessage(messages.Rule2);
-      const Rule3Intl = intl.formatMessage(messages.Rule3);
-      const Rule4Intl = intl.formatMessage(messages.Rule4);
-      const ConfirmIntl = intl.formatMessage(messages.Confirm);
+      const BalanceIntl = I18n.t("DelegatebwPage Balance");
+      const StakeCountIntl = I18n.t("DelegatebwPage StakeCount");
+      const StakeQuantityIntl = I18n.t("DelegatebwPage StakeQuantity");
+      const CPUIntl = I18n.t("DelegatebwPage CPU");
+      const NetworkIntl = I18n.t("DelegatebwPage Network");
+      const RuleIntl = I18n.t("DelegatebwPage Rule");
+      const Rule1Intl = I18n.t("DelegatebwPage Rule1");
+      const Rule2Intl = I18n.t("DelegatebwPage Rule2");
+      const Rule3Intl = I18n.t("DelegatebwPage Rule3");
+      const Rule4Intl = I18n.t("DelegatebwPage Rule4");
+      const ConfirmIntl = I18n.t("DelegatebwPage Confirm");
         return (
             <SafeAreaView style={[{flex:1}]}>
-
             <View style={styles.bodyBox}>
               <ScrollView>
-                <View style={navStyles.navBox}>
-                  <View style={navStyles.navItem}>
-                    <TouchableOpacity onPress={() => {this.props.navigation.goBack()}}>
-                      <Image style={{width: 24, height: 24,}} source={require("./images/arrow-left-account.png")} />
-                    </TouchableOpacity>
-                  </View>
-                  <View style={navStyles.navItem}>
-                    <Text style={navStyles.navTitle}>{DelegatebwPageIntl}</Text>
-                  </View>
-                  <View style={navStyles.navItem}></View>
-                </View>
                 <View style={countStyles.countBox}>
                   <View style={countStyles.countItem}>
                     <Text style={countStyles.countName}>{BalanceIntl}</Text>
@@ -130,14 +112,11 @@ class DelegatebwPage extends Component {
                   <Text style={ruleStyles.ruleDesc}>{Rule3Intl}</Text>
                   <Text style={ruleStyles.ruleDesc}>{Rule4Intl}</Text>
                 </View>
-                <View style={{height: 100}}></View>
+                <View style={{height: 50}}></View>
               </ScrollView>
               <View style={btnStyles.btnBox}>
                 <Text style={btnStyles.btn} onPress={() => this.DelegatebwConfirmFn()}>{ConfirmIntl}</Text>
               </View>
-              {/*<View style={styles.bodyFooterBox}>*/}
-                {/*<View style={styles.bodyFooterFlg}></View>*/}
-              {/*</View>*/}
             </View>
             </SafeAreaView>
         );
@@ -190,4 +169,4 @@ function mapStateToProps( state ) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(DelegatebwPage));
+export default connect(mapStateToProps, mapDispatchToProps)(DelegatebwPage);
