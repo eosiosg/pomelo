@@ -45,7 +45,14 @@ class VotePage extends Component {
         let votingList = nextProps.selectedNodeList;
         this.setState({
             votingList,
-        })
+        });
+      let IsSubmitSuccess = nextProps.IsSubmitSuccess;
+      IsSubmitSuccess ? this.props.getAccountInfo() : null;
+      if (IsSubmitSuccess && IsSubmitSuccess != this.porps.IsSubmitSuccess) {
+        // 投票成功，重新获取AccountInfo，重置IsSubmitSuccess
+        this.props.getAccountInfo();
+        this.props.resetIsSubmitSuccess();
+      }
     }
 
     componentDidMount() {
@@ -353,7 +360,8 @@ class VotePage extends Component {
 function mapDispatchToProps(dispatch) {
     return {
          onDispatchVoteVotingList: (data) => dispatch({ type: "VOTE_SUBMITLIST_POST", data }),
-         getAccountInfo: (data) => dispatch({ type: "WALLET_ACCOUNTINFO_POST" }),
+         getAccountInfo: () => dispatch({ type: "WALLET_ACCOUNTINFO_POST" }),
+         resetIsSubmitSuccess: () => dispatch({ type: "VOTE_SUBMITLIST_REDUCER", data: false }),
     };
 }
 function mapStateToProps(state) {

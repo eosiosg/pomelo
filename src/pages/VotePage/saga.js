@@ -38,23 +38,22 @@ function getInfo() {
 export function* postVotingList(action) {
     try {
         console.log(action.data);
-        yield call(()=>votePorducers(action.data.account_name, action.data.votingList));
-        yield put({ type: "VOTE_GETLIST_REDUCER", data: votingList });
+        const response = yield call(votePorducers, action.data.account_name, action.data.votingList);
+        yield put({ type: "VOTE_GETLIST_REDUCER", data: response.broadcast });
     } catch (err) {}
-
-
 }
-
 
 function votePorducers(accountName = 'eosiomeetone', producers = ['eosiomeetone']) {
     let eos = GetEOS(accountPrivateKey);
-    eos.voteproducer( {
+    return eos.voteproducer( {
         voter: accountName,
         proxy: '',
         producers: producers
     }).then( function ( result ) {
         console.log( 'EOSVoteProducer result: ' + JSON.stringify( result ) );
+        return result;
     }).catch( function ( error ) {
         console.log( 'EOSVoteProducer error: ' + error.message );
+        return [];
     });
 }

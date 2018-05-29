@@ -4,6 +4,7 @@
 
 const initState = {
     votingList: [],
+    IsSubmitSuccess: false,
 };
 
 
@@ -12,9 +13,11 @@ export default function VotePageReducer (state = initState, action) {
         case "VOTE_GETLIST_REDUCER":
             return Object.assign({}, state, {
                 "votingList": action.data
-            })
+            });
         case "VOTE_SUBMITLIST_REDUCER":
-            return Object.assign({}, state)
+            return Object.assign({}, state, {
+                "IsSubmitSuccess": action.data
+            });
         default:
             return state;
     }
