@@ -206,9 +206,73 @@ const voteBpsStales = StyleSheet.create({
     fontSize: 14,
   },
 });
+const modalStyles = StyleSheet.create({
+  // modal的样式
+  modalStyle: {
+    // backgroundColor:'#ccc',
+    alignItems: 'center',
+    justifyContent:'center',
+    flex:1,
+  },
+  // modal上子View的样式
+  subView:{
+    marginLeft:60,
+    marginRight:60,
+    backgroundColor:'#fff',
+    alignSelf: 'stretch',
+    justifyContent:'center',
+    borderRadius: 10,
+    borderWidth: 0.5,
+    borderColor:'#ccc',
+  },
+  // 标题
+  titleText:{
+    marginTop:10,
+    marginBottom:5,
+    fontSize:16,
+    fontWeight:'bold',
+    textAlign:'center',
+  },
+  // 内容
+  contentText:{
+    margin:10,
+    paddingBottom : 20,
+    paddingTop  :10,
+    fontSize:14,
+    textAlign:'center',
+  },
+  // 水平的分割线
+  horizontalLine:{
+    marginTop:5,
+    height:0.5,
+    backgroundColor:'#ccc',
+  },
+  // 按钮
+  buttonView:{
+    display: "flex",
+    flexDirection: 'row',
+    justifyContent: "space-between",
+    alignItems: 'center',
+  },
+  // 竖直的分割线
+  verticalLine:{
+    flex: 0,
+    width:0.5,
+    height:44,
+    backgroundColor:'#ccc',
+  },
+  buttonStyle:{
+    flex: 1,
+    fontSize: 17,
+    color: "#007AFF",
+    lineHeight:44,
+    textAlign: "center",
+  },
+});
 export {
   styles,
   assetStyles,
   voteStyles,
   voteBpsStales,
+  modalStyles,
 };
