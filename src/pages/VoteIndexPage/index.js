@@ -12,6 +12,7 @@ class VoteIndexPage extends Component {
     static navigationOptions = ( props ) => {
         return {
           title: 'Total Asset',
+          headerBackImage: null,
           headerRight: (
             <Text style={{paddingRight: 10}} onPress={() => {props.navigation.state.params.navigatePress()}}>Change Wallet</Text>
           ),
@@ -56,7 +57,7 @@ class VoteIndexPage extends Component {
       const Refunds = this.props.Refunds;
       const TotalAsset = stake + CurrencyBalance + Refunds;
       const TotalAssetByUsd = TotalAsset * this.props.USD;
-      const BPs = this.props.BPs;
+      const BPs = this.getBpsByAccountInfoFilter();
       const userNameIntl = I18n.t("VoteIndexPage userName");
       const TotalAssetIntl = I18n.t("VoteIndexPage TotalAsset");
       const RefundingIntl = I18n.t("VoteIndexPage Refunding");
@@ -139,7 +140,7 @@ class VoteIndexPage extends Component {
                         <View key={index} style={voteBpsStales.VoteBpsItem}>
 
                           <Text style={voteBpsStales.VoteBpsItemName}>{item.owner}</Text>
-                          <Text style={voteBpsStales.VoteBpsItemDesc}>{item.total_votes} Voter Choise</Text>
+                          <Text style={voteBpsStales.VoteBpsItemDesc}>{item.votePersent}% Voter Choise</Text>
                         </View>
                       ))}
                     </View>
@@ -164,6 +165,30 @@ class VoteIndexPage extends Component {
             </SafeAreaView>
         );
     }
+
+    getBpsByAccountInfoFilter = () => {
+      const BPs = this.props.BPs;
+      const { producers } = this.props.accountInfo.voter_info;
+      const newBpsTem = [];
+      const newBps = [];
+      let totalWeight = 0;
+      for (let i = 0; i < BPs.length; i++) {
+        for (let j = 0; j < producers.length; j++) {
+          if (BPs[i].owner == producers[j]) {
+            totalWeight += BPs[i].total_votes;
+            newBpsTem.push(BPs[i]);
+          }
+        }
+      }
+      for (let i = 0; i < newBpsTem.length; i++) {
+        newBps.push({
+          owner: newBpsTem[i].owner,
+          votePersent: (newBpsTem[i].total_votes/totalWeight * 100),
+        });
+      }
+      return newBps;
+    }
+    
     // RefundingCountdown = (creatTime) => {
     //   const totalTime = 3*24*60*60;
     //   let newCreatTime = new Date(creatTime);

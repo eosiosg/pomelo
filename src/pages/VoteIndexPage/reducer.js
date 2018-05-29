@@ -12,6 +12,9 @@ const initState = {
     total_resources: {
       ram_bytes: 0,
     },
+    voter_info: {
+      producers: [],
+    },
   },
   CurrencyBalance: 0,
   Refunds: 0,
