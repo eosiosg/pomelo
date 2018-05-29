@@ -14,8 +14,6 @@ import VoteIndexPage from "./src/pages/VoteIndexPage";
 import DelegatebwPage from "./src/pages/DelegatebwPage";
 import UnDelegatebwPage from "./src/pages/UnDelegatebwPage";
 import NodeListPage from "./src/pages/NodeListPage";
-import WalletPage from "./src/pages/WalletPage";
-import IntlProviderLanguage from "./src/pages/IntlProviderLanguage";
 import TestPage from "./src/pages/TestPage";
 //import { persistStore, autoRehydrate } from "redux-persist";
 //import createEncryptor from "redux-persist-transform-encrypt";
@@ -29,7 +27,6 @@ const Navigator = StackNavigator(
         NodeListPage: { screen: NodeListPage },
         DelegatebwPage: { screen: DelegatebwPage },
         UnDelegatebwPage: { screen: UnDelegatebwPage },
-        WalletPage: { screen: WalletPage },
         TestPage: { screen: TestPage },
     },
     {
@@ -68,9 +65,7 @@ export default class App extends Component {
   render() {
     return (
         <Provider store={myStore}>
-          <IntlProviderLanguage>
           <Navigator/>
-          </IntlProviderLanguage>
         </Provider>
     );
   }
