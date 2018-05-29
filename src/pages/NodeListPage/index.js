@@ -30,15 +30,24 @@ class NodeListPage extends Component {
         };
     }
     componentDidMount() {
-        console.log('hi--------');
-        console.log(this.props.allAsset);
-        this.state.allAsset = this.props.allAsset;
+        let allAsset = [].concat(this.props.allAsset);
+        this.copyBpList(allAsset)
 
     }
 
-    componentWillReceiveProps(){
-        console.log('hi--------');
-        console.log(this.props.allAsset);
+    componentWillReceiveProps(nextProps){
+        let allAsset = [].concat(nextProps.allAsset);
+        this.copyBpList(allAsset)
+
+    }
+
+    copyBpList = (allAsset) =>{
+        allAsset.map((bp)=>{
+            bp.voting = true;
+        })
+        this.setState({
+            allAsset
+        })
     }
 
 

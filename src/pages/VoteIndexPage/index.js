@@ -167,4 +167,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(VoteIndexPage));
+export default connect(mapStateToProps, mapDispatchToProps)(VoteIndexPage);
