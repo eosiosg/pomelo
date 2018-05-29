@@ -12,8 +12,6 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 class NodeListPage extends Component {
     static navigationOptions = ( props ) => {
-        console.log('=----node lsit-=-=');
-        console.log(props);
         const { navigation } = props;
         const { state, setParams } = navigation;
         const { params } = state;
@@ -31,7 +29,17 @@ class NodeListPage extends Component {
             isRequesting: false
         };
     }
-    componentDidMount() {}
+    componentDidMount() {
+        console.log('hi--------');
+        console.log(this.props.allAsset);
+        this.state.allAsset = this.props.allAsset;
+
+    }
+
+    componentWillReceiveProps(){
+        console.log('hi--------');
+        console.log(this.props.allAsset);
+    }
 
 
     onVote() {
@@ -125,7 +133,7 @@ class NodeListPage extends Component {
                 <View style={[ styles.wrapper, { backgroundColor: '#fafafa', } ]}>
                     <View style={styles.wrapper}>
                         <FlatList
-                            data={this.props.allAsset}
+                            data={this.state.allAsset}
                             keyExtractor={( item, index ) => {
                                 return index + '';
                             }}

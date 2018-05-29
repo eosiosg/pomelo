@@ -17,7 +17,7 @@ import LoadingView from './components/loading'
 class VotePage extends Component {
     static navigationOptions = ( props ) => {
         console.log('=---votepage=-=-=');
-        console.log(props);
+        console.log(props.navigation);
         const { navigation } = props;
         const { state, setParams } = navigation;
         const { params } = state;
@@ -93,7 +93,7 @@ class VotePage extends Component {
             <SafeAreaView style={[{flex:1}]}>
 
                 <ScrollView>
-            <View style={[styles.bodyBox,{flex:1,backgroundColor: '#000'},]}>
+            <View style={[styles.bodyBox,{flex:1}]}>
 
                 {/*<View style={navStyles.navBox}>*/}
                     {/*<View style={navStyles.navItem}>*/}

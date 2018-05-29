@@ -6,18 +6,35 @@ import { ScrollView, View, Text, Image, TouchableHighlight, Dimensions, Modal, S
 import {  storage } from "../../utils/storage";
 import { injectIntl } from 'react-intl';
 
+import I18n from "../../../I18n";
 // 自定义组件
 import { styles } from "./style";
 import messages from './messages';
 
 class WalletPage extends Component {
+    // static navigationOptions = ( props ) => {
+    //     const { navigation } = props;
+    //     const { state, setParams } = navigation;
+    //     const { params } = state;
+    //
+    //     return {
+    //         tabBarVisible : true,
+    //         header: 'hellllo',
+    //         // backTitle: null
+    //     };
+    //
+    // };
+
     static navigationOptions = ( props ) => {
+        console.log('=---votepage=-=-=');
+        console.log(props);
         const { navigation } = props;
         const { state, setParams } = navigation;
         const { params } = state;
 
         return {
-            header: null
+            title: 'wallet',
+            // backTitle: null,
         };
     };
 
@@ -65,11 +82,11 @@ class WalletPage extends Component {
       const TotalAsset = stake + CurrencyBalance + Refunds;
       const TotalAssetByUsd = TotalAsset * this.props.EOSPrice;
 
-      const changeWalletIntl = intl.formatMessage(messages.changeWallet);
-      const totalAssetsIntl = intl.formatMessage(messages.totalAssets);
-      const confirmContentIntl = intl.formatMessage(messages.confirmContent);
-      const PleaseSure = intl.formatMessage(messages.PleaseSure);
-      const PleaseCancel = intl.formatMessage(messages.PleaseCancel);
+      const changeWalletIntl = I18n.t(messages.changeWallet.id);
+      const totalAssetsIntl = I18n.t(messages.totalAssets.id);
+      const confirmContentIntl = I18n.t(messages.confirmContent.id);
+      const PleaseSure = I18n.t(messages.PleaseSure.id);
+      const PleaseCancel = I18n.t(messages.PleaseCancel.id);
 
       return (
           <SafeAreaView style={[{flex:1}]}>
@@ -186,4 +203,4 @@ function mapStateToProps(state) {
         EOSPrice: state.WalletPageReducer.EOSPrice,
     };
 }
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(WalletPage));
+export default connect(mapStateToProps, mapDispatchToProps)(WalletPage);

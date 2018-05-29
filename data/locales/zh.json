@@ -5,5 +5,23 @@
   "HomePage_submitKey": "Submit",
   "HomePage_PleaseEnterComplete": "Please enter the complete",
   "HomePage_PleaseSure": "sure",
-  "HomePage_PleaseCancel": "cancel"
+  "HomePage_PleaseCancel": "cancel",
+
+  "VotePage account" : "账户名",
+  "VotePage balance" : "余额",
+  "VotePage stake" : "权重",
+  "VotePage cancel" : "取消",
+  "VotePage delegatebw" : "设置权重",
+  "VotePage gotIt" : "知道了",
+  "VotePage confirm" : "确认",
+  "VotePage submit" : "提交",
+  "VotePage delegatebw" : "Delegatebw",
+  "VotePage bpList" : "投票列表",
+  "VotePage notice" : "告知",
+  "VotePage noticeC" : "你可以在任何时候重新投票，delegatebw或者undelegatebw。投票将会使用CPU和Network股权。",
+  "VotePage RuleT": "规则*",
+  "VotePage Rule1": "· 投票会使用一些你的CPU和Network股权",
+  "VotePage Rule2": "· 权重 weight = 2000年以来的秒数/ 一年的秒数，这意味着权重按秒增加;",
+  "VotePage Rule3": "· 票数 vote = (CPU stake + Network stake) * 2^weight;",
+  "VotePage Rule4": "· 你可以在任何时候选择undelegatebw，此项操作将会减少你给voter的投票，EOS将会在3天后退回你的账户"
 }
