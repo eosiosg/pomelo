@@ -198,14 +198,14 @@ class VotePage extends Component {
                                 <Text style={styles.contentBodyBPName}>
                                     { votingC.owner }
                                 </Text>
-                                <View style={styles.contentBodyBPDeleteContainer}>
-                                    <TouchableHighlight id={index}
-                                                        onPress={()=>this._setDeleteBPC(index)}>
-                                        <View style={styles.contentBodyBPDeleteButton}>
-                                            <View style={styles.contentBodyBPDeleteButtonInner}></View>
-                                        </View>
-                                    </TouchableHighlight>
-                                </View>
+                                {/*<View style={styles.contentBodyBPDeleteContainer}>*/}
+                                    {/*<TouchableHighlight id={index}*/}
+                                                        {/*onPress={()=>this._setDeleteBPC(index)}>*/}
+                                        {/*<View style={styles.contentBodyBPDeleteButton}>*/}
+                                            {/*<View style={styles.contentBodyBPDeleteButtonInner}></View>*/}
+                                        {/*</View>*/}
+                                    {/*</TouchableHighlight>*/}
+                                {/*</View>*/}
                             </View>
                         })
                     }
@@ -314,9 +314,11 @@ class VotePage extends Component {
         let votingList = [];
         this.state.votingList.map((one)=>{
             votingList.push(one.owner)
-        })
+        });
+        votingList.sort();
         let account_name = this.account_name;
         this.props.onDispatchVoteVotingList({account_name,votingList});
+        this.props.getAccountInfo();
         this.setState({
             noticeShow:false,
         });
@@ -351,6 +353,7 @@ class VotePage extends Component {
 function mapDispatchToProps(dispatch) {
     return {
          onDispatchVoteVotingList: (data) => dispatch({ type: "VOTE_SUBMITLIST_POST", data }),
+         getAccountInfo: (data) => dispatch({ type: "WALLET_ACCOUNTINFO_POST" }),
     };
 }
 function mapStateToProps(state) {

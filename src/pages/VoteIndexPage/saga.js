@@ -34,7 +34,7 @@ export function* getVoteIndexPageAccountInfoPost() {
 function getAccountByEos() {
   const eos = GetEOS(accountPrivateKey);
   return eos.getAccount( { 'account_name': accountName } ).then(( result ) => {
-    console.log(result);
+    console.log(result);getAccount
       return result;
     });
 }

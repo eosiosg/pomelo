@@ -20,7 +20,6 @@ import OperationBottomComponent from "./OperationBottomComponent";
 class NodeListSelectedResultComponent extends React.Component {
     static propTypes = {
         totalData: PropTypes.array.isRequired,
-        selectData: PropTypes.array.isRequired,
         isOpen: PropTypes.bool.isRequired,
         onRemoveNode: PropTypes.func.isRequired,
         onClose: PropTypes.func.isRequired,
@@ -78,6 +77,9 @@ class NodeListSelectedResultComponent extends React.Component {
 
 
     renderItem( { item, index } ) {
+        if(!item.voting){
+            return
+        }
         return (
             <View style={[ {
                 flex: 1,
@@ -88,13 +90,13 @@ class NodeListSelectedResultComponent extends React.Component {
                 height: 44,
                 alignItems: 'center'
             } ]}>
-                <Text style={[ style.commonTextColorStyle, { fontSize: 18 }, style.wrapper ]}>{item.title}</Text>
+                <Text style={[ style.commonTextColorStyle, { fontSize: 18 }, style.wrapper ]}>{item.owner}</Text>
 
                 <View>
                     <TouchableOpacity
                         onPress={() => {
                             if ( this.props.onRemoveNode ) {
-                                this.props.onRemoveNode( item );
+                                this.props.onRemoveNode( item, index );
                             }
                         }}>
                         <Icon
@@ -166,7 +168,7 @@ class NodeListSelectedResultComponent extends React.Component {
 
                         <View style={[ style.wrapper ]}>
                             <FlatList
-                                data={this.props.selectData}
+                                data={this.props.totalData}
                                 keyExtractor={( item, index ) => {
                                     return index + '';
                                 }}
@@ -189,7 +191,6 @@ class NodeListSelectedResultComponent extends React.Component {
 
                         <OperationBottomComponent
                             totalData={this.props.totalData}
-                            selectData={this.props.selectData}
                             isOpenSelected={true}
                             onShowSelected={() => {
                                 this.closeModal();

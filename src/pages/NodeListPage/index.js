@@ -25,76 +25,91 @@ class NodeListPage extends Component {
         super( props );
         this.state = {
             isOpenAccountSelect: false,
-            selectData: [],
-            isRequesting: false
+            selectData: 1,
+            isRequesting: false,
+            allAsset:[],
         };
     }
-    componentDidMount() {
-        let allAsset = [].concat(this.props.allAsset);
-        this.copyBpList(allAsset)
 
+    componentDidMount() {
+        let iVoterProducers = this.props.accountInfo.voter_info.producers;
+        let allAsset = [].concat(this.props.allAsset);
+        this.copyBpList(allAsset,iVoterProducers)
     }
 
     componentWillReceiveProps(nextProps){
+        console.log('hi， new prosp', nextProps);
         let allAsset = [].concat(nextProps.allAsset);
-        this.copyBpList(allAsset)
-
+        let iVoterProducers = this.props.accountInfo.voter_info.producers;
+        this.copyBpList(allAsset,iVoterProducers);
     }
 
-    copyBpList = (allAsset) =>{
+    copyBpList = (allAsset, iVoterProducers) =>{
+        let selectedData = this.state.selectedData;
         allAsset.map((bp)=>{
-            bp.voting = true;
-        })
+            if(iVoterProducers.indexOf(bp.owner)!==-1){
+                bp.voting = true;
+                selectedData += 1;
+            }else{
+                bp.voting = false;
+            }
+        });
+
         this.setState({
-            allAsset
-        })
+            allAsset,
+            selectedData,
+            iVoterProducers
+        });
     }
 
 
     onVote() {
-        if ( this.state.selectData.length <= 0 ) {
-            Toast.show( 'Please select Node' );
-            return;
-        }
-        this.props.onDispatchSetSelectedNodeListDataPost(this.state.selectData);
-        this.props.navigation.navigate("VotePage", {selectedNodeList: this.state.selectData});
+        let selectedNodes = []
+        this.state.allAsset.map((bp)=>{
+            if(bp.voting){
+                selectedNodes.push(bp)
+            }
+        });
+        // if ( selectedNodes.length <= 0 ) {
+        //     Toast.show( 'Please select Node' );
+        //     return;
+        // }
+        this.props.onDispatchSetSelectedNodeListDataPost(selectedNodes);
+        this.props.navigation.navigate("VotePage", {selectedNodeList: selectedNodes});
     }
 
-    addNode( nodeItem ) {
-        for ( let index = 0; index < this.state.selectData.length; index++ ) {
-            if ( nodeItem.id === this.state.selectData[ index ].id ) {
-                return;
-            }
-        }
+    addNode( nodeItem, index ) {
 
-        const selectData = this.state.selectData.slice();
-
-        selectData.push( nodeItem );
-
+        console.log('----addd   -=-=====');
+        console.log(this.state.allAsset[index]);
+        let allAsset = [].concat(this.state.allAsset);
+        allAsset[index].voting = true;
+        let selectedData = this.state.selectedData +1;
         this.setState( {
-            selectData: selectData
-        } );
+            allAsset,
+            selectedData
+        });
     }
 
-    removeNode( nodeItem ) {
-        const selectData = this.state.selectData.slice();
+    removeNode( nodeItem, index ) {
 
-        for ( let index = 0; index < this.state.selectData.length; index++ ) {
-            if ( nodeItem.id === this.state.selectData[ index ].id ) {
-                selectData.splice( index, 1 );
+        console.log('----remove   -=-=====');
+        console.log(this.state.allAsset[index]);
 
-                break;
-            }
-        }
+        let allAsset = [].concat(this.state.allAsset);
+        allAsset[index].voting = false;
+        let selectedData = this.state.selectedData - 1;
 
         this.setState( {
-            selectData: selectData
-        } );
+            allAsset,
+            selectedData
+        });
     }
 
     renderItem( { item, index } ) {
         return (
-            <View style={[ {
+            <View key={index}
+                style={[ {
                 flex: 1,
                 backgroundColor: '#fafafa',
                 paddingLeft: 15,
@@ -102,29 +117,64 @@ class NodeListPage extends Component {
                 paddingTop: 10,
                 paddingBottom: 10,
                 flexDirection: 'row',
-                height: 76
             } ]}>
                 <View style={[ {}, style.wrapper ]}>
-                    <Text numberOfLines={1} style={[ style.commonTextColorStyle, { fontWeight: 'bold', fontSize: 18 } ]}>{item.owner}</Text>
-                    <Text numberOfLines={1} style={[ style.commonSubTextColorStyle, { fontSize: 14 } ]}>http://{item.url}</Text>
-                    <Text numberOfLines={1} style={[ style.commonSubTextColorStyle, { fontSize: 14 } ]}>{item.total_votes} Voter Choise</Text>
+                    <Text numberOfLines={1}
+                          style={[
+                              style.commonTextColorStyle,
+                              { fontWeight: 'bold',
+                                  fontSize: 20,
+                                  lineHeight:28,
+                                  fontFamily: 'PingFangSC-Semibold',
+                                  color: '#323232',
+                          } ]}>
+                        {item.owner}
+                    </Text>
+                    <Text numberOfLines={1}
+                          style={[
+                              style.commonSubTextColorStyle,
+                              {
+                                  fontSize: 16,
+                                  marginTop: 8,
+                                  lineHeight:20,
+                                  fontFamily: 'PingFangSC-Regular',
+                                  color: '#999999',
+                                  letterSpacing: 0,
+                              }]
+                          }>
+                        http://{item.url}
+                    </Text>
+                    <Text numberOfLines={1}
+                          style={[
+                              style.commonSubTextColorStyle,
+                              {
+                                  fontSize: 14,
+                                  marginTop: 10,
+                                  lineHeight:20,
+                                  fontFamily: 'PingFangSC-Regular',
+                                  color: '#999999',
+                                  letterSpacing: 0,
+                              }]
+                          }>
+                        {item.total_votes} Voter Choise
+                    </Text>
                 </View>
 
-                <View style={[ { marginTop: 25 } ]}>
+                <View style={[ { marginBottom: 45 } ]}>
                     <TouchableOpacity
                         onPress={() => {
-                            if ( this.state.selectData.indexOf( item ) !== -1 ) {
-                                this.removeNode( item );
-                            } else {
-                                this.addNode( item )
+                            if(item.voting){
+                                this.removeNode( item, index )
+                            }else{
+                                this.addNode( item, index )
                             }
                         }}>
                         <Icon
                             style={[ {
                                 marginLeft: 10,
                             } ]}
-                            name={this.state.selectData.indexOf( item ) !== -1 ? 'ios-remove-circle-outline' : 'md-add-circle'}
-                            size={30}
+                            name={item.voting ? 'ios-remove-circle-outline' : 'md-add-circle'}
+                            size={33}
                             color={'#3c4144'}>
                         </Icon>
                     </TouchableOpacity>
@@ -136,6 +186,9 @@ class NodeListPage extends Component {
     render() {
         const viewHeight = 76;
         const separatorHeight = getDpFromPx( 1 );
+
+        console.log('selected tate',this.state.selectData);
+
 
         return (
             <SafeAreaView style={styles.wrapper}>
@@ -162,8 +215,7 @@ class NodeListPage extends Component {
                         />
 
                         <NodeListSelectedResultComponent
-                            totalData={this.props.allAsset}
-                            selectData={this.state.selectData}
+                            totalData={this.state.allAsset}
                             navigation={this.props.navigation}
                             isOpen={this.state.isOpenAccountSelect}
                             isSupportImport={true}
@@ -182,8 +234,8 @@ class NodeListPage extends Component {
                             onVote={()=>{
                                 this.onVote()
                             }}
-                            onRemoveNode={( nodeItem ) => {
-                                this.removeNode( nodeItem )
+                            onRemoveNode={( nodeItem, index ) => {
+                                this.removeNode( nodeItem, index )
                             }}
                         />
                     </View>
@@ -220,6 +272,7 @@ function mapDispatchToProps( dispatch ) {
 function mapStateToProps( state ) {
     return {
         allAsset: state.VoteIndexPageReducer.BPs,
+        accountInfo: state.VoteIndexPageReducer.accountInfo,
     };
 }
 

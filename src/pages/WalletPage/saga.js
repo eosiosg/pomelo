@@ -52,7 +52,7 @@ export function* getEOSPrice () {
 
 // getWalletPageAccountInfoPost
 export function* getWalletPageAccountInfoPost() {
-  try {
+    try {
     const res = yield call(getAccountByEos);
     yield put({ type: "VOTEINDEX_SETACCOUNTINFO_REDUCER", data: res });
   } catch (err) {}

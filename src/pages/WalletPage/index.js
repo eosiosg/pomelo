@@ -12,29 +12,14 @@ import { styles } from "./style";
 import messages from './messages';
 
 class WalletPage extends Component {
-    // static navigationOptions = ( props ) => {
-    //     const { navigation } = props;
-    //     const { state, setParams } = navigation;
-    //     const { params } = state;
-    //
-    //     return {
-    //         tabBarVisible : true,
-    //         header: 'hellllo',
-    //         // backTitle: null
-    //     };
-    //
-    // };
 
     static navigationOptions = ( props ) => {
-        console.log('=---votepage=-=-=');
-        console.log(props);
         const { navigation } = props;
         const { state, setParams } = navigation;
         const { params } = state;
 
         return {
             title: 'wallet',
-            // backTitle: null,
         };
     };
 

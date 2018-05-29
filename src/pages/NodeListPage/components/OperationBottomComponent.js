@@ -8,7 +8,6 @@ import { styles as style } from "../style";
 class OperationBottomComponent extends React.Component {
     static propTypes = {
         totalData: PropTypes.array.isRequired,
-        selectData: PropTypes.array.isRequired,
         isOpenSelected: PropTypes.bool.isRequired,
         onShowSelected: PropTypes.func.isRequired,
         onVote: PropTypes.func.isRequired,
@@ -33,6 +32,14 @@ class OperationBottomComponent extends React.Component {
 
 
     render() {
+
+        let selectedNumber = 0;
+        this.props.totalData.map((bp)=>{
+            if(bp.voting){
+                selectedNumber += 1
+            }
+        })
+
         return (
             <View style={[ { flexDirection: 'row', height: 44, backgroundColor: 'white' } ]}>
                 <View style={[ { flex: 3, height: 44 } ]}>
@@ -47,7 +54,7 @@ class OperationBottomComponent extends React.Component {
                             <Text style={[ style.commonSubTextColorStyle, {
                                 fontSize: 14,
                                 marginLeft: 10,
-                            } ]}>{(this.props.selectData && this.props.totalData) ? this.props.selectData.length + '/' + this.props.totalData.length : ''}</Text>
+                            } ]}>{(this.props.totalData) ? selectedNumber+ '/' + this.props.totalData.length : ''}</Text>
                             <Icon
                                 style={[ {
                                     marginLeft: 10,

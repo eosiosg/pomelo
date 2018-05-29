@@ -1,40 +1,30 @@
 /**
  * Created by dongjie on 24/5/18.
  */
-
-
 import { put, call} from "redux-saga/effects";
+import { storage } from "../../utils/storage";
+import { getWalletPageAccountInfoPost } from "../WalletPage/saga"
 
-import { GetEOS, EOSVoteProducer,EOSGetInfo } from "../../actions/EosAction";
+let accountName = ''
+
+storage.load({key: "accountName"}).then((ret) => {
+    if (ret) {
+        accountName = ret
+    } else {
+        console.log("ret:",ret)
+    }
+}).catch(err => {
+    console.log("err:",err)
+});
+
+
+import { GetEOS, EOSVoteProducer, EOSGetInfo } from "../../actions/EosAction";
 
 const accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
 
 // 创建假数据
 const votingList = [];
 
-
-
-export function* getVotingList(action) {
-
-    try {
-        const response = yield call(getInfo);
-        yield put({ type: "VOTE_GETLIST_REDUCER", data: votingList });
-    } catch (err) {}
-
-    // try{
-    //     EOSGetInfo(eos, function* (err, result){
-    //         if(err){
-    //             console.log('fail');
-    //         }else{
-    //             console.log('success');
-    //             // 根据返回数据，渲染结果
-    //         }
-    //     })
-    // }catch(err){
-    //     console.log(err);
-    // }
-
-}
 
 function getInfo() {
     let eos = GetEOS(accountPrivateKey);
