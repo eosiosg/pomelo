@@ -1,7 +1,7 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { ScrollView, View, Text, TextInput, Image, TouchableOpacity, Dimensions ,Modal ,CheckBox ,TouchableOpacity , AlertIOS, SafeAreaView} from "react-native";
+import { ScrollView, View, Text, TextInput, Image, TouchableOpacity, Dimensions ,Modal ,CheckBox , AlertIOS, SafeAreaView} from "react-native";
 import { storage } from "../../utils/storage";
 //import TouchID from 'react-native-touch-id'
 import Toast from "react-native-root-toast";
@@ -116,21 +116,21 @@ class HomePage extends Component {
                     </Text>
                     <View style={styles.horizontalLine} />
                     <View style={styles.buttonView}>
-                      <TouchableHighlight underlayColor='transparent'
+                      <TouchableOpacity underlayColor='transparent'
                                           style={styles.buttonStyle}
                                           onPress={this._setModalVisible.bind(this)}>
                         <Text style={styles.buttonText}>
                           {PleaseCancel}
                         </Text>
-                      </TouchableHighlight>
+                      </TouchableOpacity>
                       <View style={styles.verticalLine} />
-                      <TouchableHighlight underlayColor='transparent'
+                      <TouchableOpacity underlayColor='transparent'
                                           style={styles.buttonStyle}
                                           onPress={this._setModalVisible.bind(this)}>
                         <Text style={styles.buttonText}>
                           {PleaseSure}
                         </Text>
-                      </TouchableHighlight>
+                      </TouchableOpacity>
                     </View>
                   </View>
                 </View>
