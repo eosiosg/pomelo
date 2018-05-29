@@ -6,7 +6,6 @@ import NodeListPageReducer from "../pages/NodeListPage/reducer";
 import VoteIndexPageReducer from "../pages/VoteIndexPage/reducer";
 import DelegatebwPageReducer from "../pages/DelegatebwPage/reducer";
 import UnDelegatebwPageReducer from "../pages/UnDelegatebwPage/reducer";
-import IntlProviderLanguageReducer from "../pages/IntlProviderLanguage/reducer";
 
 const reducers = combineReducers({
     HomePageReducer,
@@ -15,6 +14,5 @@ const reducers = combineReducers({
     VoteIndexPageReducer,
     DelegatebwPageReducer,
     UnDelegatebwPageReducer,
-    IntlProviderLanguageReducer,
 });
 export default reducers;
