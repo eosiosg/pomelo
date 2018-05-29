@@ -115,17 +115,6 @@ const styles = StyleSheet.create({
     backgroundColor:'#ccc',
   },
   buttonText:{
-    fontSize:18,
-    color:'#3393F2',
-    textAlign:'center',
-  },
-  // 竖直的分割线
-  verticalLine:{
-    width:0.5,
-    height:44,
-    backgroundColor:'#ccc',
-  },
-  buttonText:{
     fontSize:16,
     color:'#3393F2',
     textAlign:'center',

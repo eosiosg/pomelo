@@ -1,11 +1,11 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { ScrollView, View, Text, Image, TouchableOpacity,SafeAreaView } from "react-native";
+import { ScrollView, View, Text, Image, TouchableOpacity, SafeAreaView, Modal } from "react-native";
 
 // 自定义组件
 import I18n from "../../../I18n";
-import { styles, assetStyles, voteStyles, voteBpsStales } from "./style";
+import { styles, assetStyles, voteStyles, voteBpsStales, modalStyles } from "./style";
 import {storage} from "../../utils/storage";
 
 class VoteIndexPage extends Component {
@@ -13,14 +13,16 @@ class VoteIndexPage extends Component {
         return {
           title: 'Total Asset',
           headerRight: (
-            <Text style={{paddingRight: 10}} onPress={() => (props.navigation.navigate("HomePage", {aaa:"aaa"}))}>Change Wallet</Text>
+            <Text style={{paddingRight: 10}} onPress={() => {props.navigation.state.params.navigatePress()}}>Change Wallet</Text>
           ),
         };
     };
 
     constructor (props) {
         super(props);
-        this.state = {};
+        this.state = {
+          IsModalShow: false,
+        };
     }
 
     componentWillReceiveProps( nextProps ) {}
@@ -41,6 +43,7 @@ class VoteIndexPage extends Component {
           this.props.onDispatchGetVoteUsdPost();
         }
       });
+      this.props.navigation.setParams({navigatePress: () => {this.setState({IsModalShow: true})}})
     }
 
     render() {
@@ -132,7 +135,7 @@ class VoteIndexPage extends Component {
                     </View>
                     <View style={voteBpsStales.VoteBpsList}>
                       {BPs.map((item) => (
-                        <View key={item.total_votes} style={voteBpsStales.VoteBpsItem}>
+                        <View key={item.total_votes + item.owner} style={voteBpsStales.VoteBpsItem}>
                           <Text style={voteBpsStales.VoteBpsItemName}>{item.owner}</Text>
                           <Text style={voteBpsStales.VoteBpsItemDesc}>{item.total_votes} Voter Choise</Text>
                         </View>
@@ -142,6 +145,20 @@ class VoteIndexPage extends Component {
                   <View style={{height: 50}}></View>
                 </ScrollView>
             </View>
+              <Modal animationType='slide' transparent={true} visible={this.state.IsModalShow}>
+                <View style={modalStyles.modalStyle}>
+                  <View style={modalStyles.subView}>
+                    <Text style={modalStyles.titleText}>Notice</Text>
+                    <Text style={modalStyles.contentText}>Please confirm that backup the EOS wallet before change it.</Text>
+                    <View style={modalStyles.horizontalLine} />
+                    <View style={modalStyles.buttonView}>
+                      <Text style={modalStyles.buttonStyle} onPress={() => {this.setState({IsModalShow: false})}}>Cancel</Text>
+                      <View style={modalStyles.verticalLine} />
+                      <Text style={modalStyles.buttonStyle} onPress={() => {this.setState({IsModalShow: false});this.props.navigation.navigate("HomePage", {aaa:"aaa"})}}>OK</Text>
+                    </View>
+                  </View>
+                </View>
+              </Modal>
             </SafeAreaView>
         );
     }
@@ -162,6 +179,7 @@ class VoteIndexPage extends Component {
 // 挂载中间件到组件；
 function mapDispatchToProps(dispatch) {
     return {
+      dispatch,
         onDispatchGetAccountInfoPost: (data) => dispatch({ type: "VOTE_INDEX_ACCOUNTINFO_POST", data }),
         onDispatchGetCurrencyBalancePost: (data) => dispatch({ type: "VOTE_INDEX_CURRENCYBALANCE_POST", data }),
         onDispatchGetRefundsPost: (data) => dispatch({ type: "VOTE_INDEX_REFUNDS_POST", data }),
