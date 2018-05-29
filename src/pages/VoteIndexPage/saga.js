@@ -58,6 +58,7 @@ function getRefunds(action) {
 
 // getVoteIndexPageBpsPost
 export function* getVoteIndexPageBpsPost (action) {
+  console.log('action, getnew bps: ', action);
   try {
     const response = yield call(getBps, action);
     yield put({ type: "VOTEINDEX_SETBPS_REDUCER", data: response });
