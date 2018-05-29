@@ -51,13 +51,13 @@ const styles = StyleSheet.create({
     bottom : 22,
     width : "94%",
     left: "3%",
+    backgroundColor: "#000",
   },
   buttonSubmit:{
     fontSize : 16,
     lineHeight: 44,
     color : "#fff",
     textAlign: "center",
-    backgroundColor: "#000",
   },
   // modal的样式
   modalStyle: {
