@@ -10,3 +10,7 @@ ios/Pods
 android/build
 android/app/build
 android/.gradle/*
+yarn.lock
+
+android/settings.gradle
+adnroid/app/build.gradle
