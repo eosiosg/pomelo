@@ -1,19 +1,14 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import Eos from "eosjs"
-import LinearGradient from "react-native-linear-gradient";
-import { ScrollView, View, Text, TextInput, Image, TouchableHighlight, Dimensions ,Modal ,CheckBox ,TouchableOpacity , AlertIOS, SafeAreaView} from "react-native";
-import { localSave  ,storage} from "../../utils/storage";
-import { EOSInit ,  } from "./../../actions/EosAction"
+import { ScrollView, View, Text, TextInput, Image, TouchableOpacity, Dimensions ,Modal ,CheckBox ,TouchableOpacity , AlertIOS, SafeAreaView} from "react-native";
+import { storage } from "../../utils/storage";
 //import TouchID from 'react-native-touch-id'
-import { injectIntl } from 'react-intl';
 import Toast from "react-native-root-toast";
 import I18n from "../../../I18n";
 
 // 自定义组件
 import { styles } from "./style";
-import messages from './messages';
 
 class HomePage extends Component {
 
@@ -92,7 +87,7 @@ class HomePage extends Component {
                 <Text style={styles.contentItemTitle}>{choiceAccountIntl}</Text>
                 <View style={styles.contentItemBox}>
                   {this.state.ItemData.map((v , i) => (
-                  <TouchableHighlight onPress={() => {this.goWallet(v)}}  key={ i}>
+                  <TouchableOpacity onPress={() => {this.goWallet(v)}}  key={ i}>
                     <View style={styles.contentItem} >
                       <Text  style={styles.contentItemText} >
                         {v|| ""}
@@ -101,7 +96,7 @@ class HomePage extends Component {
                           <Image source={require("./image/arrow-right-account.png")}  style={styles.contentBoxImg}/>
                       </View>
                     </View>
-                  </TouchableHighlight>
+                  </TouchableOpacity>
                   ))}
                 </View>
               </View>
