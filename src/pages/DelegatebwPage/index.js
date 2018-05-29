@@ -174,7 +174,7 @@ function mapDispatchToProps(  dispatch  ) {
     return {
       onDispatchGetAccountInfoPost: (data) => dispatch({ type: "DELEGATEBW_ACCOUNTINFO_POST", data }),
       onDispatchGetCurrencyBalancePost: (data) => dispatch({ type: "DELEGATEBW_CURRENCYBALANCE_POST", data }),
-      onDispatchDelegateBwPost: (data, nav, accountPrivateKey) => dispatch({ type: "DELEGATEBW_CONFIRM_POST", data, navaccountPrivateKey,  }),
+      onDispatchDelegateBwPost: (data, nav, accountPrivateKey) => dispatch({ type: "DELEGATEBW_CONFIRM_POST", data, nav, accountPrivateKey }),
     };
 }
 
