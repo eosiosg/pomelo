@@ -50,7 +50,7 @@
   "HomePage importWallet": "Import EOS wallet",
   "HomePage privateKey": "Your Private Key",
   "HomePage choiceAccount" : "Choice an account name",
-  "HomePage submit":"submit",
+  "HomePage submitKey":"submit",
   "HomePage PleaseEnterComplete":"Please enter the complete",
   "HomePage PleaseSure" : "OK",
   "HomePage PleaseCancel" : "Cancel",

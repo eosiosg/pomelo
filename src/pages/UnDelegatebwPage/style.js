@@ -5,10 +5,6 @@ const styles = StyleSheet.create({
         position: "relative",
         flexBasis: "100%",
         backgroundColor: "#eee",
-      // paddingTop: 35,
-    },
-    contentBox: {
-      // minHeight: Dimensions.get("window").height,
     },
 });
 const countStyles = StyleSheet.create({
@@ -105,20 +101,17 @@ const stakeStyles = StyleSheet.create({
 });
 const btnStyles = StyleSheet.create({
   btnBox: {
-    position: "absolute",
-    bottom: 15,
-    width: Dimensions.get("window").width,
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#222",
+    position : "absolute",
+    bottom : 22,
+    width : "94%",
+    left: "3%",
+    backgroundColor: "#000",
   },
   btn: {
     color: "#fff",
     fontSize: 16,
-    lineHeight: 60,
+    lineHeight: 44,
+    textAlign: "center",
   },
 });
 export {

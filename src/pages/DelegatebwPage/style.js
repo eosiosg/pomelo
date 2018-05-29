@@ -126,20 +126,17 @@ const ruleStyles = StyleSheet.create({
 });
 const btnStyles = StyleSheet.create({
   btnBox: {
-    position: "absolute",
-    bottom: 0,
-    width: Dimensions.get("window").width,
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#222",
+    position : "absolute",
+    bottom : 22,
+    width : "94%",
+    left: "3%",
+    backgroundColor: "#000",
   },
   btn: {
     color: "#fff",
     fontSize: 16,
-    lineHeight: 60,
+    lineHeight: 44,
+    textAlign: "center",
   },
 });
 export {

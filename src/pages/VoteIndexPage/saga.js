@@ -2,53 +2,32 @@ import { put, call} from "redux-saga/effects";
 import { GetEOS } from "../../actions/EosAction";
 import {storage} from "../../utils/storage";
 
-let accountPrivateKey = '5K6g9pgX6QUqvNinK2CNAScNvq7dc9tqocTUq1X9HvtEj1xdjFq';
-let accountName = "meetone33333";
-// 缓存中获取accountPublicKey 和 accountName
-storage.load({key: "accountPrivateKey"}).then((ret) => {
-  if (ret) {
-    accountPrivateKey = ret
-  } else {
-    console.log("ret:",ret)
-  }
-}).catch(err => {
-  console.log("err:",err)
-});
-storage.load({key: "accountName"}).then((ret) => {
-  if (ret) {
-    accountName = ret
-  } else {
-    console.log("ret:",ret)
-  }
-}).catch(err => {
-  console.log("err:",err)
-});
-
 // getVoteIndexPageAccountInfoPost
-export function* getVoteIndexPageAccountInfoPost() {
+export function* getVoteIndexPageAccountInfoPost(action) {
     try {
-      const res = yield call(getAccountByEos);
+      const res = yield call(getAccountByEos, action);
       yield put({ type: "VOTEINDEX_SETACCOUNTINFO_REDUCER", data: res });
     } catch (err) {}
 }
-function getAccountByEos() {
-  const eos = GetEOS(accountPrivateKey);
-  return eos.getAccount( { 'account_name': accountName } ).then(( result ) => {
-    console.log(result);getAccount
+
+function getAccountByEos(action) {
+  const eos = GetEOS(action.data.accountPrivateKey);
+  return eos.getAccount( { 'account_name': action.data.accountName } ).then(( result ) => {
+    console.log(result);
       return result;
     });
 }
 
 // getVoteIndexPageCurrencyBalancePost
-export function* getVoteIndexPageCurrencyBalancePost () {
+export function* getVoteIndexPageCurrencyBalancePost (action) {
   try {
-    const response = yield call(getCurrencyBalance);
+    const response = yield call(getCurrencyBalance, action);
     yield put({ type: "VOTEINDEX_SETCURRENCYBALANCE_REDUCER", data: response });
   } catch (err) {}
 }
-function getCurrencyBalance() {
-  const eos = GetEOS(accountPrivateKey);
-  return eos.getCurrencyBalance( { "code": "eosio.token", "account": accountName }).then(( res ) => {
+function getCurrencyBalance(action) {
+  const eos = GetEOS(action.data.accountPrivateKey);
+  return eos.getCurrencyBalance( { "code": "eosio.token", "account": action.data.accountName }).then(( res ) => {
     const balance = Number(res[0].replace(" SYS", ""));
     console.log(balance);
     return balance;
@@ -56,20 +35,20 @@ function getCurrencyBalance() {
 }
 
 // getVoteIndexPageRefundsPost
-export function* getVoteIndexPageRefundsPost () {
+export function* getVoteIndexPageRefundsPost (action) {
   try {
-    const response = yield call(getRefunds);
+    const response = yield call(getRefunds, action);
     yield put({ type: "VOTEINDEX_SETREFUNDS_REDUCER", data: response });
   } catch (err) {}
 }
-function getRefunds() {
-  const eos = GetEOS(accountPrivateKey);
+function getRefunds(action) {
+  const eos = GetEOS(action.data.accountPrivateKey);
   return eos.getTableRows({
     'json': true,
     'code': 'eosio',
-    'scope': 'eosiomeetone',
+    'scope': action.data.accountName,
     'table': 'refunds',
-    'table_key': 'owner'
+    'table_key': 'active'
   }).then(function (result) {
     console.log(result);
     const refunds = result.rows[0] ? Number(result.rows[0].cpu_amount.replace(" SYS", ""))+Number(result.rows[0].net_amount.replace(" SYS", "")) : 0;
@@ -78,14 +57,14 @@ function getRefunds() {
 }
 
 // getVoteIndexPageBpsPost
-export function* getVoteIndexPageBpsPost () {
+export function* getVoteIndexPageBpsPost (action) {
   try {
-    const response = yield call(getBps);
+    const response = yield call(getBps, action);
     yield put({ type: "VOTEINDEX_SETBPS_REDUCER", data: response });
   } catch (err) {}
 }
-function getBps() {
-  const eos = GetEOS(accountPrivateKey);
+function getBps(action) {
+  const eos = GetEOS(action.data.accountPrivateKey);
   return eos.getProducers( { json: true } ).then( result => {
     return result.rows;
   } );

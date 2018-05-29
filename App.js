@@ -57,7 +57,7 @@ const myStore = createStore(
 );
 sagaMiddleware.run( saga );
 
-I18n.locale = 'zh';
+I18n.locale = 'en';
 
 // main component
 export default class App extends Component {

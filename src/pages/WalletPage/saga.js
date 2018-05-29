@@ -60,6 +60,7 @@ export function* getWalletPageAccountInfoPost() {
 function getAccountByEos() {
   const eos = GetEOS(accountPrivateKey);
   return eos.getAccount( { 'account_name': accountName } ).then(( result ) => {
+    console.log("getAccount result:",result)
     return result;
   });
 }
@@ -74,6 +75,8 @@ export function* getWalletPageCurrencyBalancePost () {
 function getCurrencyBalance() {
   const eos = GetEOS(accountPrivateKey);
   return eos.getCurrencyBalance( { "code": "eosio.token", "account": accountName }).then(( res ) => {
+    console.log("getCurrencyBalance res:",res)
+
     const balance = Number(res[0].replace(" SYS", ""));
     return balance;
   });

@@ -34,8 +34,10 @@ class DelegatebwPage extends Component {
     }
 
     componentDidMount() {
-      this.props.onDispatchGetAccountInfoPost();
-      this.props.onDispatchGetCurrencyBalancePost();
+      setTimeout(() => {
+        this.props.onDispatchGetAccountInfoPost();
+        this.props.onDispatchGetCurrencyBalancePost();
+      }, 2000);
     }
 
     render() {
