@@ -23,12 +23,6 @@ export default function DelegatebwPageReducer (state = initState, action) {
         return Object.assign({}, state, {
           "CurrencyBalance": action.data
         });
-
-      case "DELEGATEBW_SUCCESS_REDUCER":
-        return Object.assign({}, state, {
-          "needGetUserInfo" : action.data.needGetUserInfo
-        })
-
       default:
           return state;
     }

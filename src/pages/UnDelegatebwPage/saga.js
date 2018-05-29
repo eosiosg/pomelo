@@ -16,7 +16,11 @@ function getAccount(action) {
 // getUnDelegatebwPageConfirmPost
 export function* getUnDelegatebwPageConfirmPost (action) {
   try {
-    yield call(undelegatebw, action);
+    let response = yield call(undelegatebw, action);
+    if(response){
+        yield put({ type: "VOTEINDEX_GETINFO_TRUE_REDUCER", data:{ needGetUserInfo:true }});
+        action.nav.goBack();
+    }
   } catch (err) {}
 }
 function undelegatebw(action) {
@@ -24,8 +28,9 @@ function undelegatebw(action) {
   return eos.transaction( tr => {
     tr.undelegatebw(action.data);
   } ).then( function ( result ) {
+    console.log('wssss:resut:',result)
     if (result.broadcast) {
-      action.nav.goBack();
+      return result.broadcast
     }
   } );
 }

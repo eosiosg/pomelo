@@ -45,7 +45,19 @@ export default function VoteIndexPageReducer (state = initState, action) {
         return Object.assign({}, state, {
           "BPs": action.data
         });
-    case "VOTEINDEX_SETUSD_REDUCER":
+
+
+        case "VOTEINDEX_GETINFO_TRUE_REDUCER":
+            return Object.assign({}, state, {
+                "needGetUserInfo" : true
+            });
+
+        case "VOTEINDEX_GETINFO_FALSE_REDUCER":
+            return Object.assign({}, state, {
+                "needGetUserInfo" : false
+            });
+
+        case "VOTEINDEX_SETUSD_REDUCER":
       return Object.assign({}, state, {
         "USD": action.data
       });

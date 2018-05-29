@@ -38,7 +38,7 @@ export function* getDelegatebwPageConfirmPost (action) {
   try {
     let result = yield call(delegatebw, action);
     if(result){
-        yield put({ type: "DELEGATEBW_SUCCESS_REDUCER", data:{ needGetUserInfo:true }});
+        yield put({ type: "VOTEINDEX_GETINFO_TRUE_REDUCER", data:{ needGetUserInfo:true }});
         action.nav.goBack();
       }
   } catch (err) {}

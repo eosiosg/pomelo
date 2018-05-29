@@ -17,43 +17,29 @@ class UnDelegatebwPage extends Component {
     constructor( props ) {
         super( props );
         this.state = {
-          Network: "",
-          CPU: "",
+          Network: 0,
+          CPU: 0,
           cpu_weight: 0,
           net_weight: 0,
         };
     }
 
-    componentWillReceiveProps( nextProps ) {
-      if (nextProps.accountInfo) {
-        const { cpu_weight, net_weight } = nextProps.accountInfo.delegated_bandwidth ? nextProps.accountInfo.delegated_bandwidth : { cpu_weight: '0 SYS', net_weight: '0 SYS' };
-        const cpu_weight_number = cpu_weight.replace(" SYS", "");
-        const net_weight_number = net_weight.replace(" SYS", "");
-        this.setState({
-          cpu_weight: cpu_weight_number,
-          net_weight: net_weight_number,
-        });
-      }
-    }
+    componentWillReceiveProps( nextProps ) {}
 
-    componentDidMount() {
-      storage.load({key: "HomePageStorage"}).then((ret) => {
-        if (ret) {
-          const accountPrivateKey = ret.accountPrivateKey;
-          const accountName = ret.accountName;
-          const data = {
-            accountPrivateKey,
-            accountName,
-          };
-          this.props.onDispatchGetAccountInfoPost(data);
-        }
-      });
-    }
+    componentDidMount() {}
 
     render() {
-      const Stake = Number(this.state.cpu_weight) + Number(this.state.net_weight);
-      const CPU_placeholder = "CPU Stake";
-      const Network_placeholder = "NetWork Stake";
+
+        const { delegated_bandwidth } = this.props.accountInfo;
+        let { cpu_weight, net_weight } = delegated_bandwidth ? delegated_bandwidth : { cpu_weight: "0 SYS", net_weight: "0 SYS"};
+        this.cpu_weight = cpu_weight.replace(" SYS", "");
+        this.net_weight = net_weight.replace(" SYS", "");
+        const Stake = Number(this.cpu_weight) + Number(this.net_weight);
+
+        const CPU_placeholder = "CPU Stake";
+        const Network_placeholder = "NetWork Stake";
+
+
       const StakeCountIntl = I18n.t("UnDelegatebwPage StakeCount");
       const StakeCountInfoIntl = I18n.t("UnDelegatebwPage StakeCountInfo");
       const StakeQuantityIntl = I18n.t("UnDelegatebwPage StakeQuantity");
@@ -119,14 +105,14 @@ class UnDelegatebwPage extends Component {
     }
 
     SetStateCpu = (val) => {
-    const CPU = String(Math.min(this.state.cpu_weight, val));
+    const CPU = String(Math.min(this.cpu_weight, val));
     this.setState({
       CPU,
     });
   };
 
     SetStateNetwork = (val) => {
-    const Network = String(Math.min(this.state.net_weight, val));
+    const Network = String(Math.min(this.net_weight, val));
     this.setState({
       Network,
     });
@@ -136,6 +122,7 @@ class UnDelegatebwPage extends Component {
     if (!this.state.CPU && !this.state.Network) {
       return;
     }
+
     storage.load({key: "HomePageStorage"}).then((ret) => {
       if (ret) {
         const accountPrivateKey = ret.accountPrivateKey;
@@ -156,7 +143,6 @@ class UnDelegatebwPage extends Component {
 // 挂载中间件到组件；
 function mapDispatchToProps(  dispatch  ) {
     return {
-      onDispatchGetAccountInfoPost: (data) => dispatch({ type: "UNDELEGATEBW_ACCOUNTINFO_POST", data }),
       onDispatchUnDelegateBwPost: (data, nav, accountPrivateKey) => dispatch({ type: "UNDELEGATEBW_CONFIRM_POST", data, nav, accountPrivateKey }),
     };
 }
@@ -164,7 +150,7 @@ function mapDispatchToProps(  dispatch  ) {
 function mapStateToProps( state ) {
     return {
       state,
-      accountInfo: state.UnDelegatebwPageReducer.accountInfo,
+      accountInfo: state.VoteIndexPageReducer.accountInfo,
     };
 }
 

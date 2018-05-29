@@ -17,54 +17,14 @@ class DelegatebwPage extends Component {
     constructor( props ) {
         super( props );
         this.state = {
-          CPU: "",
-          Network: "",
-          cpu_weight: 0,
-          net_weight: 0,
+          CPU: 0,
+          Network: 0,
         };
     }
 
-    componentWillReceiveProps( nextProps ) {
-      if (nextProps.accountInfo) {
-        const { cpu_weight, net_weight, } = nextProps.accountInfo;
-        this.setState({
-          cpu_weight,
-          net_weight,
-        });
-      }
+    componentWillReceiveProps( nextProps ) {}
 
-      if(nextProps.needGetUserInfo&&nextProps.needGetUserInfo!==this.props.needGetUserInfo){
-          this.props.setNeedGetUserInfoFalse();
-          storage.load({key: "HomePageStorage"}).then((ret) => {
-              if (ret) {
-                  const accountPrivateKey = ret.accountPrivateKey;
-                  const accountName = ret.accountName;
-                  const data = {
-                      accountPrivateKey,
-                      accountName,
-                  };
-                  this.props.onDispatchGetAccountInfoPost(data);
-                  this.props.onDispatchGetCurrencyBalancePost(data);
-              }
-          });
-      }
-
-    }
-
-    componentDidMount() {
-      storage.load({key: "HomePageStorage"}).then((ret) => {
-        if (ret) {
-          const accountPrivateKey = ret.accountPrivateKey;
-          const accountName = ret.accountName;
-          const data = {
-            accountPrivateKey,
-            accountName,
-          };
-          this.props.onDispatchGetAccountInfoPost(data);
-          this.props.onDispatchGetCurrencyBalancePost(data);
-        }
-      });
-    }
+    componentDidMount() {}
 
     render() {
       const stake = Number(this.state.CPU) + Number(this.state.Network);
@@ -151,9 +111,6 @@ class DelegatebwPage extends Component {
     SetStateCpu = (val) => {
       const cpuSurplus = this.props.CurrencyBalance - this.state.Network;
       const CPU = String(Math.min(cpuSurplus, val));
-        console.log("PUAASDFADSF===================");
-        console.log(cpuSurplus, CPU);
-        console.log("PUAASDFADSF===================");
       this.setState({
         CPU,
       });
@@ -171,10 +128,6 @@ class DelegatebwPage extends Component {
       if (!this.state.CPU && !this.state.Network) {
         return;
       }
-
-      console.log('=================================');
-      console.log(this.state.CPU,this.state.Network);
-      console.log('=================================');
 
       storage.load({key: "HomePageStorage"}).then((ret) => {
         if (ret) {
@@ -195,26 +148,19 @@ class DelegatebwPage extends Component {
 }
 
 // 挂载中间件到组件；
-function mapDispatchToProps(  dispatch  ) {
+function mapDispatchToProps( dispatch ) {
     return {
-      setNeedGetUserInfoFalse : () => dispatch({type:""}),
-      onDispatchGetAccountInfoPost: (data) => dispatch({ type: "DELEGATEBW_ACCOUNTINFO_POST", data }),
-      onDispatchGetCurrencyBalancePost: (data) => dispatch({ type: "DELEGATEBW_CURRENCYBALANCE_POST", data }),
       onDispatchDelegateBwPost: (data, nav, accountPrivateKey) => dispatch({ type: "DELEGATEBW_CONFIRM_POST", data, nav, accountPrivateKey }),
     };
 }
 
 function mapStateToProps( state ) {
     return {
-      state,
-
         accountInfo: state.VoteIndexPageReducer.accountInfo,
         CurrencyBalance: state.VoteIndexPageReducer.CurrencyBalance,
         Refunds: state.VoteIndexPageReducer.Refunds,
         BPs: state.VoteIndexPageReducer.BPs,
         USD: state.VoteIndexPageReducer.USD,
-
-        needGetUserInfo: state.DelegatebwPageReducer.needGetUserInfo,
     };
 }
 

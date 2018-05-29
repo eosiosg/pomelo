@@ -26,7 +26,24 @@ class VoteIndexPage extends Component {
         };
     }
 
-    componentWillReceiveProps( nextProps ) {}
+    componentWillReceiveProps( nextProps ) {
+        if(nextProps.needGetUserInfo&&nextProps.needGetUserInfo!==this.props.needGetUserInfo){
+            this.props.setNeedGetUserInfoFalse();
+            storage.load({key: "HomePageStorage"}).then((ret) => {
+                if (ret) {
+                    const accountPrivateKey = ret.accountPrivateKey;
+                    const accountName = ret.accountName;
+                    const data = {
+                        accountPrivateKey,
+                        accountName,
+                    };
+                    this.props.onDispatchGetAccountInfoPost(data);
+                    this.props.onDispatchGetRefundsPost(data);
+                    this.props.onDispatchGetCurrencyBalancePost(data);
+                }
+            });
+        }
+    }
 
     componentDidMount() {
       storage.load({key: "HomePageStorage"}).then((ret) => {
@@ -51,7 +68,7 @@ class VoteIndexPage extends Component {
 
       const { account_name, total_resources, delegated_bandwidth } = this.props.accountInfo;
       const { ram_bytes } = total_resources;
-      const { cpu_weight, net_weight } = delegated_bandwidth ? delegated_bandwidth : { cpu_weight: "", net_weight: ""};
+      const { cpu_weight, net_weight } = delegated_bandwidth ? delegated_bandwidth : { cpu_weight: "0 SYS", net_weight: "0 SYS"};
       const stake = Number(net_weight.replace(" SYS", "")) + Number(cpu_weight.replace(" SYS", ""));
       const CurrencyBalance = this.props.CurrencyBalance;
       const Refunds = this.props.Refunds;
@@ -207,6 +224,7 @@ class VoteIndexPage extends Component {
 function mapDispatchToProps(dispatch) {
     return {
       dispatch,
+        setNeedGetUserInfoFalse : () => dispatch({type:"VOTEINDEX_GETINFO_FALSE_REDUCER"}),
         onDispatchGetAccountInfoPost: (data) => dispatch({ type: "VOTE_INDEX_ACCOUNTINFO_POST", data }),
         onDispatchGetCurrencyBalancePost: (data) => dispatch({ type: "VOTE_INDEX_CURRENCYBALANCE_POST", data }),
         onDispatchGetRefundsPost: (data) => dispatch({ type: "VOTE_INDEX_REFUNDS_POST", data }),
@@ -222,6 +240,8 @@ function mapStateToProps(state) {
         Refunds: state.VoteIndexPageReducer.Refunds,
         BPs: state.VoteIndexPageReducer.BPs,
         USD: state.VoteIndexPageReducer.USD,
+
+        needGetUserInfo: state.VoteIndexPageReducer.needGetUserInfo,
     };
 }
 
