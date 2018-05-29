@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "HomePage_importWallet": "Import EOS wallet",
   "HomePage_privateKey": "Your Private Key",
   "HomePage_choiceAccount": "Choice an account name",
@@ -7,7 +6,7 @@
   "HomePage_PleaseEnterComplete": "Please enter the complete",
   "HomePage_PleaseSure": "sure",
   "HomePage_PleaseCancel": "cancel",
-=======
+
   "VoteIndexPage userName": "用户名",
   "VoteIndexPage TotalAsset": "账户总额度",
   "VoteIndexPage Refunding": "正在赎回",
@@ -58,13 +57,13 @@
 
   "VotePage Rule4": "· 你可以在任何时候选择undelegatebw，此项操作将会减少你给voter的投票，EOS将会在3天后退回你的账户",
 
-  "HomePage importWallet": "导入钱包",
-  "HomePage privateKey": "个人私钥",
-  "HomePage choiceAccount" : "选择账户",
-  "HomePage submit":"提交",
-  "HomePage PleaseEnterComplete":"请填写完整",
-  "HomePage PleaseSure" : "是",
-  "HomePage PleaseCancel" : "否",
+//  "HomePage importWallet": "导入钱包",
+//  "HomePage privateKey": "个人私钥",
+//  "HomePage choiceAccount" : "选择账户",
+//  "HomePage submit":"提交",
+//  "HomePage PleaseEnterComplete":"请填写完整",
+//  "HomePage PleaseSure" : "是",
+//  "HomePage PleaseCancel" : "否",
   "WalletPage changeWallet" : "更换账户",
   "WalletPage totalAssets" : "总余额",
   "WalletPage confirmContent" : "请在更换账户钱备份EOS钱包",

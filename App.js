@@ -11,6 +11,7 @@ import reducers from "./src/utils/reducers";
 import HomePage from "./src/pages/HomePage";
 import VotePage from "./src/pages/VotePage";
 import VoteIndexPage from "./src/pages/VoteIndexPage";
+import WalletPage from "./src/pages/WalletPage";
 import DelegatebwPage from "./src/pages/DelegatebwPage";
 import UnDelegatebwPage from "./src/pages/UnDelegatebwPage";
 import NodeListPage from "./src/pages/NodeListPage";
@@ -22,6 +23,7 @@ import I18n from "./I18n";
 const Navigator = StackNavigator(
     {
         HomePage: { screen: HomePage },
+        WalletPage: { screen: WalletPage },
         VoteIndexPage: { screen: VoteIndexPage },
         VotePage: { screen: VotePage },
         NodeListPage: { screen: NodeListPage },
