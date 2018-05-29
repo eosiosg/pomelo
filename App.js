@@ -44,7 +44,7 @@ const Navigator = StackNavigator(
                 fontWeight: 'bold'
             },
             headerTintColor: '#323232',
-            headerBackTitle: null,
+            //headerBackTitle: null,
         }
     }
 );
@@ -56,7 +56,7 @@ const myStore = createStore(
 );
 sagaMiddleware.run( saga );
 
-I18n.locale = 'zh';
+I18n.locale = 'en';
 
 // main component
 export default class App extends Component {

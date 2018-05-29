@@ -22,11 +22,13 @@ class HomePage extends Component {
         const { state, setParams } = navigation;
         const { params } = state;
         return {
-            title: I18n.t( "HomePage_importWallet" ),
+            title: I18n.t( "HomePage importWallet" ),
         };
-    }
+    };
 
-    constructor (props) {
+
+
+  constructor (props) {
         super(props);
         this.state = {
           TextInputAutoFocus : true,
@@ -73,13 +75,13 @@ class HomePage extends Component {
     }
     render() {
       const { intl } = this.props;
-      const importWalletIntl = I18n.t( "HomePage_importWallet" );
-      const privateKeyIntl = I18n.t( "HomePage_privateKey" );
-      const choiceAccountIntl = I18n.t( "HomePage_choiceAccount" );
-      const submitKey = I18n.t( "HomePage_submitKey" );
-      const PleaseEnterComplete = I18n.t( "HomePage_PleaseEnterComplete" );
-      const PleaseSure = I18n.t( "HomePage_PleaseSure" );
-      const PleaseCancel = I18n.t( "HomePage_PleaseCancel" );
+      const importWalletIntl = I18n.t( "HomePage importWallet" );
+      const privateKeyIntl = I18n.t( "HomePage privateKey" );
+      const choiceAccountIntl = I18n.t( "HomePage choiceAccount" );
+      const submitKey = I18n.t( "HomePage submitKey" );
+      const PleaseEnterComplete = I18n.t( "HomePage PleaseEnterComplete" );
+      const PleaseSure = I18n.t( "HomePage PleaseSure" );
+      const PleaseCancel = I18n.t( "HomePage PleaseCancel" );
 
       return (
           <SafeAreaView style={[{flex:1}]}>
@@ -165,14 +167,14 @@ class HomePage extends Component {
   //back last page
   goback = () =>{
     if(this.state.accountPrivateKey){
-      this.props.navigation.navigate("WalletPage");
+      this.props.navigation.navigate("VoteIndexPage");
     }
   }
 
   //go WalletPage
   goWallet = (data) =>{
     localSave.setAccountName(data);
-    this.props.navigation.navigate("WalletPage");
+    this.props.navigation.navigate("VoteIndexPage");
   }
 
   //submit wallet data

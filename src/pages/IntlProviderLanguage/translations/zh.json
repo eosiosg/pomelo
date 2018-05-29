@@ -38,7 +38,6 @@
   "VotePage gotIt" : "知道了",
   "VotePage comfirm" : "确认",
   "VotePage sumbit" : "提交",
-  "VotePage delegatebw" : "Delegatebw",
   "VotePage bpList" : "投票列表",
   "VotePage notice" : "告知",
   "VotePage noticeC" : "你可以在任何时候重新投票，delegatebw或者undelegatebw。投票将会使用CPU和Network股权。",
