@@ -32,10 +32,15 @@ const assetStyles = StyleSheet.create({
   },
   totalAssetBox: {
     position: "relative",
+  },
+  totalAssetBgImg: {
+    position: "relative",
     paddingLeft: 15,
     paddingRight: 15,
     paddingTop: 15,
     paddingBottom: 15,
+    height: 130,
+    width: Dimensions.get("window").width - 30,
     backgroundColor: "#353535",
   },
   userNameBox: {
@@ -103,10 +108,13 @@ const assetStyles = StyleSheet.create({
   itemValue: {
     color: "#222",
     fontSize: 20,
-    lineHeight: 48,
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
   },
   itemValueUnit: {
-    fontSize: 16,
+    fontSize: 14,
+    color: "#555",
   },
 });
 const voteStyles = StyleSheet.create({
@@ -179,7 +187,7 @@ const voteBpsStales = StyleSheet.create({
     height: 12,
     width: 3,
     marginRight: 5,
-    backgroundColor: "#abc",
+    backgroundColor: "#1BCE9A",
   },
   VoteBpsTitle: {
     color: "#222",

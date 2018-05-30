@@ -29,7 +29,7 @@ class DelegatebwPage extends Component {
 
     render() {
       const stake = Number(this.state.CPU) + Number(this.state.Network);
-      const CurrencyBalance = this.props.CurrencyBalance;
+      const CurrencyBalance = (this.props.CurrencyBalance).toFixed(2);
       const CPU_placeholder = "CPU Stake";
       const Network_placeholder = "NetWork Stake";
       const BalanceIntl = I18n.t("DelegatebwPage Balance");
@@ -73,6 +73,7 @@ class DelegatebwPage extends Component {
                           style={stakeStyles.stakeValueInput}
                           placeholder={CPU_placeholder}
                           placeholderTextColor={"#999"}
+                          keyboardType="numeric"
                           onChangeText={(CPU) => this.SetStateCpu(CPU)}
                           underlineColorAndroid={"transparent"}
                         />
@@ -85,6 +86,7 @@ class DelegatebwPage extends Component {
                           style={stakeStyles.stakeValueInput}
                           placeholder={Network_placeholder}
                           placeholderTextColor={"#999"}
+                          keyboardType="numeric"
                           onChangeText={(Network) => this.SetStateNetwork(Network)}
                           underlineColorAndroid={"transparent"}
                         />

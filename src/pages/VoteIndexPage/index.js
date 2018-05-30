@@ -1,7 +1,7 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { ScrollView, View, Text, Image, TouchableOpacity, SafeAreaView, Modal } from "react-native";
+import { ScrollView, View, Text, Image, TouchableOpacity, SafeAreaView, Modal, ImageBackground } from "react-native";
 
 // 自定义组件
 import I18n from "../../../I18n";
@@ -76,10 +76,10 @@ class VoteIndexPage extends Component {
       const { ram_bytes } = total_resources;
       const { cpu_weight, net_weight } = delegated_bandwidth ? delegated_bandwidth : { cpu_weight: "0 SYS", net_weight: "0 SYS"};
       const stake = Number(net_weight.replace(" SYS", "")) + Number(cpu_weight.replace(" SYS", ""));
-      const CurrencyBalance = this.props.CurrencyBalance;
+      const CurrencyBalance = (this.props.CurrencyBalance).toFixed(2);
       const Refunds = this.props.Refunds;
-      const TotalAsset = stake + CurrencyBalance + Refunds;
-      const TotalAssetByUsd = TotalAsset * this.props.USD;
+      const TotalAsset = Number(stake + CurrencyBalance + Refunds).toFixed(2);
+      const TotalAssetByUsd = (TotalAsset * this.props.USD).toFixed(2);
       const BPs = this.getBpsByAccountInfoFilter();
       const userNameIntl = I18n.t("VoteIndexPage userName");
       const TotalAssetIntl = I18n.t("VoteIndexPage TotalAsset");
@@ -101,18 +101,20 @@ class VoteIndexPage extends Component {
                   </View>
                   <View style={assetStyles.contentAssetBox}>
                     <View style={assetStyles.totalAssetBox}>
-                      <View style={assetStyles.userNameBox}>
-                        <Text style={assetStyles.userNameTip}>
-                          {userNameIntl}:  <Text style={assetStyles.userName}>{account_name}</Text>
-                        </Text>
-                      </View>
-                      <View style={assetStyles.userTotalAssetBox}>
-                        <Text style={assetStyles.userTotalAssetTip}>{TotalAssetIntl}</Text>
-                        <Text style={assetStyles.userTotalAssetValue}>
-                          {TotalAsset} <Text style={assetStyles.userTotalAssetValueUnit}>EOS</Text>
-                        </Text>
-                      </View>
-                      <Text style={assetStyles.userTotalAssetByUsd}>≈ ${TotalAssetByUsd}</Text>
+                      <ImageBackground style={assetStyles.totalAssetBgImg} source={require("./images/wallet_img_background.png")}>
+                        <View style={assetStyles.userNameBox}>
+                          <Text style={assetStyles.userNameTip}>
+                            {userNameIntl}:  <Text style={assetStyles.userName}>{account_name}</Text>
+                          </Text>
+                        </View>
+                        <View style={assetStyles.userTotalAssetBox}>
+                          <Text style={assetStyles.userTotalAssetTip}>{TotalAssetIntl}</Text>
+                          <Text style={assetStyles.userTotalAssetValue}>
+                            {TotalAsset} <Text style={assetStyles.userTotalAssetValueUnit}>EOS</Text>
+                          </Text>
+                        </View>
+                        <Text style={assetStyles.userTotalAssetByUsd}>≈ ${TotalAssetByUsd}</Text>
+                      </ImageBackground>
                     </View>
                     <View style={assetStyles.assetItemBox}>
                       <View style={assetStyles.itemBox}>
