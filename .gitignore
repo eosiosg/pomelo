@@ -12,6 +12,7 @@ android/app/build
 android/.gradle/*
 
 yarn.lock
+package-lock.json
 
 android/settings.gradle
 adnroid/app/build.gradle

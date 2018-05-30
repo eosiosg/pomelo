@@ -51,7 +51,7 @@
   "HomePage privateKey": "Your Private Key",
   "HomePage choiceAccount" : "Choice an account name",
   "HomePage submitKey":"Submit",
-  "HomePage Hint":"Hint",
+  "HomePage Hint":"Paste your private key string here",
   "HomePage PleaseEnterComplete":"Please enter the complete",
   "HomePage PleaseSure" : "OK",
   "HomePage PleaseCancel" : "Cancel",
