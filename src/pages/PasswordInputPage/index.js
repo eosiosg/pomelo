@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FlatList, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { Button, FlatList, SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { styles } from "./style";
-import { getDpFromPx } from "../../utils/util";
-import Spinner from 'react-native-loading-spinner-overlay';
+import { stakeStyles } from "../DelegatebwPage/style";
+import Toast from "react-native-root-toast";
+import PasswordCheckComponent from "./components/PasswordCheckComponent";
 
 class PasswordInputPage extends Component {
     static navigationOptions = ( props ) => {
@@ -18,7 +19,10 @@ class PasswordInputPage extends Component {
 
     constructor( props ) {
         super( props );
-        this.state = {};
+        this.state = {
+            password: '',
+            isPasswordCheckOpen: false
+        };
     }
 
     componentDidMount() {
@@ -29,19 +33,82 @@ class PasswordInputPage extends Component {
 
     }
 
+    setPassword() {
+        if ( this.state.password.length !== 6 ) {
+            Toast.show( "密码长度不正确" );
+
+            return;
+        }
+
+        this.props.onDispatchSetPassword( this.state.password );
+        Toast.show( "密码设置成功" );
+    }
+
+    checkPassword() {
+        if ( this.props.password.length <= 0 ) {
+            Toast.show( "请先设置密码" );
+
+            return;
+        }
+
+        this.setState( {
+            isPasswordCheckOpen: true
+        } );
+    }
 
     render() {
-        const viewHeight = 76;
-        const separatorHeight = getDpFromPx( 1 );
-
         return (
             <SafeAreaView style={styles.wrapper}>
                 <View style={[ styles.wrapper, { backgroundColor: '#fafafa', } ]}>
-                    <Text>asdasdadsd</Text>
+                    <TextInput
+                        style={stakeStyles.stakeValueInput}
+                        placeholder={'请输入密码'}
+                        placeholderTextColor={"#999"}
+                        keyboardType="numeric"
+                        onChangeText={( text ) => {
+                            this.setState( {
+                                password: text
+                            } );
+                        }}
+                        underlineColorAndroid={"transparent"}
+                    />
+
+                    <Button
+                        onPress={() => {
+                            this.setPassword()
+                        }}
+                        title="保存密码"
+                        color="#841584"
+                        accessibilityLabel=""
+                    />
+
+                    <Button
+                        onPress={() => {
+                            this.checkPassword()
+                        }}
+                        title="Check Password"
+                        color="#841584"
+                        accessibilityLabel=""
+                    />
+
+                    <Button
+                        onPress={() => {
+                            this.props.onDispatchSetPassword( '' );
+                        }}
+                        title="Clear Password"
+                        color="#841584"
+                        accessibilityLabel=""
+                    />
                 </View>
 
-                <Spinner visible={this.state.isRequesting} children={<LoadingView/>}/>
-
+                <PasswordCheckComponent
+                    isOpen={this.state.isPasswordCheckOpen}
+                    onClose={() => {
+                        this.setState( {
+                            isPasswordCheckOpen: false
+                        } );
+                    }}
+                />
             </SafeAreaView>
         );
     }
@@ -50,15 +117,17 @@ class PasswordInputPage extends Component {
 function mapDispatchToProps( dispatch ) {
     return {
         dispatch,
-        onDispatchSetSelectedNodeListDataPost: ( data ) => dispatch( {
-            type: "NODELIST_SETSELECTEDNODELISTDATA_REDUCER",
-            data
+        onDispatchSetPassword: ( password ) => dispatch( {
+            type: "PASSWORD_SET_REDUCER",
+            password
         } ),
     };
 }
 
 function mapStateToProps( state ) {
-    return {};
+    return {
+        password: state.PasswordInputPageReducer.password
+    };
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( PasswordInputPage );

@@ -3,14 +3,13 @@
  *
  */
 const initState = {
-    selectedNodeList: [],
-    testData2: 'aaaa'
+    password: [],
 };
 export default function PasswordInputPageReducer( state = initState, action ) {
     switch ( action.type ) {
-        case "NODELIST_SETSELECTEDNODELISTDATA_REDUCER":
+        case "PASSWORD_SET_REDUCER":
             return Object.assign( {}, state, {
-                "selectedNodeList": action.data
+                "password": action.password
             } );
         default:
             return state;
