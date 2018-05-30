@@ -357,7 +357,7 @@
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = eoswallet/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = eoswallet/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = eoswallet/Info.plist; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Info-debug.plist"; path = "eoswallet/Info-debug.plist"; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = eoswallet/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -509,7 +509,7 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				BB34F7B120BE70CA00C4DE81 /* Info-appstore.plist */,
-				13B07FB61A68108700A75B9A /* Info.plist */,
+				13B07FB61A68108700A75B9A /* Info-debug.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -1202,35 +1202,36 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-i18n/ios",
 				);
-				INFOPLIST_FILE = eoswallet/Info.plist;
+				INFOPLIST_FILE = "eoswallet/Info-debug.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = pomelo.alpha;
+				PRODUCT_BUNDLE_IDENTIFIER = pomelo.debug;
 				PRODUCT_NAME = eoswallet;
-				PROVISIONING_PROFILE = "917b4757-8676-4892-af69-012aeeb0f264";
-				PROVISIONING_PROFILE_SPECIFIER = PomeloAlpha;
+				PROVISIONING_PROFILE = "a87ee2d0-a9d2-4c22-a4be-7341a8ef3f18";
+				PROVISIONING_PROFILE_SPECIFIER = PomeloDebug;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
-		13B07F951A680F5B00A75B9A /* Release */ = {
+		13B07F951A680F5B00A75B9A /* Appstore */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E2D2988BD34C1B3CAD8E154D /* Pods-eoswallet.release.xcconfig */;
 			buildSettings = {
-				APP_DISPLAY_NAME = "Pomelo Alpha";
+				APP_DISPLAY_NAME = Pomelo;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: SUN LIN (V77JF59G7B)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: SUN LIN (BG9UYMZLS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SUN LIN (BG9UYMZLS9)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BG9UYMZLS9;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
-					ALPHA,
+					APPSTORE,
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1238,20 +1239,20 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-i18n/ios",
 				);
-				INFOPLIST_FILE = eoswallet/Info.plist;
+				INFOPLIST_FILE = "eoswallet/Info-appstore.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = pomelo.alpha;
+				PRODUCT_BUNDLE_IDENTIFIER = pomelo.appstore;
 				PRODUCT_NAME = eoswallet;
-				PROVISIONING_PROFILE = "917b4757-8676-4892-af69-012aeeb0f264";
-				PROVISIONING_PROFILE_SPECIFIER = PomeloAlpha;
+				PROVISIONING_PROFILE = "8310ccb7-0378-488d-baab-08a253344d1e";
+				PROVISIONING_PROFILE_SPECIFIER = PomeloAppstore;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = Release;
+			name = Appstore;
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1294,7 +1295,42 @@
 			};
 			name = Debug;
 		};
-		83CBBA211A601CBA00E9B192 /* Release */ = {
+		83CBBA211A601CBA00E9B192 /* Appstore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Appstore;
+		};
+		BB842EB120BECD0100543AA4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1329,46 +1365,11 @@
 			};
 			name = Release;
 		};
-		BB34F7AF20BE6F9A00C4DE81 /* AppStore */ = {
+		BB842EB220BECD0100543AA4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E2D2988BD34C1B3CAD8E154D /* Pods-eoswallet.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = AppStore;
-		};
-		BB34F7B020BE6F9A00C4DE81 /* AppStore */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 028391F25A61DDE140D25068 /* Pods-eoswallet.appstore.xcconfig */;
-			buildSettings = {
-				APP_DISPLAY_NAME = Pomelo;
+				APP_DISPLAY_NAME = "Pomelo Adhoc";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: SUN LIN (BG9UYMZLS9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SUN LIN (BG9UYMZLS9)";
@@ -1378,7 +1379,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
-					APPSTORE,
+					ADHOC,
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1393,13 +1394,13 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = pomelo.appstore;
+				PRODUCT_BUNDLE_IDENTIFIER = pomelo.adhoc;
 				PRODUCT_NAME = eoswallet;
-				PROVISIONING_PROFILE = "8310ccb7-0378-488d-baab-08a253344d1e";
-				PROVISIONING_PROFILE_SPECIFIER = PomeloAppstore;
+				PROVISIONING_PROFILE = "2303d8f9-b915-420c-bb1e-80b16155932b";
+				PROVISIONING_PROFILE_SPECIFIER = PomeloAdhoc;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = AppStore;
+			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -1408,8 +1409,8 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
-				13B07F951A680F5B00A75B9A /* Release */,
-				BB34F7B020BE6F9A00C4DE81 /* AppStore */,
+				13B07F951A680F5B00A75B9A /* Appstore */,
+				BB842EB220BECD0100543AA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -1418,8 +1419,8 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
-				83CBBA211A601CBA00E9B192 /* Release */,
-				BB34F7AF20BE6F9A00C4DE81 /* AppStore */,
+				83CBBA211A601CBA00E9B192 /* Appstore */,
+				BB842EB120BECD0100543AA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
