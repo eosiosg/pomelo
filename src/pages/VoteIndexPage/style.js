@@ -187,7 +187,7 @@ const voteBpsStales = StyleSheet.create({
     height: 12,
     width: 3,
     marginRight: 5,
-    backgroundColor: "#abc",
+    backgroundColor: "#1BCE9A",
   },
   VoteBpsTitle: {
     color: "#222",
