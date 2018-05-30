@@ -137,6 +137,8 @@ class UnDelegatebwPage extends Component {
         const nav = this.props.navigation;
         this.props.onDispatchUnDelegateBwPost(data, nav, accountPrivateKey);
       }
+    }).catch( err => {
+      console.log(err);
     });
   };
 }

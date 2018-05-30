@@ -42,6 +42,8 @@ class VoteIndexPage extends Component {
                     this.props.onDispatchGetRefundsPost(data);
                     this.props.onDispatchGetCurrencyBalancePost(data);
                 }
+            }).catch( err => {
+              console.log(err);
             });
         }
     }
@@ -62,6 +64,8 @@ class VoteIndexPage extends Component {
             this.props.onDispatchGetVoteBpsPost(data);
             this.props.onDispatchGetVoteUsdPost();
         }
+      }).catch( err => {
+        console.log(err);
       });
       this.props.navigation.setParams({navigatePress: () => {this.setState({IsModalShow: true})}})
     }

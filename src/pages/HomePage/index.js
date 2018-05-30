@@ -50,6 +50,7 @@ class HomePage extends Component {
 
   componentDidMount() {
     storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
+      console.log("HomePageStorage === ",ret1);
         if ( ret1 ) {
             const ret = decryptObject( ret1 );
             if ( ret && ret.accountPrivateKey ) {
@@ -61,6 +62,8 @@ class HomePage extends Component {
                 }
             }
         }
+    }).catch( err => {
+      console.log(err);
     });
   }
 

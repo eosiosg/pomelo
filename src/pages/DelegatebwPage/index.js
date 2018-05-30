@@ -145,6 +145,8 @@ class DelegatebwPage extends Component {
           const nav = this.props.navigation;
           this.props.onDispatchDelegateBwPost(data, nav, accountPrivateKey);
         }
+      }).catch( err => {
+        console.log(err);
       });
     };
 }
