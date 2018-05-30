@@ -720,6 +720,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = BG9UYMZLS9;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1190,6 +1191,8 @@
 			buildSettings = {
 				APP_DISPLAY_NAME = "Pomelo Debug";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: SUN LIN (V77JF59G7B)";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = BG9UYMZLS9;
@@ -1208,16 +1211,20 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pomelo.alpha;
 				PRODUCT_NAME = eoswallet;
+				PROVISIONING_PROFILE = "917b4757-8676-4892-af69-012aeeb0f264";
+				PROVISIONING_PROFILE_SPECIFIER = PomeloAlpha;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
-		13B07F951A680F5B00A75B9A /* Alpha */ = {
+		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A0CBBE490F985B19A26F3432 /* Pods-eoswallet.alpha.xcconfig */;
+			baseConfigurationReference = E2D2988BD34C1B3CAD8E154D /* Pods-eoswallet.release.xcconfig */;
 			buildSettings = {
 				APP_DISPLAY_NAME = "Pomelo Alpha";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: SUN LIN (V77JF59G7B)";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BG9UYMZLS9;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1240,9 +1247,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pomelo.alpha;
 				PRODUCT_NAME = eoswallet;
+				PROVISIONING_PROFILE = "917b4757-8676-4892-af69-012aeeb0f264";
+				PROVISIONING_PROFILE_SPECIFIER = PomeloAlpha;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
-			name = Alpha;
+			name = Release;
 		};
 		83CBBA201A601CBA00E9B192 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1285,7 +1294,7 @@
 			};
 			name = Debug;
 		};
-		83CBBA211A601CBA00E9B192 /* Alpha */ = {
+		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1318,7 +1327,7 @@
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Alpha;
+			name = Release;
 		};
 		BB34F7AF20BE6F9A00C4DE81 /* AppStore */ = {
 			isa = XCBuildConfiguration;
@@ -1361,6 +1370,9 @@
 			buildSettings = {
 				APP_DISPLAY_NAME = Pomelo;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: SUN LIN (BG9UYMZLS9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SUN LIN (BG9UYMZLS9)";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BG9UYMZLS9;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1383,6 +1395,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pomelo.appstore;
 				PRODUCT_NAME = eoswallet;
+				PROVISIONING_PROFILE = "8310ccb7-0378-488d-baab-08a253344d1e";
+				PROVISIONING_PROFILE_SPECIFIER = PomeloAppstore;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = AppStore;
@@ -1394,7 +1408,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
-				13B07F951A680F5B00A75B9A /* Alpha */,
+				13B07F951A680F5B00A75B9A /* Release */,
 				BB34F7B020BE6F9A00C4DE81 /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1404,7 +1418,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
-				83CBBA211A601CBA00E9B192 /* Alpha */,
+				83CBBA211A601CBA00E9B192 /* Release */,
 				BB34F7AF20BE6F9A00C4DE81 /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
