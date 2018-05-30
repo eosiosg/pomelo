@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
         position: "relative",
         flexBasis: "100%",
         backgroundColor: "#eee",
-        marginTop: 10,
     },
     contentBox: {
       minHeight: Dimensions.get("window").height,
@@ -38,20 +37,24 @@ const countStyles = StyleSheet.create({
     lineHeight: 60,
   },
   countValue: {
-    color: "#222",
+    color: "#181818",
     fontSize: 20,
     fontWeight: "600",
-    lineHeight: 60,
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
   },
   countStakeValue: {
     color: "#F65858",
     fontSize: 20,
     fontWeight: "600",
-    lineHeight: 60,
+    display: "flex",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
   },
   countValueUnit: {
-    fontSize: 16,
-    color: "#222",
+    fontSize: 14,
+    color: "#0c0c0c",
   },
 });
 const stakeStyles = StyleSheet.create({
@@ -128,13 +131,14 @@ const ruleStyles = StyleSheet.create({
 const btnStyles = StyleSheet.create({
   btnBox: {
     position : "absolute",
-    bottom : 0,
-    width : "100%",
-    backgroundColor: "#000",
+    bottom : 5,
+    width : "96%",
+    left: "2%",
+    backgroundColor: "#3D4144",
   },
   btn: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 18,
     lineHeight: 44,
     textAlign: "center",
   },

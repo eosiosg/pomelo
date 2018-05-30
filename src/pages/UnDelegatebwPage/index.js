@@ -5,7 +5,7 @@ import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaVie
 // 自定义组件
 import I18n from "../../../I18n";
 import { styles, countStyles, stakeStyles, btnStyles } from "./style";
-import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
+import { decryptObject, storage } from "../../utils/storage";
 
 class UnDelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
@@ -37,16 +37,15 @@ class UnDelegatebwPage extends Component {
         this.net_weight = net_weight.replace(" SYS", "");
         const Stake = Number(this.cpu_weight) + Number(this.net_weight);
 
-        const CPU_placeholder = "CPU Stake";
-        const Network_placeholder = "NetWork Stake";
+        const CPU_placeholder = "Max "+ this.cpu_weight +" Stake";
+        const Network_placeholder = "Max "+ this.net_weight +" Stake";
 
-
-      const StakeCountIntl = I18n.t("UnDelegatebwPage StakeCount");
-      const StakeCountInfoIntl = I18n.t("UnDelegatebwPage StakeCountInfo");
-      const StakeQuantityIntl = I18n.t("UnDelegatebwPage StakeQuantity");
-      const CPUIntl = I18n.t("UnDelegatebwPage CPU");
-      const NetworkIntl = I18n.t("UnDelegatebwPage Network");
-      const ConfirmIntl = I18n.t("UnDelegatebwPage Confirm");
+        const StakeCountIntl = I18n.t("UnDelegatebwPage StakeCount");
+        const StakeCountInfoIntl = I18n.t("UnDelegatebwPage StakeCountInfo");
+        const StakeQuantityIntl = I18n.t("UnDelegatebwPage StakeQuantity");
+        const CPUIntl = I18n.t("UnDelegatebwPage CPU");
+        const NetworkIntl = I18n.t("UnDelegatebwPage Network");
+        const ConfirmIntl = I18n.t("UnDelegatebwPage Confirm");
         return (
             <SafeAreaView style={[{flex:1}]}>
             <View style={styles.bodyBox}>
@@ -75,6 +74,7 @@ class UnDelegatebwPage extends Component {
                           placeholder={CPU_placeholder}
                           placeholderTextColor={"#999"}
                           maxLength={11}
+                          keyboardType="numeric"
                           onChangeText={(CPU) => this.SetStateCpu(CPU)}
                           underlineColorAndroid={"transparent"}
                         />
@@ -88,6 +88,7 @@ class UnDelegatebwPage extends Component {
                           placeholder={Network_placeholder}
                           placeholderTextColor={"#999"}
                           maxLength={11}
+                          keyboardType="numeric"
                           onChangeText={(Network) => this.SetStateNetwork(Network)}
                           underlineColorAndroid={"transparent"}
                         />
@@ -123,9 +124,10 @@ class UnDelegatebwPage extends Component {
     if (!this.state.CPU && !this.state.Network) {
       return;
     }
-
-    storage.load({key: "HomePageStorage"}).then((ret) => {s
-      if (ret) {
+        
+    storage.load({key: "HomePageStorage"}).then((ret1) => {
+      if (ret1) {
+        const ret = decryptObject( ret1 );
         const accountPrivateKey = ret.accountPrivateKey;
         const accountName = ret.accountName;
         const data = {
@@ -137,6 +139,8 @@ class UnDelegatebwPage extends Component {
         const nav = this.props.navigation;
         this.props.onDispatchUnDelegateBwPost(data, nav, accountPrivateKey);
       }
+    }).catch( err => {
+      console.log(err);
     });
   };
 }

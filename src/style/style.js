@@ -3,22 +3,22 @@
  */
 
 import {Dimensions, StyleSheet} from "react-native";
-import { getDpFromPx } from "../../utils/util";
+import { getDpFromPx } from "./../utils/util";
 
 
 
 
 const commonStyles = StyleSheet.create({
     bottomButton : {
-        fontSize : 16,
+        fontSize : 18,
         lineHeight: 44,
         color : "#fff",
         textAlign: "center",
-        backgroundColor: "#000",
+        backgroundColor: "#3D4144",
         position : "absolute",
-        bottom : 0,
+        bottom : 5,
         width : "94%",
-        // left: "3%",
+        left: "3%",
     }
 
 });

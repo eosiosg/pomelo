@@ -50,6 +50,7 @@ class HomePage extends Component {
 
   componentDidMount() {
     storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
+      console.log("HomePageStorage === ",ret1);
         if ( ret1 ) {
             const ret = decryptObject( ret1 );
             if ( ret && ret.accountPrivateKey ) {
@@ -61,6 +62,8 @@ class HomePage extends Component {
                 }
             }
         }
+    }).catch( err => {
+      console.log(err);
     });
   }
 
@@ -68,6 +71,7 @@ class HomePage extends Component {
     const privateKeyIntl = I18n.t( "HomePage privateKey" );
     const choiceAccountIntl = I18n.t( "HomePage choiceAccount" );
     const submitKey = I18n.t( "HomePage submitKey" );
+    const Hint = I18n.t( "HomePage Hint" );
     const PleaseEnterComplete = I18n.t( "HomePage PleaseEnterComplete" );
     const PleaseSure = I18n.t( "HomePage PleaseSure" );
     const PleaseCancel = I18n.t( "HomePage PleaseCancel" );
@@ -80,8 +84,8 @@ class HomePage extends Component {
                 <Text style={styles.contentBoxTitle}>{privateKeyIntl}</Text>
                 <TextInput
                   style={styles.conItemTextInput}
-                  placeholder="Please enter"
-                  placeholderTextColor={"#222"}
+                  placeholder={Hint}
+                  placeholderTextColor={"#999"}
                   onChangeText={(key) => this.setState({key})}
                   underlineColorAndroid={"transparent"}
                 />

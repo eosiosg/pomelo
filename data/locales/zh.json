@@ -51,6 +51,7 @@
   "HomePage privateKey": "个人私钥",
   "HomePage choiceAccount" : "选择账户",
   "HomePage submit":"提交",
+  "HomePage Hint":"请输入",
   "HomePage PleaseEnterComplete":"请填写完整",
   "HomePage PleaseSure" : "是",
   "HomePage PleaseCancel" : "否",

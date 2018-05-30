@@ -123,7 +123,8 @@
       buildConfiguration = "Debug">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release"
+      buildConfiguration = "AppStore"
+      customArchiveName = "Pomelo"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>

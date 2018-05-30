@@ -1,12 +1,12 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { ScrollView, View, Text, Image, TouchableOpacity, SafeAreaView, Modal } from "react-native";
+import { ScrollView, View, Text, Image, TouchableOpacity, SafeAreaView, Modal, ImageBackground } from "react-native";
 
 // 自定义组件
 import I18n from "../../../I18n";
 import { styles, assetStyles, voteStyles, voteBpsStales, modalStyles } from "./style";
-import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
+import { decryptObject, storage } from "../../utils/storage";
 
 class VoteIndexPage extends Component {
     static navigationOptions = ( props ) => {
@@ -22,6 +22,7 @@ class VoteIndexPage extends Component {
     constructor (props) {
         super(props);
         this.state = {
+          cuntDownTime: "00d00h",
           IsModalShow: false,
         };
     }
@@ -29,8 +30,9 @@ class VoteIndexPage extends Component {
     componentWillReceiveProps( nextProps ) {
         if(nextProps.needGetUserInfo&&nextProps.needGetUserInfo!==this.props.needGetUserInfo){
             this.props.setNeedGetUserInfoFalse();
-            storage.load({key: "HomePageStorage"}).then((ret) => {
-                if (ret) {
+            storage.load({key: "HomePageStorage"}).then((ret1) => {
+                if (ret1) {
+                    const ret = decryptObject( ret1 );
                     const accountPrivateKey = ret.accountPrivateKey;
                     const accountName = ret.accountName;
                     const data = {
@@ -41,26 +43,34 @@ class VoteIndexPage extends Component {
                     this.props.onDispatchGetRefundsPost(data);
                     this.props.onDispatchGetCurrencyBalancePost(data);
                 }
+            }).catch( err => {
+              console.log(err);
             });
+        }
+
+        if (nextProps.RefundsTime) {
+          this.RefundingCountdown(nextProps.RefundsTime);
         }
     }
 
     componentDidMount() {
       storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
           if ( ret1 ) {
-              const ret = decryptObject( ret1 );
-          const accountPrivateKey = ret.accountPrivateKey;
-          const accountName = ret.accountName;
-          const data = {
-            accountPrivateKey,
-            accountName,
-          };
-          this.props.onDispatchGetAccountInfoPost(data);
-          this.props.onDispatchGetCurrencyBalancePost(data);
-          this.props.onDispatchGetRefundsPost(data);
-          this.props.onDispatchGetVoteBpsPost(data);
-          this.props.onDispatchGetVoteUsdPost();
+            const ret = decryptObject( ret1 );
+            const accountPrivateKey = ret.accountPrivateKey;
+            const accountName = ret.accountName;
+            const data = {
+              accountPrivateKey,
+              accountName,
+            };
+            this.props.onDispatchGetAccountInfoPost(data);
+            this.props.onDispatchGetCurrencyBalancePost(data);
+            this.props.onDispatchGetRefundsPost(data);
+            this.props.onDispatchGetVoteBpsPost(data);
+            this.props.onDispatchGetVoteUsdPost();
         }
+      }).catch( err => {
+        console.log(err);
       });
       this.props.navigation.setParams({navigatePress: () => {this.setState({IsModalShow: true})}})
     }
@@ -71,10 +81,10 @@ class VoteIndexPage extends Component {
       const { ram_bytes } = total_resources;
       const { cpu_weight, net_weight } = delegated_bandwidth ? delegated_bandwidth : { cpu_weight: "0 SYS", net_weight: "0 SYS"};
       const stake = Number(net_weight.replace(" SYS", "")) + Number(cpu_weight.replace(" SYS", ""));
-      const CurrencyBalance = this.props.CurrencyBalance;
+      const CurrencyBalance = (this.props.CurrencyBalance).toFixed(2);
       const Refunds = this.props.Refunds;
-      const TotalAsset = stake + CurrencyBalance + Refunds;
-      const TotalAssetByUsd = TotalAsset * this.props.USD;
+      const TotalAsset = (stake + this.props.CurrencyBalance + Refunds).toFixed(4);
+      const TotalAssetByUsd = (TotalAsset * this.props.USD).toFixed(2);
       const BPs = this.getBpsByAccountInfoFilter();
       const userNameIntl = I18n.t("VoteIndexPage userName");
       const TotalAssetIntl = I18n.t("VoteIndexPage TotalAsset");
@@ -96,24 +106,28 @@ class VoteIndexPage extends Component {
                   </View>
                   <View style={assetStyles.contentAssetBox}>
                     <View style={assetStyles.totalAssetBox}>
-                      <View style={assetStyles.userNameBox}>
-                        <Text style={assetStyles.userNameTip}>
-                          {userNameIntl}:  <Text style={assetStyles.userName}>{account_name}</Text>
-                        </Text>
-                      </View>
-                      <View style={assetStyles.userTotalAssetBox}>
-                        <Text style={assetStyles.userTotalAssetTip}>{TotalAssetIntl}</Text>
-                        <Text style={assetStyles.userTotalAssetValue}>
-                          {TotalAsset} <Text style={assetStyles.userTotalAssetValueUnit}>EOS</Text>
-                        </Text>
-                      </View>
-                      <Text style={assetStyles.userTotalAssetByUsd}>≈ ${TotalAssetByUsd}</Text>
+                      <ImageBackground style={assetStyles.totalAssetBgImg} source={require("./images/wallet_img_background.png")}>
+                        <View style={assetStyles.userNameBox}>
+                          <Text style={assetStyles.userNameTip}>
+                            {userNameIntl}:  <Text style={assetStyles.userName}>{account_name}</Text>
+                          </Text>
+                        </View>
+                        <View style={assetStyles.userTotalAssetBox}>
+                          <Text style={assetStyles.userTotalAssetTip}>{TotalAssetIntl}</Text>
+                          <Text style={assetStyles.userTotalAssetValue}>
+                            {TotalAsset} <Text style={assetStyles.userTotalAssetValueUnit}>EOS</Text>
+                          </Text>
+                        </View>
+                        <Text style={assetStyles.userTotalAssetByUsd}>≈ ${TotalAssetByUsd}</Text>
+                      </ImageBackground>
                     </View>
                     <View style={assetStyles.assetItemBox}>
                       <View style={assetStyles.itemBox}>
-                        <Text style={assetStyles.itemName}>
-                          {RefundingIntl}
-                        </Text>
+                        <View style={assetStyles.itemRefundBox}>
+                          <Text style={assetStyles.itemRefundName}>{RefundingIntl}</Text>
+                          <Image style={assetStyles.refundingIcon} source={require("./images/wallet_icon_countdown.png")} />
+                          <Text style={assetStyles.refundingTime}>{this.state.cuntDownTime}</Text>
+                        </View>
                         <Text style={assetStyles.itemValue}>
                           {Refunds} <Text style={assetStyles.itemValueUnit}>EOS</Text>
                         </Text>
@@ -158,7 +172,7 @@ class VoteIndexPage extends Component {
                         <View key={index} style={voteBpsStales.VoteBpsItem}>
 
                           <Text style={voteBpsStales.VoteBpsItemName}>{item.owner}</Text>
-                          <Text style={voteBpsStales.VoteBpsItemDesc}>total vote percentage：{item.votePersent}% </Text>
+                          <Text style={voteBpsStales.VoteBpsItemDesc}>Total Vote Percentage：{item.votePersent}% </Text>
                         </View>
                       ))}
                     </View>
@@ -205,20 +219,21 @@ class VoteIndexPage extends Component {
         });
       }
       return newBps;
-    }
+    };
 
-    // RefundingCountdown = (creatTime) => {
-    //   const totalTime = 3*24*60*60;
-    //   let newCreatTime = new Date(creatTime);
-    //   newCreatTime = newCreatTime.getTime();
-    //   let cuntDownTime = totalTime - newCreatTime;
-    //   setInterval(()=> {
-    //     cuntDownTime--;
-    //     this.setState({
-    //
-    //     });
-    //   },1000);
-    // };
+    RefundingCountdown = (RefundsTime) => {
+      const totalTime = 3*24*60*60*1000;
+      let nowTime = new Date();
+      nowTime = nowTime.getTime();
+      let CreatTime = new Date(RefundsTime);
+      CreatTime = CreatTime.getTime();
+      let cuntDownTime = totalTime - (nowTime - CreatTime);
+      const hours = Math.floor(cuntDownTime/(1000*60*60));
+      const day = Math.floor(cuntDownTime/(1000*60*60*24));
+      this.setState({
+        cuntDownTime: day + "d " + hours + "h",
+      });
+    };
 }
 
 // 挂载中间件到组件；
@@ -239,9 +254,9 @@ function mapStateToProps(state) {
         accountInfo: state.VoteIndexPageReducer.accountInfo,
         CurrencyBalance: state.VoteIndexPageReducer.CurrencyBalance,
         Refunds: state.VoteIndexPageReducer.Refunds,
+        RefundsTime: state.VoteIndexPageReducer.RefundsTime,
         BPs: state.VoteIndexPageReducer.BPs,
         USD: state.VoteIndexPageReducer.USD,
-
         needGetUserInfo: state.VoteIndexPageReducer.needGetUserInfo,
     };
 }
