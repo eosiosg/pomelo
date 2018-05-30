@@ -5,7 +5,7 @@ import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaVie
 // 自定义组件
 import I18n from "../../../I18n";
 import { styles, countStyles, stakeStyles, btnStyles } from "./style";
-import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
+import { decryptObject, storage } from "../../utils/storage";
 
 class UnDelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
@@ -40,13 +40,12 @@ class UnDelegatebwPage extends Component {
         const CPU_placeholder = "CPU Stake";
         const Network_placeholder = "NetWork Stake";
 
-
-      const StakeCountIntl = I18n.t("UnDelegatebwPage StakeCount");
-      const StakeCountInfoIntl = I18n.t("UnDelegatebwPage StakeCountInfo");
-      const StakeQuantityIntl = I18n.t("UnDelegatebwPage StakeQuantity");
-      const CPUIntl = I18n.t("UnDelegatebwPage CPU");
-      const NetworkIntl = I18n.t("UnDelegatebwPage Network");
-      const ConfirmIntl = I18n.t("UnDelegatebwPage Confirm");
+        const StakeCountIntl = I18n.t("UnDelegatebwPage StakeCount");
+        const StakeCountInfoIntl = I18n.t("UnDelegatebwPage StakeCountInfo");
+        const StakeQuantityIntl = I18n.t("UnDelegatebwPage StakeQuantity");
+        const CPUIntl = I18n.t("UnDelegatebwPage CPU");
+        const NetworkIntl = I18n.t("UnDelegatebwPage Network");
+        const ConfirmIntl = I18n.t("UnDelegatebwPage Confirm");
         return (
             <SafeAreaView style={[{flex:1}]}>
             <View style={styles.bodyBox}>
@@ -124,8 +123,9 @@ class UnDelegatebwPage extends Component {
       return;
     }
 
-    storage.load({key: "HomePageStorage"}).then((ret) => {
-      if (ret) {
+    storage.load({key: "HomePageStorage"}).then((ret1) => {
+      if (ret1) {
+        const ret = decryptObject( ret1 );
         const accountPrivateKey = ret.accountPrivateKey;
         const accountName = ret.accountName;
         const data = {

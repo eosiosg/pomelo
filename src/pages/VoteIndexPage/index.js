@@ -6,7 +6,7 @@ import { ScrollView, View, Text, Image, TouchableOpacity, SafeAreaView, Modal } 
 // 自定义组件
 import I18n from "../../../I18n";
 import { styles, assetStyles, voteStyles, voteBpsStales, modalStyles } from "./style";
-import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
+import { decryptObject, storage } from "../../utils/storage";
 
 class VoteIndexPage extends Component {
     static navigationOptions = ( props ) => {
@@ -29,8 +29,9 @@ class VoteIndexPage extends Component {
     componentWillReceiveProps( nextProps ) {
         if(nextProps.needGetUserInfo&&nextProps.needGetUserInfo!==this.props.needGetUserInfo){
             this.props.setNeedGetUserInfoFalse();
-            storage.load({key: "HomePageStorage"}).then((ret) => {
-                if (ret) {
+            storage.load({key: "HomePageStorage"}).then((ret1) => {
+                if (ret1) {
+                    const ret = decryptObject( ret1 );
                     const accountPrivateKey = ret.accountPrivateKey;
                     const accountName = ret.accountName;
                     const data = {
@@ -48,18 +49,18 @@ class VoteIndexPage extends Component {
     componentDidMount() {
       storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
           if ( ret1 ) {
-              const ret = decryptObject( ret1 );
-          const accountPrivateKey = ret.accountPrivateKey;
-          const accountName = ret.accountName;
-          const data = {
-            accountPrivateKey,
-            accountName,
-          };
-          this.props.onDispatchGetAccountInfoPost(data);
-          this.props.onDispatchGetCurrencyBalancePost(data);
-          this.props.onDispatchGetRefundsPost(data);
-          this.props.onDispatchGetVoteBpsPost(data);
-          this.props.onDispatchGetVoteUsdPost();
+            const ret = decryptObject( ret1 );
+            const accountPrivateKey = ret.accountPrivateKey;
+            const accountName = ret.accountName;
+            const data = {
+              accountPrivateKey,
+              accountName,
+            };
+            this.props.onDispatchGetAccountInfoPost(data);
+            this.props.onDispatchGetCurrencyBalancePost(data);
+            this.props.onDispatchGetRefundsPost(data);
+            this.props.onDispatchGetVoteBpsPost(data);
+            this.props.onDispatchGetVoteUsdPost();
         }
       });
       this.props.navigation.setParams({navigatePress: () => {this.setState({IsModalShow: true})}})
