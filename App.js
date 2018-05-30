@@ -18,6 +18,7 @@ import I18n from "./I18n";
 // Navigator
 const Navigator = StackNavigator(
     {
+        PasswordInputPage: { screen: PasswordInputPage },
         HomePage: { screen: HomePage },
         VoteIndexPage: { screen: VoteIndexPage },
         VotePage: { screen: VotePage },
