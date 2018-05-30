@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
     alignItems : "center",
   },
   contentBoxTitle :{
-    fontSize: 18,
-    color: "#000",
+    fontSize: 14,
+    color: "#323232",
     lineHeight: 25,
     paddingTop : 15,
     paddingBottom : 10,
@@ -39,9 +39,9 @@ const styles = StyleSheet.create({
   },
   conItemTextInput: {
     flexGrow: 1,
-    fontSize : 18,
-    paddingTop : 10,
-    paddingBottom : 10,
+    fontSize : 16,
+    paddingTop : 15,
+    paddingBottom : 15,
     paddingLeft: 10,
     backgroundColor: "#fff",
     color: "#000",
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     position : "absolute",
     bottom : 0,
     width : "100%",
-    backgroundColor: "#000",
+    backgroundColor: "#3D4144",
   },
   buttonSubmit:{
     fontSize : 16,
@@ -80,14 +80,17 @@ const styles = StyleSheet.create({
   titleText:{
     marginTop:10,
     marginBottom:5,
-    fontSize:16,
+    fontSize:17,
     fontWeight:'bold',
     textAlign:'center',
+    color : "#030303",
   },
   // 内容
   contentText:{
-    margin:8,
-    fontSize:14,
+    margin:10,
+    paddingBottom : 20,
+    paddingTop  :10,
+    fontSize:13,
     textAlign:'center',
   },
   // 水平的分割线
@@ -114,8 +117,8 @@ const styles = StyleSheet.create({
     backgroundColor:'#ccc',
   },
   buttonText:{
-    fontSize:16,
-    color:'#3393F2',
+    fontSize:17,
+    color:'#007AFF',
     textAlign:'center',
   },
   //item

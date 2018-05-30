@@ -3,7 +3,7 @@
  */
 
 import {Dimensions, StyleSheet} from "react-native";
-import { getDpFromPx } from "../../utils/util";
+import { getDpFromPx } from "./../utils/util";
 
 
 

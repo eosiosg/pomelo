@@ -14,8 +14,6 @@ import VoteIndexPage from "./src/pages/VoteIndexPage";
 import DelegatebwPage from "./src/pages/DelegatebwPage";
 import UnDelegatebwPage from "./src/pages/UnDelegatebwPage";
 import NodeListPage from "./src/pages/NodeListPage";
-//import { persistStore, autoRehydrate } from "redux-persist";
-//import createEncryptor from "redux-persist-transform-encrypt";
 import I18n from "./I18n";
 // Navigator
 const Navigator = StackNavigator(
