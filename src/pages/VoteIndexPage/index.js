@@ -172,7 +172,7 @@ class VoteIndexPage extends Component {
                         <View key={index} style={voteBpsStales.VoteBpsItem}>
 
                           <Text style={voteBpsStales.VoteBpsItemName}>{item.owner}</Text>
-                          <Text style={voteBpsStales.VoteBpsItemDesc}>total vote percentage：{item.votePersent}% </Text>
+                          <Text style={voteBpsStales.VoteBpsItemDesc}>Total Vote Percentage：{item.votePersent}% </Text>
                         </View>
                       ))}
                     </View>
