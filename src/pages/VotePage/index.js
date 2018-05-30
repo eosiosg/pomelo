@@ -13,7 +13,7 @@ import messages from './messages';
 import I18n from "../../../I18n";
 import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 
-import LoadingView from './components/loading'
+import LoadingView from '../../commonComponents/loading'
 
 class VotePage extends Component {
     static navigationOptions = ( props ) => {
@@ -24,7 +24,6 @@ class VotePage extends Component {
             title: 'Vote'
         };
     };
-
 
     constructor (props) {
         super(props);
@@ -45,8 +44,6 @@ class VotePage extends Component {
             votingList,
         });
       let IsSubmitSuccess = nextProps.IsSubmitSuccess;
-      // IsSubmitSuccess ? this.props.getAccountInfo() : null;
-        console.log('issubmitSucccess', IsSubmitSuccess, this.props.IsSubmitSuccess);
 
       if (IsSubmitSuccess && IsSubmitSuccess != this.props.IsSubmitSuccess) {
         // 投票成功，重新获取AccountInfo，重置IsSubmitSuccess
@@ -118,114 +115,115 @@ class VotePage extends Component {
         return (
             <SafeAreaView style={[{flex:1}]}>
 
-                <ScrollView>
-            <View style={[styles.bodyBox,{flex:1}]}>
+            <ScrollView>
+                <View style={[styles.bodyBox,{flex:1}]}>
 
-
-                <View style={styles.contentHeader}>
-                    <View style={styles.contentHeaderAccountName}>
-                        <Text style={styles.contentHeaderAccountNameLabel}>
-                            {account}
-                        </Text>
-                        <Text style={styles.contentHeaderAccountNameValue}>
-                            {account_name||'none'}
-                        </Text>
-                    </View>
-                    <View style={styles.contentHeaderBalance}>
-                        <Text style={styles.contentHeaderAccountNameLabel}>
-                            {balance}
-                        </Text>
-                        <Text style={styles.contentHeaderBalanceValueContainer}>
-                            <Text style={styles.contentHeaderBalanceValue}>
-                                {CurrencyBalance||123345}
+                    <View style={styles.contentHeader}>
+                        <View style={styles.contentHeaderAccountName}>
+                            <Text style={styles.contentHeaderAccountNameLabel}>
+                                {account}
                             </Text>
-                            <View style={styles.contentHeaderEOSSignContainer}>
-                                <Text style={styles.contentHeaderEOSSign}>
-                                    EOS
-                                </Text>
-                            </View>
-                        </Text>
-                    </View>
-                    <View style={styles.contentHeaderStake}>
-                        <Text style={styles.contentHeaderAccountNameLabel}>
-                            {stakeN}
-                        </Text>
-                        <Text style={styles.contentHeaderBalanceValueContainer}>
-                            <Text style={styles.contentHeaderBalanceValue}>
-                                {stake||0}
-                            </Text>
-                            <View style={styles.contentHeaderEOSSignContainer}>
-                                <Text style={styles.contentHeaderEOSSign}>
-                                    EOS
-                                </Text>
-                            </View>
-                        </Text>
-                    </View>
-                </View>
-
-                <View style={styles.contentBodyStake}>
-                    <View style={styles.contentBodyStakeHeader}>
-                        <Text style={styles.contentBodyStakeHeaderName}>{delegatebw}</Text>
-                        <View  style={styles.contentBodyStakeHeaderQuestionContainer}>
-                            <TouchableHighlight onPress={this._setRuleModalVisible.bind(this)} >
-                            <View style={styles.contentBodyStakeHeaderQuestionBox}>
-                                <Text style={styles.contentBodyStakeHeaderQuestion}>
-                                    ?
-                                </Text>
-                            </View>
-                            </TouchableHighlight>
-                        </View>
-                    </View>
-                    <View style={styles.contentBodyStakeBody}>
-                        <View style={styles.contentBodyStakeCpu}>
-                            <Text style={styles.contentBodyStakeBodyTextLabel}>
-                                CPU
-                            </Text>
-                            <Text style={styles.contentBodyStakeBodyTextValue}>
-                                {cpu_weight}
+                            <Text style={styles.contentHeaderAccountNameValue}>
+                                {account_name||'none'}
                             </Text>
                         </View>
-                        <View style={styles.contentBodyStakeNetwork}>
-                            <Text style={styles.contentBodyStakeBodyTextLabel}>
-                                Network
+                        <View style={styles.contentHeaderBalance}>
+                            <Text style={styles.contentHeaderAccountNameLabel}>
+                                {balance}
                             </Text>
-                            <Text style={styles.contentBodyStakeBodyTextValue}>
-                                {net_weight}
+                            <Text style={styles.contentHeaderBalanceValueContainer}>
+                                <Text style={styles.contentHeaderBalanceValue}>
+                                    {CurrencyBalance||123345}
+                                </Text>
+                                <View style={styles.contentHeaderEOSSignContainer}>
+                                    <Text style={styles.contentHeaderEOSSign}>
+                                        EOS
+                                    </Text>
+                                </View>
+                            </Text>
+                        </View>
+                        <View style={styles.contentHeaderStake}>
+                            <Text style={styles.contentHeaderAccountNameLabel}>
+                                {stakeN}
+                            </Text>
+                            <Text style={styles.contentHeaderBalanceValueContainer}>
+                                <Text style={styles.contentHeaderBalanceValue}>
+                                    {stake||0}
+                                </Text>
+                                <View style={styles.contentHeaderEOSSignContainer}>
+                                    <Text style={styles.contentHeaderEOSSign}>
+                                        EOS
+                                    </Text>
+                                </View>
                             </Text>
                         </View>
                     </View>
-                </View>
 
-                <View style={styles.contentBodyVotingList}>
-                    <View style={styles.contentBodyVotingListHeader}>
-                        <Text style={styles.contentBodyVotingListName}>
-                            {bpList}
-                            {/*Each node bellow will get {1234*2**((new Date().getTime() - new Date(2000,0,1).getTime())/1000/(3600*24*365))} votes*/}
-                        </Text>
-                    </View>
-                    <View style={styles.contentBodyBPListContainer}>
-                    {
-                        this.state.votingList.map((votingC, index)=>{
-                            return <View key = {index}
-                                         style={styles.contentBodyBP}>
-                                <Text style={styles.contentBodyBPName}>
-                                    { votingC.owner }
-                                </Text>
-                                {/*<View style={styles.contentBodyBPDeleteContainer}>*/}
-                                    {/*<TouchableHighlight id={index}*/}
-                                                        {/*onPress={()=>this._setDeleteBPC(index)}>*/}
-                                        {/*<View style={styles.contentBodyBPDeleteButton}>*/}
-                                            {/*<View style={styles.contentBodyBPDeleteButtonInner}></View>*/}
-                                        {/*</View>*/}
-                                    {/*</TouchableHighlight>*/}
-                                {/*</View>*/}
+                    <View style={styles.contentBodyStake}>
+                        <View style={styles.contentBodyStakeHeader}>
+                            <Text style={styles.contentBodyStakeHeaderName}>{delegatebw}</Text>
+                            <View  style={styles.contentBodyStakeHeaderQuestionContainer}>
+                                <TouchableHighlight onPress={this._setRuleModalVisible.bind(this)} >
+                                <View style={styles.contentBodyStakeHeaderQuestionBox}>
+                                    <Text style={styles.contentBodyStakeHeaderQuestion}>
+                                        ?
+                                    </Text>
+                                </View>
+                                </TouchableHighlight>
                             </View>
-                        })
-                    }
+                        </View>
+                        <View style={styles.contentBodyStakeBody}>
+                            <View style={styles.contentBodyStakeCpu}>
+                                <Text style={styles.contentBodyStakeBodyTextLabel}>
+                                    CPU
+                                </Text>
+                                <Text style={styles.contentBodyStakeBodyTextValue}>
+                                    {cpu_weight}
+                                </Text>
+                            </View>
+                            <View style={styles.contentBodyStakeNetwork}>
+                                <Text style={styles.contentBodyStakeBodyTextLabel}>
+                                    Network
+                                </Text>
+                                <Text style={styles.contentBodyStakeBodyTextValue}>
+                                    {net_weight}
+                                </Text>
+                            </View>
+                        </View>
                     </View>
+
+                    <View style={styles.contentBodyVotingList}>
+                        <View style={styles.contentBodyVotingListHeader}>
+                            <Text style={styles.contentBodyVotingListName}>
+                                {bpList}
+                                {/*Each node bellow will get {1234*2**((new Date().getTime() - new Date(2000,0,1).getTime())/1000/(3600*24*365))} votes*/}
+                            </Text>
+                        </View>
+                        <View style={styles.contentBodyBPListContainer}>
+                        {
+                            this.state.votingList.map((votingC, index)=>{
+                                return <View key = {index}
+                                             style={styles.contentBodyBP}>
+                                    <Text style={styles.contentBodyBPName}>
+                                        { votingC.owner }
+                                    </Text>
+                                    {/*<View style={styles.contentBodyBPDeleteContainer}>*/}
+                                        {/*<TouchableHighlight id={index}*/}
+                                                            {/*onPress={()=>this._setDeleteBPC(index)}>*/}
+                                            {/*<View style={styles.contentBodyBPDeleteButton}>*/}
+                                                {/*<View style={styles.contentBodyBPDeleteButtonInner}></View>*/}
+                                            {/*</View>*/}
+                                        {/*</TouchableHighlight>*/}
+                                    {/*</View>*/}
+                                </View>
+                            })
+                        }
+                        </View>
+                    </View>
+
                 </View>
-            </View>
             </ScrollView>
+
                 <View style = {styles.footerView}>
                     <Text style={styles.footerSubmit}
                           onPress={this._setNoticeModalShow.bind(this)}>

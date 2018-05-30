@@ -22,6 +22,7 @@ const styles = StyleSheet.create( {
         height: getDpFromPx( 1 ),
         backgroundColor: '#e8e8e8'
     },
+
 } );
 export {
     styles

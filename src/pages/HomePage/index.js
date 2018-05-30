@@ -49,6 +49,7 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
+
     storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
       console.log("HomePageStorage === ",ret1);
         if ( ret1 ) {
@@ -212,6 +213,7 @@ class HomePage extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         onDispatchGetAccountNames: (data) => dispatch({ type: "HOME_ACCOUNT_NAME" ,data}),
+
     };
 }
 

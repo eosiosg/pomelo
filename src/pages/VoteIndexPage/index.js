@@ -5,8 +5,10 @@ import { ScrollView, View, Text, Image, TouchableOpacity, SafeAreaView, Modal, I
 
 // 自定义组件
 import I18n from "../../../I18n";
-import { styles, assetStyles, voteStyles, voteBpsStales, modalStyles } from "./style";
+import { styles, assetStyles, voteStyles, voteBpsStales, modalStyles, style } from "./style";
 import { decryptObject, storage } from "../../utils/storage";
+const developTeam = require('../../images/developTeamBackground.png');
+
 
 class VoteIndexPage extends Component {
     static navigationOptions = ( props ) => {
@@ -54,7 +56,10 @@ class VoteIndexPage extends Component {
     }
 
     componentDidMount() {
-      storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
+
+        this.props.getNodesIDInfo();
+
+        storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
           if ( ret1 ) {
             const ret = decryptObject( ret1 );
             const accountPrivateKey = ret.accountPrivateKey;
@@ -75,7 +80,88 @@ class VoteIndexPage extends Component {
       this.props.navigation.setParams({navigatePress: () => {this.setState({IsModalShow: true})}})
     }
 
+
+
+    renderItem( { item, index } ) {
+    return (
+        <View key={index}
+              style={[ {
+                  flex: 1,
+                  backgroundColor: '#ffffff',
+                  paddingRight: 15,
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                  flexDirection: 'row',
+              } ]}>
+            <View style={[ {flex:2} ]}>
+                <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:''}}
+                       style={{width:46,height:46, borderRadius:23, marginTop:10}}/>
+            </View>
+            <View style={[ {flex:8,} ]}>
+                <Text numberOfLines={1}
+                      style={[
+                          style.commonTextColorStyle,
+                          {
+                              fontWeight: 'bold',
+                              fontSize: 22,
+                              lineHeight: 35,
+                              fontFamily: 'PingFangSC-Semibold',
+                              color: '#323232',
+                          } ]}>
+                    {this.props.accountDic[item.owner]?this.props.accountDic[item.owner].organization_name:'Not set'}
+
+                </Text>
+                <Text numberOfLines={1}
+                      style={[
+                          style.commonTextColorStyle,
+                          {
+                              fontSize: 14,
+                              lineHeight: 22,
+                              fontFamily: 'PingFangSC-Semibold',
+                              color: '#323232',
+                          } ]}>
+                    {item.owner}
+                </Text>
+                <Text numberOfLines={1}
+                      style={[
+                          style.commonSubTextColorStyle,
+                          {
+                              fontSize: 14,
+                              lineHeight: 28,
+                              fontFamily: 'PingFangSC-Regular',
+                              color: '#999999',
+                              letterSpacing: 0,
+                          } ]
+                      }>
+                    {parseFloat(item.total_votes/this.props.totalVoteWeight*100).toFixed(2) + "%"} Voter Choise
+                </Text>
+            </View>
+
+            <View style={[ { paddingTop: 55,position:'relative' } ]}>
+                {
+                    this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground style={{
+                        width: 160, height: 18,
+                        position: 'absolute',
+                        top: 6, right: -5,
+                        paddingLeft: 10,
+                        paddingRight: 10,
+                    }}
+                                                                                           source={developTeam}>
+                        <Text style={{textAlign: "center", lineHeight: 18, color: 'white'}}>
+                            Development Team
+                        </Text>
+                    </ImageBackground>
+                }
+
+            </View>
+        </View>
+    );
+}
+
+
     render() {
+
+      const votedByMeProducers = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info.producers : []
 
       const { account_name, total_resources, delegated_bandwidth } = this.props.accountInfo;
       const { ram_bytes } = total_resources;
@@ -85,7 +171,8 @@ class VoteIndexPage extends Component {
       const Refunds = this.props.Refunds;
       const TotalAsset = (stake + this.props.CurrencyBalance + Refunds).toFixed(4);
       const TotalAssetByUsd = (TotalAsset * this.props.USD).toFixed(2);
-      const BPs = this.getBpsByAccountInfoFilter();
+      const BPs = this.props.BPs;
+      // const BPs = this.getBpsByAccountInfoFilter();
       const userNameIntl = I18n.t("VoteIndexPage userName");
       const TotalAssetIntl = I18n.t("VoteIndexPage TotalAsset");
       const RefundingIntl = I18n.t("VoteIndexPage Refunding");
@@ -97,6 +184,7 @@ class VoteIndexPage extends Component {
       const AddDelegatebwIntl = I18n.t("VoteIndexPage AddDelegatebw");
       const RevoteIntl = I18n.t("VoteIndexPage Revote");
       const VotedBpsIntl = I18n.t("VoteIndexPage VotedBps");
+
         return (
             <SafeAreaView style={[{flex:1}]}>
             <View style={styles.bodyBox}>
@@ -168,13 +256,14 @@ class VoteIndexPage extends Component {
                       <Text style={voteBpsStales.VoteBpsTitle}>{VotedBpsIntl}</Text>
                     </View>
                     <View style={voteBpsStales.VoteBpsList}>
-                      {BPs.map((item,index) => (
-                        <View key={index} style={voteBpsStales.VoteBpsItem}>
+                      {BPs.map((item,index) => {
+                          if(votedByMeProducers.indexOf(item.owner)==-1){
+                              return
+                          }else{
+                              return this.renderItem({item,index});
 
-                          <Text style={voteBpsStales.VoteBpsItemName}>{item.owner}</Text>
-                          <Text style={voteBpsStales.VoteBpsItemDesc}>Total Vote Percentage：{item.votePersent}% </Text>
-                        </View>
-                      ))}
+                          }
+                      })}
                     </View>
                   </View>
                   <View style={{height: 50}}></View>
@@ -198,28 +287,29 @@ class VoteIndexPage extends Component {
         );
     }
 
-    getBpsByAccountInfoFilter = () => {
-      const BPs = this.props.BPs;
-      let producers = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info.producers : [];
-      const newBpsTem = [];
-      const newBps = [];
-      let totalWeight = 0;
-      for (let i = 0; i < BPs.length; i++) {
-        for (let j = 0; j < producers.length; j++) {
-          if (BPs[i].owner == producers[j]) {
-            totalWeight += Number(BPs[i].total_votes);
-            newBpsTem.push(BPs[i]);
-          }
-        }
-      }
-      for (let i = 0; i < newBpsTem.length; i++) {
-        newBps.push({
-          owner: newBpsTem[i].owner,
-          votePersent: (Number(newBpsTem[i].total_votes)/totalWeight * 100),
-        });
-      }
-      return newBps;
-    };
+    // getBpsByAccountInfoFilter = () => {
+    //   const BPs = this.props.BPs;
+    //   let producers = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info.producers : [];
+    //   const newBpsTem = [];
+    //   const newBps = [];
+    //   let totalWeight = 0;
+    //   for (let i = 0; i < BPs.length; i++) {
+    //     for (let j = 0; j < producers.length; j++) {
+    //       if (BPs[i].owner == producers[j]) {
+    //
+    //           totalWeight += Number(BPs[i].total_votes);
+    //         newBpsTem.push(BPs[i]);
+    //       }
+    //     }
+    //   }
+    //   for (let i = 0; i < newBpsTem.length; i++) {
+    //     newBps.push({
+    //       owner: newBpsTem[i].owner,
+    //       votePersent: (Number(newBpsTem[i].total_votes)/totalWeight * 100),
+    //     });
+    //   }
+    //   return newBps;
+    // };
 
     RefundingCountdown = (RefundsTime) => {
       const totalTime = 3*24*60*60*1000;
@@ -246,6 +336,7 @@ function mapDispatchToProps(dispatch) {
         onDispatchGetRefundsPost: (data) => dispatch({ type: "VOTE_INDEX_REFUNDS_POST", data }),
         onDispatchGetVoteBpsPost: (data) => dispatch({ type: "VOTE_INDEX_BPS_POST", data }),
         onDispatchGetVoteUsdPost: () => dispatch({ type: "VOTE_INDEX_GETUSDPRICE_POST" }),
+        getNodesIDInfo: () => dispatch({ type: "GET_NODESIDINFO_POST" }),
     };
 }
 
@@ -256,8 +347,13 @@ function mapStateToProps(state) {
         Refunds: state.VoteIndexPageReducer.Refunds,
         RefundsTime: state.VoteIndexPageReducer.RefundsTime,
         BPs: state.VoteIndexPageReducer.BPs,
+        totalVoteWeight: state.VoteIndexPageReducer.totalVoteWeight,
         USD: state.VoteIndexPageReducer.USD,
         needGetUserInfo: state.VoteIndexPageReducer.needGetUserInfo,
+
+
+        accountDic: state.VoteIndexPageReducer.totalVoteWeight,
+        contributors: state.VoteIndexPageReducer.totalVoteWeight,
     };
 }
 
