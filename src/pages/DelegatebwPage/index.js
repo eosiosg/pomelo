@@ -130,8 +130,9 @@ class DelegatebwPage extends Component {
         return;
       }
 
-      storage.load({key: "HomePageStorage"}).then((ret) => {
-        if (ret) {
+      storage.load({key: "HomePageStorage"}).then((ret1) => {
+        if (ret1) {
+          const ret = decryptObject( ret1 );
           const accountPrivateKey = ret.accountPrivateKey;
           const accountName = ret.accountName;
           const data = {
