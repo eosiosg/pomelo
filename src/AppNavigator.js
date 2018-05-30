@@ -9,13 +9,13 @@ import UnDelegatebwPage from "./pages/UnDelegatebwPage";
 
 export const AppNavigator = StackNavigator(
     {
-        PasswordInputPage: { screen: PasswordInputPage },
         HomePage: { screen: HomePage },
         VoteIndexPage: { screen: VoteIndexPage },
         VotePage: { screen: VotePage },
         NodeListPage: { screen: NodeListPage },
         DelegatebwPage: { screen: DelegatebwPage },
         UnDelegatebwPage: { screen: UnDelegatebwPage },
+        PasswordInputPage: { screen: PasswordInputPage },
     },
     {
         navigationOptions: {
