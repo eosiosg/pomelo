@@ -37,8 +37,8 @@ class UnDelegatebwPage extends Component {
         this.net_weight = net_weight.replace(" SYS", "");
         const Stake = Number(this.cpu_weight) + Number(this.net_weight);
 
-        const CPU_placeholder = "CPU Stake";
-        const Network_placeholder = "NetWork Stake";
+        const CPU_placeholder = "Max "+ this.cpu_weight +" Stake";
+        const Network_placeholder = "Max "+ this.net_weight +" Stake";
 
         const StakeCountIntl = I18n.t("UnDelegatebwPage StakeCount");
         const StakeCountInfoIntl = I18n.t("UnDelegatebwPage StakeCountInfo");
@@ -74,6 +74,7 @@ class UnDelegatebwPage extends Component {
                           placeholder={CPU_placeholder}
                           placeholderTextColor={"#999"}
                           maxLength={11}
+                          keyboardType="numeric"
                           onChangeText={(CPU) => this.SetStateCpu(CPU)}
                           underlineColorAndroid={"transparent"}
                         />
@@ -87,6 +88,7 @@ class UnDelegatebwPage extends Component {
                           placeholder={Network_placeholder}
                           placeholderTextColor={"#999"}
                           maxLength={11}
+                          keyboardType="numeric"
                           onChangeText={(Network) => this.SetStateNetwork(Network)}
                           underlineColorAndroid={"transparent"}
                         />
