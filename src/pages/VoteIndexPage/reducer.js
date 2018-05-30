@@ -18,6 +18,7 @@ const initState = {
   },
   CurrencyBalance: 0,
   Refunds: 0,
+  RefundsTime: "",
   BPs: [
     {
       owner: "",
@@ -41,25 +42,27 @@ export default function VoteIndexPageReducer (state = initState, action) {
         return Object.assign({}, state, {
           "Refunds": action.data
         });
+      case "VOTEINDEX_SETREFUNDSTIME_REDUCER":
+        return Object.assign({}, state, {
+          "RefundsTime" : action.data
+        });
     case "VOTEINDEX_SETBPS_REDUCER":
         return Object.assign({}, state, {
           "BPs": action.data
         });
+    case "VOTEINDEX_GETINFO_TRUE_REDUCER":
+        return Object.assign({}, state, {
+            "needGetUserInfo" : true
+        });
 
+    case "VOTEINDEX_GETINFO_FALSE_REDUCER":
+        return Object.assign({}, state, {
+            "needGetUserInfo" : false
+        });
 
-        case "VOTEINDEX_GETINFO_TRUE_REDUCER":
-            return Object.assign({}, state, {
-                "needGetUserInfo" : true
-            });
-
-        case "VOTEINDEX_GETINFO_FALSE_REDUCER":
-            return Object.assign({}, state, {
-                "needGetUserInfo" : false
-            });
-
-        case "VOTEINDEX_SETUSD_REDUCER":
-      return Object.assign({}, state, {
-        "USD": action.data
+    case "VOTEINDEX_SETUSD_REDUCER":
+        return Object.assign({}, state, {
+          "USD": action.data
       });
     default:
         return state;

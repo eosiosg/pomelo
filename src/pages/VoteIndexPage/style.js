@@ -101,10 +101,6 @@ const assetStyles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 48,
   },
-  refundingTime: {
-    fontSize: 14,
-    color: "#555",
-  },
   itemValue: {
     color: "#222",
     fontSize: 20,
@@ -113,6 +109,28 @@ const assetStyles = StyleSheet.create({
     alignItems: "flex-end",
   },
   itemValueUnit: {
+    fontSize: 14,
+    color: "#555",
+  },
+  itemRefundBox: {
+    height: 48,
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
+  itemRefundName: {
+    marginRight: 10,
+    color: "#222",
+    fontSize: 16,
+  },
+  refundingIcon: {
+    width: 16,
+    height: 16,
+  },
+  refundingTime: {
+    marginLeft: 5,
     fontSize: 14,
     color: "#555",
   },
