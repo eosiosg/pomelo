@@ -101,9 +101,21 @@ const assetStyles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 48,
   },
+  itemRefundName: {
+    color: "#222",
+    fontSize: 16,
+    lineHeight: 48,
+  },
+  refundingIcon: {
+    width: 16,
+    height: 20,
+    lineHeight: 48,
+  },
   refundingTime: {
+    marginLeft: 10,
     fontSize: 14,
     color: "#555",
+    lineHeight: 48,
   },
   itemValue: {
     color: "#222",

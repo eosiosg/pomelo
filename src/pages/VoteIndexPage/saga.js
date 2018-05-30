@@ -38,7 +38,8 @@ function getCurrencyBalance(action) {
 export function* getVoteIndexPageRefundsPost (action) {
   try {
     const response = yield call(getRefunds, action);
-    yield put({ type: "VOTEINDEX_SETREFUNDS_REDUCER", data: response });
+    yield put({ type: "VOTEINDEX_SETREFUNDS_REDUCER", data: response.refunds });
+    yield put({ type: "VOTEINDEX_SETREFUNDSTIME_REDUCER", data: response.request_time });
   } catch (err) {}
 }
 function getRefunds(action) {
@@ -52,7 +53,8 @@ function getRefunds(action) {
   }).then(function (result) {
     console.log(result);
     const refunds = result.rows[0] ? Number(result.rows[0].cpu_amount.replace(" SYS", ""))+Number(result.rows[0].net_amount.replace(" SYS", "")) : 0;
-    return refunds;
+    const request_time = result.rows[0] ? result.rows[0].request_time : null;
+    return { refunds, request_time };
   });
 }
 

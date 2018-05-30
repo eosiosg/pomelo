@@ -22,6 +22,7 @@ class VoteIndexPage extends Component {
     constructor (props) {
         super(props);
         this.state = {
+          cuntDownTime: "00d00h",
           IsModalShow: false,
         };
     }
@@ -45,6 +46,10 @@ class VoteIndexPage extends Component {
             }).catch( err => {
               console.log(err);
             });
+        }
+
+        if (nextProps.RefundsTime) {
+          this.RefundingCountdown(nextProps.RefundsTime);
         }
     }
 
@@ -78,7 +83,7 @@ class VoteIndexPage extends Component {
       const stake = Number(net_weight.replace(" SYS", "")) + Number(cpu_weight.replace(" SYS", ""));
       const CurrencyBalance = (this.props.CurrencyBalance).toFixed(2);
       const Refunds = this.props.Refunds;
-      const TotalAsset = Number(stake + CurrencyBalance + Refunds).toFixed(2);
+      const TotalAsset = (stake + this.props.CurrencyBalance + Refunds).toFixed(4);
       const TotalAssetByUsd = (TotalAsset * this.props.USD).toFixed(2);
       const BPs = this.getBpsByAccountInfoFilter();
       const userNameIntl = I18n.t("VoteIndexPage userName");
@@ -118,8 +123,10 @@ class VoteIndexPage extends Component {
                     </View>
                     <View style={assetStyles.assetItemBox}>
                       <View style={assetStyles.itemBox}>
-                        <Text style={assetStyles.itemName}>
+                        <Text style={assetStyles.itemRefundName}>
                           {RefundingIntl}
+                          <Image style={assetStyles.refundingIcon} source={require("./images/arrow-right-account.png")} />
+                          <Text style={assetStyles.refundingTime}>{this.state.cuntDownTime}</Text>
                         </Text>
                         <Text style={assetStyles.itemValue}>
                           {Refunds} <Text style={assetStyles.itemValueUnit}>EOS</Text>
@@ -212,20 +219,21 @@ class VoteIndexPage extends Component {
         });
       }
       return newBps;
-    }
+    };
 
-    // RefundingCountdown = (creatTime) => {
-    //   const totalTime = 3*24*60*60;
-    //   let newCreatTime = new Date(creatTime);
-    //   newCreatTime = newCreatTime.getTime();
-    //   let cuntDownTime = totalTime - newCreatTime;
-    //   setInterval(()=> {
-    //     cuntDownTime--;
-    //     this.setState({
-    //
-    //     });
-    //   },1000);
-    // };
+    RefundingCountdown = (RefundsTime) => {
+      const totalTime = 3*24*60*60*1000;
+      let nowTime = new Date();
+      nowTime = nowTime.getTime();
+      let CreatTime = new Date(RefundsTime);
+      CreatTime = CreatTime.getTime();
+      let cuntDownTime = totalTime - (nowTime - CreatTime);
+      const hours = Math.floor(cuntDownTime/(1000*60*60));
+      const day = Math.floor(cuntDownTime/(1000*60*60*24));
+      this.setState({
+        cuntDownTime: day + "d " + hours + "h",
+      });
+    };
 }
 
 // 挂载中间件到组件；
@@ -246,9 +254,9 @@ function mapStateToProps(state) {
         accountInfo: state.VoteIndexPageReducer.accountInfo,
         CurrencyBalance: state.VoteIndexPageReducer.CurrencyBalance,
         Refunds: state.VoteIndexPageReducer.Refunds,
+        RefundsTime: state.VoteIndexPageReducer.RefundsTime,
         BPs: state.VoteIndexPageReducer.BPs,
         USD: state.VoteIndexPageReducer.USD,
-
         needGetUserInfo: state.VoteIndexPageReducer.needGetUserInfo,
     };
 }
