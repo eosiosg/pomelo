@@ -125,7 +125,7 @@ class VoteIndexPage extends Component {
                       <View style={assetStyles.itemBox}>
                         <View style={assetStyles.itemRefundBox}>
                           <Text style={assetStyles.itemRefundName}>{RefundingIntl}</Text>
-                          <Image style={{width: 16, height: 20}} source={require("./images/wallet_icon_countdown.png")} />
+                          <Image style={assetStyles.refundingIcon} source={require("./images/wallet_icon_countdown.png")} />
                           <Text style={assetStyles.refundingTime}>{this.state.cuntDownTime}</Text>
                         </View>
                         <Text style={assetStyles.itemValue}>
