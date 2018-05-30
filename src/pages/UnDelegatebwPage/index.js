@@ -124,7 +124,7 @@ class UnDelegatebwPage extends Component {
       return;
     }
 
-    storage.load({key: "HomePageStorage"}).then((ret) => {
+    storage.load({key: "HomePageStorage"}).then((ret) => {s
       if (ret) {
         const accountPrivateKey = ret.accountPrivateKey;
         const accountName = ret.accountName;
