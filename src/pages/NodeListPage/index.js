@@ -111,7 +111,7 @@ class NodeListPage extends Component {
                       flexDirection: 'row',
                   } ]}>
                 <View style={[ {flex:2} ]}>
-                    <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:'http://images.eosio.sg/eos.png'}}
+                    <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:'https://steemitimages.com/0x0/https://steemitimages.com/DQmWs93EuTs1CrgazwChGBqj7eygJoQ4HqB9ANWMN8TMHc8/eoosss1920_0023.jpg'}}
                            style={{width:46,height:46, borderRadius:23, marginTop:10}}/>
                 </View>
                 <View style={[ {flex:8,} ]}>
@@ -164,7 +164,7 @@ class NodeListPage extends Component {
                             paddingRight: 10,
                         }}
                                                                                                source={developTeam}>
-                            <Text style={{textAlign: "center", lineHeight: 18, color: 'white'}}>
+                            <Text style={{textAlign: "center", lineHeight: 18, fontSize:12, color: 'white'}}>
                                 Development Team
                             </Text>
                         </ImageBackground>
@@ -285,8 +285,8 @@ function mapStateToProps( state ) {
         testData2: state.NodeListPageReducer.testData2,
         totalVoteWeight: state.VoteIndexPageReducer.totalVoteWeight,
 
-        accountDic: state.VoteIndexPageReducer.totalVoteWeight,
-        contributors: state.VoteIndexPageReducer.totalVoteWeight,
+        accountDic: state.VoteIndexPageReducer.accountDic,
+        contributors: state.VoteIndexPageReducer.contributors,
 
     };
 }

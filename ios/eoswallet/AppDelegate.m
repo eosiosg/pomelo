@@ -21,7 +21,12 @@
 #else
   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
+
+  NSInteger test;
   
+#ifdef ADHOC
+  test = 1;
+#endif
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"eoswallet"

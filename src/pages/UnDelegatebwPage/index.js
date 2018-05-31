@@ -25,11 +25,6 @@ class UnDelegatebwPage extends Component {
         };
     }
 
-    componentWillReceiveProps( nextProps ) {}
-
-    componentDidMount() {}
-
-
     render() {
 
         const { delegated_bandwidth } = this.props.accountInfo;
@@ -76,7 +71,7 @@ class UnDelegatebwPage extends Component {
                           placeholderTextColor={"#999"}
                           maxLength={11}
                           keyboardType="numeric"
-                          onChange={(CPU) => {this.setState(CPU)}}
+                          onChangeText={(CPU) => this.setState({CPU})}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
@@ -90,7 +85,7 @@ class UnDelegatebwPage extends Component {
                           placeholderTextColor={"#999"}
                           maxLength={11}
                           keyboardType="numeric"
-                          onChange={(Network) => {this.setState(Network)}}
+                          onChangeText={(Network) => this.setState({Network})}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
@@ -130,7 +125,7 @@ class UnDelegatebwPage extends Component {
   };
 
     UnDelegatebwConfirmFn = () => {
-      if ((!this.state.CPU && !this.state.Network) || this.IsStateCpuLegal() || this.IsStateNetworkLegal()) {
+      if ((!this.state.CPU && !this.state.Network) || !this.IsStateCpuLegal() || !this.IsStateNetworkLegal()) {
         return;
       }
 
@@ -142,8 +137,8 @@ class UnDelegatebwPage extends Component {
         const data = {
           from: accountName,
           receiver: accountName,
-          unstake_net_quantity: this.state.Network + " SYS",
-          unstake_cpu_quantity: this.state.CPU + " SYS",
+          unstake_net_quantity: Number(this.state.Network) + " SYS",
+          unstake_cpu_quantity: Number(this.state.CPU) + " SYS",
         };
         const nav = this.props.navigation;
         this.props.onDispatchUnDelegateBwPost(data, nav, accountPrivateKey);

@@ -20,7 +20,7 @@ class VoteIndexPage extends Component {
           title: 'Total Asset',
           headerBackImage: null,
           headerRight: (
-            // {/*<Text style={{paddingRight: 10}} onPress={() => {props.navigation.navigate('ChangeNodeConnection');}}>Change Wallet</Text>*/}
+            //*<Text style={{paddingRight: 10}} onPress={() => {props.navigation.navigate('ChangeNodeConnection');}}>Change Wallet</Text>*/}
             <Text style={{paddingRight: 10}} onPress={() => {props.navigation.state.params.navigatePress()}}>Change Wallet</Text>
           )
         };
@@ -97,9 +97,12 @@ class VoteIndexPage extends Component {
                   paddingTop: 10,
                   paddingBottom: 10,
                   flexDirection: 'row',
+                  borderBottomWidth:1,
+                  borderBottomColor: "#eee",
+                  justifyContent: "space-between",
               } ]}>
             <View style={[ {flex:2} ]}>
-                <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:'http://images.eosio.sg/eos.png'}}
+                <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:'https://steemitimages.com/0x0/https://steemitimages.com/DQmWs93EuTs1CrgazwChGBqj7eygJoQ4HqB9ANWMN8TMHc8/eoosss1920_0023.jpg'}}
                        style={{width:46,height:46, borderRadius:23, marginTop:10}}/>
             </View>
             <View style={[ {flex:8,} ]}>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Platform } from "react-native";
 import { Provider } from "react-redux";
 import configureStore from "./utils/configure-store";
 import App from "./App";
@@ -27,9 +28,11 @@ export function setup() {
         }
 
       componentDidMount() {
-        setTimeout(() => {
-          // SplashScreen.hide();
-        }, 1000);
+          if (Platform.OS == "android") {
+            setTimeout(() => {
+              // SplashScreen.hide();
+            }, 1000);
+          }
       }
 
         render() {
