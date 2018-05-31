@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     position: "relative",
     flexBasis: "100%",
     backgroundColor: "#fafafa",
-
+    minHeight: Dimensions.get("window").height - 80,
   },
   contentBox: {
     paddingTop: 40,
