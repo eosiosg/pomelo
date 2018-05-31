@@ -25,11 +25,6 @@ class UnDelegatebwPage extends Component {
         };
     }
 
-    componentWillReceiveProps( nextProps ) {}
-
-    componentDidMount() {}
-
-
     render() {
 
         const { delegated_bandwidth } = this.props.accountInfo;
@@ -76,7 +71,7 @@ class UnDelegatebwPage extends Component {
                           placeholderTextColor={"#999"}
                           maxLength={11}
                           keyboardType="numeric"
-                          onChange={(CPU) => {this.setState(CPU)}}
+                          onChangeText={(CPU) => this.setState({CPU})}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
@@ -90,7 +85,7 @@ class UnDelegatebwPage extends Component {
                           placeholderTextColor={"#999"}
                           maxLength={11}
                           keyboardType="numeric"
-                          onChange={(Network) => {this.setState(Network)}}
+                          onChangeText={(Network) => this.setState({Network})}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
