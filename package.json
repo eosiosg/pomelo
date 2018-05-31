@@ -66,6 +66,7 @@
     "redux-persist-transform-encrypt": "^2.0.1",
     "redux-saga": "^0.16.0",
     "redux-thunk": "^2.3.0",
+    "rn-viewpager": "^1.2.9",
     "rn-splash-screen": "^5.2.0",
     "stream-browserify": "^1.0.0",
     "string_decoder": "^0.10.31",

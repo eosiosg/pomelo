@@ -34,6 +34,8 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B33469C9A5040634BCF6DCA2 /* libPods-eoswallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D60B592D09542CDDCE395B7F /* libPods-eoswallet.a */; };
 		BAFF3B35621A4CC9BBD4E4D3 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E101A78089094A71AE845EC4 /* Foundation.ttf */; };
+		BB0AB08520C049950083570B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB0AB08420C049950083570B /* LaunchScreen.xib */; };
+		BB0AB08B20C052600083570B /* 750.png in Resources */ = {isa = PBXBuildFile; fileRef = BB0AB08A20C052600083570B /* 750.png */; };
 		BB34F7B220BE70CA00C4DE81 /* Info-adhoc.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB34F7B120BE70CA00C4DE81 /* Info-adhoc.plist */; };
 		D6AEFD98281E49C68E8DEA27 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72FE9B829D584235958C8B6C /* Octicons.ttf */; };
 		F2E04C33B2DA4B39A1D1BA27 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A89FF216E619439DA1482D58 /* Ionicons.ttf */; };
@@ -381,6 +383,8 @@
 		A0CBBE490F985B19A26F3432 /* Pods-eoswallet.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eoswallet.alpha.xcconfig"; path = "Pods/Target Support Files/Pods-eoswallet/Pods-eoswallet.alpha.xcconfig"; sourceTree = "<group>"; };
 		A89FF216E619439DA1482D58 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		BB0AB08420C049950083570B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = eoswallet/Base.proj/LaunchScreen.xib; sourceTree = "<group>"; };
+		BB0AB08A20C052600083570B /* 750.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 750.png; sourceTree = "<group>"; };
 		BB34F7B120BE70CA00C4DE81 /* Info-adhoc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Info-adhoc.plist"; path = "eoswallet/Info-adhoc.plist"; sourceTree = "<group>"; };
 		D361F5FB36A666B41BD5B0C4 /* Pods-eoswallet-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eoswallet-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eoswallet-tvOSTests/Pods-eoswallet-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D60B592D09542CDDCE395B7F /* libPods-eoswallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eoswallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -502,12 +506,14 @@
 		13B07FAE1A68108700A75B9A /* eoswallet */ = {
 			isa = PBXGroup;
 			children = (
+				BB0AB08A20C052600083570B /* 750.png */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				BB34F7B120BE70CA00C4DE81 /* Info-adhoc.plist */,
 				13B07FB61A68108700A75B9A /* Info-debug.plist */,
+				BB0AB08420C049950083570B /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = eoswallet;
@@ -1112,8 +1118,10 @@
 				BAFF3B35621A4CC9BBD4E4D3 /* Foundation.ttf in Resources */,
 				F2E04C33B2DA4B39A1D1BA27 /* Ionicons.ttf in Resources */,
 				8E7856127701490B83E05477 /* MaterialCommunityIcons.ttf in Resources */,
+				BB0AB08520C049950083570B /* LaunchScreen.xib in Resources */,
 				159D6F1E8D8646F0AA7C0AEB /* MaterialIcons.ttf in Resources */,
 				D6AEFD98281E49C68E8DEA27 /* Octicons.ttf in Resources */,
+				BB0AB08B20C052600083570B /* 750.png in Resources */,
 				5A571E956424441599B3A0BD /* SimpleLineIcons.ttf in Resources */,
 				87B42434FC764AF886466612 /* Zocial.ttf in Resources */,
 			);
@@ -1175,7 +1183,6 @@
 			buildSettings = {
 				APP_DISPLAY_NAME = "Pomelo Debug";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: SUN LIN (V77JF59G7B)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1284,7 +1291,6 @@
 			buildSettings = {
 				APP_DISPLAY_NAME = Pomelo;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: SUN LIN (BG9UYMZLS9)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: SUN LIN (BG9UYMZLS9)";
 				CODE_SIGN_STYLE = Manual;
@@ -1311,7 +1317,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pomelo.adhoc;
 				PRODUCT_NAME = eoswallet;
-				PROVISIONING_PROFILE = "2303d8f9-b915-420c-bb1e-80b16155932b";
+				PROVISIONING_PROFILE = "092027cc-e178-4ead-b981-6c1d2eb708bc";
 				PROVISIONING_PROFILE_SPECIFIER = PomeloAdhoc;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
