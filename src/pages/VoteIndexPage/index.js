@@ -269,7 +269,7 @@ class VoteIndexPage extends Component {
                   <View style={{height: 50}}></View>
                 </ScrollView>
             </View>
-              <Modal animationType='slide' transparent={true} visible={this.state.IsModalShow}>
+              <Modal animationType='slide' transparent={true} visible={this.state.IsModalShow} onRequestClose={() => {}}>
                 <View style={modalStyles.modalStyle}>
                   <View style={modalStyles.subView}>
                     <Text style={modalStyles.titleText}>Notice</Text>
