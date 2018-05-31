@@ -3,9 +3,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaView } from "react-native";
 // 自定义组件
+import Toast from "react-native-root-toast";
 import I18n from "../../../I18n";
 import { styles, countStyles, stakeStyles, ruleStyles, btnStyles } from "./style";
-import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
+import { decryptObject, storage } from "../../utils/storage";
 
 class DelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
@@ -74,7 +75,7 @@ class DelegatebwPage extends Component {
                           placeholder={CPU_placeholder}
                           placeholderTextColor={"#999"}
                           keyboardType="numeric"
-                          onChangeText={(CPU) => this.SetStateCpu(CPU)}
+                          onChangeText={(CPU) => this.setState(CPU)}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
@@ -87,7 +88,7 @@ class DelegatebwPage extends Component {
                           placeholder={Network_placeholder}
                           placeholderTextColor={"#999"}
                           keyboardType="numeric"
-                          onChangeText={(Network) => this.SetStateNetwork(Network)}
+                          onChangeText={(Network) => this.setState(Network)}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
@@ -111,24 +112,32 @@ class DelegatebwPage extends Component {
         );
     }
 
-    SetStateCpu = (val) => {
-      const cpuSurplus = this.props.CurrencyBalance - this.state.Network;
-      const CPU = String(Math.min(cpuSurplus, val));
-      this.setState({
-        CPU,
-      });
+    IsStateCpuLegal = () => {
+      let IsLegal = true;
+      const cpuSurplus = this.props.CurrencyBalance - Number(this.state.Network);
+      if (Number(this.state.CPU) < 0 || cpuSurplus < 0 || Number(this.state.CPU) > cpuSurplus) {
+        Toast.show("The CPU Number is illegal",{
+          position: 20,
+        });
+        IsLegal = false;
+      }
+      return IsLegal;
     };
 
-    SetStateNetwork = (val) => {
-      const networkSurplus = this.props.CurrencyBalance - this.state.CPU;
-      const Network = String(Math.min(networkSurplus, val));
-      this.setState({
-        Network,
-      });
+    IsStateNetworkLegal = () => {
+      let IsLegal = true;
+      const networkSurplus = this.props.CurrencyBalance - Number(this.state.CPU);
+      if (Number(this.state.Network) < 0 || networkSurplus < 0 || Number(this.state.Network) > networkSurplus) {
+        Toast.show("The Network Number is illegal",{
+          position: 20,
+        });
+        IsLegal = false;
+      }
+      return IsLegal;
     };
 
     DelegatebwConfirmFn = () => {
-      if (!this.state.CPU && !this.state.Network) {
+      if ((!this.state.CPU && !this.state.Network) || this.IsStateCpuLegal() || this.IsStateNetworkLegal()) {
         return;
       }
 
