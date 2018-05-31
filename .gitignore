@@ -26,3 +26,5 @@ ios/*.xcbkptlist
 .DS_Store
 */.DS_Store
 ios/xcuserdata
+
+ios/Podfile.lock
