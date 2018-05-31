@@ -12,11 +12,16 @@ const developTeam = require('../../images/developTeamBackground.png');
 
 class VoteIndexPage extends Component {
     static navigationOptions = ( props ) => {
+
+        const { navigation } = props;
+        const { state, setParams } = navigation;
+        const { params } = state;
         return {
           title: 'Total Asset',
           headerBackImage: null,
           headerRight: (
-            <Text style={{paddingRight: 10}} onPress={() => {props.navigation.state.params.navigatePress()}}>Change Wallet</Text>
+            <Text style={{paddingRight: 10}} onPress={() => {props.navigation.navigate('ChangeNodeConnection');}}>Change Wallet</Text>
+            // <Text style={{paddingRight: 10}} onPress={() => {props.navigation.state.params.navigatePress()}}>Change Wallet</Text>
           ),
         };
     };
@@ -161,7 +166,9 @@ class VoteIndexPage extends Component {
 
     render() {
 
-      const votedByMeProducers = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info.producers : []
+        console.log('aaa');
+
+        const votedByMeProducers = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info.producers : []
 
       const { account_name, total_resources, delegated_bandwidth } = this.props.accountInfo;
       const { ram_bytes } = total_resources;
