@@ -34,7 +34,7 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B33469C9A5040634BCF6DCA2 /* libPods-eoswallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D60B592D09542CDDCE395B7F /* libPods-eoswallet.a */; };
 		BAFF3B35621A4CC9BBD4E4D3 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E101A78089094A71AE845EC4 /* Foundation.ttf */; };
-		BB34F7B220BE70CA00C4DE81 /* Info-appstore.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB34F7B120BE70CA00C4DE81 /* Info-appstore.plist */; };
+		BB34F7B220BE70CA00C4DE81 /* Info-adhoc.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB34F7B120BE70CA00C4DE81 /* Info-adhoc.plist */; };
 		D6AEFD98281E49C68E8DEA27 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 72FE9B829D584235958C8B6C /* Octicons.ttf */; };
 		F2E04C33B2DA4B39A1D1BA27 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A89FF216E619439DA1482D58 /* Ionicons.ttf */; };
 		FB6A23AEEADC40DBB1E5F331 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C62F197D04EF59D29CEB5 /* Feather.ttf */; };
@@ -381,7 +381,7 @@
 		A0CBBE490F985B19A26F3432 /* Pods-eoswallet.alpha.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eoswallet.alpha.xcconfig"; path = "Pods/Target Support Files/Pods-eoswallet/Pods-eoswallet.alpha.xcconfig"; sourceTree = "<group>"; };
 		A89FF216E619439DA1482D58 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
-		BB34F7B120BE70CA00C4DE81 /* Info-appstore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Info-appstore.plist"; path = "eoswallet/Info-appstore.plist"; sourceTree = "<group>"; };
+		BB34F7B120BE70CA00C4DE81 /* Info-adhoc.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Info-adhoc.plist"; path = "eoswallet/Info-adhoc.plist"; sourceTree = "<group>"; };
 		D361F5FB36A666B41BD5B0C4 /* Pods-eoswallet-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eoswallet-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-eoswallet-tvOSTests/Pods-eoswallet-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D60B592D09542CDDCE395B7F /* libPods-eoswallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eoswallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB8EDC192A836C0D20263C89 /* Pods-eoswallet-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-eoswallet-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-eoswallet-tvOSTests/Pods-eoswallet-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -506,7 +506,7 @@
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				BB34F7B120BE70CA00C4DE81 /* Info-appstore.plist */,
+				BB34F7B120BE70CA00C4DE81 /* Info-adhoc.plist */,
 				13B07FB61A68108700A75B9A /* Info-debug.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -1108,7 +1108,7 @@
 				A4D8DF0663AE467BAE6B38DE /* EvilIcons.ttf in Resources */,
 				FB6A23AEEADC40DBB1E5F331 /* Feather.ttf in Resources */,
 				4F5306CB1A444CA9B2658BEF /* FontAwesome.ttf in Resources */,
-				BB34F7B220BE70CA00C4DE81 /* Info-appstore.plist in Resources */,
+				BB34F7B220BE70CA00C4DE81 /* Info-adhoc.plist in Resources */,
 				BAFF3B35621A4CC9BBD4E4D3 /* Foundation.ttf in Resources */,
 				F2E04C33B2DA4B39A1D1BA27 /* Ionicons.ttf in Resources */,
 				8E7856127701490B83E05477 /* MaterialCommunityIcons.ttf in Resources */,
@@ -1302,7 +1302,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-i18n/ios",
 				);
-				INFOPLIST_FILE = "eoswallet/Info-appstore.plist";
+				INFOPLIST_FILE = "eoswallet/Info-adhoc.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
