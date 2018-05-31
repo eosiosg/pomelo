@@ -30,7 +30,7 @@ export function setup() {
       componentDidMount() {
           if (Platform.OS == "android") {
             setTimeout(() => {
-              SplashScreen.hide();
+              // SplashScreen.hide();
             }, 1000);
           }
       }

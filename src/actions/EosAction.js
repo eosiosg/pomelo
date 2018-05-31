@@ -1,5 +1,18 @@
 const chainId = '706a7ddd808de9fc2b8879904f3b392256c83104c1d544b38302cc07d9fca477';
-const nodeAddress = 'http://13.229.70.163:8888';
+let nodeAddress = 'http://13.229.70.163:8888';
+
+// const nodeAddressList = [
+//     'http://13.229.70.163:8888',
+//     'http://52.74.197.107:8888',
+//     'http://13.229.70.163:8888'
+// ];
+//
+// function getNodeAddress(){
+//     let randomNum = parseInt(10*Math.random())%nodeAddressList.length;
+//     nodeAddress = randomNum;
+// }
+//
+// getNodeAddress();
 
 export function GetEOS( accountPrivateKey ) {
   try {
