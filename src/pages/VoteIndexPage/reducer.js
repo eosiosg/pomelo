@@ -48,12 +48,19 @@ export default function VoteIndexPageReducer (state = initState, action) {
         });
     case "VOTEINDEX_SETBPS_REDUCER":
         return Object.assign({}, state, {
-          "BPs": action.data
+          "BPs": action.data.rows,
+            "totalVoteWeight" : action.data.total_producer_vote_weight,
         });
     case "VOTEINDEX_GETINFO_TRUE_REDUCER":
         return Object.assign({}, state, {
             "needGetUserInfo" : true
         });
+
+        case "GET_NODESIDINFO_REDUCER":
+            return Object.assign({}, state, {
+                "accountDic": action.data.accountDic,
+                "contributors": action.data.contributors,
+            });
 
     case "VOTEINDEX_GETINFO_FALSE_REDUCER":
         return Object.assign({}, state, {
@@ -64,6 +71,11 @@ export default function VoteIndexPageReducer (state = initState, action) {
         return Object.assign({}, state, {
           "USD": action.data
       });
+        case "VOTEINDEX_TOTALWEIGHT_REDUCER":{
+            return Object.assign({}, state, {
+                "totalVoteWeight" :action.data.totalVoteWeight
+            })
+        }
     default:
         return state;
     }

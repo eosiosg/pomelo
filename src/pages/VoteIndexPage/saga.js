@@ -70,7 +70,7 @@ function getBps(action) {
   const eos = GetEOS(action.data.accountPrivateKey);
   return eos.getProducers( { json: true } ).then( result => {
     console.log(result);
-    return result.rows;
+      return result;
   } );
 }
 
@@ -95,3 +95,32 @@ export function* getVoteIndexPageUsdPricePost () {
   } catch (err) {}
 }
 
+
+
+export function* getNodesIDInfo(){
+    try{
+        const response = yield call(getNodesInfo);
+        let accountDic = {};
+        response.bp_info_list.map((bp)=>{
+            accountDic[bp.producer_name] = {
+                logo:bp.logo,
+                organization_name : bp.organization_name
+            }
+        })
+        yield put({ type: "GET_NODESIDINFO_REDUCER", data: {accountDic, contributors:response.contributors} });
+
+    }catch(err){
+
+    }
+}
+
+
+function getNodesInfo(){
+    return fetch('https://api.eosio.sg/bp/info').then((res)=>{
+        return res.json()
+    }).then((res)=>{
+        return res
+    }).catch(err=>{
+        console.log(err)
+    })
+}

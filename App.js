@@ -14,10 +14,12 @@ import VoteIndexPage from "./src/pages/VoteIndexPage";
 import DelegatebwPage from "./src/pages/DelegatebwPage";
 import UnDelegatebwPage from "./src/pages/UnDelegatebwPage";
 import NodeListPage from "./src/pages/NodeListPage";
+import ChangeNodeConnection from "./src/pages/ChangeNodeConnection";
 import I18n from "./I18n";
 // Navigator
 const Navigator = StackNavigator(
     {
+        ChangeNodeConnection: { screen: ChangeNodeConnection },
         HomePage: { screen: HomePage },
         VoteIndexPage: { screen: VoteIndexPage },
         VotePage: { screen: VotePage },

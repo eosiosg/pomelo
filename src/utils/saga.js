@@ -1,7 +1,7 @@
 import { takeLatest } from "redux-saga/effects";
 import { getHomeAccountName } from "../pages/HomePage/saga";
 import { postVotingList } from "../pages/VotePage/saga";
-import { getVoteIndexPageAccountInfoPost, getVoteIndexPageCurrencyBalancePost, getVoteIndexPageRefundsPost, getVoteIndexPageBpsPost, getVoteIndexPageUsdPricePost } from "../pages/VoteIndexPage/saga";
+import { getVoteIndexPageAccountInfoPost, getVoteIndexPageCurrencyBalancePost, getVoteIndexPageRefundsPost, getVoteIndexPageBpsPost, getVoteIndexPageUsdPricePost,getNodesIDInfo } from "../pages/VoteIndexPage/saga";
 import { getDelegatebwPageAccountInfoPost, getDelegatebwPageCurrencyBalancePost, getDelegatebwPageConfirmPost } from "../pages/DelegatebwPage/saga";
 import { getUnDelegatebwPageAccountPost, getUnDelegatebwPageConfirmPost } from "../pages/UnDelegatebwPage/saga";
 
@@ -10,6 +10,7 @@ import { getUnDelegatebwPageAccountPost, getUnDelegatebwPageConfirmPost } from "
  */
 export default function* SagaInit() {
     yield takeLatest("HOME_ACCOUNT_NAME", getHomeAccountName);
+    yield takeLatest("GET_NODESIDINFO_POST", getNodesIDInfo);
     yield takeLatest("VOTE_INDEX_ACCOUNTINFO_POST", getVoteIndexPageAccountInfoPost);
     yield takeLatest("VOTE_INDEX_CURRENCYBALANCE_POST", getVoteIndexPageCurrencyBalancePost);
     yield takeLatest("VOTE_INDEX_REFUNDS_POST", getVoteIndexPageRefundsPost);

@@ -48,8 +48,10 @@ const styles = StyleSheet.create({
   },
   bottomContent  :{
     position : "absolute",
-    bottom : 0,
-    width : "100%",
+    bottom : 25,
+    width : "94%",
+    left : "3%",
+    borderRadius: 5,
     backgroundColor: "#3D4144",
   },
   buttonSubmit:{
@@ -79,6 +81,7 @@ const styles = StyleSheet.create({
   // 标题
   titleText:{
     marginTop:10,
+    paddingTop:10,
     marginBottom:5,
     fontSize:17,
     fontWeight:'bold',
@@ -139,12 +142,12 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   contentItemTitle:{
-    paddingBottom : 15,
-    paddingTop : 25,
+    fontSize: 14,
+    color: "#323232",
+    lineHeight: 25,
+    paddingTop : 15,
+    paddingBottom : 10,
     paddingLeft: 10,
-    paddingRight: 10,
-    fontSize:18,
-    color : "#323232",
   },
   contentItemNo:{
     fontSize : 22,

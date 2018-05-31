@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { FlatList, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, SafeAreaView, Text, TouchableOpacity,ImageBackground, View, Image } from "react-native";
 import { styles as style, styles } from "./style";
 import { getDpFromPx } from "../../utils/util";
 import Icon from "react-native-vector-icons/Ionicons";
@@ -9,6 +9,8 @@ import OperationBottomComponent from "./components/OperationBottomComponent";
 import LoadingView from "./components/LoadingView";
 import Spinner from 'react-native-loading-spinner-overlay';
 import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
+const developTeam = require('../../images/developTeamBackground.png');
+import developmentTeamList from '../../../data/developmentTeam'
 
 class NodeListPage extends Component {
     static navigationOptions = ( props ) => {
@@ -108,14 +110,30 @@ class NodeListPage extends Component {
                       paddingBottom: 10,
                       flexDirection: 'row',
                   } ]}>
-                <View style={[ {}, style.wrapper ]}>
+                <View style={[ {flex:2} ]}>
+                    <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:''}}
+                           style={{width:46,height:46, borderRadius:23, marginTop:10}}/>
+                </View>
+                <View style={[ {flex:8,} ]}>
                     <Text numberOfLines={1}
                           style={[
                               style.commonTextColorStyle,
                               {
                                   fontWeight: 'bold',
-                                  fontSize: 20,
-                                  lineHeight: 28,
+                                  fontSize: 22,
+                                  lineHeight: 35,
+                                  fontFamily: 'PingFangSC-Semibold',
+                                  color: '#323232',
+                              } ]}>
+                        {this.props.accountDic[item.owner]?this.props.accountDic[item.owner].organization_name:'Not set'}
+
+                    </Text>
+                    <Text numberOfLines={1}
+                          style={[
+                              style.commonTextColorStyle,
+                              {
+                                  fontSize: 14,
+                                  lineHeight: 22,
                                   fontFamily: 'PingFangSC-Semibold',
                                   color: '#323232',
                               } ]}>
@@ -125,33 +143,33 @@ class NodeListPage extends Component {
                           style={[
                               style.commonSubTextColorStyle,
                               {
-                                  fontSize: 16,
-                                  marginTop: 8,
-                                  lineHeight: 20,
-                                  fontFamily: 'PingFangSC-Regular',
-                                  color: '#999999',
-                                  letterSpacing: 0,
-                              } ]
-                          }>
-                        http://{item.url}
-                    </Text>
-                    <Text numberOfLines={1}
-                          style={[
-                              style.commonSubTextColorStyle,
-                              {
                                   fontSize: 14,
-                                  marginTop: 10,
-                                  lineHeight: 20,
+                                  lineHeight: 28,
                                   fontFamily: 'PingFangSC-Regular',
                                   color: '#999999',
                                   letterSpacing: 0,
                               } ]
                           }>
-                        {item.total_votes} Voter Choise
+                        {parseFloat(item.total_votes/this.props.totalVoteWeight*100).toFixed(2) + "%"} Voter Choise
                     </Text>
                 </View>
 
-                <View style={[ { marginBottom: 45 } ]}>
+                <View style={[ { paddingTop: 55,position:'relative' } ]}>
+                    {
+                        this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground style={{
+                            width: 160, height: 18,
+                            position: 'absolute',
+                            top: 6, right: -5,
+                            paddingLeft: 10,
+                            paddingRight: 10,
+                        }}
+                                                                                               source={developTeam}>
+                            <Text style={{textAlign: "center", lineHeight: 18, color: 'white'}}>
+                                Development Team
+                            </Text>
+                        </ImageBackground>
+                    }
+
                     <TouchableOpacity
                         onPress={() => {
                             if ( item.voting ) {
@@ -264,7 +282,12 @@ function mapStateToProps( state ) {
     return {
         allAsset: state.VoteIndexPageReducer.BPs,
         accountInfo: state.VoteIndexPageReducer.accountInfo,
-        testData2: state.NodeListPageReducer.testData2
+        testData2: state.NodeListPageReducer.testData2,
+        totalVoteWeight: state.VoteIndexPageReducer.totalVoteWeight,
+
+        accountDic: state.VoteIndexPageReducer.totalVoteWeight,
+        contributors: state.VoteIndexPageReducer.totalVoteWeight,
+
     };
 }
 

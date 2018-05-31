@@ -124,7 +124,7 @@ class UnDelegatebwPage extends Component {
     if (!this.state.CPU && !this.state.Network) {
       return;
     }
-
+        
     storage.load({key: "HomePageStorage"}).then((ret1) => {
       if (ret1) {
         const ret = decryptObject( ret1 );

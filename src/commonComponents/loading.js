@@ -5,7 +5,7 @@
 import React from "react";
 
 import { ActivityIndicator, Text, View } from "react-native";
-import { styles as style } from "../style";
+import { styles as style } from "../pages/VotePage/style";
 
 class LoadingView extends React.Component {
     constructor( props ) {
