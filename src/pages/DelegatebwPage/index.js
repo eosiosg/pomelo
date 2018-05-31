@@ -23,11 +23,6 @@ class DelegatebwPage extends Component {
         };
     }
 
-    componentWillReceiveProps( nextProps ) {}
-
-    componentDidMount() {}
-
-
     render() {
       const stake = Number(this.state.CPU) + Number(this.state.Network);
       const CurrencyBalance = (this.props.CurrencyBalance).toFixed(2);
@@ -75,7 +70,7 @@ class DelegatebwPage extends Component {
                           placeholder={CPU_placeholder}
                           placeholderTextColor={"#999"}
                           keyboardType="numeric"
-                          onChange={(CPU) => {this.setState(CPU)}}
+                          onChangeText={(CPU) => this.setState({CPU})}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
@@ -88,7 +83,7 @@ class DelegatebwPage extends Component {
                           placeholder={Network_placeholder}
                           placeholderTextColor={"#999"}
                           keyboardType="numeric"
-                          onChange={(Network) => {this.setState(Network)}}
+                          onChangeText={(Network) => this.setState({Network})}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
