@@ -113,7 +113,8 @@ class HomePage extends Component {
                 transparent={true}
                 visible={this.state.show}
                 onShow={() => {}}
-                onRequestClose={() => {}} >
+                onRequestClose={() => {}}
+              >
                 <View style={styles.modalStyle}>
                   <View style={styles.subView}>
                     <Text style={styles.titleText}>

@@ -95,6 +95,8 @@ class PasswordCheckComponent extends React.Component {
             <Modal
                 transparent={true}
                 visible={this.state.isOpen}
+                onShow={() => {}}
+                onRequestClose={() => {}}
             >
 
                 <View style={[ {
