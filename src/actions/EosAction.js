@@ -1,8 +1,76 @@
 const chainId = '706a7ddd808de9fc2b8879904f3b392256c83104c1d544b38302cc07d9fca477';
-const nodeAddress = 'http://13.229.70.163:8888';
+let nodeAddress = '';
+
+// var nodeAddressList = [
+//     'http://13.229.70.163:8888',
+//     'http://52.74.197.107:8888',
+//     // 'http://13.229.70.163:8888',
+//     // 'http://13.229.70.164:8888',
+//     // 'http://13.229.70.165:8888',
+//     // 'http://13.229.70.166:8888',
+//     // 'http://13.229.70.167:8888',
+// ];
+// nodeAddressList.sort(function(a, b){return 0.5 - Math.random()});
+//
+//
+// async function getNodeAddress(){
+//     let result = false;
+//     let api;
+//     for(let i = 0 ; i< nodeAddressList.length; i++){
+//         api = `${nodeAddressList[i]}/v1/chain/get_info`;
+//         console.log('$$$$apiiii',api);
+//         await fetch(api).then(
+//             res=>{
+//                 console.log(res)
+//                 result = true
+//             }
+//         ).catch(
+//             err=>{
+//                 console.log(err);
+//                 result = false
+//             }
+//         )
+//         if(result)break
+//     }
+//     return api
+// }
+
+// async function getResult(api){
+//     let result=false;
+//     await Promise.race([fetch(api),setTimeout(()=>false, 1500)]).then(res=>result=true).catch(err=>result=false);
+//     console.log(result);
+//     console.log('===============');
+//     return result
+// }
+// function getNodeAddress(){
+//     let randomNum = parseInt(10*Math.random())%nodeAddressList.length;
+//     console.log('---------------------------');
+//     console.log(`${nodeAddressList[randomNum]}/v1/chain/get_info`, randomNum);
+//     console.log('---------------------------');
+//     // while(!getResult(`${nodeAddressList[randomNum]}/v1/chain/get_info`)){
+//     //     console.log('---------------------------');
+//     //     console.log(nodeAddressList[randomNum]);
+//     //     console.log('---------------------------');
+//     //     nodeAddressList = nodeAddressList.slice(randomNum,1)
+//     //     randomNum = parseInt(10*Math.random())%nodeAddressList.length;
+//     // }
+//     return randomNum;
+// }
+
+// let api = getNodeAddress();
+
+
+
+var nodeAddressList = [
+    'http://13.229.70.163:8888',
+    'http://52.74.197.107:8888',
+];
+nodeAddressList.sort(function(a, b){return 0.5 - Math.random()});
+
+nodeAddress = nodeAddressList[0];
 
 export function GetEOS( accountPrivateKey ) {
-  try {
+    try {
     const Eos = require( 'eosjs' );
     const config = {
       keyProvider: accountPrivateKey, // WIF string or array of keys..

@@ -101,12 +101,17 @@ export function* getNodesIDInfo(){
     try{
         const response = yield call(getNodesInfo);
         let accountDic = {};
+        console.log('!!!!!!!!!!!!!!!!!!!!=======')
+        console.log(response)
         response.bp_info_list.map((bp)=>{
             accountDic[bp.producer_name] = {
                 logo:bp.logo,
                 organization_name : bp.organization_name
             }
-        })
+        });
+
+        console.log('bp got+++++++++++++++++');
+        console.log(accountDic)
         yield put({ type: "GET_NODESIDINFO_REDUCER", data: {accountDic, contributors:response.contributors} });
 
     }catch(err){
@@ -116,6 +121,7 @@ export function* getNodesIDInfo(){
 
 
 function getNodesInfo(){
+
     return fetch('https://api.eosio.sg/bp/info').then((res)=>{
         return res.json()
     }).then((res)=>{

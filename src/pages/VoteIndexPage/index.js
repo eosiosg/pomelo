@@ -12,12 +12,17 @@ const developTeam = require('../../images/developTeamBackground.png');
 
 class VoteIndexPage extends Component {
     static navigationOptions = ( props ) => {
+
+        const { navigation } = props;
+        const { state, setParams } = navigation;
+        const { params } = state;
         return {
           title: 'Total Asset',
           headerBackImage: null,
           headerRight: (
+            //*<Text style={{paddingRight: 10}} onPress={() => {props.navigation.navigate('ChangeNodeConnection');}}>Change Wallet</Text>*/}
             <Text style={{paddingRight: 10}} onPress={() => {props.navigation.state.params.navigatePress()}}>Change Wallet</Text>
-          ),
+          )
         };
     };
 
@@ -92,9 +97,12 @@ class VoteIndexPage extends Component {
                   paddingTop: 10,
                   paddingBottom: 10,
                   flexDirection: 'row',
+                  borderBottomWidth:1,
+                  borderBottomColor: "#eee",
+                  justifyContent: "space-between",
               } ]}>
             <View style={[ {flex:2} ]}>
-                <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:''}}
+                <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:'https://steemitimages.com/0x0/https://steemitimages.com/DQmWs93EuTs1CrgazwChGBqj7eygJoQ4HqB9ANWMN8TMHc8/eoosss1920_0023.jpg'}}
                        style={{width:46,height:46, borderRadius:23, marginTop:10}}/>
             </View>
             <View style={[ {flex:8,} ]}>
@@ -103,12 +111,12 @@ class VoteIndexPage extends Component {
                           style.commonTextColorStyle,
                           {
                               fontWeight: 'bold',
-                              fontSize: 22,
+                              fontSize: 21,
                               lineHeight: 35,
                               fontFamily: 'PingFangSC-Semibold',
                               color: '#323232',
                           } ]}>
-                    {this.props.accountDic[item.owner]?this.props.accountDic[item.owner].organization_name:'Not set'}
+                    {this.props.accountDic[item.owner]?this.props.accountDic[item.owner].organization_name:item.owner}
 
                 </Text>
                 <Text numberOfLines={1}
@@ -137,17 +145,17 @@ class VoteIndexPage extends Component {
                 </Text>
             </View>
 
-            <View style={[ { paddingTop: 55,position:'relative' } ]}>
+            <View style={[ { paddingTop: 55,position:'relative',zIndex:-1 } ]}>
                 {
                     this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground style={{
-                        width: 160, height: 18,
+                        width: 130, height: 18,
                         position: 'absolute',
                         top: 6, right: -5,
                         paddingLeft: 10,
                         paddingRight: 10,
                     }}
                                                                                            source={developTeam}>
-                        <Text style={{textAlign: "center", lineHeight: 18, color: 'white'}}>
+                        <Text style={{textAlign: "center", lineHeight: 18, fontSize:12, color: 'white'}}>
                             Development Team
                         </Text>
                     </ImageBackground>
@@ -160,8 +168,7 @@ class VoteIndexPage extends Component {
 
 
     render() {
-
-      const votedByMeProducers = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info.producers : []
+        const votedByMeProducers = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info.producers : []
 
       const { account_name, total_resources, delegated_bandwidth } = this.props.accountInfo;
       const { ram_bytes } = total_resources;
@@ -269,7 +276,7 @@ class VoteIndexPage extends Component {
                   <View style={{height: 50}}></View>
                 </ScrollView>
             </View>
-              <Modal animationType='slide' transparent={true} visible={this.state.IsModalShow}>
+              <Modal animationType='slide' transparent={true} visible={this.state.IsModalShow} onRequestClose={() => {}}>
                 <View style={modalStyles.modalStyle}>
                   <View style={modalStyles.subView}>
                     <Text style={modalStyles.titleText}>Notice</Text>
@@ -351,9 +358,8 @@ function mapStateToProps(state) {
         USD: state.VoteIndexPageReducer.USD,
         needGetUserInfo: state.VoteIndexPageReducer.needGetUserInfo,
 
-
-        accountDic: state.VoteIndexPageReducer.totalVoteWeight,
-        contributors: state.VoteIndexPageReducer.totalVoteWeight,
+        accountDic: state.VoteIndexPageReducer.accountDic,
+        contributors: state.VoteIndexPageReducer.contributors,
     };
 }
 

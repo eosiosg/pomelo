@@ -6,6 +6,7 @@ import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaVie
 import I18n from "../../../I18n";
 import { styles, countStyles, stakeStyles, btnStyles } from "./style";
 import { decryptObject, storage } from "../../utils/storage";
+import Toast from "react-native-root-toast";
 
 class UnDelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
@@ -17,17 +18,12 @@ class UnDelegatebwPage extends Component {
     constructor( props ) {
         super( props );
         this.state = {
-          Network: 0,
-          CPU: 0,
+          Network: "",
+          CPU: "",
           cpu_weight: 0,
           net_weight: 0,
         };
     }
-
-    componentWillReceiveProps( nextProps ) {}
-
-    componentDidMount() {}
-
 
     render() {
 
@@ -75,7 +71,7 @@ class UnDelegatebwPage extends Component {
                           placeholderTextColor={"#999"}
                           maxLength={11}
                           keyboardType="numeric"
-                          onChangeText={(CPU) => this.SetStateCpu(CPU)}
+                          onChangeText={(CPU) => this.setState({CPU})}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
@@ -89,7 +85,7 @@ class UnDelegatebwPage extends Component {
                           placeholderTextColor={"#999"}
                           maxLength={11}
                           keyboardType="numeric"
-                          onChangeText={(Network) => this.SetStateNetwork(Network)}
+                          onChangeText={(Network) => this.setState({Network})}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
@@ -106,25 +102,33 @@ class UnDelegatebwPage extends Component {
         );
     }
 
-    SetStateCpu = (val) => {
-    const CPU = String(Math.min(this.cpu_weight, val));
-    this.setState({
-      CPU,
-    });
+  IsStateCpuLegal = () => {
+    let IsLegal = true;
+    if (Number(this.state.CPU) > Number(this.cpu_weight) || Number(this.state.CPU) < 0) {
+      Toast.show("The CPU Number is illegal",{
+        position: 20,
+      });
+      IsLegal = false;
+    }
+    return IsLegal;
   };
 
-    SetStateNetwork = (val) => {
-    const Network = String(Math.min(this.net_weight, val));
-    this.setState({
-      Network,
-    });
+  IsStateNetworkLegal = () => {
+    let IsLegal = true;
+    if (Number(this.state.Network) > Number(this.net_weight) || Number(this.state.Network) < 0) {
+      Toast.show("The Network Number is illegal",{
+        position: 20,
+      });
+      IsLegal = false;
+    }
+    return IsLegal;
   };
 
     UnDelegatebwConfirmFn = () => {
-    if (!this.state.CPU && !this.state.Network) {
-      return;
-    }
-        
+      if ((!this.state.CPU && !this.state.Network) || !this.IsStateCpuLegal() || !this.IsStateNetworkLegal()) {
+        return;
+      }
+
     storage.load({key: "HomePageStorage"}).then((ret1) => {
       if (ret1) {
         const ret = decryptObject( ret1 );
@@ -133,8 +137,8 @@ class UnDelegatebwPage extends Component {
         const data = {
           from: accountName,
           receiver: accountName,
-          unstake_net_quantity: this.state.Network + " SYS",
-          unstake_cpu_quantity: this.state.CPU + " SYS",
+          unstake_net_quantity: Number(this.state.Network) + " SYS",
+          unstake_cpu_quantity: Number(this.state.CPU) + " SYS",
         };
         const nav = this.props.navigation;
         this.props.onDispatchUnDelegateBwPost(data, nav, accountPrivateKey);

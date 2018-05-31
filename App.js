@@ -19,8 +19,8 @@ import I18n from "./I18n";
 // Navigator
 const Navigator = StackNavigator(
     {
-        ChangeNodeConnection: { screen: ChangeNodeConnection },
         HomePage: { screen: HomePage },
+        ChangeNodeConnection: { screen: ChangeNodeConnection },
         VoteIndexPage: { screen: VoteIndexPage },
         VotePage: { screen: VotePage },
         NodeListPage: { screen: NodeListPage },

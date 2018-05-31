@@ -111,7 +111,7 @@ class NodeListPage extends Component {
                       flexDirection: 'row',
                   } ]}>
                 <View style={[ {flex:2} ]}>
-                    <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:''}}
+                    <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:'https://steemitimages.com/0x0/https://steemitimages.com/DQmWs93EuTs1CrgazwChGBqj7eygJoQ4HqB9ANWMN8TMHc8/eoosss1920_0023.jpg'}}
                            style={{width:46,height:46, borderRadius:23, marginTop:10}}/>
                 </View>
                 <View style={[ {flex:8,} ]}>
@@ -125,7 +125,7 @@ class NodeListPage extends Component {
                                   fontFamily: 'PingFangSC-Semibold',
                                   color: '#323232',
                               } ]}>
-                        {this.props.accountDic[item.owner]?this.props.accountDic[item.owner].organization_name:'Not set'}
+                        {this.props.accountDic[item.owner]?this.props.accountDic[item.owner].organization_name:item.owner}
 
                     </Text>
                     <Text numberOfLines={1}
@@ -154,17 +154,17 @@ class NodeListPage extends Component {
                     </Text>
                 </View>
 
-                <View style={[ { paddingTop: 55,position:'relative' } ]}>
+                <View style={[ { paddingTop: 55,position:'relative',zIndex:0, } ]}>
                     {
                         this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground style={{
-                            width: 160, height: 18,
+                            width: 130, height: 18,
                             position: 'absolute',
                             top: 6, right: -5,
                             paddingLeft: 10,
                             paddingRight: 10,
                         }}
                                                                                                source={developTeam}>
-                            <Text style={{textAlign: "center", lineHeight: 18, color: 'white'}}>
+                            <Text style={{textAlign: "center", lineHeight: 18, fontSize:12, color: 'white'}}>
                                 Development Team
                             </Text>
                         </ImageBackground>
@@ -285,8 +285,8 @@ function mapStateToProps( state ) {
         testData2: state.NodeListPageReducer.testData2,
         totalVoteWeight: state.VoteIndexPageReducer.totalVoteWeight,
 
-        accountDic: state.VoteIndexPageReducer.totalVoteWeight,
-        contributors: state.VoteIndexPageReducer.totalVoteWeight,
+        accountDic: state.VoteIndexPageReducer.accountDic,
+        contributors: state.VoteIndexPageReducer.contributors,
 
     };
 }

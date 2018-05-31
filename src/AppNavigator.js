@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import VotePage from "./pages/VotePage";
 import DelegatebwPage from "./pages/DelegatebwPage";
 import NodeListPage from "./pages/NodeListPage";
+import ChangeNodeConnection from "./pages/ChangeNodeConnection";
 import UnDelegatebwPage from "./pages/UnDelegatebwPage";
 
 export const AppNavigator = StackNavigator(
@@ -14,6 +15,7 @@ export const AppNavigator = StackNavigator(
         VotePage: { screen: VotePage },
         NodeListPage: { screen: NodeListPage },
         DelegatebwPage: { screen: DelegatebwPage },
+        ChangeNodeConnection: { screen: ChangeNodeConnection },
         UnDelegatebwPage: { screen: UnDelegatebwPage },
         PasswordInputPage: { screen: PasswordInputPage },
     },
