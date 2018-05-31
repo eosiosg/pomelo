@@ -1,10 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button, FlatList, SafeAreaView, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+    Button,
+    Dimensions,
+    FlatList,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
 import { styles } from "./style";
-import { stakeStyles } from "../DelegatebwPage/style";
 import Toast from "react-native-root-toast";
-import PasswordCheckComponent from "./components/PasswordCheckComponent";
+import { ViewPager } from 'rn-viewpager';
+import PasswordInputPageItem from "./PasswordInputPageItem";
+
 
 class PasswordInputPage extends Component {
     static navigationOptions = ( props ) => {
@@ -20,8 +31,7 @@ class PasswordInputPage extends Component {
     constructor( props ) {
         super( props );
         this.state = {
-            password: '',
-            isPasswordCheckOpen: false
+            oldPassword: '',
         };
     }
 
@@ -33,82 +43,109 @@ class PasswordInputPage extends Component {
 
     }
 
-    setPassword() {
-        if ( this.state.password.length !== 6 ) {
-            Toast.show( "密码长度不正确" );
+    setPassword( password ) {
+        if ( password.length !== 6 ) {
+            Toast.show( "Password length is not correctly" );
 
             return;
         }
 
-        this.props.onDispatchSetPassword( this.state.password );
-        Toast.show( "密码设置成功" );
+        this.props.onDispatchSetPassword( password );
+        Toast.show( "Password set success" );
     }
 
-    checkPassword() {
-        if ( this.props.password.length <= 0 ) {
-            Toast.show( "请先设置密码" );
-
-            return;
-        }
-
-        this.setState( {
-            isPasswordCheckOpen: true
-        } );
-    }
+    //
+    // checkPassword() {
+    //     if ( this.props.password.length <= 0 ) {
+    //         Toast.show( "请先设置密码" );
+    //
+    //         return;
+    //     }
+    //
+    //     this.setState( {
+    //         isPasswordCheckOpen: true
+    //     } );
+    // }
 
     render() {
         return (
             <SafeAreaView style={styles.wrapper}>
                 <View style={[ styles.wrapper, { backgroundColor: '#fafafa', } ]}>
-                    <TextInput
-                        style={stakeStyles.stakeValueInput}
-                        placeholder={'请输入密码'}
-                        placeholderTextColor={"#999"}
-                        keyboardType="numeric"
-                        onChangeText={( text ) => {
-                            this.setState( {
-                                password: text
-                            } );
+                    <ViewPager
+                        ref={( viewPager ) => {
+                            this._viewPager = viewPager;
                         }}
-                        underlineColorAndroid={"transparent"}
-                    />
+                        style={[ styles.wrapper ]}
+                        scrollEnabled={false}
+                        initialPage={0}
+                        keyboardDismissMode={'on-drag'}
+                        onPageSelected={( p ) => {
+                            if ( p.position === 1 ) {
+                                this._passwordInputPageItem1.blur();
+                                this._passwordInputPageItem2.focus();
+                            }
+                            else {
+                                if ( p.position === 1 ) {
+                                    this._passwordInputPageItem2.blur();
+                                    this._passwordInputPageItem1.focus();
+                                }
+                            }
+                        }}
+                    >
+                        <View>
+                            <PasswordInputPageItem
+                                ref={( passwordInputPageItem ) => {
+                                    this._passwordInputPageItem1 = passwordInputPageItem;
+                                }}
+                                style={[ {} ]} title={'Please enter your password'}
+                                isSupportClear={true}
+                                autoFocus={true}
+                                onPasswordSet={( password ) => {
+                                    // Toast.show( "First setup Password: " + password );
 
-                    <Button
-                        onPress={() => {
-                            this.setPassword()
-                        }}
-                        title="保存密码"
-                        color="#841584"
-                        accessibilityLabel=""
-                    />
+                                    this.setState( {
+                                        oldPassword: password
+                                    } );
 
-                    <Button
-                        onPress={() => {
-                            this.checkPassword()
-                        }}
-                        title="Check Password"
-                        color="#841584"
-                        accessibilityLabel=""
-                    />
+                                    this._passwordInputPageItem1.blur();
+                                    this._passwordInputPageItem2.clearPassword();
+                                    this._viewPager.setPage( 1 )
+                                }}
+                            />
+                        </View>
+                        <View>
+                            <PasswordInputPageItem
+                                ref={( passwordInputPageItem ) => {
+                                    this._passwordInputPageItem2 = passwordInputPageItem;
+                                }}
+                                style={[ {} ]} title={'Please check your password'}
+                                isSupportClear={false}
+                                autoFocus={false}
+                                onPasswordSet={( newPassword ) => {
+                                    if ( newPassword === this.state.oldPassword ) {
+                                        this._passwordInputPageItem2.blur();
 
-                    <Button
-                        onPress={() => {
-                            this.props.onDispatchSetPassword( '' );
-                        }}
-                        title="Clear Password"
-                        color="#841584"
-                        accessibilityLabel=""
-                    />
+                                        this.setPassword( newPassword );
+                                    } else {
+                                        Toast.show( "Password is not the same", { position: Toast.positions.CENTER } );
+
+                                        this._passwordInputPageItem1.clearPassword();
+                                        this._passwordInputPageItem2.clearPassword();
+
+                                        this._passwordInputPageItem2.blur();
+                                        this._passwordInputPageItem1.focus();
+
+                                        this.setState( {
+                                            oldPassword: ''
+                                        } );
+
+                                        this._viewPager.setPage( 0 )
+                                    }
+                                }}
+                            />
+                        </View>
+                    </ViewPager>
                 </View>
-
-                <PasswordCheckComponent
-                    isOpen={this.state.isPasswordCheckOpen}
-                    onClose={() => {
-                        this.setState( {
-                            isPasswordCheckOpen: false
-                        } );
-                    }}
-                />
             </SafeAreaView>
         );
     }

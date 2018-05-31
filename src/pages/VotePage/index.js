@@ -115,7 +115,7 @@ class VotePage extends Component {
         return (
             <SafeAreaView style={[{flex:1}]}>
 
-            <ScrollView>
+            <ScrollView >
                 <View style={[styles.bodyBox,{flex:1}]}>
 
                     <View style={styles.contentHeader}>
@@ -128,10 +128,10 @@ class VotePage extends Component {
                             </Text>
                         </View>
                         <View style={styles.contentHeaderBalance}>
-                            <Text style={styles.contentHeaderAccountNameLabel}>
+                            <Text style={[styles.contentHeaderAccountNameLabel,{flex:3}]}>
                                 {balance}
                             </Text>
-                            <Text style={styles.contentHeaderBalanceValueContainer}>
+                            <Text style={[styles.contentHeaderBalanceValueContainer,{flex:8}]}>
                                 <Text style={styles.contentHeaderBalanceValue}>
                                     {CurrencyBalance||123345}
                                 </Text>
@@ -192,7 +192,7 @@ class VotePage extends Component {
                         </View>
                     </View>
 
-                    <View style={styles.contentBodyVotingList}>
+                    <View style={[styles.contentBodyVotingList,{marginBottom:50},]}>
                         <View style={styles.contentBodyVotingListHeader}>
                             <Text style={styles.contentBodyVotingListName}>
                                 {bpList}
@@ -224,7 +224,7 @@ class VotePage extends Component {
                 </View>
             </ScrollView>
 
-                <View style = {styles.footerView}>
+                <View style = {[styles.footerView,{flex: 1, marginBottom:0}]}>
                     <Text style={styles.footerSubmit}
                           onPress={this._setNoticeModalShow.bind(this)}>
                         {submit}
