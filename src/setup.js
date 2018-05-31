@@ -2,6 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import configureStore from "./utils/configure-store";
 import App from "./App";
+import SplashScreen from "rn-splash-screen";
 
 let _provider;
 let _store;
@@ -24,6 +25,12 @@ export function setup() {
 
             _store = this.state.store;
         }
+
+      componentDidMount() {
+        setTimeout(() => {
+          SplashScreen.hide();
+        }, 1000);
+      }
 
         render() {
             if ( this.state.isLoading ) {

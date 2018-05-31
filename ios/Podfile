@@ -18,6 +18,8 @@ target 'eoswallet' do
 
   common_pods
 
+pod 'rn-splash-screen', :path => '../node_modules/rn-splash-screen'
+
 #  target 'eoswalletTests' do
 #    inherit! :search_paths
     # Pods for testing
