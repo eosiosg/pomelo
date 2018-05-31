@@ -111,7 +111,7 @@ class NodeListPage extends Component {
                       flexDirection: 'row',
                   } ]}>
                 <View style={[ {flex:2} ]}>
-                    <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:''}}
+                    <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:'http://images.eosio.sg/eos.png'}}
                            style={{width:46,height:46, borderRadius:23, marginTop:10}}/>
                 </View>
                 <View style={[ {flex:8,} ]}>
@@ -154,10 +154,10 @@ class NodeListPage extends Component {
                     </Text>
                 </View>
 
-                <View style={[ { paddingTop: 55,position:'relative' } ]}>
+                <View style={[ { paddingTop: 55,position:'relative',zIndex:0, } ]}>
                     {
                         this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground style={{
-                            width: 160, height: 18,
+                            width: 130, height: 18,
                             position: 'absolute',
                             top: 6, right: -5,
                             paddingLeft: 10,

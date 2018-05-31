@@ -28,7 +28,7 @@ export function setup() {
 
       componentDidMount() {
         setTimeout(() => {
-          SplashScreen.hide();
+          // SplashScreen.hide();
         }, 1000);
       }
 
