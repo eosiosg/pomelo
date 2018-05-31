@@ -132,7 +132,7 @@ class DelegatebwPage extends Component {
     };
 
     DelegatebwConfirmFn = () => {
-      if ((!this.state.CPU && !this.state.Network) || this.IsStateCpuLegal() || this.IsStateNetworkLegal()) {
+      if ((!this.state.CPU && !this.state.Network) || !this.IsStateCpuLegal() || !this.IsStateNetworkLegal()) {
         return;
       }
 

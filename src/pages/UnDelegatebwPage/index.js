@@ -125,7 +125,7 @@ class UnDelegatebwPage extends Component {
   };
 
     UnDelegatebwConfirmFn = () => {
-      if ((!this.state.CPU && !this.state.Network) || this.IsStateCpuLegal() || this.IsStateNetworkLegal()) {
+      if ((!this.state.CPU && !this.state.Network) || !this.IsStateCpuLegal() || !this.IsStateNetworkLegal()) {
         return;
       }
 
