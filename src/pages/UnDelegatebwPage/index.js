@@ -18,8 +18,8 @@ class UnDelegatebwPage extends Component {
     constructor( props ) {
         super( props );
         this.state = {
-          Network: 0,
-          CPU: 0,
+          Network: "",
+          CPU: "",
           cpu_weight: 0,
           net_weight: 0,
         };
@@ -76,7 +76,7 @@ class UnDelegatebwPage extends Component {
                           placeholderTextColor={"#999"}
                           maxLength={11}
                           keyboardType="numeric"
-                          onChangeText={(CPU) => this.setState(CPU)}
+                          onChange={(CPU) => {this.setState(CPU)}}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
@@ -90,7 +90,7 @@ class UnDelegatebwPage extends Component {
                           placeholderTextColor={"#999"}
                           maxLength={11}
                           keyboardType="numeric"
-                          onChangeText={(Network) => this.setState(Network)}
+                          onChange={(Network) => {this.setState(Network)}}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>

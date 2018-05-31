@@ -18,8 +18,8 @@ class DelegatebwPage extends Component {
     constructor( props ) {
         super( props );
         this.state = {
-          CPU: 0,
-          Network: 0,
+          CPU: "",
+          Network: "",
         };
     }
 
@@ -75,7 +75,7 @@ class DelegatebwPage extends Component {
                           placeholder={CPU_placeholder}
                           placeholderTextColor={"#999"}
                           keyboardType="numeric"
-                          onChangeText={(CPU) => this.setState(CPU)}
+                          onChange={(CPU) => {this.setState(CPU)}}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
@@ -88,7 +88,7 @@ class DelegatebwPage extends Component {
                           placeholder={Network_placeholder}
                           placeholderTextColor={"#999"}
                           keyboardType="numeric"
-                          onChangeText={(Network) => this.setState(Network)}
+                          onChange={(Network) => {this.setState(Network)}}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
