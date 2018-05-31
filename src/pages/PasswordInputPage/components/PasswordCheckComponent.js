@@ -1,9 +1,11 @@
 import React from "react";
 import {
+    AppState,
     BackHandler,
     Button,
     Dimensions,
     FlatList,
+    Keyboard,
     Modal,
     Text,
     TextInput,
@@ -14,8 +16,8 @@ import {
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { styles as style } from "../style";
-import { stakeStyles } from "../../DelegatebwPage/style";
-import Toast from "react-native-root-toast";
+import PasswordInputComponent from "./PasswordInputComponent";
+import NumberInputComponent from "./NumberInputComponent";
 
 class PasswordCheckComponent extends React.Component {
     static propTypes = {
@@ -37,6 +39,10 @@ class PasswordCheckComponent extends React.Component {
 
     componentWillMount() {
         BackHandler.addEventListener( 'hardwareBackPress', this._onBack );
+    }
+
+    componentDidMount() {
+        Keyboard.dismiss();
     }
 
     componentWillUnmount() {
@@ -77,18 +83,19 @@ class PasswordCheckComponent extends React.Component {
     }
 
 
-    checkPassword() {
-        if ( this.state.password !== this.props.password ) {
+    checkPassword( password ) {
+        if ( password !== this.props.password ) {
             this.setState( {
                 errorText: 'Password is not correct'
             } );
+
+            this._passwordInputComponent.clearData();
             return;
         }
 
         this.closeModal();
-
-        Toast.show( "密码验证正确" );
     }
+
 
     render() {
         return (
@@ -98,38 +105,73 @@ class PasswordCheckComponent extends React.Component {
             >
 
                 <View style={[ {
-                    backgroundColor: 'white',
+                    backgroundColor: '#fafafa',
                 }, style.wrapper ]}>
-                    <TextInput
-                        style={stakeStyles.stakeValueInput}
-                        placeholder={'请输入密码'}
-                        placeholderTextColor={"#999"}
-                        keyboardType="numeric"
-                        onChangeText={( text ) => {
+                    <Text
+                        style={[ {
+                            fontSize: 18,
+                            color: '#323232',
+                            marginTop: 100,
+                            marginLeft: 20,
+                            marginRight: 20,
+                            textAlign: 'center'
+                        } ]}>
+                        {
+                            'Please enter your password'
+                        }
+                    </Text>
+
+                    <PasswordInputComponent
+                        ref={( passwordInputComponent ) => {
+                            this._passwordInputComponent = passwordInputComponent;
+                        }}
+                        password={this.state.password}
+                        style={[ { marginTop: 40, marginLeft: 50, marginRight: 50 } ]}
+                        autoFocus={false}
+                        editable={false}
+                        onPasswordChange={( password ) => {
+                            if ( password.length >= 6 ) {
+                                this.checkPassword( password );
+                            } else if ( password.length > 0 ) {
+                                this.setState( {
+                                    errorText: ''
+                                } );
+                            }
                             this.setState( {
-                                password: text
+                                password: password
                             } );
                         }}
-                        underlineColorAndroid={"transparent"}
                     />
 
-                    {
-                        this.state.errorText.length > 0 ?
-                            <Text style={[ {
-                                fontSize: 12,
-                                color: 'red'
-                            } ]}>{this.state.errorText}</Text>
-                            :
-                            null
-                    }
+                    <Text
+                        style={[ {
+                            fontSize: 12,
+                            color: 'red',
+                            marginTop: 10,
+                            marginLeft: 20,
+                            marginRight: 20,
+                            textAlign: 'center'
+                        } ]}>
+                        {
+                            this.state.errorText
+                        }
+                    </Text>
+
+                    <NumberInputComponent
+                        style={[ { flex: 1, marginLeft: 50, marginRight: 50, } ]}
+                        onInput={( content ) => {
+                            this._passwordInputComponent.appendContent( content );
+                        }}
+                    />
 
                     <Button
                         onPress={() => {
-                            this.checkPassword()
+                            this._passwordInputComponent.clearData()
                         }}
-                        title="Check Password"
-                        color="#841584"
+                        title="Clear Password"
+                        color="#007AFF"
                         accessibilityLabel=""
+                        style={[ { marginTop: 100, marginBottom: 20 } ]}
                     />
 
                 </View>
