@@ -125,7 +125,7 @@ class NodeListPage extends Component {
                                   fontFamily: 'PingFangSC-Semibold',
                                   color: '#323232',
                               } ]}>
-                        {this.props.accountDic[item.owner]?this.props.accountDic[item.owner].organization_name:'Not set'}
+                        {this.props.accountDic[item.owner]?this.props.accountDic[item.owner].organization_name:item.owner}
 
                     </Text>
                     <Text numberOfLines={1}
