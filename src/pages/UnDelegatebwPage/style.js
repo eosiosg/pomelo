@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
         position: "relative",
         flexBasis: "100%",
         backgroundColor: "#eee",
+        minHeight: Dimensions.get("window").height - 80,
     },
 });
 const countStyles = StyleSheet.create({
