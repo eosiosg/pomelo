@@ -144,8 +144,8 @@ class DelegatebwPage extends Component {
           const data = {
             from: accountName,
             receiver: accountName,
-            stake_net_quantity: this.state.Network + " SYS",
-            stake_cpu_quantity: this.state.CPU + " SYS",
+            stake_net_quantity: Number(this.state.Network) + " SYS",
+            stake_cpu_quantity: Number(this.state.CPU) + " SYS",
             transfer: 0,
           };
           const nav = this.props.navigation;

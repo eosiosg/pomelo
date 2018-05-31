@@ -137,8 +137,8 @@ class UnDelegatebwPage extends Component {
         const data = {
           from: accountName,
           receiver: accountName,
-          unstake_net_quantity: this.state.Network + " SYS",
-          unstake_cpu_quantity: this.state.CPU + " SYS",
+          unstake_net_quantity: Number(this.state.Network) + " SYS",
+          unstake_cpu_quantity: Number(this.state.CPU) + " SYS",
         };
         const nav = this.props.navigation;
         this.props.onDispatchUnDelegateBwPost(data, nav, accountPrivateKey);
