@@ -1,10 +1,8 @@
-import { AppState, Platform, StyleSheet, View } from "react-native";
+import { AppState, Platform, View } from "react-native";
 import React from "react";
 import { connect } from "react-redux";
 import { AppNavigator } from "./AppNavigator";
 import PasswordCheckComponent from "./pages/PasswordInputPage/components/PasswordCheckComponent";
-
-const styles = StyleSheet.create( {} );
 
 class App extends React.Component {
     constructor( props ) {
@@ -28,6 +26,7 @@ class App extends React.Component {
     componentDidMount() {
         AppState.addEventListener( 'change', this._handleAppStateChange );
         AppState.addEventListener( 'memoryWarning', this._handleMemoryWarning );
+
     }
 
 
@@ -76,6 +75,9 @@ class App extends React.Component {
     render() {
         return (
             <View style={[ { flex: 1 } ]}>
+
+
+
                 <AppNavigator/>
                 <PasswordCheckComponent
                     isOpen={this.state.isPasswordCheckOpen}
@@ -88,6 +90,7 @@ class App extends React.Component {
             </View>
         )
     }
+
 
 }
 

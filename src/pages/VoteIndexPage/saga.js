@@ -40,7 +40,9 @@ export function* getVoteIndexPageRefundsPost (action) {
     const response = yield call(getRefunds, action);
     yield put({ type: "VOTEINDEX_SETREFUNDS_REDUCER", data: response.refunds });
     yield put({ type: "VOTEINDEX_SETREFUNDSTIME_REDUCER", data: response.request_time });
-  } catch (err) {}
+  } catch (err) {
+
+  }
 }
 function getRefunds(action) {
   const eos = GetEOS(action.data.accountPrivateKey);
@@ -60,7 +62,6 @@ function getRefunds(action) {
 
 // getVoteIndexPageBpsPost
 export function* getVoteIndexPageBpsPost (action) {
-  console.log('action, getnew bps: ', action);
   try {
     const response = yield call(getBps, action);
     yield put({ type: "VOTEINDEX_SETBPS_REDUCER", data: response });
@@ -69,7 +70,7 @@ export function* getVoteIndexPageBpsPost (action) {
 function getBps(action) {
   const eos = GetEOS(action.data.accountPrivateKey);
   return eos.getProducers( { json: true } ).then( result => {
-    console.log(result);
+    // console.log(result);
       return result;
   } );
 }
@@ -101,8 +102,6 @@ export function* getNodesIDInfo(){
     try{
         const response = yield call(getNodesInfo);
         let accountDic = {};
-        console.log('!!!!!!!!!!!!!!!!!!!!=======')
-        console.log(response)
         response.bp_info_list.map((bp)=>{
             accountDic[bp.producer_name] = {
                 logo:bp.logo,
@@ -110,8 +109,6 @@ export function* getNodesIDInfo(){
             }
         });
 
-        console.log('bp got+++++++++++++++++');
-        console.log(accountDic)
         yield put({ type: "GET_NODESIDINFO_REDUCER", data: {accountDic, contributors:response.contributors} });
 
     }catch(err){

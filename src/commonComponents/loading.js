@@ -13,6 +13,9 @@ class LoadingView extends React.Component {
     }
 
     render() {
+
+        let text = this.props.text||'Loading'
+
         return (
             <View style={[
                 {
@@ -21,6 +24,7 @@ class LoadingView extends React.Component {
                     bottom: 0,
                     left: 0,
                     right: 0,
+                    zIndex:80,
                     backgroundColor: '#88000000'
                 },
                 style.justAlignCenter ]}>
@@ -46,7 +50,9 @@ class LoadingView extends React.Component {
                             height: 50,
                             fontSize: 12,
                             color: 'white'
-                        } ]}>Loading</Text>
+                        } ]}>
+                            {text}
+                        </Text>
                     </View>
                 </View>
             </View>

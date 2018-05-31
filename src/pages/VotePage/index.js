@@ -12,6 +12,7 @@ import { styles } from "./style";
 import messages from './messages';
 import I18n from "../../../I18n";
 import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
+import Toast from "react-native-root-toast";
 
 import LoadingView from '../../commonComponents/loading'
 
@@ -45,8 +46,12 @@ class VotePage extends Component {
         });
       let IsSubmitSuccess = nextProps.IsSubmitSuccess;
 
+      console.log("is submit success value IsSubmitSuccess: ",IsSubmitSuccess, " this.props.IsSubmitSuccess: ",this.props.IsSubmitSuccess)
       if (IsSubmitSuccess && IsSubmitSuccess != this.props.IsSubmitSuccess) {
         // 投票成功，重新获取AccountInfo，重置IsSubmitSuccess
+          Toast.show("Successful!",{
+              position: 10,
+          });
           this.props.resetIsSubmitSuccess();
           this.props.onDispatchGetVoteBpsPost({...this.state.accountPri})
           this.props.getAccountInfo({...this.state.accountPri});
@@ -54,7 +59,7 @@ class VotePage extends Component {
     }
 
     componentDidMount() {
-
+        console.log('!!!this.prosp.IssubmitSuccess: ', this.props.IsSubmitSuccess);
         let votingList = this.props.selectedNodeList;
         storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
             if ( ret1 ) {
@@ -113,7 +118,12 @@ class VotePage extends Component {
 
 
         return (
-            <SafeAreaView style={[{flex:1}]}>
+            <SafeAreaView style={[{flex:1, backgroundColor:'#e8e8e8'},]}>
+
+                {
+                    this.props.isVoting&&<LoadingView text="Voting"/>
+                }
+
 
             <ScrollView >
                 <View style={[styles.bodyBox,{flex:1}]}>
@@ -224,7 +234,7 @@ class VotePage extends Component {
                 </View>
             </ScrollView>
 
-                <View style = {[styles.footerView,{flex: 1, marginBottom:0}]}>
+                <View style = {[styles.footerView,]}>
                     <Text style={styles.footerSubmit}
                           onPress={this._setNoticeModalShow.bind(this)}>
                         {submit}
@@ -314,7 +324,6 @@ class VotePage extends Component {
     }
 
     _submitList() {
-
         let votingList = [];
         this.state.votingList.map((one)=>{
             votingList.push(one.owner)
@@ -355,10 +364,10 @@ class VotePage extends Component {
 function mapDispatchToProps(dispatch) {
     return {
         onDispatchGetVoteBpsPost: (data) => dispatch({ type: "VOTE_INDEX_BPS_POST", data }),
-
-        onDispatchVoteVotingList: (data) => dispatch({ type: "VOTE_SUBMITLIST_POST", data }),
         getAccountInfo: (data) => dispatch({ type: "VOTE_INDEX_ACCOUNTINFO_POST", data }),
-        resetIsSubmitSuccess: () => dispatch({ type: "VOTE_SUBMITLIST_POST", data:{submitSuccess:false}  }),
+
+        resetIsSubmitSuccess: () => dispatch({ type: "VOTE_FAIL_REDUCER"  }),
+        onDispatchVoteVotingList: (data) => dispatch({ type: "VOTE_SUBMITLIST_POST", data }),
     };
 }
 function mapStateToProps(state) {
@@ -370,6 +379,8 @@ function mapStateToProps(state) {
 
         IsSubmitSuccess : state.VotePageReducer.IsSubmitSuccess,
         votingList: state.VotePageReducer.votingList,
+
+        isVoting: state.VotePageReducer.isVoting,
     };
 }
 export default connect(mapStateToProps, mapDispatchToProps)(VotePage);

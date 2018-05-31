@@ -1,13 +1,14 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { ScrollView, View, Text, Image, TouchableOpacity, SafeAreaView, Modal, ImageBackground } from "react-native";
+import { ScrollView, View, Text, Image, TouchableOpacity, TouchableHighlight,SafeAreaView, Modal, ImageBackground } from "react-native";
 
 // 自定义组件
 import I18n from "../../../I18n";
 import { styles, assetStyles, voteStyles, voteBpsStales, modalStyles, style } from "./style";
 import { decryptObject, storage } from "../../utils/storage";
 const developTeam = require('../../images/developTeamBackground.png');
+import {ModalYNStyles as styleModal} from '../../style/style';
 
 
 class VoteIndexPage extends Component {
@@ -31,7 +32,10 @@ class VoteIndexPage extends Component {
         this.state = {
           cuntDownTime: "00d00h",
           IsModalShow: false,
+            needUpdate:false,
         };
+
+
     }
 
     componentWillReceiveProps( nextProps ) {
@@ -61,6 +65,43 @@ class VoteIndexPage extends Component {
     }
 
     componentDidMount() {
+
+        const appVersion= '0.0.1';
+
+        fetch('https://api.eosio.sg/upgrade').then((res)=>{
+            return res.json()
+        }).then((res)=>{
+            // let newestVersion = '1.2.1';
+            let newestVersion = res.version;
+            this.downLoadUrl = res.download;
+            let [a,b,c] = newestVersion.split('.');
+            let [x,y,z] = appVersion.split('.');
+            let needUpdate = false;
+            if(a>x){
+                needUpdate = true;
+            }else if(a==x){
+                if(b>y){
+                    needUpdate =true;
+                }else if(b==y){
+                    if(c>z){
+                        needUpdate=true;
+                    }else if(c<z){
+                        console.log(`Error version number from api ${newestVersion}`)
+                    }
+                }else{
+                    console.log(`Error version number from api ${newestVersion}`)
+                }
+            }else{
+                console.log(`Error version number from api ${newestVersion}`)
+            }
+            this.setState({
+                needUpdate
+            })
+
+        }).catch(
+            err=>err
+        )
+
 
         this.props.getNodesIDInfo();
 
@@ -97,8 +138,8 @@ class VoteIndexPage extends Component {
                   paddingTop: 10,
                   paddingBottom: 10,
                   flexDirection: 'row',
-                  borderBottomWidth:1,
-                  borderBottomColor: "#eee",
+                  borderTopWidth:1,
+                  borderTopColor: "#eee",
                   justifyContent: "space-between",
               } ]}>
             <View style={[ {flex:2} ]}>
@@ -290,33 +331,51 @@ class VoteIndexPage extends Component {
                   </View>
                 </View>
               </Modal>
+
+                <Modal
+                    animationType='slide'
+                    transparent={true}
+                    visible={this.state.needUpdate}
+                    onShow={() => {}}
+                    onRequestClose={() => {}} >
+                    <View style={styleModal.modalStyle}>
+                        <View style={styleModal.subView}>
+                            <Text style={styleModal.titleText}>
+                                Notice
+                            </Text>
+                            <Text style={styleModal.contentText}>
+                                We have released a new version, please update to see the new feature.
+                            </Text>
+                            <View style={styleModal.horizontalLine} />
+                            <View style={styleModal.buttonView}>
+                                <TouchableHighlight underlayColor='transparent'
+                                                    style={styleModal.buttonStyle}
+                                                    onPress={this._setNoticeModalVisible.bind(this)}>
+                                    <Text style={styleModal.buttonText}>
+                                        Later
+                                    </Text>
+                                </TouchableHighlight>
+                                <View style={styleModal.verticalLine} />
+                                <TouchableHighlight underlayColor='transparent'
+                                                    style={styleModal.buttonStyle}>
+                                    <Text style={styleModal.buttonText}>
+                                        Update
+                                    </Text>
+                                </TouchableHighlight>
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
+
             </SafeAreaView>
         );
     }
 
-    // getBpsByAccountInfoFilter = () => {
-    //   const BPs = this.props.BPs;
-    //   let producers = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info.producers : [];
-    //   const newBpsTem = [];
-    //   const newBps = [];
-    //   let totalWeight = 0;
-    //   for (let i = 0; i < BPs.length; i++) {
-    //     for (let j = 0; j < producers.length; j++) {
-    //       if (BPs[i].owner == producers[j]) {
-    //
-    //           totalWeight += Number(BPs[i].total_votes);
-    //         newBpsTem.push(BPs[i]);
-    //       }
-    //     }
-    //   }
-    //   for (let i = 0; i < newBpsTem.length; i++) {
-    //     newBps.push({
-    //       owner: newBpsTem[i].owner,
-    //       votePersent: (Number(newBpsTem[i].total_votes)/totalWeight * 100),
-    //     });
-    //   }
-    //   return newBps;
-    // };
+    _setNoticeModalVisible(){
+        this.setState({
+            needUpdate:false
+        })
+    }
 
     RefundingCountdown = (RefundsTime) => {
       const totalTime = 3*24*60*60*1000;

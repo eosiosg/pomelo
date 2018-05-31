@@ -41,11 +41,7 @@ const styles = StyleSheet.create({
     bodyBox: {
         position: "relative",
         flexBasis: "100%",
-        backgroundColor: "#e8e8e8",
     },
-
-
-
 
     contentHeader: {
         marginTop: 20,
@@ -60,8 +56,6 @@ const styles = StyleSheet.create({
         flexWrap:'wrap',
         paddingLeft: 5,
         paddingRight: 5,
-        borderBottomWidth: 0.3,
-        borderBottomColor:'#ccc',
         marginLeft:8,
         marginRight:8,
     },
@@ -71,8 +65,9 @@ const styles = StyleSheet.create({
         flexWrap:'wrap',
         paddingLeft: 5,
         paddingRight: 5,
-        borderBottomWidth: 0.3,
-        borderBottomColor:'#ccc',
+        justifyContent: "space-between",
+        borderTopWidth: 1,
+        borderTopColor: "#eee",
         marginLeft:8,
         marginRight:8,
     },
@@ -84,6 +79,9 @@ const styles = StyleSheet.create({
         paddingRight: 5,
         marginLeft:8,
         marginRight:8,
+        justifyContent: "space-between",
+        borderTopWidth: 1,
+        borderTopColor: "#eee",
     },
 
 
@@ -177,8 +175,9 @@ const styles = StyleSheet.create({
     contentBodyStakeCpu:{
         flexDirection:'row',
         flexWrap:'wrap',
-        borderBottomWidth: 0.3,
-        borderBottomColor:'#ccc',
+        justifyContent: "space-between",
+        borderTopWidth: 1,
+        borderTopColor: "#eee",
     },
 
     contentBodyStakeBodyTextLabel:{
@@ -200,6 +199,9 @@ const styles = StyleSheet.create({
     contentBodyStakeNetwork:{
         flexDirection:'row',
         flexWrap:'wrap',
+        justifyContent: "space-between",
+        borderTopWidth: 1,
+        borderTopColor: "#eee",
     },
 
     contentBodyVotingList:{
@@ -229,8 +231,9 @@ const styles = StyleSheet.create({
         flexWrap:'wrap',
         marginLeft: leftFirstBase,
         marginRight: leftFirstBase,
-        borderBottomWidth:0.3,
-        borderBottomColor:'#ccc',
+        justifyContent: "space-between",
+        borderTopWidth: 1,
+        borderTopColor: "#eee",
     },
 
     contentBodyBPName:{
@@ -327,7 +330,7 @@ const styles = StyleSheet.create({
     // 水平的分割线
     horizontalLine:{
         marginTop:5,
-        height:0.5,
+        height:1,
         backgroundColor:'#ccc',
     },
     // 按钮
@@ -343,7 +346,7 @@ const styles = StyleSheet.create({
     },
     // 竖直的分割线
     verticalLine:{
-        width:0.5,
+        width:1,
         height:44,
         backgroundColor:'#ccc',
     },
@@ -356,7 +359,6 @@ const styles = StyleSheet.create({
 
 
     footerView:{
-        position:'absolute',
         height:footerHeight,
         width:'100%',
         display: "flex",
@@ -365,7 +367,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         backgroundColor:'#736d75',
-        bottom:0,
     },
 
 
