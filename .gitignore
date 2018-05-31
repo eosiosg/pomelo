@@ -16,3 +16,13 @@ package-lock.json
 
 android/settings.gradle
 adnroid/app/build.gradle
+
+
+ios/*.xcuserstate
+ios/*.xcscheme
+ios/*.xccheckout
+ios/*.xcsettings
+ios/*.xcbkptlist
+.DS_Store
+*/.DS_Store
+ios/xcuserdata
