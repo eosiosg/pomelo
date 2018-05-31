@@ -3,6 +3,7 @@ import createSagaMiddleware, { END } from 'redux-saga';
 import thunk from "redux-thunk";
 import { persistCombineReducers, persistStore, } from "redux-persist";
 import reducers from "./reducers";
+import saga from "./saga";
 import storage from 'redux-persist/es/storage'
 import createEncryptor from "redux-persist-transform-encrypt";
 
@@ -50,7 +51,7 @@ export default function configureStore( onComplete ) {
     persistStore( store, null, onComplete );
 
     // install saga run
-    store.runSaga = sagaMiddleware.run;
+    store.runSaga = sagaMiddleware.run(saga);
     store.close = () => store.dispatch( END );
 
     return store;

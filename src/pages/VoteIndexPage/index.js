@@ -318,7 +318,7 @@ class VoteIndexPage extends Component {
       let CreatTime = new Date(RefundsTime);
       CreatTime = CreatTime.getTime();
       let cuntDownTime = totalTime - (nowTime - CreatTime);
-      const hours = Math.floor(cuntDownTime/(1000*60*60));
+      const hours = Math.ceil(cuntDownTime/(1000*60*60)%24);
       const day = Math.floor(cuntDownTime/(1000*60*60*24));
       this.setState({
         cuntDownTime: day + "d " + hours + "h",
