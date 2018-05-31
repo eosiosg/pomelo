@@ -99,7 +99,7 @@ class PasswordInputPage extends Component {
                                 }}
                                 style={[ {} ]} title={'Please enter your password'}
                                 isSupportClear={true}
-                                autoFocus={false}
+                                autoFocus={true}
                                 onPasswordSet={( password ) => {
                                     // Toast.show( "First setup Password: " + password );
 
