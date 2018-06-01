@@ -10,8 +10,9 @@ import Toast from "react-native-root-toast";
 
 class UnDelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
+        let title = I18n.t("UnDelegatebwPage Title");
       return {
-        title: 'UnDelegatebw'
+        title: title
       };
     };
 

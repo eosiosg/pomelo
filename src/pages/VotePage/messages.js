@@ -68,10 +68,6 @@ export default defineMessages({
     Rule3: {
         id: 'VotePage Rule3',
         defaultMessage: "· Vote = (CPU stake + Network stake) * 2^weight;",
-    },
-    Rule4: {
-        id: 'VotePage Rule4',
-        defaultMessage: "· Could undelegatebw anytime，whitch will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later;",
-    },
+    }
 
 });

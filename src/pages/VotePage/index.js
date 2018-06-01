@@ -106,7 +106,7 @@ class VotePage extends Component {
         const Rule1 = I18n.t(messages.Rule1.id);
         const Rule2 = I18n.t(messages.Rule2.id);
         const Rule3 = I18n.t(messages.Rule3.id);
-        const Rule4 = I18n.t(messages.Rule4.id);
+        // const Rule4 = I18n.t(messages.Rule4.id);
 
         // const VoteDescIntl = I18n.t(messages.VoteDesc);
         // const UndelegatebwIntl = I18n.t(messages.Undelegatebw);
@@ -261,9 +261,9 @@ class VotePage extends Component {
                             <Text style={styles.ruleContentText}>
                                 {Rule3}
                             </Text>
-                            <Text style={styles.ruleContentText}>
-                                {Rule4}
-                            </Text>
+                            {/*<Text style={styles.ruleContentText}>*/}
+                                {/*{Rule4}*/}
+                            {/*</Text>*/}
                             <View style={styles.buttonView}>
                                 <TouchableHighlight underlayColor='transparent'
                                                     style={styles.buttonStyle}

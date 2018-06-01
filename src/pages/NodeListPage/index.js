@@ -19,8 +19,9 @@ class NodeListPage extends Component {
         const { state, setParams } = navigation;
         const { params } = state;
 
+        let title = I18n.t("Producers List Title");
         return {
-            title : "Producers List",
+            title : title,
         };
     };
 
@@ -151,7 +152,7 @@ class NodeListPage extends Component {
                                   letterSpacing: 0,
                               } ]
                           }>
-                        {parseFloat(item.total_votes/this.props.totalVoteWeight*100).toFixed(2) + "%"} Voter Choise
+                        {I18n.t("Global Total Votes Percentage")} : {parseFloat(item.total_votes/this.props.totalVoteWeight*100).toFixed(2) + "%"}
                     </Text>
                 </View>
 

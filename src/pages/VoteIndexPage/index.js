@@ -17,8 +17,9 @@ class VoteIndexPage extends Component {
         const { navigation } = props;
         const { state, setParams } = navigation;
         const { params } = state;
+        let title = I18n.t("VoteIndexPage Title");
         return {
-          title: 'Total Asset',
+          title: title,
           headerBackImage: null,
           headerRight: (
             <Text style={{paddingRight: 10}} onPress={() => {props.navigation.state.params.navigatePress()}}>{I18n.t("VoteIndexPage ChangeWallet")}</Text>
@@ -147,7 +148,7 @@ class VoteIndexPage extends Component {
                               letterSpacing: 0,
                           } ]
                       }>
-                    {parseFloat(item.total_votes/this.props.totalVoteWeight*100).toFixed(2) + "%"} Voter Choise
+                    {I18n.t("Global Total Votes Percentage")} : {parseFloat(item.total_votes/this.props.totalVoteWeight*100).toFixed(2) + "%"}
                 </Text>
             </View>
 
