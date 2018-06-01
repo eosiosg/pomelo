@@ -3,7 +3,7 @@ import { AsyncStorage } from "react-native";
 
 var CryptoJS = require( "crypto-js" );
 
-const localStorageAESKey = "eos_wallet_jhagdhasgdahjdgash";
+let localStorageAESKey = "";
 
 // 设置本地存储方法对象；
 const storage = new Storage( {
@@ -58,10 +58,15 @@ function decryptObject( str ) {
     return decryptedData;
 }
 
+function setStorageAESKey( localStorageAESKey1 ) {
+    localStorageAESKey = localStorageAESKey1;
+}
+
 // localSave.setLoginState(false);
 export {
     storage,
     localSave,
     encryptObjectToString,
-    decryptObject
+    decryptObject,
+    setStorageAESKey,
 };

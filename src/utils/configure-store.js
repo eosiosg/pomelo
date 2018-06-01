@@ -5,7 +5,6 @@ import { persistCombineReducers, persistStore, } from "redux-persist";
 import reducers from "./reducers";
 import saga from "./saga";
 import storage from 'redux-persist/es/storage'
-import createEncryptor from "redux-persist-transform-encrypt";
 
 const middlewares = [];
 
@@ -23,18 +22,18 @@ middlewares.push( thunk );
 // }
 const createStoreWithMiddleware = applyMiddleware( ...middlewares );
 
-const encryptor = createEncryptor( {
-    secretKey: 'eos_wallet_yuegyugdsaghsgd',
-    onError: function ( error ) {
-        // Handle the error.
-    }
-} );
+// const encryptor = createEncryptor( {
+//     secretKey: 'eos_wallet_yuegyugdsaghsgd',
+//     onError: function ( error ) {
+//         // Handle the error.
+//     }
+// } );
 
 export default function configureStore( onComplete ) {
     const config = {
         key: 'primary',
         storage,
-        transform: [ encryptor ],
+        // transform: [ encryptor ],
         //whitelist: ['userStore'],,
     };
 
@@ -51,7 +50,7 @@ export default function configureStore( onComplete ) {
     persistStore( store, null, onComplete );
 
     // install saga run
-    store.runSaga = sagaMiddleware.run(saga);
+    store.runSaga = sagaMiddleware.run( saga );
     store.close = () => store.dispatch( END );
 
     return store;

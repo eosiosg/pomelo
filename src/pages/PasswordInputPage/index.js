@@ -15,7 +15,8 @@ import { styles } from "./style";
 import Toast from "react-native-root-toast";
 import { ViewPager } from 'rn-viewpager';
 import PasswordInputPageItem from "./PasswordInputPageItem";
-
+import { encryptObjectToString, setStorageAESKey, storage } from "../../utils/storage";
+import { setIsSetLocalStorageAESKey } from "../../setup";
 
 class PasswordInputPage extends Component {
     static navigationOptions = ( props ) => {
@@ -50,10 +51,19 @@ class PasswordInputPage extends Component {
             return;
         }
 
-        this.props.onDispatchSetPassword( password );
-        Toast.show( "Password set success" );
+        setStorageAESKey( password );
 
-        this.props.navigation.goBack();
+        storage.save( {
+            key: 'PasswordInputPage',
+            data: encryptObjectToString( {
+                passwordCheck: "passwordCheck",
+            } ),
+        } ).then( () => {
+            setIsSetLocalStorageAESKey( true );
+
+            this.props.navigation.goBack();
+            Toast.show( "Password set success" );
+        } );
     }
 
     //
@@ -157,16 +167,11 @@ class PasswordInputPage extends Component {
 function mapDispatchToProps( dispatch ) {
     return {
         dispatch,
-        onDispatchSetPassword: ( password ) => dispatch( {
-            type: "PASSWORD_SET_REDUCER",
-            password
-        } ),
     };
 }
 
 function mapStateToProps( state ) {
     return {
-        password: state.PasswordInputPageReducer.password
     };
 }
 
