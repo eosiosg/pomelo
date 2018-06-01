@@ -161,7 +161,7 @@ class HomePage extends Component {
   }
 
   isNeedInputPassword = () => {
-    if (!this.props.password) {
+    if (this.props.password.length <= 0) {
       this.props.navigation.navigate("PasswordInputPage");
     } else {
       this.isHadImportPrivateKey();
