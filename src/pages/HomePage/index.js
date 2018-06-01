@@ -10,6 +10,7 @@ import I18n from "../../../I18n";
 import { styles } from "./style";
 import { getEventEmitter, isSetLocalStorageAESKey } from "../../setup";
 import {ModalYNStyles as styleModal} from "../../style/style";
+import DeviceInfo from 'react-native-device-info';
 
 class HomePage extends Component {
 
@@ -52,7 +53,6 @@ class HomePage extends Component {
 
   componentWillMount() {
     this.isNeedInputPassword();
-
   }
   componentDidMount() {}
 
@@ -171,6 +171,8 @@ class HomePage extends Component {
   isNeedUpdate = () => {
     // 判断更新
     const appVersion= '0.0.1';
+
+    console.log(DeviceInfo.getVersion());
 
     fetch('https://api.eosio.sg/upgrade').then((res)=>{
       return res.json()

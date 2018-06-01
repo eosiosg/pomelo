@@ -9,8 +9,10 @@ import { styles, assetStyles, voteStyles, voteBpsStales, modalStyles, style } fr
 import { decryptObject, storage } from "../../utils/storage";
 import {ModalYNStyles as styleModal} from "../../style/style";
 const developTeam = require('../../images/developTeamBackground.png');
-
-
+const arrowRightAccount = require("./images/arrow-right-account.png");
+const walletCountdown = require("./images/wallet_icon_countdown.png");
+const walletImageBackground = require("./images/wallet_img_background.png");
+import defaultLogoUrl from '../../../data/defaultLogoURL';
 class VoteIndexPage extends Component {
     static navigationOptions = ( props ) => {
 
@@ -109,7 +111,7 @@ class VoteIndexPage extends Component {
                   justifyContent: "space-between",
               } ]}>
             <View style={[ {flex:2} ]}>
-                <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:'https://steemitimages.com/0x0/https://steemitimages.com/DQmWs93EuTs1CrgazwChGBqj7eygJoQ4HqB9ANWMN8TMHc8/eoosss1920_0023.jpg'}}
+                <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:defaultLogoUrl}}
                        style={{width:46,height:46, borderRadius:23, marginTop:10}}/>
             </View>
             <View style={[ {flex:8,} ]}>
@@ -207,7 +209,7 @@ class VoteIndexPage extends Component {
                   </View>
                   <View style={assetStyles.contentAssetBox}>
                     <View style={assetStyles.totalAssetBox}>
-                      <ImageBackground style={assetStyles.totalAssetBgImg} source={require("./images/wallet_img_background.png")}>
+                      <ImageBackground style={assetStyles.totalAssetBgImg} source={walletImageBackground}>
                         <View style={assetStyles.userNameBox}>
                           <Text style={assetStyles.userNameTip}>
                             {userNameIntl}:  <Text style={assetStyles.userName}>{account_name}</Text>
@@ -226,7 +228,7 @@ class VoteIndexPage extends Component {
                       <View style={assetStyles.itemBox}>
                         <View style={assetStyles.itemRefundBox}>
                           <Text style={assetStyles.itemRefundName}>{RefundingIntl}</Text>
-                          <Image style={assetStyles.refundingIcon} source={require("./images/wallet_icon_countdown.png")} />
+                          <Image style={assetStyles.refundingIcon} source={walletCountdown} />
                           <Text style={assetStyles.refundingTime}>{this.state.cuntDownTime}</Text>
                         </View>
                         <Text style={assetStyles.itemValue}>
@@ -251,15 +253,15 @@ class VoteIndexPage extends Component {
                     <View style={voteStyles.voteItemList}>
                       <TouchableOpacity style={voteStyles.voteItem} onPress={() => {this.props.navigation.navigate("UnDelegatebwPage")}}>
                         <Text style={voteStyles.voteItemName}>{UndelegatebwIntl}</Text>
-                        <Image style={[voteStyles.voteItemActionIcon, {width: 16, height: 20,}]} source={require("./images/arrow-right-account.png")} />
+                        <Image style={[voteStyles.voteItemActionIcon, {width: 16, height: 20,}]} source={arrowRightAccount} />
                       </TouchableOpacity>
                       <TouchableOpacity style={voteStyles.voteItem} onPress={() => {this.props.navigation.navigate("DelegatebwPage")}}>
                         <Text style={voteStyles.voteItemName}>{AddDelegatebwIntl}</Text>
-                        <Image style={[voteStyles.voteItemActionIcon, {width: 16, height: 20,}]} source={require("./images/arrow-right-account.png")} />
+                        <Image style={[voteStyles.voteItemActionIcon, {width: 16, height: 20,}]} source={arrowRightAccount} />
                       </TouchableOpacity>
                       <TouchableOpacity style={voteStyles.voteItem} onPress={() => {this.props.navigation.navigate("NodeListPage")}}>
                         <Text style={voteStyles.voteItemName}>{RevoteIntl}</Text>
-                        <Image style={[voteStyles.voteItemActionIcon, {width: 16, height: 20,}]} source={require("./images/arrow-right-account.png")} />
+                        <Image style={[voteStyles.voteItemActionIcon, {width: 16, height: 20,}]} source={arrowRightAccount} />
                       </TouchableOpacity>
                     </View>
                   </View>

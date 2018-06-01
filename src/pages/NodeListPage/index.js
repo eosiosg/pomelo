@@ -12,6 +12,7 @@ import { decryptObject, encryptObjectToString, storage } from "../../utils/stora
 const developTeam = require('../../images/developTeamBackground.png');
 import developmentTeamList from '../../../data/developmentTeam'
 import I18n from "../../../I18n";
+import defaultLogoUrl from '../../../data/defaultLogoURL';
 
 class NodeListPage extends Component {
     static navigationOptions = ( props ) => {
@@ -113,7 +114,7 @@ class NodeListPage extends Component {
                       flexDirection: 'row',
                   } ]}>
                 <View style={[ {flex:2} ]}>
-                    <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:'https://steemitimages.com/0x0/https://steemitimages.com/DQmWs93EuTs1CrgazwChGBqj7eygJoQ4HqB9ANWMN8TMHc8/eoosss1920_0023.jpg'}}
+                    <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:defaultLogoUrl}}
                            style={{width:46,height:46, borderRadius:23, marginTop:10}}/>
                 </View>
                 <View style={[ {flex:8,} ]}>

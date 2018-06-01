@@ -79,7 +79,6 @@ class App extends React.Component {
         return (
             <View style={[ { flex: 1 } ]}>
 
-
                 <AppNavigator/>
                 <PasswordCheckComponent
                     isOpen={this.state.isPasswordCheckOpen}

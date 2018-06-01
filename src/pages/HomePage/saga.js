@@ -5,8 +5,6 @@ import { GetEOS } from "../../actions/EosAction";
 export function* getHomeAccountName (action) {
   try {
     const response = yield call(getAccountName , action.data);
-    console.log('--------===get account name=-----------');
-    console.log(response);
     yield put({ type: "HOME_SETACCOUNTNAMES_REDUCER", data: response });
     yield put({ type: "HOME_SETACCOUNTNAMESERR_REDUCER", data: false });
 

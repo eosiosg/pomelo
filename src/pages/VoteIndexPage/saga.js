@@ -79,7 +79,7 @@ function getBps(action) {
 export function* getVoteIndexPageUsdPricePost () {
   try {
     // 组装请求数据
-    const requestOption = {
+            const requestOption = {
       url: "https://api.coinmarketcap.com/v2/ticker/1765/?convert=USD",
       body: {
         method: 'get',

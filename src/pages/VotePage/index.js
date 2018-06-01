@@ -59,7 +59,6 @@ class VotePage extends Component {
     }
 
     componentDidMount() {
-        console.log('!!!this.prosp.IssubmitSuccess: ', this.props.IsSubmitSuccess);
         let votingList = this.props.selectedNodeList;
         storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
             if ( ret1 ) {
