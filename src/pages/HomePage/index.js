@@ -55,6 +55,10 @@ class HomePage extends Component {
 
   componentWillMount() {
     this.isNeedInputPassword();
+
+      getEventEmitter().on('checkPasswordSuccess', () => {
+          this.isNeedUpdate();
+      });
   }
   componentDidMount() {}
 
@@ -162,10 +166,11 @@ class HomePage extends Component {
 
   isNeedInputPassword = () => {
     if (!isSetLocalStorageAESKey()) {
-    } else {
-      getEventEmitter().on('checkPasswordSuccess', () => {
-        this.isNeedUpdate();
-      });
+      this.props.navigation.navigate("PasswordInputPage", {
+          callback: (  ) => {
+              this.isNeedUpdate();
+          }
+      })
     }
   };
 

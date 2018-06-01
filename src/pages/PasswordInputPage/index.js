@@ -25,7 +25,7 @@ class PasswordInputPage extends Component {
         const { state, setParams } = navigation;
         const { params } = state;
 
-        let title = I18n.t("Password Set");
+        let title = I18n.t( "Password Set" );
         return {
             title: title,
         };
@@ -64,7 +64,14 @@ class PasswordInputPage extends Component {
             setIsSetLocalStorageAESKey( true );
 
             this.props.navigation.goBack();
-            Toast.show( I18n.t("Password Set Success"));
+            Toast.show( I18n.t( "Password Set Success" ) );
+
+
+            const { navigate, goBack, state } = this.props.navigation;
+
+            if ( state.params && state.params.callback ) {
+                state.params && state.params.callback && state.params.callback();
+            }
         } );
     }
 
@@ -111,7 +118,7 @@ class PasswordInputPage extends Component {
                                 ref={( passwordInputPageItem ) => {
                                     this._passwordInputPageItem1 = passwordInputPageItem;
                                 }}
-                                style={[ {} ]} title={I18n.t("Password Input")}
+                                style={[ {} ]} title={I18n.t( "Password Input" )}
                                 isSupportClear={true}
                                 autoFocus={true}
                                 onPasswordSet={( password ) => {
@@ -132,7 +139,7 @@ class PasswordInputPage extends Component {
                                 ref={( passwordInputPageItem ) => {
                                     this._passwordInputPageItem2 = passwordInputPageItem;
                                 }}
-                                style={[ {} ]} title={I18n.t('Password Check')}
+                                style={[ {} ]} title={I18n.t( 'Password Check' )}
                                 isSupportClear={false}
                                 autoFocus={false}
                                 onPasswordSet={( newPassword ) => {
@@ -142,7 +149,7 @@ class PasswordInputPage extends Component {
 
                                         this.setPassword( newPassword );
                                     } else {
-                                        Toast.show( I18n.t('Password Invalid'), { position: Toast.positions.CENTER } );
+                                        Toast.show( I18n.t( 'Password Invalid' ), { position: Toast.positions.CENTER } );
 
                                         this._passwordInputPageItem1.clearPassword();
                                         this._passwordInputPageItem2.clearPassword();
@@ -173,8 +180,7 @@ function mapDispatchToProps( dispatch ) {
 }
 
 function mapStateToProps( state ) {
-    return {
-    };
+    return {};
 }
 
 export default connect( mapStateToProps, mapDispatchToProps )( PasswordInputPage );
