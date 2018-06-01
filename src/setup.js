@@ -4,8 +4,11 @@ import { Provider } from "react-redux";
 import configureStore from "./utils/configure-store";
 import App from "./App";
 import SplashScreen from "rn-splash-screen";
+import { storage } from "./utils/storage";
+
 let _provider;
 let _store;
+let _isSetLocalStorageAESKey = false;
 
 export function setup() {
     console.disableYellowBox = true;
@@ -19,20 +22,34 @@ export function setup() {
             this.state = {
                 isLoading: true,
                 store: configureStore( () => {
-                    this.setState( { isLoading: false } );
+                    storage.load( { key: "PasswordInputPage" } )
+                        .then( ( ret ) => {
+                            if ( ret && ret.length > 0 ) {
+                                _isSetLocalStorageAESKey = true;
+
+                                this.setState( { isLoading: false } );
+                            } else {
+                                this.setState( { isLoading: false } );
+                            }
+                        } )
+                        .catch( ( error ) =>{
+                            console.log( 'EOSGetInfo error: ' + error.message );
+
+                            this.setState( { isLoading: false } );
+                        } );
                 } )
             };
 
             _store = this.state.store;
         }
 
-      componentDidMount() {
-          if (Platform.OS == "android") {
-            setTimeout(() => {
-              SplashScreen.hide();
-            }, 1000);
-          }
-      }
+        componentDidMount() {
+            if ( Platform.OS == "android" ) {
+                setTimeout( () => {
+                    SplashScreen.hide();
+                }, 1000 );
+            }
+        }
 
         render() {
             if ( this.state.isLoading ) {
@@ -56,4 +73,12 @@ export function getProvider() {
 
 export function getStore() {
     return _store;
+}
+
+export function isSetLocalStorageAESKey() {
+    return _isSetLocalStorageAESKey;
+}
+
+export function setIsSetLocalStorageAESKey( isSetLocalStorageAESKey ) {
+    _isSetLocalStorageAESKey = isSetLocalStorageAESKey;
 }

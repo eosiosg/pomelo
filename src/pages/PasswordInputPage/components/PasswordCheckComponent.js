@@ -18,6 +18,7 @@ import PropTypes from 'prop-types';
 import { styles as style } from "../style";
 import PasswordInputComponent from "./PasswordInputComponent";
 import NumberInputComponent from "./NumberInputComponent";
+import { decryptObject, setStorageAESKey, storage } from "../../../utils/storage";
 
 class PasswordCheckComponent extends React.Component {
     static propTypes = {
@@ -84,16 +85,21 @@ class PasswordCheckComponent extends React.Component {
 
 
     checkPassword( password ) {
-        if ( password !== this.props.password ) {
+        setStorageAESKey( password );
+
+        storage.load( { key: "PasswordInputPage" } ).then( ( ret1 ) => {
+            if ( ret1 ) {
+                const ret = decryptObject( ret1 );
+                if ( ret && ret.passwordCheck === 'passwordCheck' ) {
+                    this.closeModal();
+                }
+            }
+        } ).catch( err => {
             this.setState( {
                 errorText: 'Password is not correct'
             } );
-
             this._passwordInputComponent.clearData();
-            return;
-        }
-
-        this.closeModal();
+        } );
     }
 
 
@@ -102,8 +108,10 @@ class PasswordCheckComponent extends React.Component {
             <Modal
                 transparent={true}
                 visible={this.state.isOpen}
-                onShow={() => {}}
-                onRequestClose={() => {}}
+                onShow={() => {
+                }}
+                onRequestClose={() => {
+                }}
             >
 
                 <View style={[ {
@@ -185,7 +193,7 @@ class PasswordCheckComponent extends React.Component {
 
 function select( store ) {
     return {
-        password: store.PasswordInputPageReducer.password
+
     }
 }
 

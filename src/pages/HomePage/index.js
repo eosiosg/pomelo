@@ -8,6 +8,7 @@ import I18n from "../../../I18n";
 
 // 自定义组件
 import { styles } from "./style";
+import { isSetLocalStorageAESKey } from "../../setup";
 
 class HomePage extends Component {
 
@@ -137,7 +138,7 @@ class HomePage extends Component {
   }
 
   isNeedInputPassword = () => {
-    if (this.props.password.length <= 0) {
+    if (!isSetLocalStorageAESKey()) {
       this.props.navigation.navigate("PasswordInputPage");
     } else {
       this.isHadImportPrivateKey();
@@ -214,7 +215,7 @@ function mapStateToProps(state) {
     return {
       accountNames: state.HomePageReducer.accountNames,
       accountNamesErr: state.HomePageReducer.accountNamesErr,
-      password: state.PasswordInputPageReducer.password
+
     };
 }
 

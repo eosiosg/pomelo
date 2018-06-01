@@ -3,6 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { AppNavigator } from "./AppNavigator";
 import PasswordCheckComponent from "./pages/PasswordInputPage/components/PasswordCheckComponent";
+import { isSetLocalStorageAESKey } from "./setup";
 
 class App extends React.Component {
     constructor( props ) {
@@ -12,7 +13,7 @@ class App extends React.Component {
             appState: AppState.currentState,
             previousAppStates: [],
             memoryWarnings: 0,
-            isPasswordCheckOpen: this.props.password.length > 0
+            isPasswordCheckOpen: isSetLocalStorageAESKey()
         };
 
         this._handleAppStateChange = this.handleAppStateChange.bind( this );
@@ -42,7 +43,7 @@ class App extends React.Component {
             if ( nextState.previousAppStates.length > 0 && nextState.previousAppStates[ nextState.previousAppStates.length - 1 ] === 'background' && nextState.appState === 'active' ) {
                 //the app from background to active
 
-                if ( this.props.password.length > 0 ) {
+                if ( isSetLocalStorageAESKey() ) {
                     this.setState( {
                         isPasswordCheckOpen: true
                     } );
@@ -77,7 +78,6 @@ class App extends React.Component {
             <View style={[ { flex: 1 } ]}>
 
 
-
                 <AppNavigator/>
                 <PasswordCheckComponent
                     isOpen={this.state.isPasswordCheckOpen}
@@ -96,9 +96,7 @@ class App extends React.Component {
 
 
 function select( store ) {
-    return {
-        password: store.PasswordInputPageReducer.password
-    };
+    return {};
 }
 
 export default connect( select )( App );
