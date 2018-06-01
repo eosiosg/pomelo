@@ -52,6 +52,8 @@ class PasswordInputPage extends Component {
 
         this.props.onDispatchSetPassword( password );
         Toast.show( "Password set success" );
+
+        this.props.navigation.goBack();
     }
 
     //
@@ -123,6 +125,7 @@ class PasswordInputPage extends Component {
                                 autoFocus={false}
                                 onPasswordSet={( newPassword ) => {
                                     if ( newPassword === this.state.oldPassword ) {
+                                        this._passwordInputPageItem1.blur();
                                         this._passwordInputPageItem2.blur();
 
                                         this.setPassword( newPassword );
