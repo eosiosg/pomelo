@@ -297,12 +297,7 @@ class VoteIndexPage extends Component {
                 </View>
               </Modal>
 
-              <Modal
-                animationType='slide'
-                transparent={true}
-                visible={this.state.needUpdate}
-                onShow={() => {console.log("needUpdate modal")}}
-                onRequestClose={() => {}} >
+              <Modal animationType='slide' transparent={true} visible={this.state.needUpdate} onShow={() => {}} onRequestClose={() => {}} >
                 <View style={styleModal.modalStyle}>
                   <View style={styleModal.subView}>
                     <Text style={styleModal.titleText}>{I18n.t("Global Upgrade Notice")}</Text>
