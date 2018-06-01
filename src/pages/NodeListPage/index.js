@@ -20,7 +20,7 @@ class NodeListPage extends Component {
         const { params } = state;
 
         return {
-            title: 'Node List',
+            title : "Producers List",
         };
     };
 
@@ -166,7 +166,7 @@ class NodeListPage extends Component {
                         }}
                                                                                                source={developTeam}>
                             <Text style={{textAlign: "center", lineHeight: 18, fontSize:12, color: 'white'}}>
-                                {I18n.t("Global Development Team")};
+                                {I18n.t("Global Development Team")}
                             </Text>
                         </ImageBackground>
                     }

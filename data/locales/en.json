@@ -63,6 +63,11 @@
   "WalletPage confirmContent" : "Please confirm that backup the EOS wallet before change it.",
   "WalletPage PleaseSure" : "OK",
   "WalletPage PleaseCancel" : "Cancel",
-  "Global Development Team": "Pomelo Developer"
+  "Global Development Team": "Pomelo Developer",
+  "Global Upgrade Description": "We have released a new version, please update to see the new feature.",
+  "Global Upgrade Notice": "Upgrade Notice",
+  "Global Upgrade Later": "Later",
+  "Global Upgrade Now": "Upgrade",
+  "Producers List":"Producers"
 
 }

@@ -133,16 +133,16 @@ class HomePage extends Component {
                 onRequestClose={() => {}} >
                 <View style={styleModal.modalStyle}>
                   <View style={styleModal.subView}>
-                    <Text style={styleModal.titleText}>Notice</Text>
-                    <Text style={styleModal.contentText}>We have released a new version, please update to see the new feature.</Text>
+                    <Text style={styleModal.titleText}>{I18n.t("Global Upgrade Notice")}</Text>
+                    <Text style={styleModal.contentText}>{I18n.t("Global Upgrade Description")}</Text>
                     <View style={styleModal.horizontalLine} />
                     <View style={styleModal.buttonView}>
                       <TouchableOpacity style={styleModal.buttonStyle} onPress={() => {this.setState({needUpdate:false})}}>
-                        <Text style={styleModal.buttonText}>Later</Text>
+                        <Text style={styleModal.buttonText}>{I18n.t("Global Upgrade Later")}</Text>
                       </TouchableOpacity>
                       <View style={styleModal.verticalLine} />
                       <TouchableOpacity style={styleModal.buttonStyle} onPress={() => {this.OpenUpdateUrl()}}>
-                        <Text style={styleModal.buttonText}>Update</Text>
+                        <Text style={styleModal.buttonText}>{I18n.t("Global Upgrade Now")}</Text>
                       </TouchableOpacity>
                     </View>
                   </View>
