@@ -6,6 +6,10 @@ import App from "./App";
 import SplashScreen from "rn-splash-screen";
 import { storage } from "./utils/storage";
 
+const EventEmitter = require( 'events' );
+
+const _eventEmitter = new EventEmitter();
+
 let _provider;
 let _store;
 let _isSetLocalStorageAESKey = false;
@@ -32,7 +36,7 @@ export function setup() {
                                 this.setState( { isLoading: false } );
                             }
                         } )
-                        .catch( ( error ) =>{
+                        .catch( ( error ) => {
                             console.log( 'EOSGetInfo error: ' + error.message );
 
                             this.setState( { isLoading: false } );
@@ -81,4 +85,8 @@ export function isSetLocalStorageAESKey() {
 
 export function setIsSetLocalStorageAESKey( isSetLocalStorageAESKey ) {
     _isSetLocalStorageAESKey = isSetLocalStorageAESKey;
+}
+
+export function getEventEmitter() {
+    return _eventEmitter;
 }
