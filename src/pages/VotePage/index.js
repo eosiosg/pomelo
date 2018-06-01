@@ -46,11 +46,11 @@ class VotePage extends Component {
         });
       let IsSubmitSuccess = nextProps.IsSubmitSuccess;
 
-      console.log("is submit success value IsSubmitSuccess: ",IsSubmitSuccess, " this.props.IsSubmitSuccess: ",this.props.IsSubmitSuccess)
+      // console.log("is submit success value IsSubmitSuccess: ",IsSubmitSuccess, " this.props.IsSubmitSuccess: ",this.props.IsSubmitSuccess)
       if (IsSubmitSuccess && IsSubmitSuccess != this.props.IsSubmitSuccess) {
         // 投票成功，重新获取AccountInfo，重置IsSubmitSuccess
           Toast.show("Successful!",{
-              position: 10,
+              position: 36,
           });
           this.props.resetIsSubmitSuccess();
           this.props.onDispatchGetVoteBpsPost({...this.state.accountPri})

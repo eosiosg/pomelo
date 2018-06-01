@@ -61,10 +61,8 @@ let nodeAddress = '';
 
 
 
-var nodeAddressList = [
-    'http://13.229.70.163:8888',
-    'http://52.74.197.107:8888',
-];
+import { nodeAddressList as nodes } from '../../config/configParams';
+let nodeAddressList = [].concat(nodes);
 nodeAddressList.sort(function(a, b){return 0.5 - Math.random()});
 
 nodeAddress = nodeAddressList[0];

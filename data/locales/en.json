@@ -43,7 +43,7 @@
   "VotePage submit" : "Submit",
   "VotePage delegatebw" : "Delegate Bandwidth",
   "VotePage bpList" : "Candidates you selected",
-  "VotePage12 notice" : "Notice",
+  "VotePage notice" : "Notice",
   "VotePage noticeC" : "You could Vote, Delegate Bandwidth or Undelegate Bandwidth anytime. Vote will use CPU+Network stake.",
   "VotePage RuleT": "Rule*",
   "VotePage Rule1": "· Vote will use a little CPU + Network stake;",
@@ -59,11 +59,12 @@
   "HomePage importWallet": "Import EOS wallet",
   "HomePage privateKey": "Your Private Key",
   "HomePage choiceAccount" : "Choice an account name",
-  "HomePage submitKey":"Submit",
+  "HomePage Submit":"Submit",
   "HomePage Hint":"Paste your private key string here",
   "HomePage PleaseEnterComplete":"Please enter the complete",
   "HomePage PleaseSure" : "OK",
   "HomePage PleaseCancel" : "Cancel",
+
   "WalletPage changeWallet" : "Change Wallet",
   "WalletPage totalAssets" : "Total Assets",
   "WalletPage Title": "Notice",
@@ -79,5 +80,13 @@
 
   "Node Vote List" : "Selected Producers",
   "Node Vote" : "Vote",
-  "Node Choose" : "Selected"
+  "Node Choose" : "Selected",
+
+  "Password Set" : "Set Password",
+  "Password Input" : "Please enter your password",
+  "Password Check" : "Please check your password",
+  "Password Verify" : "Please enter your password",
+  "Password Clear" : "Clear Passwords",
+  "Password Invalid" : "Password is not the same",
+  "Password Set Success" : "Password set success"
 }

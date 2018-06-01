@@ -5,12 +5,14 @@ import { ScrollView, View, Text, TextInput, Image, TouchableOpacity, Dimensions,
 import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 import Toast from "react-native-root-toast";
 import I18n from "../../../I18n";
+var compareVersions = require('compare-versions');
+import  { updateDetectURL } from '../../../config/configParams' ;
 
 // 自定义组件
 import { styles } from "./style";
 import { getEventEmitter, isSetLocalStorageAESKey } from "../../setup";
 import {ModalYNStyles as styleModal} from "../../style/style";
-import DeviceInfo from 'react-native-device-info';
+import {versionNumber} from '../../../config/configParams';
 
 class HomePage extends Component {
 
@@ -59,7 +61,7 @@ class HomePage extends Component {
   render() {
     const privateKeyIntl = I18n.t( "HomePage privateKey" );
     const choiceAccountIntl = I18n.t( "HomePage choiceAccount" );
-    const submitKey = I18n.t( "HomePage submitKey" );
+    const submitKey = I18n.t( "HomePage Submit" );
     const Hint = I18n.t( "HomePage Hint" );
     const PleaseEnterComplete = I18n.t( "HomePage PleaseEnterComplete" );
     const PleaseSure = I18n.t( "HomePage PleaseSure" );
@@ -160,9 +162,8 @@ class HomePage extends Component {
 
   isNeedInputPassword = () => {
     if (!isSetLocalStorageAESKey()) {
-      this.props.navigation.navigate("PasswordInputPage");
     } else {
-      getEventEmitter().on('checkPasswordSuccess', function () {
+      getEventEmitter().on('checkPasswordSuccess', () => {
         this.isNeedUpdate();
       });
     }
@@ -170,35 +171,16 @@ class HomePage extends Component {
 
   isNeedUpdate = () => {
     // 判断更新
-    const appVersion= '0.0.1';
+    const appVersion= versionNumber;
 
-    console.log(DeviceInfo.getVersion());
-
-    fetch('https://api.eosio.sg/upgrade').then((res)=>{
+    fetch(updateDetectURL).then((res)=>{
       return res.json()
     }).then((res)=>{
       let newestVersion = res.version;
       this.downLoadUrl = res.download;
-      let [a,b,c] = newestVersion.split('.');
-      let [x,y,z] = appVersion.split('.');
-      let needUpdate = false;
-      if(a>x){
-        needUpdate = true;
-      }else if(a==x){
-        if(b>y){
-          needUpdate =true;
-        }else if(b==y){
-          if(c>z){
-            needUpdate=true;
-          }else if(c<z){
-            console.log(`Error version number from api ${newestVersion}`)
-          }
-        }else{
-          console.log(`Error version number from api ${newestVersion}`)
-        }
-      }else{
-        console.log(`Error version number from api ${newestVersion}`)
-      }
+
+      let compareResult = compareVersions(appVersion,newestVersion);
+      let needUpdate = compareResult<0;
       this.setState({
         needUpdate
       });

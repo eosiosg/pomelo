@@ -20,6 +20,8 @@ import PasswordInputComponent from "./PasswordInputComponent";
 import NumberInputComponent from "./NumberInputComponent";
 import { decryptObject, setStorageAESKey, storage } from "../../../utils/storage";
 import { getEventEmitter } from "../../../setup";
+import I18n from "../../../../I18n";
+
 
 class PasswordCheckComponent extends React.Component {
     static propTypes = {
@@ -101,7 +103,7 @@ class PasswordCheckComponent extends React.Component {
             this.setState( {
                 errorText: 'Password is not correct'
             } );
-            this._passwordInputComponent.clearData();
+          this._passwordInputComponent ? this._passwordInputComponent.clearData() : null;
         } );
     }
 
@@ -130,7 +132,7 @@ class PasswordCheckComponent extends React.Component {
                             textAlign: 'center'
                         } ]}>
                         {
-                            'Please enter your password'
+                            I18n.t("Password Verify")
                         }
                     </Text>
 
@@ -181,7 +183,7 @@ class PasswordCheckComponent extends React.Component {
                         onPress={() => {
                             this._passwordInputComponent.clearData()
                         }}
-                        title="Clear Password"
+                        title = {I18n.t("Password Clear")}
                         color="#007AFF"
                         accessibilityLabel=""
                         style={[ { marginTop: 100, marginBottom: 20 } ]}

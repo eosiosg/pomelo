@@ -10,9 +10,8 @@ import LoadingView from "./components/LoadingView";
 import Spinner from 'react-native-loading-spinner-overlay';
 import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 const developTeam = require('../../images/developTeamBackground.png');
-import developmentTeamList from '../../../data/developmentTeam'
 import I18n from "../../../I18n";
-import defaultLogoUrl from '../../../data/defaultLogoURL';
+import { defaultLogoUrl } from '../../../config/configParams';
 
 class NodeListPage extends Component {
     static navigationOptions = ( props ) => {

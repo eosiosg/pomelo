@@ -12,7 +12,8 @@ import {
 } from "react-native";
 import { styles } from "./style";
 import PasswordInputComponent from "./components/PasswordInputComponent";
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';;
+import I18n from "../../../I18n";
 
 class PasswordInputPageItem extends Component {
     static navigationOptions = ( props ) => {
@@ -105,7 +106,7 @@ class PasswordInputPageItem extends Component {
                                 onPress={() => {
                                     this._passwordInputComponent.clearData()
                                 }}
-                                title="Clear Password"
+                                title={I18n.t("Password Clear")}
                                 color="#007AFF"
                                 accessibilityLabel=""
                                 style={[ { marginTop: 100 } ]}

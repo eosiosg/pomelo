@@ -23,10 +23,19 @@ const initState = {
     {
       owner: "",
       total_votes: "",
+
+
       producer_key: "1",
     },
   ],
   USD: 6.2,
+  needGetUserInfo: false,
+  accountDic: {
+    logo: "",
+    organization_name: "",
+  },
+  contributors: "",
+  totalVoteWeight: 0,
 };
 export default function VoteIndexPageReducer (state = initState, action) {
     switch (action.type) {
