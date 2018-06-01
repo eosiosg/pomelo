@@ -1,4 +1,4 @@
-const chainId = '706a7ddd808de9fc2b8879904f3b392256c83104c1d544b38302cc07d9fca477';
+import { chainId } from '../../config/configParams';
 let nodeAddress = '';
 
 // var nodeAddressList = [

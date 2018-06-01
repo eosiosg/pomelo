@@ -36,6 +36,8 @@
   "UnDelegatebwPage Confirm": "确认",
 
   "VotePage account": "账户名",
+  "VotePage vote" : "投票",
+  "VotePage vote_success" : "投票成功",
   "VotePage balance": "可用余额",
   "VotePage stake": "可投票资源",
   "VotePage cancel": "取消",

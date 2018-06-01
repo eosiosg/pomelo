@@ -5,7 +5,6 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { injectIntl } from 'react-intl';
 import { ScrollView, View, Text, Image, TouchableHighlight, SafeAreaView, TouchableOpacity, Dimensions, Modal } from "react-native";
 // 自定义组件
 import { styles } from "./style";
@@ -22,7 +21,7 @@ class VotePage extends Component {
         const { state, setParams } = navigation;
         const { params } = state;
         return {
-            title: 'Vote'
+            title: I18n.t('VotePage vote')
         };
     };
 
@@ -49,7 +48,7 @@ class VotePage extends Component {
       // console.log("is submit success value IsSubmitSuccess: ",IsSubmitSuccess, " this.props.IsSubmitSuccess: ",this.props.IsSubmitSuccess)
       if (IsSubmitSuccess && IsSubmitSuccess != this.props.IsSubmitSuccess) {
         // 投票成功，重新获取AccountInfo，重置IsSubmitSuccess
-          Toast.show("Successful!",{
+          Toast.show(I18n.t('VotePage vote_success')+'!',{
               position: 36,
           });
           this.props.resetIsSubmitSuccess();

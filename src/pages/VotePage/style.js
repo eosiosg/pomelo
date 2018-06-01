@@ -354,7 +354,6 @@ const styles = StyleSheet.create({
     },
 
 
-
     footerView:{
         height:footerHeight,
         width:'100%',
@@ -363,7 +362,7 @@ const styles = StyleSheet.create({
         flexWrap: "nowrap",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor:'#736d75',
+        backgroundColor:'#3D4144',
     },
 
 
