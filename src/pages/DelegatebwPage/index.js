@@ -10,8 +10,9 @@ import { decryptObject, storage } from "../../utils/storage";
 
 class DelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
+        let title = I18n.t("DelegatebwPage Title");
         return {
-          title: 'Delegatebw'
+          title: title
         };
     };
 
@@ -37,7 +38,7 @@ class DelegatebwPage extends Component {
       const Rule1Intl = I18n.t("DelegatebwPage Rule1");
       const Rule2Intl = I18n.t("DelegatebwPage Rule2");
       const Rule3Intl = I18n.t("DelegatebwPage Rule3");
-      const Rule4Intl = I18n.t("DelegatebwPage Rule4");
+      // const Rule4Intl = I18n.t("DelegatebwPage Rule4");
       const ConfirmIntl = I18n.t("DelegatebwPage Confirm");
         return (
             <SafeAreaView style={[{flex:1}]}>
@@ -95,7 +96,7 @@ class DelegatebwPage extends Component {
                   <Text style={ruleStyles.ruleDesc}>{Rule1Intl}</Text>
                   <Text style={ruleStyles.ruleDesc}>{Rule2Intl}</Text>
                   <Text style={ruleStyles.ruleDesc}>{Rule3Intl}</Text>
-                  <Text style={ruleStyles.ruleDesc}>{Rule4Intl}</Text>
+                  {/*<Text style={ruleStyles.ruleDesc}>{Rule4Intl}</Text>*/}
                 </View>
                 <View style={{height: 50}}></View>
               </ScrollView>

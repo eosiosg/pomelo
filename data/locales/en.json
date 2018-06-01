@@ -1,4 +1,6 @@
 {
+
+  "VoteIndexPage Title": "Pomelo",
   "VoteIndexPage ChangeWallet": "Change Wallet",
   "VoteIndexPage userName": "userName",
   "VoteIndexPage TotalAsset": "Total Asset",
@@ -6,13 +8,13 @@
   "VoteIndexPage Balance": "Balance",
   "VoteIndexPage RAMBytes": "RAM bytes",
   "VoteIndexPage Vote": "Vote",
-  "VoteIndexPage VoteDesc": "Undelegatebw will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later.",
-  "VoteIndexPage Undelegatebw": "Undelegatebw",
-  "VoteIndexPage AddDelegatebw": "Add Delegatebw",
-  "VoteIndexPage Revote": "Revote",
-  "VoteIndexPage VotedBps": "Voted Bps",
+  "VoteIndexPage VoteDesc": "Undelegate Bandwidth will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later.",
+  "VoteIndexPage Undelegatebw": "Undelegate Bandwidth",
+  "VoteIndexPage AddDelegatebw": "Delegate Bandwidth",
+  "VoteIndexPage Revote": "Vote Producers",
+  "VoteIndexPage VotedBps": "Voted Block Producers",
 
-  "DelegatebwPage DelegatebwPage": "Add DelegatebwPage",
+  "DelegatebwPage Title": "Delegate Bandwidth",
   "DelegatebwPage Balance": "Balance",
   "DelegatebwPage StakeCount": "Stake Count",
   "DelegatebwPage StakeQuantity": "Stake Quantity",
@@ -20,12 +22,11 @@
   "DelegatebwPage Network": "Network",
   "DelegatebwPage Rule": "Rule*",
   "DelegatebwPage Rule1": "· Vote will use a little CPU + Network stake;",
-  "DelegatebwPage Rule2": "· Weight  = seconds_count_since_year_2000/ seconds_count_per_year，means increase by second;",
-  "DelegatebwPage Rule3": "· Vote = (CPU stake + Network stake) * 2^weight;",
-  "DelegatebwPage Rule4": "· Could undelegatebw anytime，whitch will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later;",
+  "DelegatebwPage Rule2": "· The voting weight will decrease over time;",
+  "DelegatebwPage Rule3": "· Could Undelegate Bandwidth anytime，which will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later;",
   "DelegatebwPage Confirm": "Confirm",
 
-  "UnDelegatebwPage UnDelegatebwPage": "UnDelegatebwPage",
+  "UnDelegatebwPage Title": "Undelegate Bandwidth Page",
   "UnDelegatebwPage StakeCount": "Stake Count",
   "UnDelegatebwPage StakeCountInfo": "* EOS will return to account 3 days later",
   "UnDelegatebwPage StakeQuantity": "Stake Quantity",
@@ -40,15 +41,20 @@
   "VotePage gotIt" : "Got it",
   "VotePage confirm" : "Confirm",
   "VotePage submit" : "Submit",
-  "VotePage delegatebw" : "Delegatebw",
+  "VotePage delegatebw" : "Delegate Bandwidth",
   "VotePage bpList" : "Candidates you selected",
-  "VotePage notice" : "Notice",
-  "VotePage noticeC" : "You could revote, delegatebw or undelegatebw anytime. Vote will use CPU+Network stake.",
+  "VotePage12 notice" : "Notice",
+  "VotePage noticeC" : "You could Vote, Delegate Bandwidth or Undelegate Bandwidth anytime. Vote will use CPU+Network stake.",
   "VotePage RuleT": "Rule*",
   "VotePage Rule1": "· Vote will use a little CPU + Network stake;",
-  "VotePage Rule2": "· Weight  = seconds_count_since_year_2000/ seconds_count_per_year，means increase by second;",
-  "VotePage Rule3": "· Vote = (CPU stake + Network stake) * 2^weight;",
-  "VotePage Rule4": "· Could undelegatebw anytime，whitch will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later;",
+  "VotePage Rule2": "· The voting weight will decrease over time;",
+  "VotePage Rule3": "· Could Undelegate Bandwidth anytime，which will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later;",
+
+
+
+  "Producers List Title" : "Producers List",
+  "Producers List Vote" : "Vote",
+  "Producers List Choose" : "Choose",
 
   "HomePage importWallet": "Import EOS wallet",
   "HomePage privateKey": "Your Private Key",
@@ -68,6 +74,6 @@
   "Global Upgrade Notice": "Upgrade Notice",
   "Global Upgrade Later": "Later",
   "Global Upgrade Now": "Upgrade",
-  "Producers List":"Producers"
+  "Global Total Votes Percentage" : "Total Votes Percentage"
 
 }

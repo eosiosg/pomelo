@@ -1,4 +1,6 @@
 {
+
+  "VoteIndexPage Title": "柚子钱包",
   "VoteIndexPage ChangeWallet": "更换钱包",
   "VoteIndexPage userName": "用户名",
   "VoteIndexPage TotalAsset": "账户总额度",
@@ -11,41 +13,48 @@
   "VoteIndexPage AddDelegatebw": "资源质押",
   "VoteIndexPage Revote": "开始投票",
   "VoteIndexPage VotedBps": "已投节点",
-  "DelegatebwPage DelegatebwPage": "资源质押",
+
+  "DelegatebwPage Title": "资源质押",
   "DelegatebwPage Balance": "可用余额",
   "DelegatebwPage StakeCount": "质押资源总数",
   "DelegatebwPage StakeQuantity": "资源数量",
   "DelegatebwPage CPU": "CPU",
   "DelegatebwPage Network": "Network",
   "DelegatebwPage Rule": "规则*",
-  "DelegatebwPage Rule1": "· 投票会使用一些你的CPU和Network股权",
-  "DelegatebwPage Rule2": "· 权重 weight = 2000年以来的秒数/ 一年的秒数，这意味着权重按秒增加;",
-  "DelegatebwPage Rule3": "· 票数 vote = (CPU stake + Network stake) * 2^weight;",
-  "DelegatebwPage Rule4": "· 你可以在任何时候选择undelegatebw，此项操作将会减少你给voter的投票，EOS将会在3天后退回你的账户",
+
+  "DelegatebwPage Rule1": "· 投票会使用一些你的CPU和Network资源",
+  "DelegatebwPage Rule2": "· 投票产生的权重，会随着时间递减",
+  "DelegatebwPage Rule3": "· 你可以在任何时候选择'赎回资源'，此项操作将会减少你给节点的投票，EOS将会在3天后退回你的账户",
   "DelegatebwPage Confirm": "确认",
-  "UnDelegatebwPage UnDelegatebwPage": "赎回资源",
+
+  "UnDelegatebwPage Title": "赎回资源",
   "UnDelegatebwPage StakeCount": "当前已质押资源",
   "UnDelegatebwPage StakeCountInfo": "* EOS将在3天后返回到'可用余额'中",
   "UnDelegatebwPage StakeQuantity": "赎回数量",
   "UnDelegatebwPage CPU": "CPU",
   "UnDelegatebwPage Network": "Network",
   "UnDelegatebwPage Confirm": "确认",
+
   "VotePage account": "账户名",
-  "VotePage balance": "余额",
-  "VotePage stake": "权重",
+  "VotePage balance": "可用余额",
+  "VotePage stake": "可投票资源",
   "VotePage cancel": "取消",
-  "VotePage delegatebw": "设置权重",
+  "VotePage delegatebw": "资源分配情况",
   "VotePage gotIt": "知道了",
   "VotePage confirm": "确认",
   "VotePage submit": "提交",
-  "VotePage bpList": "投票列表",
+  "VotePage bpList": "已选节点列表",
   "VotePage notice": "告知",
-  "VotePage noticeC": "你可以在任何时候重新投票，'质押资源'或者'赎回资源'。投票将会使用CPU和Network股权。",
+  "VotePage noticeC": "你可以在任何时候'重新投票'、'质押资源'或者'赎回资源'。投票将会使用CPU和Network。",
   "VotePage RuleT": "规则*",
-  "VotePage Rule1": "· 投票会使用一些你的CPU和Network股权",
-  "VotePage Rule2": "· 权重 weight = 2000年以来的秒数/ 一年的秒数，这意味着权重按秒增加;",
-  "VotePage Rule3": "· 票数 vote = (CPU stake + Network stake) * 2^weight;",
-  "VotePage Rule4": "· 你可以在任何时候选择'赎回资源'，此项操作将会减少你给节点的投票，EOS将会在3天后退回你的账户",
+  "VotePage Rule1": "· 投票会使用一些你的CPU和Network资源",
+  "VotePage Rule2": "· 投票产生的权重，会随着时间递减",
+  "VotePage Rule3": "· 你可以在任何时候选择'赎回资源'，此项操作将会减少你给节点的投票，EOS将会在3天后退回你的账户",
+
+  "Producers List Title" : "所有节点",
+  "Producers List Vote" : "投票",
+  "Producers List Choose" : "已选择",
+
   "HomePage importWallet": "导入钱包",
   "HomePage privateKey": "个人私钥",
   "HomePage choiceAccount": "选择账户",
@@ -66,6 +75,6 @@
   "Global Upgrade Notice": "更新通知",
   "Global Upgrade Later": "稍后再说",
   "Global Upgrade Now": "更新",
+  "Global Total Votes Percentage" : "占总票数比例"
 
-  "Producers List":"节点候选人"
 }
