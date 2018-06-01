@@ -16,7 +16,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { getDpFromPx } from "../../../utils/util";
 import { styles as style } from "../style";
 import OperationBottomComponent from "./OperationBottomComponent";
-import I18n from "../../../I18n";
+import I18n from "../../../../I18n";
 
 class NodeListSelectedResultComponent extends React.Component {
     static propTypes = {
