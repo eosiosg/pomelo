@@ -59,7 +59,7 @@ class HomePage extends Component {
   render() {
     const privateKeyIntl = I18n.t( "HomePage privateKey" );
     const choiceAccountIntl = I18n.t( "HomePage choiceAccount" );
-    const submitKey = I18n.t( "HomePage submitKey" );
+    const submitKey = I18n.t( "HomePage Submit" );
     const Hint = I18n.t( "HomePage Hint" );
     const PleaseEnterComplete = I18n.t( "HomePage PleaseEnterComplete" );
     const PleaseSure = I18n.t( "HomePage PleaseSure" );

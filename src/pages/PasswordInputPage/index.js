@@ -17,6 +17,7 @@ import { ViewPager } from 'rn-viewpager';
 import PasswordInputPageItem from "./PasswordInputPageItem";
 import { encryptObjectToString, setStorageAESKey, storage } from "../../utils/storage";
 import { setIsSetLocalStorageAESKey } from "../../setup";
+import I18n from "../../../I18n";
 
 class PasswordInputPage extends Component {
     static navigationOptions = ( props ) => {
@@ -24,8 +25,9 @@ class PasswordInputPage extends Component {
         const { state, setParams } = navigation;
         const { params } = state;
 
+        let title = I18n.t("Password Set");
         return {
-            title: 'Set Password',
+            title: title,
         };
     };
 
@@ -62,7 +64,7 @@ class PasswordInputPage extends Component {
             setIsSetLocalStorageAESKey( true );
 
             this.props.navigation.goBack();
-            Toast.show( "Password set success" );
+            Toast.show( I18n.t("Password Set Success"));
         } );
     }
 
@@ -109,7 +111,7 @@ class PasswordInputPage extends Component {
                                 ref={( passwordInputPageItem ) => {
                                     this._passwordInputPageItem1 = passwordInputPageItem;
                                 }}
-                                style={[ {} ]} title={'Please enter your password'}
+                                style={[ {} ]} title={I18n.t("Password Input")}
                                 isSupportClear={true}
                                 autoFocus={true}
                                 onPasswordSet={( password ) => {
@@ -130,7 +132,7 @@ class PasswordInputPage extends Component {
                                 ref={( passwordInputPageItem ) => {
                                     this._passwordInputPageItem2 = passwordInputPageItem;
                                 }}
-                                style={[ {} ]} title={'Please check your password'}
+                                style={[ {} ]} title={I18n.t('Password Check')}
                                 isSupportClear={false}
                                 autoFocus={false}
                                 onPasswordSet={( newPassword ) => {
@@ -140,7 +142,7 @@ class PasswordInputPage extends Component {
 
                                         this.setPassword( newPassword );
                                     } else {
-                                        Toast.show( "Password is not the same", { position: Toast.positions.CENTER } );
+                                        Toast.show( I18n.t('Password Invalid'), { position: Toast.positions.CENTER } );
 
                                         this._passwordInputPageItem1.clearPassword();
                                         this._passwordInputPageItem2.clearPassword();

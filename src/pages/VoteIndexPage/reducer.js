@@ -23,6 +23,8 @@ const initState = {
     {
       owner: "",
       total_votes: "",
+
+
       producer_key: "1",
     },
   ],
