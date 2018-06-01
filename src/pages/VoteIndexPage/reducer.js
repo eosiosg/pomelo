@@ -29,6 +29,13 @@ const initState = {
     },
   ],
   USD: 6.2,
+  needGetUserInfo: false,
+  accountDic: {
+    logo: "",
+    organization_name: "",
+  },
+  contributors: "",
+  totalVoteWeight: 0,
 };
 export default function VoteIndexPageReducer (state = initState, action) {
     switch (action.type) {
