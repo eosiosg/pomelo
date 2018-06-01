@@ -45,6 +45,8 @@ const styles = StyleSheet.create({
 
     contentHeader: {
         marginTop: 20,
+        paddingLeft:15,
+        paddingRight:15,
         marginLeft:leftFirstBase,
         marginRight:leftFirstBase,
         borderRadius:5,
@@ -52,41 +54,37 @@ const styles = StyleSheet.create({
     },
 
     contentHeaderAccountName:{
-        flexDirection:'row',
-        flexWrap:'wrap',
-        paddingLeft: 5,
-        paddingRight: 5,
-        marginLeft:8,
-        marginRight:8,
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "nowrap",
+        justifyContent: "space-between",
+        alignItems: "center",
+        borderBottomWidth: 1,
+        borderBottomColor: "#eee",
     },
 
     contentHeaderBalance:{
-        flexDirection:'row',
-        flexWrap:'wrap',
-        paddingLeft: 5,
-        paddingRight: 5,
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "nowrap",
         justifyContent: "space-between",
-        borderTopWidth: 1,
-        borderTopColor: "#eee",
-        marginLeft:8,
-        marginRight:8,
+        alignItems: "center",
+        borderBottomWidth: 1,
+        borderBottomColor: "#eee",
     },
 
     contentHeaderStake:{
-        flexDirection:'row',
-        flexWrap:'wrap',
-        paddingLeft: 5,
-        paddingRight: 5,
-        marginLeft:8,
-        marginRight:8,
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "nowrap",
         justifyContent: "space-between",
-        borderTopWidth: 1,
-        borderTopColor: "#eee",
+        alignItems: "center",
+        borderBottomWidth: 1,
+        borderBottomColor: "#eee",
     },
 
 
     contentHeaderAccountNameLabel: {
-        width:'50%',
         fontSize:16,
         lineHeight: 45,
         color:'black',
@@ -94,7 +92,6 @@ const styles = StyleSheet.create({
     },
 
     contentHeaderAccountNameValue: {
-        width:'50%',
         textAlign:'right',
         fontSize:16,
         lineHeight: 45,
@@ -103,11 +100,12 @@ const styles = StyleSheet.create({
     },
 
     contentHeaderBalanceValueContainer:{
-        width:'50%',
-        textAlign:'right',
-        // fontSize:18,
-        // lineHeight: 45,
-        // color:'grey',
+        color: "#181818",
+        fontSize: 20,
+        fontWeight: "600",
+        display: "flex",
+        justifyContent: "flex-end",
+        alignItems: "flex-end",
     },
 
     contentHeaderBalanceValue:{
@@ -122,9 +120,8 @@ const styles = StyleSheet.create({
     },
 
     contentHeaderEOSSign:{
-        fontSize:14,
-        lineHeight:35,
-        fontWeight:'400',
+        fontSize: 14,
+        color: "#0c0c0c",
     },
 
     contentBodyStake : {

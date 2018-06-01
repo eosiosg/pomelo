@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import Icon from "react-native-vector-icons/Ionicons";
 import { styles as style } from "../style";
-import I18n from "../../../I18n";
+import I18n from "../../../../I18n";
 
 class OperationBottomComponent extends React.Component {
     static propTypes = {
@@ -12,7 +12,7 @@ class OperationBottomComponent extends React.Component {
         isOpenSelected: PropTypes.bool.isRequired,
         onShowSelected: PropTypes.func.isRequired,
         onVote: PropTypes.func.isRequired,
-    };
+    };git
 
     constructor( props ) {
         super( props );

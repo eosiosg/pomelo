@@ -138,33 +138,19 @@ class VotePage extends Component {
                             </Text>
                         </View>
                         <View style={styles.contentHeaderBalance}>
-                            <Text style={[styles.contentHeaderAccountNameLabel,{flex:3}]}>
+                            <Text style={[styles.contentHeaderAccountNameLabel]}>
                                 {balance}
                             </Text>
-                            <Text style={[styles.contentHeaderBalanceValueContainer,{flex:8}]}>
-                                <Text style={styles.contentHeaderBalanceValue}>
-                                    {CurrencyBalance||123345}
-                                </Text>
-                                <View style={styles.contentHeaderEOSSignContainer}>
-                                    <Text style={styles.contentHeaderEOSSign}>
-                                        EOS
-                                    </Text>
-                                </View>
+                            <Text style={[styles.contentHeaderBalanceValueContainer]}>
+                                {CurrencyBalance} <Text style={styles.contentHeaderEOSSign}>EOS</Text>
                             </Text>
                         </View>
                         <View style={styles.contentHeaderStake}>
-                            <Text style={styles.contentHeaderAccountNameLabel}>
+                            <Text style={[styles.contentHeaderAccountNameLabel]}>
                                 {stakeN}
                             </Text>
-                            <Text style={styles.contentHeaderBalanceValueContainer}>
-                                <Text style={styles.contentHeaderBalanceValue}>
-                                    {stake||0}
-                                </Text>
-                                <View style={styles.contentHeaderEOSSignContainer}>
-                                    <Text style={styles.contentHeaderEOSSign}>
-                                        EOS
-                                    </Text>
-                                </View>
+                            <Text style={[styles.contentHeaderBalanceValueContainer]}>
+                                {stake} <Text style={styles.contentHeaderEOSSign}>EOS</Text>
                             </Text>
                         </View>
                     </View>
