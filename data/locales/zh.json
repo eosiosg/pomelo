@@ -66,9 +66,10 @@
 
   "WalletPage changeWallet": "更换账户",
   "WalletPage totalAssets": "总余额",
-  "WalletPage confirmContent": "请在更换账户钱备份EOS钱包",
-  "WalletPage PleaseSure": "是",
-  "WalletPage PleaseCancel": "否",
+  "WalletPage Title": "友情提示",
+  "WalletPage confirmContent": "请在更换账户前做好EOS私钥备份",
+  "WalletPage PleaseSure": "继续",
+  "WalletPage PleaseCancel": "取消",
 
   "Global Development Team": "柚子开发团队",
   "Global Upgrade Description": "柚子钱包发布新版本啦，请点击'更新'前往下载页面",
