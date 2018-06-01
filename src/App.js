@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { AppNavigator } from "./AppNavigator";
 import PasswordCheckComponent from "./pages/PasswordInputPage/components/PasswordCheckComponent";
-import { isSetLocalStorageAESKey } from "./setup";
+import { getEventEmitter, isSetLocalStorageAESKey } from "./setup";
 
 class App extends React.Component {
     constructor( props ) {
@@ -21,7 +21,9 @@ class App extends React.Component {
     }
 
     componentWillMount() {
-
+        getEventEmitter().on('checkPasswordSuccess', function () {
+            console.log("ee.on('checkPasswordSuccess', function () { 2")
+        })
     }
 
     componentDidMount() {
