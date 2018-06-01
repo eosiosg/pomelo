@@ -11,6 +11,7 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 const developTeam = require('../../images/developTeamBackground.png');
 import developmentTeamList from '../../../data/developmentTeam'
+import I18n from "../../../I18n";
 
 class NodeListPage extends Component {
     static navigationOptions = ( props ) => {
@@ -165,7 +166,7 @@ class NodeListPage extends Component {
                         }}
                                                                                                source={developTeam}>
                             <Text style={{textAlign: "center", lineHeight: 18, fontSize:12, color: 'white'}}>
-                                Development Team
+                                I18n.t("Global Development Team");
                             </Text>
                         </ImageBackground>
                     }

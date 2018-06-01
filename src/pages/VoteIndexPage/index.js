@@ -157,7 +157,8 @@ class VoteIndexPage extends Component {
                     }}
                                                                                            source={developTeam}>
                         <Text style={{textAlign: "center", lineHeight: 18, fontSize:12, color: 'white'}}>
-                            Development Team
+
+                            I18n.t("Global Development Team");
                         </Text>
                     </ImageBackground>
                 }

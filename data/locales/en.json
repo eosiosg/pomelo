@@ -10,6 +10,7 @@
   "VoteIndexPage AddDelegatebw": "Add Delegatebw",
   "VoteIndexPage Revote": "Revote",
   "VoteIndexPage VotedBps": "Voted Bps",
+
   "DelegatebwPage DelegatebwPage": "Add DelegatebwPage",
   "DelegatebwPage Balance": "Balance",
   "DelegatebwPage StakeCount": "Stake Count",
@@ -22,6 +23,7 @@
   "DelegatebwPage Rule3": "· Vote = (CPU stake + Network stake) * 2^weight;",
   "DelegatebwPage Rule4": "· Could undelegatebw anytime，whitch will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later;",
   "DelegatebwPage Confirm": "Confirm",
+
   "UnDelegatebwPage UnDelegatebwPage": "UnDelegatebwPage",
   "UnDelegatebwPage StakeCount": "Stake Count",
   "UnDelegatebwPage StakeCountInfo": "* EOS will return to account 3 days later",
@@ -59,6 +61,7 @@
   "WalletPage totalAssets" : "Total Assets",
   "WalletPage confirmContent" : "Please confirm that backup the EOS wallet before change it.",
   "WalletPage PleaseSure" : "OK",
-  "WalletPage PleaseCancel" : "Cancel"
+  "WalletPage PleaseCancel" : "Cancel",
+  "Global Development Team": "Pomelo Developer"
 
 }
