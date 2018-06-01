@@ -284,13 +284,14 @@ class VoteIndexPage extends Component {
               <Modal animationType='slide' transparent={true} visible={this.state.IsModalShow} onRequestClose={() => {}}>
                 <View style={modalStyles.modalStyle}>
                   <View style={modalStyles.subView}>
-                    <Text style={modalStyles.titleText}>Notice</Text>
-                    <Text style={modalStyles.contentText}>Please confirm that backup the EOS wallet before change it.</Text>
+
+                    <Text style={modalStyles.titleText}>{I18n.t("WalletPage Title")}</Text>
+                    <Text style={modalStyles.contentText}>{I18n.t("WalletPage confirmContent")}</Text>
                     <View style={modalStyles.horizontalLine} />
                     <View style={modalStyles.buttonView}>
-                      <Text style={modalStyles.buttonStyle} onPress={() => {this.setState({IsModalShow: false})}}>Cancel</Text>
+                      <Text style={modalStyles.buttonStyle} onPress={() => {this.setState({IsModalShow: false})}}>{I18n.t("WalletPage PleaseCancel")}</Text>
                       <View style={modalStyles.verticalLine} />
-                      <Text style={modalStyles.buttonStyle} onPress={() => {this.setState({IsModalShow: false});this.props.navigation.navigate("HomePage", {aaa:"aaa"})}}>OK</Text>
+                      <Text style={modalStyles.buttonStyle} onPress={() => {this.setState({IsModalShow: false});this.props.navigation.navigate("HomePage", {aaa:"aaa"})}}>{I18n.t("WalletPage PleaseSure")}</Text>
                     </View>
                   </View>
                 </View>
