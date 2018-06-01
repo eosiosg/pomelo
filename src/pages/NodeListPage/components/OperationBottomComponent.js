@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import Icon from "react-native-vector-icons/Ionicons";
 import { styles as style } from "../style";
+import I18n from "../../../I18n";
 
 class OperationBottomComponent extends React.Component {
     static propTypes = {
@@ -40,6 +41,9 @@ class OperationBottomComponent extends React.Component {
             }
         })
 
+        let voteText = I18n.t("Node Vote");
+        let chooseText = I18n.t("Node Choose");
+
         return (
             <View style={[ { flexDirection: 'row', height: 44, backgroundColor: 'white' } ]}>
                 <View style={[ { flex: 3, height: 44 } ]}>
@@ -50,7 +54,7 @@ class OperationBottomComponent extends React.Component {
                             }
                         }}>
                         <View style={[ { flexDirection: 'row', height: 44, alignItems: 'center', paddingLeft: 15 } ]}>
-                            <Text style={[ style.commonTextColorStyle, { fontSize: 14 } ]}>Choose</Text>
+                            <Text style={[ style.commonTextColorStyle, { fontSize: 14 } ]}>{chooseText}</Text>
                             <Text style={[ style.commonSubTextColorStyle, {
                                 fontSize: 14,
                                 marginLeft: 10,
@@ -75,7 +79,7 @@ class OperationBottomComponent extends React.Component {
                             }
                         }}>
                         <View style={[ { backgroundColor: '#3c4144', height: 44 }, style.justAlignCenter ]}>
-                            <Text style={[ { color: 'white' } ]}>Vote</Text>
+                            <Text style={[ { color: 'white' } ]}>{voteText}</Text>
                         </View>
                     </TouchableOpacity>
                 </View>

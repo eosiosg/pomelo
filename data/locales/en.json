@@ -75,6 +75,9 @@
   "Global Upgrade Notice": "Upgrade Notice",
   "Global Upgrade Later": "Later",
   "Global Upgrade Now": "Upgrade",
-  "Global Total Votes Percentage" : "Total Votes Percentage"
+  "Global Total Votes Percentage" : "Total Votes Percentage",
 
+  "Node Vote List" : "Selected Producers",
+  "Node Vote" : "Vote",
+  "Node Choose" : "Selected"
 }

@@ -16,6 +16,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { getDpFromPx } from "../../../utils/util";
 import { styles as style } from "../style";
 import OperationBottomComponent from "./OperationBottomComponent";
+import I18n from "../../../I18n";
 
 class NodeListSelectedResultComponent extends React.Component {
     static propTypes = {
@@ -117,6 +118,8 @@ class NodeListSelectedResultComponent extends React.Component {
         const viewHeight = 44;
         const separatorHeight = getDpFromPx( 1 );
 
+        let voteList = I18n.t("Node Vote List");
+
         return (
             <Modal
                 transparent={true}
@@ -141,7 +144,7 @@ class NodeListSelectedResultComponent extends React.Component {
                             <Text style={[ {
                                 fontSize: 16,
                                 marginTop: 14
-                            }, style.wrapper, style.commonTextColorStyle ]}>Vote List</Text>
+                            }, style.wrapper, style.commonTextColorStyle ]}>{voteList}</Text>
                             <TouchableHighlight
                                 underlayColor='#ddd'
                                 onPress={() => {

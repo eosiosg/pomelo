@@ -8,7 +8,7 @@ import I18n from "../../../I18n";
 
 // 自定义组件
 import { styles } from "./style";
-import { isSetLocalStorageAESKey } from "../../setup";
+import { getEventEmitter, isSetLocalStorageAESKey } from "../../setup";
 
 class HomePage extends Component {
 
@@ -50,6 +50,10 @@ class HomePage extends Component {
 
   componentWillMount() {
     this.isNeedInputPassword();
+
+      getEventEmitter().on('checkPasswordSuccess', function () {
+          console.log("ee.on('checkPasswordSuccess', function () { 1")
+      })
   }
   componentDidMount() {}
 

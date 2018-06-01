@@ -19,6 +19,7 @@ import { styles as style } from "../style";
 import PasswordInputComponent from "./PasswordInputComponent";
 import NumberInputComponent from "./NumberInputComponent";
 import { decryptObject, setStorageAESKey, storage } from "../../../utils/storage";
+import { getEventEmitter } from "../../../setup";
 
 class PasswordCheckComponent extends React.Component {
     static propTypes = {
@@ -92,6 +93,8 @@ class PasswordCheckComponent extends React.Component {
                 const ret = decryptObject( ret1 );
                 if ( ret && ret.passwordCheck === 'passwordCheck' ) {
                     this.closeModal();
+
+                    getEventEmitter().emit('checkPasswordSuccess', '');
                 }
             }
         } ).catch( err => {
