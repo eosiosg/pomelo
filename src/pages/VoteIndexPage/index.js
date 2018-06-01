@@ -1,14 +1,13 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { ScrollView, View, Text, Image, TouchableOpacity, TouchableHighlight,SafeAreaView, Modal, ImageBackground, Linking } from "react-native";
+import { ScrollView, View, Text, Image, TouchableOpacity, TouchableHighlight,SafeAreaView, Modal, ImageBackground } from "react-native";
 
 // 自定义组件
 import I18n from "../../../I18n";
 import { styles, assetStyles, voteStyles, voteBpsStales, modalStyles, style } from "./style";
 import { decryptObject, storage } from "../../utils/storage";
 const developTeam = require('../../images/developTeamBackground.png');
-import {ModalYNStyles as styleModal} from '../../style/style';
 
 
 class VoteIndexPage extends Component {
@@ -21,7 +20,6 @@ class VoteIndexPage extends Component {
           title: 'Total Asset',
           headerBackImage: null,
           headerRight: (
-            //*<Text style={{paddingRight: 10}} onPress={() => {props.navigation.navigate('ChangeNodeConnection');}}>Change Wallet</Text>*/}
             <Text style={{paddingRight: 10}} onPress={() => {props.navigation.state.params.navigatePress()}}>Change Wallet</Text>
           )
         };
@@ -66,46 +64,9 @@ class VoteIndexPage extends Component {
 
     componentDidMount() {
 
-        const appVersion= '0.0.1';
+      this.props.getNodesIDInfo();
 
-        fetch('https://api.eosio.sg/upgrade').then((res)=>{
-            return res.json()
-        }).then((res)=>{
-            // let newestVersion = '1.2.1';
-            let newestVersion = res.version;
-            this.downLoadUrl = res.download;
-            let [a,b,c] = newestVersion.split('.');
-            let [x,y,z] = appVersion.split('.');
-            let needUpdate = false;
-            if(a>x){
-                needUpdate = true;
-            }else if(a==x){
-                if(b>y){
-                    needUpdate =true;
-                }else if(b==y){
-                    if(c>z){
-                        needUpdate=true;
-                    }else if(c<z){
-                        console.log(`Error version number from api ${newestVersion}`)
-                    }
-                }else{
-                    console.log(`Error version number from api ${newestVersion}`)
-                }
-            }else{
-                console.log(`Error version number from api ${newestVersion}`)
-            }
-            this.setState({
-                needUpdate
-            })
-
-        }).catch(
-            err=>err
-        )
-
-
-        this.props.getNodesIDInfo();
-
-        storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
+      storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
           if ( ret1 ) {
             const ret = decryptObject( ret1 );
             const accountPrivateKey = ret.accountPrivateKey;
@@ -119,14 +80,13 @@ class VoteIndexPage extends Component {
             this.props.onDispatchGetRefundsPost(data);
             this.props.onDispatchGetVoteBpsPost(data);
             this.props.onDispatchGetVoteUsdPost();
-        }
+          }
       }).catch( err => {
         console.log(err);
       });
+
       this.props.navigation.setParams({navigatePress: () => {this.setState({IsModalShow: true})}})
     }
-
-
 
     renderItem( { item, index } ) {
     return (
@@ -201,7 +161,6 @@ class VoteIndexPage extends Component {
                         </Text>
                     </ImageBackground>
                 }
-
             </View>
         </View>
     );
@@ -220,7 +179,6 @@ class VoteIndexPage extends Component {
       const TotalAsset = (stake + this.props.CurrencyBalance + Refunds).toFixed(4);
       const TotalAssetByUsd = (TotalAsset * this.props.USD).toFixed(2);
       const BPs = this.props.BPs;
-      // const BPs = this.getBpsByAccountInfoFilter();
       const userNameIntl = I18n.t("VoteIndexPage userName");
       const TotalAssetIntl = I18n.t("VoteIndexPage TotalAsset");
       const RefundingIntl = I18n.t("VoteIndexPage Refunding");
@@ -309,7 +267,6 @@ class VoteIndexPage extends Component {
                               return
                           }else{
                               return this.renderItem({item,index});
-
                           }
                       })}
                     </View>
@@ -332,60 +289,9 @@ class VoteIndexPage extends Component {
                 </View>
               </Modal>
 
-                <Modal
-                    animationType='slide'
-                    transparent={true}
-                    visible={this.state.needUpdate}
-                    onShow={() => {}}
-                    onRequestClose={() => {}} >
-                    <View style={styleModal.modalStyle}>
-                        <View style={styleModal.subView}>
-                            <Text style={styleModal.titleText}>
-                                Notice
-                            </Text>
-                            <Text style={styleModal.contentText}>
-                                We have released a new version, please update to see the new feature.
-                            </Text>
-                            <View style={styleModal.horizontalLine} />
-                            <View style={styleModal.buttonView}>
-                                <TouchableHighlight underlayColor='transparent'
-                                                    style={styleModal.buttonStyle}
-                                                    onPress={this._setNoticeModalVisible.bind(this)}>
-                                    <Text style={styleModal.buttonText}>
-                                        Later
-                                    </Text>
-                                </TouchableHighlight>
-                                <View style={styleModal.verticalLine} />
-                                <TouchableHighlight underlayColor='transparent'
-                                                    style={styleModal.buttonStyle}
-                                                    onPress={() => {this.OpenUpdateUrl()}}
-                                >
-                                    <Text style={styleModal.buttonText}>
-                                        Update
-                                    </Text>
-                                </TouchableHighlight>
-                            </View>
-                        </View>
-                    </View>
-                </Modal>
-
             </SafeAreaView>
         );
     }
-
-    _setNoticeModalVisible(){
-        this.setState({
-            needUpdate:false
-        })
-    }
-
-    OpenUpdateUrl = () => {
-      Linking.canOpenURL(this.downLoadUrl).then(supported => {
-        supported ? Linking.openURL(this.downLoadUrl) : console.log("不支持下载更新");
-      }).catch(err => {
-        console.log(err);
-      });
-    };
 
     RefundingCountdown = (RefundsTime) => {
       const totalTime = 3*24*60*60*1000;

@@ -1,14 +1,14 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { ScrollView, View, Text, TextInput, Image, TouchableOpacity, Dimensions ,Modal ,CheckBox , AlertIOS, SafeAreaView} from "react-native";
+import { ScrollView, View, Text, TextInput, Image, TouchableOpacity, Dimensions, Modal, CheckBox, AlertIOS, SafeAreaView, Linking } from "react-native";
 import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
-//import TouchID from 'react-native-touch-id'
 import Toast from "react-native-root-toast";
 import I18n from "../../../I18n";
 
 // 自定义组件
 import { styles } from "./style";
+import {ModalYNStyles as styleModal} from "../../style/style";
 
 class HomePage extends Component {
 
@@ -31,7 +31,8 @@ class HomePage extends Component {
           ItemData :[],
           accountPrivateKey : "",
           walletValue : "",
-          biometryType: null
+          biometryType: null,
+          needUpdate:false,
         };
     }
 
@@ -48,25 +49,13 @@ class HomePage extends Component {
    }
   }
 
-  componentDidMount() {
-
-    storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
-      console.log("HomePageStorage === ",ret1);
-        if ( ret1 ) {
-            const ret = decryptObject( ret1 );
-            if ( ret && ret.accountPrivateKey ) {
-                //判断来自哪个页面的跳转
-                if ( this.props.navigation.state.params ) {
-                    this.setState( { key: "" } )
-                } else {
-                    this.props.navigation.navigate( "VoteIndexPage" );
-                }
-            }
-        }
-    }).catch( err => {
-      console.log(err);
-    });
+  componentWillMount() {
+    this.isNeedUpdate();
   }
+
+  // componentDidMount() {
+  //   this.isHadImportPrivateKey();
+  // }
 
   render() {
     const privateKeyIntl = I18n.t( "HomePage privateKey" );
@@ -140,6 +129,29 @@ class HomePage extends Component {
                   </View>
                 </View>
               </Modal>
+              <Modal
+                animationType='slide'
+                transparent={true}
+                visible={this.state.needUpdate}
+                onShow={() => {}}
+                onRequestClose={() => {}} >
+                <View style={styleModal.modalStyle}>
+                  <View style={styleModal.subView}>
+                    <Text style={styleModal.titleText}>Notice</Text>
+                    <Text style={styleModal.contentText}>We have released a new version, please update to see the new feature.</Text>
+                    <View style={styleModal.horizontalLine} />
+                    <View style={styleModal.buttonView}>
+                      <TouchableOpacity style={styleModal.buttonStyle} onPress={() => {this.setState({needUpdate:false})}}>
+                        <Text style={styleModal.buttonText}>Later</Text>
+                      </TouchableOpacity>
+                      <View style={styleModal.verticalLine} />
+                      <TouchableOpacity style={styleModal.buttonStyle} onPress={() => {this.OpenUpdateUrl()}}>
+                        <Text style={styleModal.buttonText}>Update</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+              </Modal>
               <View style={{height : 80}}></View>
             </ScrollView>
             <View>
@@ -151,6 +163,69 @@ class HomePage extends Component {
         </SafeAreaView>
       );
   }
+
+  isHadImportPrivateKey = () => {
+    // 加载私钥
+    storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
+      if ( ret1 ) {
+        const ret = decryptObject( ret1 );
+        if ( ret && ret.accountPrivateKey ) {
+          //判断来自哪个页面的跳转
+          if ( this.props.navigation.state.params ) {
+            this.setState( { key: "" } )
+          } else {
+            this.props.navigation.navigate( "VoteIndexPage" );
+          }
+        }
+      }
+    }).catch( err => {
+      console.log(err);
+    });
+  };
+
+  isNeedUpdate = () => {
+    // 判断更新
+    const appVersion= '0.0.1';
+
+    fetch('https://api.eosio.sg/upgrade').then((res)=>{
+      return res.json()
+    }).then((res)=>{
+      // let newestVersion = '1.2.1';
+      let newestVersion = res.version;
+      this.downLoadUrl = res.download;
+      let [a,b,c] = newestVersion.split('.');
+      let [x,y,z] = appVersion.split('.');
+      let needUpdate = false;
+      if(a>x){
+        needUpdate = true;
+      }else if(a==x){
+        if(b>y){
+          needUpdate =true;
+        }else if(b==y){
+          if(c>z){
+            needUpdate=true;
+          }else if(c<z){
+            console.log(`Error version number from api ${newestVersion}`)
+          }
+        }else{
+          console.log(`Error version number from api ${newestVersion}`)
+        }
+      }else{
+        console.log(`Error version number from api ${newestVersion}`)
+      }
+      this.setState({
+        needUpdate
+      });
+      if (!needUpdate) {
+        this.isHadImportPrivateKey();
+      }
+    }).catch(
+      err => {
+        console.log(err);
+        this.isHadImportPrivateKey();
+      }
+    );
+  };
 
   //go VoteIndexPage
   goWallet = (data) =>{
@@ -167,13 +242,6 @@ class HomePage extends Component {
 
   //submit wallet data
   goSubmit = () =>{
-    //TouchID.isSupported()
-    //  .then(this.authenticate)
-    //  .catch(error => {
-    //    console.log("error:",error)
-    //
-    //    AlertIOS.alert('TouchID not supported');
-    //  });
     this.setState({
       ItemData : []
     });
@@ -195,19 +263,15 @@ class HomePage extends Component {
       show:!isShow,
     });
   }
-  //authenticate(){
-  //  TouchID.authenticate('to Authenticated')
-  //    .then(success => {
-  //    console.log("success:",success)
-  //      AlertIOS.alert('Authenticated Successfully');
-  //    })
-  //    .catch(error => {
-  //      console.log("error:",error)
-  //      AlertIOS.alert('Authentication Failed');
-  //
-  //    });
-  //}
 
+  // 打开升级更新链接
+  OpenUpdateUrl = () => {
+    Linking.canOpenURL(this.downLoadUrl).then(supported => {
+      supported ? Linking.openURL(this.downLoadUrl) : console.log("不支持下载更新");
+    }).catch(err => {
+      console.log(err);
+    });
+  };
 }
 
 // 挂载中间件到组件；
