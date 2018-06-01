@@ -35,6 +35,8 @@
   "UnDelegatebwPage Confirm": "Confirm",
 
   "VotePage account" : "Account",
+  "VotePage vote" : "Vote",
+  "VotePage vote_success" : "Successful",
   "VotePage balance" : "Balance",
   "VotePage stake" : "Stake count",
   "VotePage cancel" : "Cancel",

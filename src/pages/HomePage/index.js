@@ -6,7 +6,7 @@ import { decryptObject, encryptObjectToString, storage } from "../../utils/stora
 import Toast from "react-native-root-toast";
 import I18n from "../../../I18n";
 var compareVersions = require('compare-versions');
-import  { updateDetectURL } from '../../../config/configParams' ;
+import  { updatingDetectURL } from '../../../config/configParams' ;
 
 // 自定义组件
 import { styles } from "./style";
@@ -173,7 +173,7 @@ class HomePage extends Component {
     // 判断更新
     const appVersion= versionNumber;
 
-    fetch(updateDetectURL).then((res)=>{
+    fetch(updatingDetectURL).then((res)=>{
       return res.json()
     }).then((res)=>{
       let newestVersion = res.version;
