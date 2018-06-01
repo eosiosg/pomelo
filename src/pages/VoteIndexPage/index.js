@@ -20,7 +20,7 @@ class VoteIndexPage extends Component {
           title: 'Total Asset',
           headerBackImage: null,
           headerRight: (
-            <Text style={{paddingRight: 10}} onPress={() => {props.navigation.state.params.navigatePress()}}>Change Wallet</Text>
+            <Text style={{paddingRight: 10}} onPress={() => {props.navigation.state.params.navigatePress()}}>{I18n.t("VoteIndexPage ChangeWallet")}</Text>
           )
         };
     };
