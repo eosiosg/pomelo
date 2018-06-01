@@ -32,7 +32,7 @@ export function setup() {
                                 this.setState( { isLoading: false } );
                             }
                         } )
-                        .catch( function ( error ) {
+                        .catch( ( error ) =>{
                             console.log( 'EOSGetInfo error: ' + error.message );
 
                             this.setState( { isLoading: false } );
@@ -80,5 +80,5 @@ export function isSetLocalStorageAESKey() {
 }
 
 export function setIsSetLocalStorageAESKey( isSetLocalStorageAESKey ) {
-    _isSetLocalStorageAESKey =;
+    _isSetLocalStorageAESKey = isSetLocalStorageAESKey;
 }
