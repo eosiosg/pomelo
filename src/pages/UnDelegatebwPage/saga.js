@@ -28,7 +28,6 @@ function undelegatebw(action) {
   return eos.transaction( tr => {
     tr.undelegatebw(action.data);
   } ).then( function ( result ) {
-    console.log('wssss:resut:',result)
     if (result.broadcast) {
       return result.broadcast
     }

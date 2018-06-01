@@ -23,7 +23,9 @@ class VoteIndexPage extends Component {
         let title = I18n.t("VoteIndexPage Title");
         return {
           title: title,
-          headerBackImage: null,
+          // headerBackImage: null,
+            headerLeft:null,
+
           headerRight: (
             <Text style={{paddingRight: 10}} onPress={() => {props.navigation.state.params.navigatePress()}}>{I18n.t("VoteIndexPage ChangeWallet")}</Text>
           )

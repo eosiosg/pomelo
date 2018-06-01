@@ -9,9 +9,9 @@ import { ScrollView, View, Text, Image, TouchableHighlight, SafeAreaView, Toucha
 // 自定义组件
 import { styles } from "./style";
 import messages from './messages';
-import I18n from "../../../I18n";
 import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 import Toast from "react-native-root-toast";
+import I18n from "../../../I18n";
 
 import LoadingView from '../../commonComponents/loading'
 
@@ -48,10 +48,6 @@ class VotePage extends Component {
       // console.log("is submit success value IsSubmitSuccess: ",IsSubmitSuccess, " this.props.IsSubmitSuccess: ",this.props.IsSubmitSuccess)
       if (IsSubmitSuccess && IsSubmitSuccess != this.props.IsSubmitSuccess) {
         // 投票成功，重新获取AccountInfo，重置IsSubmitSuccess
-          Toast.show(I18n.t('VotePage vote_success')+'!',{
-              position: 36,
-          });
-          this.props.resetIsSubmitSuccess();
           this.props.onDispatchGetVoteBpsPost({...this.state.accountPri})
           this.props.getAccountInfo({...this.state.accountPri});
       }
