@@ -160,9 +160,8 @@ class HomePage extends Component {
 
   isNeedInputPassword = () => {
     if (!isSetLocalStorageAESKey()) {
-      this.props.navigation.navigate("PasswordInputPage");
     } else {
-      getEventEmitter().on('checkPasswordSuccess', function () {
+      getEventEmitter().on('checkPasswordSuccess', () => {
         this.isNeedUpdate();
       });
     }
