@@ -63,9 +63,11 @@ class VoteIndexPage extends Component {
         }
     }
 
-    componentDidMount() {
-
+    componentWillMount() {
       this.isNeedUpdate();
+    }
+
+    componentDidMount() {
 
       this.props.getNodesIDInfo();
 
