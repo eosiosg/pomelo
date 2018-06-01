@@ -1,12 +1,13 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { ScrollView, View, Text, Image, TouchableOpacity, TouchableHighlight,SafeAreaView, Modal, ImageBackground } from "react-native";
+import {ScrollView, View, Text, Image, TouchableOpacity, TouchableHighlight, SafeAreaView, Modal, ImageBackground, Linking} from "react-native";
 
 // 自定义组件
 import I18n from "../../../I18n";
 import { styles, assetStyles, voteStyles, voteBpsStales, modalStyles, style } from "./style";
 import { decryptObject, storage } from "../../utils/storage";
+import {ModalYNStyles as styleModal} from "../../style/style";
 const developTeam = require('../../images/developTeamBackground.png');
 
 
@@ -63,6 +64,8 @@ class VoteIndexPage extends Component {
     }
 
     componentDidMount() {
+
+      this.isNeedUpdate();
 
       this.props.getNodesIDInfo();
 
@@ -290,6 +293,30 @@ class VoteIndexPage extends Component {
                 </View>
               </Modal>
 
+              <Modal
+                animationType='slide'
+                transparent={true}
+                visible={this.state.needUpdate}
+                onShow={() => {console.log("needUpdate modal")}}
+                onRequestClose={() => {}} >
+                <View style={styleModal.modalStyle}>
+                  <View style={styleModal.subView}>
+                    <Text style={styleModal.titleText}>{I18n.t("Global Upgrade Notice")}</Text>
+                    <Text style={styleModal.contentText}>{I18n.t("Global Upgrade Description")}</Text>
+                    <View style={styleModal.horizontalLine} />
+                    <View style={styleModal.buttonView}>
+                      <TouchableOpacity style={styleModal.buttonStyle} onPress={() => {this.setState({needUpdate:false})}}>
+                        <Text style={styleModal.buttonText}>{I18n.t("Global Upgrade Later")}</Text>
+                      </TouchableOpacity>
+                      <View style={styleModal.verticalLine} />
+                      <TouchableOpacity style={styleModal.buttonStyle} onPress={() => {this.OpenUpdateUrl()}}>
+                        <Text style={styleModal.buttonText}>{I18n.t("Global Upgrade Now")}</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+              </Modal>
+
             </SafeAreaView>
         );
     }
@@ -305,6 +332,54 @@ class VoteIndexPage extends Component {
       const day = Math.floor(cuntDownTime/(1000*60*60*24));
       this.setState({
         cuntDownTime: day + "d " + hours + "h",
+      });
+    };
+
+    isNeedUpdate = () => {
+      // 判断更新
+      const appVersion= '0.0.1';
+
+      fetch('https://api.eosio.sg/upgrade').then((res)=>{
+        return res.json()
+      }).then((res)=>{
+        let newestVersion = res.version;
+        this.downLoadUrl = res.download;
+        let [a,b,c] = newestVersion.split('.');
+        let [x,y,z] = appVersion.split('.');
+        let needUpdate = false;
+        if(a>x){
+          needUpdate = true;
+        }else if(a==x){
+          if(b>y){
+            needUpdate =true;
+          }else if(b==y){
+            if(c>z){
+              needUpdate=true;
+            }else if(c<z){
+              console.log(`Error version number from api ${newestVersion}`)
+            }
+          }else{
+            console.log(`Error version number from api ${newestVersion}`)
+          }
+        }else{
+          console.log(`Error version number from api ${newestVersion}`)
+        }
+        this.setState({
+          needUpdate
+        });
+      }).catch(
+        err => {
+          console.log(err);
+        }
+      );
+    };
+
+    // 打开升级更新链接
+    OpenUpdateUrl = () => {
+      Linking.canOpenURL(this.downLoadUrl).then(supported => {
+        supported ? Linking.openURL(this.downLoadUrl) : console.log("不支持下载更新");
+      }).catch(err => {
+        console.log(err);
       });
     };
 }
