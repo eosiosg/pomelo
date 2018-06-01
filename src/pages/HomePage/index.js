@@ -50,12 +50,8 @@ class HomePage extends Component {
   }
 
   componentWillMount() {
-    this.isNeedUpdate();
+    this.isNeedInputPassword();
   }
-
-  // componentDidMount() {
-  //   this.isHadImportPrivateKey();
-  // }
 
   render() {
     const privateKeyIntl = I18n.t( "HomePage privateKey" );
@@ -133,7 +129,7 @@ class HomePage extends Component {
                 animationType='slide'
                 transparent={true}
                 visible={this.state.needUpdate}
-                onShow={() => {}}
+                onShow={() => {console.log("needUpdate modal")}}
                 onRequestClose={() => {}} >
                 <View style={styleModal.modalStyle}>
                   <View style={styleModal.subView}>
@@ -164,6 +160,14 @@ class HomePage extends Component {
       );
   }
 
+  isNeedInputPassword = () => {
+    if (!this.props.password) {
+      this.props.navigation.navigate("PasswordInputPage");
+    } else {
+      this.isHadImportPrivateKey();
+      this.isNeedUpdate();
+    }
+  };
   isHadImportPrivateKey = () => {
     // 加载私钥
     storage.load({key: "HomePageStorage"}).then( ( ret1 ) => {
@@ -190,7 +194,6 @@ class HomePage extends Component {
     fetch('https://api.eosio.sg/upgrade').then((res)=>{
       return res.json()
     }).then((res)=>{
-      // let newestVersion = '1.2.1';
       let newestVersion = res.version;
       this.downLoadUrl = res.download;
       let [a,b,c] = newestVersion.split('.');
@@ -216,13 +219,9 @@ class HomePage extends Component {
       this.setState({
         needUpdate
       });
-      if (!needUpdate) {
-        this.isHadImportPrivateKey();
-      }
     }).catch(
       err => {
         console.log(err);
-        this.isHadImportPrivateKey();
       }
     );
   };
@@ -286,6 +285,7 @@ function mapStateToProps(state) {
     return {
       accountNames: state.HomePageReducer.accountNames,
       accountNamesErr: state.HomePageReducer.accountNamesErr,
+      password: state.PasswordInputPageReducer.password
     };
 }
 
