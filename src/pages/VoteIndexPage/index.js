@@ -1,7 +1,7 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { ScrollView, View, Text, Image, TouchableOpacity, TouchableHighlight,SafeAreaView, Modal, ImageBackground } from "react-native";
+import { ScrollView, View, Text, Image, TouchableOpacity, TouchableHighlight,SafeAreaView, Modal, ImageBackground, Linking } from "react-native";
 
 // 自定义组件
 import I18n from "../../../I18n";
@@ -357,7 +357,9 @@ class VoteIndexPage extends Component {
                                 </TouchableHighlight>
                                 <View style={styleModal.verticalLine} />
                                 <TouchableHighlight underlayColor='transparent'
-                                                    style={styleModal.buttonStyle}>
+                                                    style={styleModal.buttonStyle}
+                                                    onPress={() => {this.OpenUpdateUrl()}}
+                                >
                                     <Text style={styleModal.buttonText}>
                                         Update
                                     </Text>
@@ -376,6 +378,14 @@ class VoteIndexPage extends Component {
             needUpdate:false
         })
     }
+
+    OpenUpdateUrl = () => {
+      Linking.canOpenURL(this.downLoadUrl).then(supported => {
+        supported ? Linking.openURL(this.downLoadUrl) : console.log("不支持下载更新");
+      }).catch(err => {
+        console.log(err);
+      });
+    };
 
     RefundingCountdown = (RefundsTime) => {
       const totalTime = 3*24*60*60*1000;
