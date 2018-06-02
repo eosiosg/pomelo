@@ -35,7 +35,7 @@ class VoteIndexPage extends Component {
     constructor (props) {
         super(props);
         this.state = {
-          cuntDownTime: "00d00h",
+          cuntDownTime: "0d 00h",
           IsModalShow: false,
         };
 
@@ -43,6 +43,7 @@ class VoteIndexPage extends Component {
     }
 
     componentWillReceiveProps( nextProps ) {
+
         if(nextProps.needGetUserInfo&&nextProps.needGetUserInfo!==this.props.needGetUserInfo){
             this.props.setNeedGetUserInfoFalse();
             storage.load({key: "HomePageStorage"}).then((ret1) => {
@@ -309,8 +310,6 @@ class VoteIndexPage extends Component {
     RefundingCountdown = (RefundsTime) => {
       const totalTime = 3*24*60*60*1000;
       let nowTime = new Date();
-        let offsetInMS = nowTime.getTimezoneOffset()*60*1000;
-      nowTime = nowTime.getTime() + offsetInMS;
       let CreatTime = new Date(RefundsTime);
       CreatTime = CreatTime.getTime();
       let cuntDownTime = totalTime - (nowTime - CreatTime);
