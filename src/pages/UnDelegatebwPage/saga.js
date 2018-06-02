@@ -16,12 +16,16 @@ function getAccount(action) {
 // getUnDelegatebwPageConfirmPost
 export function* getUnDelegatebwPageConfirmPost (action) {
   try {
-    let response = yield call(undelegatebw, action);
+      yield put({type:"UNDELEGATE_ONGOING_REDUCER"});
+      let response = yield call(undelegatebw, action);
     if(response){
+        yield put({type:"UNDELEGATE_SUCCESS_REDUCER"});
         yield put({ type: "VOTEINDEX_GETINFO_TRUE_REDUCER", data:{ needGetUserInfo:true }});
         action.nav.goBack();
     }
-  } catch (err) {}
+  } catch (err) {
+      yield put({type:"UNDELEGATE_FAIL_REDUCER"});
+  }
 }
 function undelegatebw(action) {
   const eos = GetEOS(action.accountPrivateKey);

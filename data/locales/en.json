@@ -37,7 +37,7 @@
   "VotePage account" : "Account",
   "VotePage vote" : "Vote",
   "VotePage vote_success" : "Successful",
-  "VotePage vote_fail" : "Failed in voting.",
+  "VotePage vote_fail" : "Request Failed.",
   "VotePage balance" : "Balance",
   "VotePage stake" : "Stake count",
   "VotePage cancel" : "Cancel",

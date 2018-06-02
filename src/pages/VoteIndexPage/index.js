@@ -12,7 +12,7 @@ const arrowRightAccount = require("./images/arrow-right-account.png");
 const walletCountdown = require("./images/wallet_icon_countdown.png");
 const walletImageBackground = require("./images/wallet_img_background.png");
 import { defaultLogoUrl } from '../../../config/configParams';
-
+import { versionNumber } from '../../../config/configParams'
 
 class VoteIndexPage extends Component {
     static navigationOptions = ( props ) => {
@@ -286,8 +286,16 @@ class VoteIndexPage extends Component {
                     </View>
                   </View>
                   <View style={{height: 50}}></View>
+                    <View style = {[styles.footerView]}>
+                        <Text style={styles.footerVersion}>
+                            version {versionNumber}
+                        </Text>
+                    </View>
                 </ScrollView>
             </View>
+
+
+
               <Modal animationType='slide' transparent={true} visible={this.state.IsModalShow} onRequestClose={() => {}}>
                 <View style={modalStyles.modalStyle}>
                   <View style={modalStyles.subView}>
@@ -310,6 +318,7 @@ class VoteIndexPage extends Component {
     RefundingCountdown = (RefundsTime) => {
       const totalTime = 3*24*60*60*1000;
       let nowTime = new Date();
+      console.log('RefundsTime', RefundsTime);
       let CreatTime = new Date(RefundsTime);
       CreatTime = CreatTime.getTime();
       let cuntDownTime = totalTime - (nowTime - CreatTime);

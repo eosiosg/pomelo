@@ -12,7 +12,6 @@ import messages from './messages';
 import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 import Toast from "react-native-root-toast";
 import I18n from "../../../I18n";
-
 import LoadingView from '../../commonComponents/loading'
 
 class VotePage extends Component {

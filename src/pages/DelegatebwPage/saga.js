@@ -36,12 +36,16 @@ function getCurrencyBalance(action) {
 // getDelegatebwPageConfirmPost
 export function* getDelegatebwPageConfirmPost (action) {
   try {
+    yield put({type:"DELEGATE_ONGOING_REDUCER"});
     let result = yield call(delegatebw, action);
     if(result){
+        yield put({ type: "DELEGATE_SUCCESS_REDUCER"});
         yield put({ type: "VOTEINDEX_GETINFO_TRUE_REDUCER", data:{ needGetUserInfo:true }});
         action.nav.goBack();
       }
-  } catch (err) {}
+  } catch (err) {
+      yield put({ type: "DELEGATE_FAIL_REDUCER"});
+  }
 }
 function delegatebw(action) {
   const eos = GetEOS(action.accountPrivateKey);

@@ -37,8 +37,8 @@
 
   "VotePage account": "账户名",
   "VotePage vote" : "投票",
-  "VotePage vote_success" : "投票成功",
-  "VotePage vote_fail" : "投票失败",
+  "VotePage vote_success" : "操作成功",
+  "VotePage vote_fail" : "操作失败",
   "VotePage balance": "可用余额",
   "VotePage stake": "可投票资源",
   "VotePage cancel": "取消",

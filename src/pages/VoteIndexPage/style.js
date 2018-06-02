@@ -17,8 +17,29 @@ const styles = StyleSheet.create({
   contentTitle: {
     fontSize: 32,
     fontWeight: "bold",
-    color: "#222",
+    // color: "#222",
   },
+
+    footerView:{
+        height:50,
+        width:'100%',
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "nowrap",
+        justifyContent: "center",
+        alignItems: "center",
+        // backgroundColor:"#5d5d5d",
+    },
+
+
+    footerVersion:{
+        width:'100%',
+        color:'#686868',
+        fontSize:14,
+        lineHeight:20,
+        // paddingTop:4,
+        textAlign:'center',
+    },
 });
 const assetStyles = StyleSheet.create({
   contentAssetBox: {
@@ -185,12 +206,12 @@ const voteStyles = StyleSheet.create({
 const voteBpsStales = StyleSheet.create({
   contentVoteBpsBox: {
     position: "relative",
-    marginBottom: 15,
+    // marginBottom: 15,
     marginTop: 0,
     paddingLeft: 15,
     paddingRight: 0,
     paddingTop: 15,
-    paddingBottom: 10,
+    // paddingBottom: 10,
     borderRadius: 5,
     backgroundColor: "#fff",
     overflow: "hidden",

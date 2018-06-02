@@ -1,12 +1,13 @@
 // 引入公共组件
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaView, Keyboard} from "react-native";
+import {ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaView } from "react-native";
 // 自定义组件
 import Toast from "react-native-root-toast";
 import I18n from "../../../I18n";
 import { styles, countStyles, stakeStyles, ruleStyles, btnStyles } from "./style";
 import { decryptObject, storage } from "../../utils/storage";
+import LoadingView from '../../commonComponents/loading'
 
 class DelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
@@ -42,6 +43,10 @@ class DelegatebwPage extends Component {
       const ConfirmIntl = I18n.t("DelegatebwPage Confirm");
         return (
             <SafeAreaView style={[{flex:1}]}>
+                {
+                    this.props.loading&&<LoadingView text="Voting"/>
+                }
+
             <View style={styles.bodyBox}>
               <ScrollView>
                 <View style={countStyles.countBox}>
@@ -71,7 +76,7 @@ class DelegatebwPage extends Component {
                           placeholder={CPU_placeholder}
                           placeholderTextColor={"#999"}
                           keyboardType="numeric"
-                          onBlur={() => Keyboard.dismiss()}
+                          returnKeyType="done"
                           onChangeText={(CPU) => this.setState({CPU})}
                           underlineColorAndroid={"transparent"}
                         />
@@ -85,7 +90,7 @@ class DelegatebwPage extends Component {
                           placeholder={Network_placeholder}
                           placeholderTextColor={"#999"}
                           keyboardType="numeric"
-                          onBlur={() => Keyboard.dismiss()}
+                          returnKeyType="done"
                           onChangeText={(Network) => this.setState({Network})}
                           underlineColorAndroid={"transparent"}
                         />
@@ -174,6 +179,8 @@ function mapStateToProps( state ) {
         Refunds: state.VoteIndexPageReducer.Refunds,
         BPs: state.VoteIndexPageReducer.BPs,
         USD: state.VoteIndexPageReducer.USD,
+
+        loading : state.DelegatebwPageReducer.loading,
     };
 }
 
