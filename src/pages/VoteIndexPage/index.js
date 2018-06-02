@@ -309,14 +309,20 @@ class VoteIndexPage extends Component {
     RefundingCountdown = (RefundsTime) => {
       const totalTime = 3*24*60*60*1000;
       let nowTime = new Date();
-      nowTime = nowTime.getTime();
+        let offsetInMS = nowTime.getTimezoneOffset()*60*1000;
+      nowTime = nowTime.getTime() + offsetInMS;
       let CreatTime = new Date(RefundsTime);
       CreatTime = CreatTime.getTime();
       let cuntDownTime = totalTime - (nowTime - CreatTime);
-      const hours = Math.ceil(cuntDownTime/(1000*60*60)%24);
+      const minutes = Math.floor(cuntDownTime/(1000*60)%(60));
+      const hours = Math.floor(cuntDownTime/(1000*60*60)%24);
       const day = Math.floor(cuntDownTime/(1000*60*60*24));
       let cuntDownTimeStr = "";
-      if (day > 0 && hours > 0) {
+      if(day == 0 && hours == 0 && minutes == 0){
+          cuntDownTimeStr = "";
+      }else if(day == 0){
+          cuntDownTimeStr = hours + "h " + minutes + "m";
+      }else if (day > 0) {
         cuntDownTimeStr= day + "d " + hours + "h";
       }
       this.setState({
