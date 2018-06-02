@@ -79,10 +79,15 @@ class VotePage extends Component {
 
 
     render() {
-        let { account_name, cpu_weight, net_weight } = this.props.accountInfo;
-        let stake = parseFloat((net_weight + cpu_weight)/10000).toFixed(4);
-        cpu_weight = parseFloat(cpu_weight/10000).toFixed(4);
-        net_weight = parseFloat(net_weight/10000).toFixed(4);
+        let { account_name,total_resources } = this.props.accountInfo;
+        total_resources = total_resources||{cpu_weight: '0 SYS', net_weight: '0 SYS'};
+        let cpu_weight = total_resources.cpu_weight||'0 SYS';
+        let net_weight = total_resources.net_weight||'0 SYS';
+        cpu_weight = parseFloat(cpu_weight.replace(' SYS', ''));
+        net_weight = parseFloat(net_weight.replace(' SYS', ''));
+        let stake = parseFloat(net_weight + cpu_weight).toFixed(4);
+        cpu_weight = parseFloat(cpu_weight).toFixed(4);
+        net_weight = parseFloat(net_weight).toFixed(4);
         const CurrencyBalance = this.props.CurrencyBalance;
 
         const account = I18n.t(messages.account.id);
