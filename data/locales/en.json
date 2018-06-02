@@ -26,7 +26,7 @@
   "DelegatebwPage Rule3": "· Could Undelegate Bandwidth anytime，which will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later;",
   "DelegatebwPage Confirm": "Confirm",
 
-  "UnDelegatebwPage Title": "Undelegate Bandwidth Page",
+  "UnDelegatebwPage Title": "Undelegate Bandwidth",
   "UnDelegatebwPage StakeCount": "Stake Count",
   "UnDelegatebwPage StakeCountInfo": "* EOS will return to account 3 days later",
   "UnDelegatebwPage StakeQuantity": "Stake Quantity",
