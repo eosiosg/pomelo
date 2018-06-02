@@ -1,7 +1,7 @@
 // 引入公共组件
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaView, Keyboard } from "react-native";
+import { ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaView } from "react-native";
 // 自定义组件
 import I18n from "../../../I18n";
 import { styles, countStyles, stakeStyles, btnStyles } from "./style";
@@ -25,23 +25,6 @@ class UnDelegatebwPage extends Component {
           net_weight: 0,
         };
     }
-
-    // 键盘调试用，如无用，可删除
-    // componentWillMount () {
-    //   this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
-    //   this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
-    // }
-    // componentWillUnmount () {
-    //   this.keyboardDidShowListener.remove();
-    //   this.keyboardDidHideListener.remove();
-    // }
-    // _keyboardDidShow () {
-    //   console.log('Keyboard Shown');
-    // }
-    //
-    // _keyboardDidHide () {
-    //   console.log('Keyboard Hidden');
-    // }
 
     render() {
 
@@ -89,8 +72,8 @@ class UnDelegatebwPage extends Component {
                           placeholderTextColor={"#999"}
                           maxLength={11}
                           keyboardType="numeric"
+                          returnKeyType="done"
                           onChangeText={(CPU) => this.setState({CPU})}
-                          onBlur={() => Keyboard.dismiss()}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>
@@ -104,8 +87,8 @@ class UnDelegatebwPage extends Component {
                           placeholderTextColor={"#999"}
                           maxLength={11}
                           keyboardType="numeric"
+                          returnKeyType="done"
                           onChangeText={(Network) => this.setState({Network})}
-                          onBlur={() => Keyboard.dismiss()}
                           underlineColorAndroid={"transparent"}
                         />
                       </View>

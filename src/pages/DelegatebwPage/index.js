@@ -1,7 +1,7 @@
 // 引入公共组件
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaView, Keyboard} from "react-native";
+import {ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaView } from "react-native";
 // 自定义组件
 import Toast from "react-native-root-toast";
 import I18n from "../../../I18n";
@@ -71,7 +71,7 @@ class DelegatebwPage extends Component {
                           placeholder={CPU_placeholder}
                           placeholderTextColor={"#999"}
                           keyboardType="numeric"
-                          onBlur={() => Keyboard.dismiss()}
+                          returnKeyType="done"
                           onChangeText={(CPU) => this.setState({CPU})}
                           underlineColorAndroid={"transparent"}
                         />
@@ -85,7 +85,7 @@ class DelegatebwPage extends Component {
                           placeholder={Network_placeholder}
                           placeholderTextColor={"#999"}
                           keyboardType="numeric"
-                          onBlur={() => Keyboard.dismiss()}
+                          returnKeyType="done"
                           onChangeText={(Network) => this.setState({Network})}
                           underlineColorAndroid={"transparent"}
                         />
