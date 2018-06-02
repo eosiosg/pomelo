@@ -58,6 +58,7 @@ class HomePage extends Component {
 
       getEventEmitter().on('checkPasswordSuccess', () => {
           this.isNeedUpdate();
+          this.isHadImportPrivateKey();
       });
   }
   componentDidMount() {}
@@ -141,7 +142,7 @@ class HomePage extends Component {
                     <Text style={styleModal.contentText}>{I18n.t("Global Upgrade Description")}</Text>
                     <View style={styleModal.horizontalLine} />
                     <View style={styleModal.buttonView}>
-                      <TouchableOpacity style={styleModal.buttonStyle} onPress={() => {this.setState({needUpdate:false});this.isHadImportPrivateKey();}}>
+                      <TouchableOpacity style={styleModal.buttonStyle} onPress={() => {this.setState({needUpdate:false})}}>
                         <Text style={styleModal.buttonText}>{I18n.t("Global Upgrade Later")}</Text>
                       </TouchableOpacity>
                       <View style={styleModal.verticalLine} />
@@ -166,11 +167,7 @@ class HomePage extends Component {
 
   isNeedInputPassword = () => {
     if (!isSetLocalStorageAESKey()) {
-      this.props.navigation.navigate("PasswordInputPage", {
-          callback: (  ) => {
-              this.isNeedUpdate();
-          }
-      })
+      this.props.navigation.navigate("PasswordInputPage")
     }
   };
 
@@ -189,9 +186,6 @@ class HomePage extends Component {
       this.setState({
         needUpdate
       });
-      if (!needUpdate) {
-        this.isHadImportPrivateKey();
-      }
     }).catch(
       err => {
         console.log(err);

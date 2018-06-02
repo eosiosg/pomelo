@@ -228,8 +228,12 @@ class VoteIndexPage extends Component {
                       <View style={assetStyles.itemBox}>
                         <View style={assetStyles.itemRefundBox}>
                           <Text style={assetStyles.itemRefundName}>{RefundingIntl}</Text>
-                          <Image style={assetStyles.refundingIcon} source={walletCountdown} />
-                          <Text style={assetStyles.refundingTime}>{this.state.cuntDownTime}</Text>
+                          {this.state.cuntDownTime ? (
+                            <Text>
+                              <Image style={assetStyles.refundingIcon} source={walletCountdown} />
+                              <Text style={assetStyles.refundingTime}>{this.state.cuntDownTime}</Text>
+                            </Text>
+                          ) : null}
                         </View>
                         <Text style={assetStyles.itemValue}>
                           {Refunds} <Text style={assetStyles.itemValueUnit}>EOS</Text>
@@ -311,8 +315,12 @@ class VoteIndexPage extends Component {
       let cuntDownTime = totalTime - (nowTime - CreatTime);
       const hours = Math.ceil(cuntDownTime/(1000*60*60)%24);
       const day = Math.floor(cuntDownTime/(1000*60*60*24));
+      let cuntDownTimeStr = "";
+      if (day > 0 && hours > 0) {
+        cuntDownTimeStr= day + "d " + hours + "h";
+      }
       this.setState({
-        cuntDownTime: day + "d " + hours + "h",
+        cuntDownTime: cuntDownTimeStr,
       });
     };
 }
