@@ -285,7 +285,7 @@ class VoteIndexPage extends Component {
                       })}
                     </View>
                   </View>
-                  <View style={{height: 50}}></View>
+                  <View style={{height: 10}}></View>
                     <View style = {[styles.footerView]}>
                         <Text style={styles.footerVersion}>
                             version {versionNumber}

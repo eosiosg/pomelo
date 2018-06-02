@@ -44,7 +44,7 @@ class DelegatebwPage extends Component {
         return (
             <SafeAreaView style={[{flex:1}]}>
                 {
-                    this.props.loading&&<LoadingView text="Voting"/>
+                    this.props.loading&&<LoadingView text="Waiting"/>
                 }
 
             <View style={styles.bodyBox}>
