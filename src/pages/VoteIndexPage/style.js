@@ -206,12 +206,12 @@ const voteStyles = StyleSheet.create({
 const voteBpsStales = StyleSheet.create({
   contentVoteBpsBox: {
     position: "relative",
-    // marginBottom: 15,
+    marginBottom: 15,
     marginTop: 0,
     paddingLeft: 15,
     paddingRight: 0,
     paddingTop: 15,
-    // paddingBottom: 10,
+    paddingBottom: 10,
     borderRadius: 5,
     backgroundColor: "#fff",
     overflow: "hidden",

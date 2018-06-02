@@ -47,7 +47,7 @@ class UnDelegatebwPage extends Component {
         return (
             <SafeAreaView style={[{flex:1}]}>
                 {
-                    this.props.loading&&<LoadingView text="Voting"/>
+                    this.props.loading&&<LoadingView text="Waiting"/>
                 }
             <View style={styles.bodyBox}>
               <ScrollView>
@@ -168,7 +168,6 @@ function mapStateToProps( state ) {
       state,
       accountInfo: state.VoteIndexPageReducer.accountInfo,
         loading : state.UnDelegatebwPageReducer.loading,
-
     };
 }
 
