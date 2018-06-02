@@ -2,7 +2,7 @@
  * Created by dongjie on 1/6/18.
  */
 
-export const versionNumber = '0.1.0';
+export const versionNumber = '1.0';
 export const nodeAddressList = [
     'http://13.229.70.163:8888',
     'http://52.74.197.107:8888',
