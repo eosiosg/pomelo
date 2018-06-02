@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
     },
 
 
-
     bodyBox: {
         position: "relative",
         flexBasis: "100%",

@@ -49,9 +49,9 @@ class UnDelegatebwPage extends Component {
                 {
                     this.props.loading&&<LoadingView text="Waiting"/>
                 }
-            <View style={styles.bodyBox}>
+            <View style={[styles.bodyBox,{flex:1}]}>
               <ScrollView>
-                <View style={countStyles.countBox}>
+                <View style={[countStyles.countBox]}>
                   <View style={[countStyles.countItem, {borderBottomWidth: 0,}]}>
                     <Text style={countStyles.countName}>{StakeCountIntl}</Text>
                     <Text style={countStyles.countValue}>
@@ -99,11 +99,11 @@ class UnDelegatebwPage extends Component {
                     </View>
                   </View>
                 </View>
-                <View style={{height: 100}}></View>
+                {/*<View style={{height: 100}}></View>*/}
               </ScrollView>
-              <View style={btnStyles.btnBox}>
-                <Text style={btnStyles.btn} onPress={() => this.UnDelegatebwConfirmFn()}>{ConfirmIntl}</Text>
-              </View>
+                <View style={btnStyles.btnBox}>
+                    <Text style={btnStyles.btn} onPress={() => this.UnDelegatebwConfirmFn()}>{ConfirmIntl}</Text>
+                </View>
             </View>
             </SafeAreaView>
         );
