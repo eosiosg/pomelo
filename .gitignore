@@ -10,12 +10,15 @@ ios/Pods
 android/build
 android/app/build
 android/.gradle/*
+android/.idea/
+android/.idea/*
+
+android/local.properties
 
 yarn.lock
 package-lock.json
 
 android/settings.gradle
-adnroid/app/build.gradle
 
 
 ios/*.xcuserstate
@@ -28,3 +31,4 @@ ios/*.xcbkptlist
 ios/xcuserdata
 
 ios/Podfile.lock
+my-release-key.keystore
