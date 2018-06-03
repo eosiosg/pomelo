@@ -67,6 +67,9 @@
   "HomePage PleaseEnterComplete":"Please enter the complete",
   "HomePage PleaseSure" : "OK",
   "HomePage PleaseCancel" : "Cancel",
+  "HomePage NoAccountFound" : "No account name found for the key",
+  "HomePage SomethingWrong" : "Something is Wrong",
+  "HomePage InvalidPrivateKey" : "Invalid private key",
 
   "WalletPage changeWallet" : "Change Wallet",
   "WalletPage totalAssets" : "Total Assets",

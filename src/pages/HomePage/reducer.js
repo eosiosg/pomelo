@@ -4,7 +4,6 @@
  */
 const initState = {
     allAsset: [],
-    accountNamesErr: false,
     accountName: "",
 };
 export default function HomePageReducer (state = initState, action) {
@@ -20,10 +19,6 @@ export default function HomePageReducer (state = initState, action) {
     case "HOME_SETACCOUNTNAMES_REDUCER":
         return Object.assign({}, state, {
             "accountNames": action.data
-        });
-    case "HOME_SETACCOUNTNAMESERR_REDUCER":
-        return Object.assign({}, state, {
-            "accountNamesErr": action.data
         });
     default:
         return state;
