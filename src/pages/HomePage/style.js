@@ -55,7 +55,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#3D4144",
   },
   buttonSubmit:{
-    width: "100%",
     fontSize : 16,
     lineHeight: 44,
     color : "#fff",

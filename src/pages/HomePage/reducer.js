@@ -4,6 +4,8 @@
  */
 const initState = {
     allAsset: [],
+    accountNamesErr: false,
+    accountName: "",
 };
 export default function HomePageReducer (state = initState, action) {
     switch (action.type) {

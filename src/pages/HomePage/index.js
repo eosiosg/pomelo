@@ -155,9 +155,9 @@ class HomePage extends Component {
               </Modal>
               <View style={{height : 80}}></View>
             </ScrollView>
-            <View style={styles.bottomContent}>
-              <Text style={styles.buttonSubmit} onPress={this.goSubmit}>{submitKey}</Text>
-            </View>
+            <TouchableOpacity style={styles.bottomContent} onPress={this.goSubmit}>
+              <Text style={styles.buttonSubmit}>{submitKey}</Text>
+            </TouchableOpacity>
           </View>
         </SafeAreaView>
       );
