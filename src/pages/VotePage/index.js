@@ -87,7 +87,7 @@ class VotePage extends Component {
         let stake = parseFloat(net_weight + cpu_weight).toFixed(4);
         cpu_weight = parseFloat(cpu_weight).toFixed(4);
         net_weight = parseFloat(net_weight).toFixed(4);
-        const CurrencyBalance = this.props.CurrencyBalance;
+        const CurrencyBalance = parseFloat(this.props.CurrencyBalance).toFixed(2);
 
         const account = I18n.t(messages.account.id);
         const balance = I18n.t(messages.balance.id);
