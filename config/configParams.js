@@ -12,7 +12,8 @@ export const defaultLogoUrl = 'https://steemitimages.com/0x0/https://steemitimag
 
 //test env
 export const nodeAddressList = [
-    'http://13.229.70.163:8888',
+    'http://13.251.3.82:8888',
+    // 'https://mainnet-jp.eosio.sg'
     // 'http://52.74.197.107:8888',
 ];
 
