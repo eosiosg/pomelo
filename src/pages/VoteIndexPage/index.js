@@ -12,7 +12,7 @@ const arrowRightAccount = require("./images/arrow-right-account.png");
 const walletCountdown = require("./images/wallet_icon_countdown.png");
 const walletImageBackground = require("./images/wallet_img_background.png");
 import { defaultLogoUrl } from '../../../config/configParams';
-import { versionNumber } from '../../../config/configParams'
+import { versionNumber } from '../../../config/configParams';
 
 class VoteIndexPage extends Component {
     static navigationOptions = ( props ) => {
