@@ -41,11 +41,6 @@ class HomePage extends Component {
     }
 
   componentWillReceiveProps( nextProps ) {
-    if(nextProps.accountNamesErr && nextProps.accountNamesErr != this.props.accountNamesErr){
-      Toast.show("NO DATA",{
-        position: 200,
-      });
-    }
    if(nextProps.accountNames){
      this.setState({
        ItemData :  nextProps.accountNames.account_names
@@ -269,8 +264,6 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     return {
       accountNames: state.HomePageReducer.accountNames,
-      accountNamesErr: state.HomePageReducer.accountNamesErr,
-
     };
 }
 

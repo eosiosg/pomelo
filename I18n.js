@@ -5,12 +5,14 @@
 import I18n from "react-native-i18n";
 import en from "./data/locales/en";
 import zh from "./data/locales/zh";
+import ko from "./data/locales/ko";
 
 I18n.fallbacks = true;
 
 I18n.translations = {
     en: en,
-    zh: zh
+    zh: zh,
+    ko: ko,
 };
 
 

@@ -116,20 +116,37 @@ class NodeListPage extends Component {
                     <Image source={{uri:this.props.accountDic[item.owner]?this.props.accountDic[item.owner].logo:defaultLogoUrl}}
                            style={{width:46,height:46, borderRadius:23, marginTop:10}}/>
                 </View>
-                <View style={[ {flex:8,} ]}>
-                    <Text numberOfLines={1}
-                          style={[
-                              style.commonTextColorStyle,
-                              {
-                                  fontWeight: 'bold',
-                                  fontSize: 22,
-                                  lineHeight: 35,
-                                  fontFamily: 'PingFangSC-Semibold',
-                                  color: '#323232',
-                              } ]}>
-                        {this.props.accountDic[item.owner]?this.props.accountDic[item.owner].organization_name:item.owner}
+                <View style={[ {flex:9} ]}>
+                    <View style={{flex:1, flexDirection:'row', justifyContent:'space-between'}}>
+                        <Text numberOfLines={1}
+                              style={[
+                                  style.commonTextColorStyle,
+                                  {
+                                      fontWeight: 'bold',
+                                      fontSize: 22,
+                                      lineHeight: 35,
+                                      fontFamily: 'PingFangSC-Semibold',
+                                      color: '#323232',
+                                  } ]}>
+                            {this.props.accountDic[item.owner]?this.props.accountDic[item.owner].organization_name:item.owner}
 
-                    </Text>
+                        </Text>
+                        <View style={[ {zIndex:-1}]}>
+                            {
+                                this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground source={developTeam}
+                                                                                                       style={{
+                                                                                                           marginTop:5,
+                                                                                                           width: 120, height: 18,
+                                                                                                           paddingLeft: 5,
+                                                                                                           paddingRight: 5,
+                                                                                                       }}>
+                                    <Text style={{textAlign: "center", lineHeight: 18, fontSize:12, color: 'white'}}>
+                                        {I18n.t("Global Development Team")}
+                                    </Text>
+                                </ImageBackground>
+                            }
+                        </View>
+                    </View>
                     <Text numberOfLines={1}
                           style={[
                               style.commonTextColorStyle,
@@ -141,55 +158,40 @@ class NodeListPage extends Component {
                               } ]}>
                         {item.owner}
                     </Text>
-                    <Text numberOfLines={1}
-                          style={[
-                              style.commonSubTextColorStyle,
-                              {
-                                  fontSize: 14,
-                                  lineHeight: 28,
-                                  fontFamily: 'PingFangSC-Regular',
-                                  color: '#999999',
-                                  letterSpacing: 0,
-                              } ]
-                          }>
-                        {I18n.t("Global Total Votes Percentage")} : {parseFloat(item.total_votes/this.props.totalVoteWeight*100).toFixed(2) + "%"}
-                    </Text>
+                    <View style={{flex:1, flexDirection:'row', justifyContent:'space-between'}}>
+                        <Text numberOfLines={1}
+                              style={[
+                                  style.commonSubTextColorStyle,
+                                  {
+                                      fontSize: 14,
+                                      lineHeight: 28,
+                                      fontFamily: 'PingFangSC-Regular',
+                                      color: '#999999',
+                                      letterSpacing: 0,
+                                  } ]
+                              }>
+                            {I18n.t("Global Total Votes Percentage")} : {parseFloat(item.total_votes/this.props.totalVoteWeight*100).toFixed(2) + "%"}
+                        </Text>
+                        <TouchableOpacity
+                            onPress={() => {
+                                if ( item.voting ) {
+                                    this.removeNode( item, index )
+                                } else {
+                                    this.addNode( item, index )
+                                }
+                            }}>
+                            <Icon
+                                style={[ {
+                                    marginLeft: 10,
+                                } ]}
+                                name={item.voting ? 'ios-remove-circle-outline' : 'md-add-circle'}
+                                size={33}
+                                color={'#3c4144'}>
+                            </Icon>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
-                <View style={[ { paddingTop: 55,position:'relative',zIndex:0, } ]}>
-                    {
-                        this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground style={{
-                            width: 130, height: 18,
-                            position: 'absolute',
-                            top: 6, right: -5,
-                            paddingLeft: 10,
-                            paddingRight: 10,
-                        }}
-                                                                                               source={developTeam}>
-                            <Text style={{textAlign: "center", lineHeight: 18, fontSize:12, color: 'white'}}>
-                                {I18n.t("Global Development Team")}
-                            </Text>
-                        </ImageBackground>
-                    }
-
-                    <TouchableOpacity
-                        onPress={() => {
-                            if ( item.voting ) {
-                                this.removeNode( item, index )
-                            } else {
-                                this.addNode( item, index )
-                            }
-                        }}>
-                        <Icon
-                            style={[ {
-                                marginLeft: 10,
-                            } ]}
-                            name={item.voting ? 'ios-remove-circle-outline' : 'md-add-circle'}
-                            size={33}
-                            color={'#3c4144'}>
-                        </Icon>
-                    </TouchableOpacity>
-                </View>
             </View>
         );
     }

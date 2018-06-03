@@ -1,26 +1,51 @@
 import { put, call} from "redux-saga/effects";
 import Eos from "eosjs"
 import { GetEOS } from "../../actions/EosAction";
+import Toast from "react-native-root-toast";
+import I18n from "../../../I18n";
+
+const noAccount = I18n.t( "HomePage NoAccountFound" );
+const somethingWrong = I18n.t( "HomePage SomethingWrong" );
+const invalidPriKey = I18n.t( "HomePage InvalidPrivateKey" );
+
 
 export function* getHomeAccountName (action) {
   try {
-    const response = yield call(getAccountName , action.data);
+      const response = yield call(getAccountName , action.data);
+      if(!response){
+        return
+      }else if(response.account_names&&response.account_names.length==0){
+          Toast.show(noAccount,{
+              position: 200,
+          });
+      }
     yield put({ type: "HOME_SETACCOUNTNAMES_REDUCER", data: response });
-    yield put({ type: "HOME_SETACCOUNTNAMESERR_REDUCER", data: false });
 
   } catch (err) {
-    yield put({ type: "HOME_SETACCOUNTNAMESERR_REDUCER", data: true });
-
+      Toast.show(somethingWrong,{
+          position: 200,
+      });
   }
 }
 function getAccountName(data) {
   let {ecc} = Eos.modules;
+    let isValidPrivateKey = ecc.isValidPrivate(data);
+    if(!isValidPrivateKey){
+        Toast.show(invalidPriKey,{
+            position: 200,
+        });
+      return false
+    }
   let accountPublicKey = ecc.privateToPublic(data);
   const eos = GetEOS(data);
   return eos.getKeyAccounts( {'public_key':accountPublicKey} ).then(( result ,error ) => {
-    return result;
+      return result;
   }).catch(err=>{
-    "use strict";
+
+      Toast.show(somethingWrong,{
+          position: 200,
+      });
+      "use strict";
     return err
   });
 }
