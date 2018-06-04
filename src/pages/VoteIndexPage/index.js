@@ -186,8 +186,8 @@ class VoteIndexPage extends Component {
 
       const { account_name, total_resources, delegated_bandwidth } = this.props.accountInfo;
       const { ram_bytes } = total_resources;
-      const { cpu_weight, net_weight } = delegated_bandwidth ? delegated_bandwidth : { cpu_weight: "0 SYS", net_weight: "0 SYS"};
-      const stake = Number(net_weight.replace(" SYS", "")) + Number(cpu_weight.replace(" SYS", ""));
+      const { cpu_weight, net_weight } = delegated_bandwidth ? delegated_bandwidth : { cpu_weight: "0 EOS", net_weight: "0 EOS"};
+      const stake = Number(net_weight.split(' ')[0]) + Number(cpu_weight.split(' ')[0]);
       const CurrencyBalance = (this.props.CurrencyBalance).toFixed(2);
       const Refunds = this.props.Refunds;
       const TotalAsset = (stake + this.props.CurrencyBalance + Refunds).toFixed(4);
@@ -322,7 +322,6 @@ class VoteIndexPage extends Component {
     RefundingCountdown = (RefundsTime) => {
       const totalTime = 3*24*60*60*1000;
       let nowTime = new Date();
-      console.log('RefundsTime', RefundsTime);
       let CreatTime = new Date(RefundsTime);
       CreatTime = CreatTime.getTime();
       let cuntDownTime = totalTime - (nowTime - CreatTime);
@@ -358,9 +357,16 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
+    //
+    // console.log('state: ', state.VoteIndexPageReducer);
+    // console.log('crrency balance: ', state.VoteIndexPageReducer.CurrencyBalance);
+    // console.log('Refunds: ', state.VoteIndexPageReducer.Refunds);
+    // console.log('totalVoteWeight: ', state.VoteIndexPageReducer.totalVoteWeight);
+    // console.log('delegated_bandwidth: ', state.VoteIndexPageReducer.accountInfo.delegated_bandwidth);
+
     return {
         accountInfo: state.VoteIndexPageReducer.accountInfo,
-        CurrencyBalance: state.VoteIndexPageReducer.CurrencyBalance,
+        CurrencyBalance: state.VoteIndexPageReducer.CurrencyBalance||0,
         Refunds: state.VoteIndexPageReducer.Refunds,
         RefundsTime: state.VoteIndexPageReducer.RefundsTime,
         BPs: state.VoteIndexPageReducer.BPs,

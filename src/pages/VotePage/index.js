@@ -79,11 +79,11 @@ class VotePage extends Component {
 
     render() {
         let { account_name,total_resources } = this.props.accountInfo;
-        total_resources = total_resources||{cpu_weight: '0 SYS', net_weight: '0 SYS'};
-        let cpu_weight = total_resources.cpu_weight||'0 SYS';
-        let net_weight = total_resources.net_weight||'0 SYS';
-        cpu_weight = parseFloat(cpu_weight.replace(' SYS', ''));
-        net_weight = parseFloat(net_weight.replace(' SYS', ''));
+        total_resources = total_resources||{cpu_weight: '0 EOS', net_weight: '0 EOS'};
+        let cpu_weight = total_resources.cpu_weight||'0 EOS';
+        let net_weight = total_resources.net_weight||'0 EOS';
+        cpu_weight = parseFloat(cpu_weight.replace(' EOS', ''));
+        net_weight = parseFloat(net_weight.replace(' EOS', ''));
         let stake = parseFloat(net_weight + cpu_weight).toFixed(4);
         cpu_weight = parseFloat(cpu_weight).toFixed(4);
         net_weight = parseFloat(net_weight).toFixed(4);
@@ -350,7 +350,6 @@ function mapDispatchToProps(dispatch) {
         onDispatchGetVoteBpsPost: (data) => dispatch({ type: "VOTE_INDEX_BPS_POST", data }),
         getAccountInfo: (data) => dispatch({ type: "VOTE_INDEX_ACCOUNTINFO_POST", data }),
 
-        resetIsSubmitSuccess: () => dispatch({ type: "VOTE_FAIL_REDUCER"  }),
         onDispatchVoteVotingList: (data) => dispatch({ type: "VOTE_SUBMITLIST_POST", data }),
     };
 }

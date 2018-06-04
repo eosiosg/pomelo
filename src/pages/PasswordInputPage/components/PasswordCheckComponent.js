@@ -101,7 +101,7 @@ class PasswordCheckComponent extends React.Component {
             }
         } ).catch( err => {
             this.setState( {
-                errorText: 'Password is not correct'
+                errorText: I18n.t('Password Incorrect')
             } );
           this._passwordInputComponent ? this._passwordInputComponent.clearData() : null;
         } );

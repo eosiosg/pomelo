@@ -28,7 +28,7 @@ function getCurrencyBalance(action) {
     "code": "eosio.token",
     "account": action.data.accountName,
   } ).then( ( res ) => {
-    const balance = Number(res[0].replace(" SYS", ""));
+    const balance = Number(res[0].split(' ')[0]);
     return balance;
   } );
 }
@@ -41,13 +41,14 @@ export function* getDelegatebwPageConfirmPost (action) {
     if(result){
         yield put({ type: "DELEGATE_SUCCESS_REDUCER"});
         yield put({ type: "VOTEINDEX_GETINFO_TRUE_REDUCER", data:{ needGetUserInfo:true }});
-        action.nav.goBack();
+        setTimeout(()=>action.nav.goBack(),100);
       }
   } catch (err) {
       yield put({ type: "DELEGATE_FAIL_REDUCER"});
   }
 }
 function delegatebw(action) {
+
   const eos = GetEOS(action.accountPrivateKey);
   return eos.transaction( tr => {
     tr.delegatebw(action.data);

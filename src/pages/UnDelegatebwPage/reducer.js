@@ -9,6 +9,7 @@ const initState = {
   accountInfo: {
     net_weight: 0,
     cpu_weight: 0,
+      loading:false,
   },
 };
 export default function UnDelegatebwPageReducer (state = initState, action) {
@@ -28,6 +29,10 @@ export default function UnDelegatebwPageReducer (state = initState, action) {
             return Object.assign({}, state, {
                 "loading": false
             });
+        // case "UNDELEGATEBW_GETUSERINFOFALSE_REDUCER":
+        //     return Object.assign({}, state, {
+        //         "needGetUserInfo" : false,
+        //     });
         case "UNDELEGATE_FAIL_REDUCER":
             Toast.show(I18n.t('VotePage vote_fail')+'!',{
                 position: 36,
