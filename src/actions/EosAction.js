@@ -246,8 +246,8 @@ export function EOSNewAccount( eos, newAccountName, publicKey, callback ) {
         tr.delegatebw( {
             from: 'eosiomeetone',
             receiver: newAccountName,
-            stake_net_quantity: '100.0000 SYS',
-            stake_cpu_quantity: '100.0000 SYS',
+            stake_net_quantity: '100.0000 EOS',
+            stake_cpu_quantity: '100.0000 EOS',
             transfer: 0
         } );
     } )
@@ -268,7 +268,7 @@ export function EOSTransfer( eos, fromAccountName, toAccountName, callback ) {
     eos.transfer( {
         from: fromAccountName,
         to: toAccountName,
-        quantity: '1000.0000 SYS',
+        quantity: '1000.0000 EOS',
         memo: ''
     }, true )
         .then( function ( result ) {
@@ -344,8 +344,8 @@ export function EOSDelegatebw( eos, fromAccountName, receiverAccountName, callba
     eos.delegatebw( {
         from: fromAccountName,
         receiver: receiverAccountName,
-        stake_net_quantity: '10.0000 SYS',
-        stake_cpu_quantity: '10.0000 SYS',
+        stake_net_quantity: '10.0000 EOS',
+        stake_cpu_quantity: '10.0000 EOS',
         transfer: 0
     } )
         .then( function ( result ) {
@@ -365,8 +365,8 @@ export function EOSUndelegatebw( eos, fromAccountName,receiveAccountName, callba
     eos.undelegatebw( {
         from: fromAccountName,
         receiver: receiveAccountName,
-        unstake_net_quantity: "10.0000 SYS",
-        unstake_cpu_quantity: "10.0000 SYS"
+        unstake_net_quantity: "10.0000 EOS",
+        unstake_cpu_quantity: "10.0000 EOS"
     } )
         .then( function ( result ) {
             console.log( 'EOSUndelegatebw result: ' + JSON.stringify( result ) );
@@ -386,7 +386,7 @@ export function EOSBuyram( eos, accountName, callback ) {
         tr.buyram( {
             "payer": accountName,
             "receiver": accountName,
-            "quant": "1.0000 SYS"
+            "quant": "1.0000 EOS"
         } );
     } )
         .then( function ( result ) {

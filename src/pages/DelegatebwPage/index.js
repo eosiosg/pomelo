@@ -9,6 +9,11 @@ import { styles, countStyles, stakeStyles, ruleStyles, btnStyles } from "./style
 import { decryptObject, storage } from "../../utils/storage";
 import LoadingView from '../../commonComponents/loading'
 
+const NoNegative = I18n.t("DelegatebwPage NoNegative");
+const UseValidValue = I18n.t("DelegatebwPage UseValidValue");
+const NoEnoughBW = I18n.t("DelegatebwPage NoEnoughBW");
+const Available = I18n.t("DelegatebwPage Available");
+
 class DelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
         let title = I18n.t("DelegatebwPage Title");
@@ -27,10 +32,15 @@ class DelegatebwPage extends Component {
 
     render() {
       const stake = Number(this.state.CPU) + Number(this.state.Network);
-      const CurrencyBalance = (this.props.CurrencyBalance).toFixed(2);
-      const CPU_placeholder = "CPU Stake";
-      const Network_placeholder = "NetWork Stake";
-      const BalanceIntl = I18n.t("DelegatebwPage Balance");
+      const CurrencyBalance = (this.props.CurrencyBalance).toFixed(4);
+      const refunds = (this.props.Refunds).toFixed(4);
+
+      const availableBW = (Number(CurrencyBalance) + Number(refunds)).toFixed(4);
+
+      const CPU_placeholder = `${(Number(this.props.CurrencyBalance) + Number(this.props.RefundMoneyDetail.cpu)).toFixed(4)} ${Available}`;
+      const Network_placeholder = `${(Number(this.props.CurrencyBalance) + Number(this.props.RefundMoneyDetail.net)).toFixed(4)} ${Available}`;
+
+      const BalanceIntl = I18n.t("DelegatebwPage availableBW");
       const StakeCountIntl = I18n.t("DelegatebwPage StakeCount");
       const StakeQuantityIntl = I18n.t("DelegatebwPage StakeQuantity");
       const CPUIntl = I18n.t("DelegatebwPage CPU");
@@ -41,19 +51,24 @@ class DelegatebwPage extends Component {
       const Rule3Intl = I18n.t("DelegatebwPage Rule3");
       // const Rule4Intl = I18n.t("DelegatebwPage Rule4");
       const ConfirmIntl = I18n.t("DelegatebwPage Confirm");
+
+
+
+
         return (
             <SafeAreaView style={[{flex:1}]}>
                 {
                     this.props.loading&&<LoadingView text="Waiting"/>
                 }
 
-            <View style={styles.bodyBox}>
+            <View style={[styles.bodyBox, {flex:1,justifyContent:'space-between'}]}>
+            <View>
               <ScrollView>
                 <View style={countStyles.countBox}>
                   <View style={countStyles.countItem}>
                     <Text style={countStyles.countName}>{BalanceIntl}</Text>
                     <Text style={countStyles.countValue}>
-                      {CurrencyBalance} <Text style={countStyles.countValueUnit}>EOS</Text>
+                      {availableBW} <Text style={countStyles.countValueUnit}>EOS</Text>
                     </Text>
                   </View>
                   <View style={[countStyles.countItem, {borderBottomWidth: 0,}]}>
@@ -107,6 +122,7 @@ class DelegatebwPage extends Component {
                 </View>
                 <View style={{height: 50}}></View>
               </ScrollView>
+            </View>
               <View style={btnStyles.btnBox}>
                 <Text style={btnStyles.btn} onPress={() => this.DelegatebwConfirmFn()}>{ConfirmIntl}</Text>
               </View>
@@ -116,33 +132,53 @@ class DelegatebwPage extends Component {
     }
 
     IsStateCpuLegal = () => {
-      let IsLegal = true;
-      const cpuSurplus = this.props.CurrencyBalance - Number(this.state.Network);
-      if (Number(this.state.CPU) < 0 || cpuSurplus < 0 || Number(this.state.CPU) > cpuSurplus) {
-        Toast.show("The CPU Number is illegal",{
-          position: 20,
-        });
-        IsLegal = false;
-      }
-      return IsLegal;
+
+        if(this.state.CPU<0){
+            Toast.show(NoNegative,{
+                position: 30,
+            });
+            return false
+        }else if(Number(this.props.CurrencyBalance) + Number(this.props.RefundMoneyDetail.cpu) < Number(this.state.CPU) ){
+            Toast.show('CPU <' +(Number(this.props.CurrencyBalance) + Number(this.props.RefundMoneyDetail.cpu)).toFixed(4),{
+                position: 30,
+            });
+            return false
+        }else{
+            return true
+        }
     };
 
     IsStateNetworkLegal = () => {
-      let IsLegal = true;
-      const networkSurplus = this.props.CurrencyBalance - Number(this.state.CPU);
-      if (Number(this.state.Network) < 0 || networkSurplus < 0 || Number(this.state.Network) > networkSurplus) {
-        Toast.show("The Network Number is illegal",{
-          position: 20,
-        });
-        IsLegal = false;
-      }
-      return IsLegal;
+        if(this.state.Network<0){
+            Toast.show(NoNegative,{
+                position: 30,
+            });
+            return false
+        }else if(Number(this.props.CurrencyBalance) + Number(this.props.RefundMoneyDetail.net) < Number(this.state.Network) ){
+            Toast.show('network <' +(Number(this.props.CurrencyBalance) + Number(this.props.RefundMoneyDetail.net)).toFixed(4),{
+                position: 30,
+            });
+            return false
+        }else{
+            return true
+        }
     };
 
     DelegatebwConfirmFn = () => {
-      if ((!this.state.CPU && !this.state.Network) || !this.IsStateCpuLegal() || !this.IsStateNetworkLegal()) {
-        return;
-      }
+        console.log(`use: `,(Number(this.state.CPU) + Number(this.state.Network)), 'have ', (Number(this.props.CurrencyBalance)+Number(this.props.Refunds)),(Number(this.state.CPU) + Number(this.state.Network)) > (Number(this.props.CurrencyBalance)+Number(this.props.Refunds)));
+        if(!this.state.CPU && !this.state.Network){
+            Toast.show(UseValidValue,{
+                position: 30,
+            });
+            return
+        }else if((Number(this.state.CPU) + Number(this.state.Network)) > (Number(this.props.CurrencyBalance)+Number(this.props.Refunds))){
+            Toast.show(NoEnoughBW,{
+                position: 30,
+            });
+            return
+        }else if(!this.IsStateCpuLegal() || !this.IsStateNetworkLegal()){
+            return
+        }
 
       storage.load({key: "HomePageStorage"}).then((ret1) => {
         if (ret1) {
@@ -152,8 +188,8 @@ class DelegatebwPage extends Component {
           const data = {
             from: accountName,
             receiver: accountName,
-            stake_net_quantity: Number(this.state.Network) + " SYS",
-            stake_cpu_quantity: Number(this.state.CPU) + " SYS",
+            stake_net_quantity: Number(this.state.Network) + " EOS",
+            stake_cpu_quantity: Number(this.state.CPU) + " EOS",
             transfer: 0,
           };
           const nav = this.props.navigation;
@@ -173,12 +209,14 @@ function mapDispatchToProps( dispatch ) {
 }
 
 function mapStateToProps( state ) {
+
     return {
         accountInfo: state.VoteIndexPageReducer.accountInfo,
         CurrencyBalance: state.VoteIndexPageReducer.CurrencyBalance,
-        Refunds: state.VoteIndexPageReducer.Refunds,
         BPs: state.VoteIndexPageReducer.BPs,
         USD: state.VoteIndexPageReducer.USD,
+        Refunds: state.VoteIndexPageReducer.Refunds||0,
+        RefundMoneyDetail: state.VoteIndexPageReducer.refundMoneyDetail,
 
         loading : state.DelegatebwPageReducer.loading,
     };

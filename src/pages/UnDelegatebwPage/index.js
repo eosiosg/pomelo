@@ -27,16 +27,41 @@ class UnDelegatebwPage extends Component {
         };
     }
 
+    // componentWillReceiveProps( nextProps ) {
+    //
+    //     if(nextProps.needGetUserInfo&&nextProps.needGetUserInfo!==this.props.needGetUserInfo){
+    //         this.props.setNeedGetUserInfoFalse();
+    //         storage.load({key: "HomePageStorage"}).then((ret1) => {
+    //             if (ret1) {
+    //                 const ret = decryptObject( ret1 );
+    //                 const accountPrivateKey = ret.accountPrivateKey;
+    //                 const accountName = ret.accountName;
+    //                 const data = {
+    //                     accountPrivateKey,
+    //                     accountName,
+    //                 };
+    //                 this.props.onDispatchGetAccountInfoPost(data);
+    //                 this.props.onDispatchGetRefundsPost(data);
+    //                 this.props.onDispatchGetCurrencyBalancePost(data);
+    //             }
+    //         }).catch( err => {
+    //             console.log(err);
+    //         });
+    //     }
+    //
+    // }
+
+
     render() {
 
         const { delegated_bandwidth } = this.props.accountInfo;
-        let { cpu_weight, net_weight } = delegated_bandwidth ? delegated_bandwidth : { cpu_weight: "0 SYS", net_weight: "0 SYS"};
-        this.cpu_weight = cpu_weight.replace(" SYS", "");
-        this.net_weight = net_weight.replace(" SYS", "");
+        let { cpu_weight, net_weight } = delegated_bandwidth ? delegated_bandwidth : { cpu_weight: "0 EOS", net_weight: "0 EOS"};
+        this.cpu_weight = cpu_weight.split(' ')[0];
+        this.net_weight = net_weight.split(' ')[0];
         const Stake = Number(this.cpu_weight) + Number(this.net_weight);
 
-        const CPU_placeholder = "Max "+ this.cpu_weight +" Stake";
-        const Network_placeholder = "Max "+ this.net_weight +" Stake";
+        const CPU_placeholder = this.cpu_weight + " " + I18n.t("UnDelegatebwPage Available");
+        const Network_placeholder = this.net_weight + " " + I18n.t("UnDelegatebwPage Available");
 
         const StakeCountIntl = I18n.t("UnDelegatebwPage StakeCount");
         const StakeCountInfoIntl = I18n.t("UnDelegatebwPage StakeCountInfo");
@@ -144,8 +169,8 @@ class UnDelegatebwPage extends Component {
         const data = {
           from: accountName,
           receiver: accountName,
-          unstake_net_quantity: Number(this.state.Network) + " SYS",
-          unstake_cpu_quantity: Number(this.state.CPU) + " SYS",
+          unstake_net_quantity: Number(this.state.Network) + " EOS",
+          unstake_cpu_quantity: Number(this.state.CPU) + " EOS",
         };
         const nav = this.props.navigation;
         this.props.onDispatchUnDelegateBwPost(data, nav, accountPrivateKey);
@@ -160,6 +185,11 @@ class UnDelegatebwPage extends Component {
 function mapDispatchToProps(  dispatch  ) {
     return {
       onDispatchUnDelegateBwPost: (data, nav, accountPrivateKey) => dispatch({ type: "UNDELEGATEBW_CONFIRM_POST", data, nav, accountPrivateKey }),
+        setNeedGetUserInfoFalse : () => dispatch({type:"UNDELEGATEBW_GETUSERINFOFALSE_REDUCER"}),
+        // onDispatchGetCurrencyBalancePost: (data) => dispatch({ type: "VOTE_INDEX_CURRENCYBALANCE_POST", data }),
+        // onDispatchGetRefundsPost: (data) => dispatch({ type: "VOTE_INDEX_REFUNDS_POST", data }),
+        // onDispatchGetVoteBpsPost: (data) => dispatch({ type: "VOTE_INDEX_BPS_POST", data }),
+
     };
 }
 

@@ -1,6 +1,8 @@
 import { put, call} from "redux-saga/effects";
 import { GetEOS } from "../../actions/EosAction";
 import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
+import { contributorInfo } from "../../../config/configParams";
+
 
 // getVoteIndexPageAccountInfoPost
 export function* getVoteIndexPageAccountInfoPost(action) {
@@ -13,7 +15,6 @@ export function* getVoteIndexPageAccountInfoPost(action) {
 function getAccountByEos(action) {
   const eos = GetEOS(action.data.accountPrivateKey);
   return eos.getAccount( { 'account_name': action.data.accountName } ).then(( result ) => {
-    console.log(result);
       return result;
     });
 }
@@ -22,24 +23,28 @@ function getAccountByEos(action) {
 export function* getVoteIndexPageCurrencyBalancePost (action) {
   try {
     const response = yield call(getCurrencyBalance, action);
+
     yield put({ type: "VOTEINDEX_SETCURRENCYBALANCE_REDUCER", data: response });
   } catch (err) {}
 }
 function getCurrencyBalance(action) {
   const eos = GetEOS(action.data.accountPrivateKey);
   return eos.getCurrencyBalance( { "code": "eosio.token", "account": action.data.accountName }).then(( res ) => {
-    const balance = Number(res[0].replace(" SYS", ""));
-    console.log(balance);
-    return balance;
-  });
+      if(!res){
+        return 0
+      }else if(!res.length){
+          return 0
+      }else{
+          return Number(res[0].split(' ')[0]);
+      }
+  }).catch(()=>0);
 }
 
 // getVoteIndexPageRefundsPost
 export function* getVoteIndexPageRefundsPost (action) {
   try {
     const response = yield call(getRefunds, action);
-    yield put({ type: "VOTEINDEX_SETREFUNDS_REDUCER", data: response.refunds });
-    yield put({ type: "VOTEINDEX_SETREFUNDSTIME_REDUCER", data: response.request_time });
+    yield put({ type: "VOTEINDEX_SETREFUNDS_REDUCER", data: response });
   } catch (err) {
 
   }
@@ -53,11 +58,14 @@ function getRefunds(action) {
     'table': 'refunds',
     'table_key': 'active'
   }).then(function (result) {
-    console.log(result);
-    const refunds = result.rows[0] ? Number(result.rows[0].cpu_amount.replace(" SYS", ""))+Number(result.rows[0].net_amount.replace(" SYS", "")) : 0;
+
+    const refunds = result.rows[0] ? Number(result.rows[0].cpu_amount.split(' ')[0])+Number(result.rows[0].net_amount.split(' ')[0]) : 0;
+    const refundMoneyDetail = result.rows[0] ? {cpu: Number(result.rows[0].cpu_amount.split(' ')[0]), net:Number(result.rows[0].net_amount.split(' ')[0])} : {cpu:0,net:0};
     const request_time = result.rows[0] ? result.rows[0].request_time : null;
-    return { refunds, request_time };
-  });
+    return { refunds, request_time, refundMoneyDetail };
+  }).catch(
+      err=>err
+  );
 }
 
 // getVoteIndexPageBpsPost
@@ -70,7 +78,6 @@ export function* getVoteIndexPageBpsPost (action) {
 function getBps(action) {
   const eos = GetEOS(action.data.accountPrivateKey);
   return eos.getProducers( { json: true } ).then( result => {
-    // console.log(result);
       return result;
   } );
 }
@@ -119,7 +126,7 @@ export function* getNodesIDInfo(){
 
 function getNodesInfo(){
 
-    return fetch('https://api.eosio.sg/bp/info').then((res)=>{
+    return fetch(contributorInfo).then((res)=>{
         return res.json()
     }).then((res)=>{
         return res

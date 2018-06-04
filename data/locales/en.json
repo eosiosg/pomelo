@@ -15,7 +15,7 @@
   "VoteIndexPage VotedBps": "Voted Block Producers",
 
   "DelegatebwPage Title": "Delegate Bandwidth",
-  "DelegatebwPage Balance": "Balance",
+  "DelegatebwPage availableBW": "Available Bandwidth",
   "DelegatebwPage StakeCount": "Stake Count",
   "DelegatebwPage StakeQuantity": "Stake Quantity",
   "DelegatebwPage CPU": "CPU",
@@ -25,6 +25,10 @@
   "DelegatebwPage Rule2": "· The voting weight will decrease over time;",
   "DelegatebwPage Rule3": "· Could Undelegate Bandwidth anytime，which will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later;",
   "DelegatebwPage Confirm": "Confirm",
+  "DelegatebwPage NoNegative": "Negative is not allowed",
+  "DelegatebwPage UseValidValue": "Please input valid value",
+  "DelegatebwPage NoEnoughBW": "No enough bandwidth available",
+  "DelegatebwPage Available": "Available",
 
   "UnDelegatebwPage Title": "Undelegate Bandwidth",
   "UnDelegatebwPage StakeCount": "Stake Count",
@@ -33,6 +37,8 @@
   "UnDelegatebwPage CPU": "CPU",
   "UnDelegatebwPage Network": "Network",
   "UnDelegatebwPage Confirm": "Confirm",
+  "UnDelegatebwPage Available": "Available",
+
 
   "VotePage account" : "Account",
   "VotePage vote" : "Vote",
@@ -94,5 +100,6 @@
   "Password Verify" : "Please enter your password",
   "Password Clear" : "Clear Passwords",
   "Password Invalid" : "Password is not the same",
-  "Password Set Success" : "Password set success"
+  "Password Set Success" : "Password set success",
+  "Password Incorrect" : "Password is incorrect"
 }

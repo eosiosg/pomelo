@@ -22,7 +22,7 @@ class App extends React.Component {
 
     componentWillMount() {
         getEventEmitter().on('checkPasswordSuccess', function () {
-            console.log("ee.on('checkPasswordSuccess', function () { 2")
+            // console.log("ee.on('checkPasswordSuccess', function () { 2")
         })
     }
 

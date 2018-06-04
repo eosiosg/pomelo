@@ -19,6 +19,7 @@ const initState = {
   CurrencyBalance: 0,
   Refunds: 0,
   RefundsTime: "",
+    refundMoneyDetail:{cpu:0,net:0},
   BPs: [
     {
       owner: "",
@@ -49,11 +50,9 @@ export default function VoteIndexPageReducer (state = initState, action) {
         });
     case "VOTEINDEX_SETREFUNDS_REDUCER":
         return Object.assign({}, state, {
-          "Refunds": action.data
-        });
-      case "VOTEINDEX_SETREFUNDSTIME_REDUCER":
-        return Object.assign({}, state, {
-          "RefundsTime" : action.data
+          "Refunds": action.data.refunds,
+          "RefundsTime": action.data.request_time,
+          "refundMoneyDetail": action.data.refundMoneyDetail,
         });
     case "VOTEINDEX_SETBPS_REDUCER":
         return Object.assign({}, state, {
