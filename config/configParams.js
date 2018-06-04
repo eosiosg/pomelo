@@ -14,7 +14,6 @@ export const defaultLogoUrl = 'http://images.eosio.sg/eos.png';
 export const nodeAddressList = [
     'http://13.251.3.82:8888',
     // 'https://mainnet-jp.eosio.sg'
-    // 'http://52.74.197.107:8888',
 ];
 
 
