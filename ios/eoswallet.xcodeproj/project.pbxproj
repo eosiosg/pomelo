@@ -1342,7 +1342,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pomelo.adhoc;
 				PRODUCT_NAME = eoswallet;
-				PROVISIONING_PROFILE = "e2187c64-446c-4b09-afee-7a06e56861eb";
+				PROVISIONING_PROFILE = "ec9794d4-dfdf-4cb2-a9c5-923bded686aa";
 				PROVISIONING_PROFILE_SPECIFIER = PomeloAdhoc;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
