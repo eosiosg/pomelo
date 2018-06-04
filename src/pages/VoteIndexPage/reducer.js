@@ -29,12 +29,15 @@ const initState = {
       producer_key: "1",
     },
   ],
+    HAVE_NODE_ID_INFO:false,
+    HAVE_BPS_INFO:false,
   USD: 6.2,
   needGetUserInfo: false,
   accountDic: {
     logo: "",
     organization_name: "",
   },
+    showLabel:false,
   contributors: "",
   totalVoteWeight: 0,
 };
@@ -54,18 +57,24 @@ export default function VoteIndexPageReducer (state = initState, action) {
           "RefundsTime": action.data.request_time,
           "refundMoneyDetail": action.data.refundMoneyDetail,
         });
-    case "VOTEINDEX_SETBPS_REDUCER":
+    case "VOTEINDEX_GETBPS_SUCCESS_REDUCER":
         return Object.assign({}, state, {
-          "BPs": action.data.rows,
-            "totalVoteWeight" : action.data.total_producer_vote_weight,
+            "HAVE_BPS_INFO":true,
+            "totalVoteWeight" : action.total_producer_vote_weight,
+        });
+    case "VOTEINDEX_SETBPS_SUCCESS_REDUCER":
+        return Object.assign({}, state, {
+            "BPs": action.data,
         });
     case "VOTEINDEX_GETINFO_TRUE_REDUCER":
         return Object.assign({}, state, {
             "needGetUserInfo" : true
         });
 
-        case "GET_NODESIDINFO_REDUCER":
+        case "GET_NODESIDINFO_SUCCESS_REDUCER":
             return Object.assign({}, state, {
+                "HAVE_NODE_ID_INFO": true,
+                "showLabel":action.data.showLabel,
                 "accountDic": action.data.accountDic,
                 "contributors": action.data.contributors,
             });

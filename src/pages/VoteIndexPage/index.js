@@ -130,7 +130,7 @@ class VoteIndexPage extends Component {
 
                     <View style={[ {zIndex:-1}]}>
                         {
-                            this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground  source={developTeam}
+                           this.props.showLabel && this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground  source={developTeam}
                                                                                                     style={{
                                                                                                         marginTop:5,
                                 width: 130, height: 18,
@@ -280,7 +280,7 @@ class VoteIndexPage extends Component {
                       <Text style={voteBpsStales.VoteBpsTitle}>{VotedBpsIntl}</Text>
                     </View>
                     <View style={voteBpsStales.VoteBpsList}>
-                      {BPs.map((item,index) => {
+                      {BPs&&BPs.map((item,index) => {
                           if(votedByMeProducers.join(",").indexOf(item.owner)==-1){
                               return
                           }else{
@@ -352,7 +352,7 @@ function mapDispatchToProps(dispatch) {
         onDispatchGetRefundsPost: (data) => dispatch({ type: "VOTE_INDEX_REFUNDS_POST", data }),
         onDispatchGetVoteBpsPost: (data) => dispatch({ type: "VOTE_INDEX_BPS_POST", data }),
         onDispatchGetVoteUsdPost: () => dispatch({ type: "VOTE_INDEX_GETUSDPRICE_POST" }),
-        getNodesIDInfo: () => dispatch({ type: "GET_NODESIDINFO_POST" }),
+        getNodesIDInfo: (data) => dispatch({ type: "GET_NODESIDINFO_POST", data }),
     };
 }
 
@@ -373,6 +373,7 @@ function mapStateToProps(state) {
         totalVoteWeight: state.VoteIndexPageReducer.totalVoteWeight,
         USD: state.VoteIndexPageReducer.USD,
         needGetUserInfo: state.VoteIndexPageReducer.needGetUserInfo,
+        showLabel: state.VoteIndexPageReducer.showLabel,
 
         accountDic: state.VoteIndexPageReducer.accountDic,
         contributors: state.VoteIndexPageReducer.contributors,

@@ -91,7 +91,9 @@ class NodeListSelectedResultComponent extends React.Component {
                 height: 44,
                 alignItems: 'center'
             } ]}>
-                <Text style={[ style.commonTextColorStyle, { fontSize: 18 }, style.wrapper ]}>{item.owner}</Text>
+                <Text style={[ style.commonTextColorStyle, { fontSize: 18 }, style.wrapper ]}>
+                    {this.props.accountDic[item.owner]?this.props.accountDic[item.owner].organization_name:item.owner}
+                </Text>
 
                 <View>
                     <TouchableOpacity

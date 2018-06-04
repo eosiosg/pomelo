@@ -4,6 +4,10 @@ import { decryptObject, encryptObjectToString, storage } from "../../utils/stora
 import { contributorInfo } from "../../../config/configParams";
 
 
+var BPS = null;
+var contributors = null;
+var needNotrSort = false;
+
 // getVoteIndexPageAccountInfoPost
 export function* getVoteIndexPageAccountInfoPost(action) {
     try {
@@ -72,7 +76,13 @@ function getRefunds(action) {
 export function* getVoteIndexPageBpsPost (action) {
   try {
     const response = yield call(getBps, action);
-    yield put({ type: "VOTEINDEX_SETBPS_REDUCER", data: response });
+    BPS = response.rows;
+      yield put({ type: "VOTEINDEX_GETBPS_SUCCESS_REDUCER", total_producer_vote_weight:response.total_producer_vote_weight});
+
+      if(BPS&&contributors){
+          let data = sortBPS();
+          yield put({ type: "VOTEINDEX_SETBPS_SUCCESS_REDUCER", data });
+      }
   } catch (err) {}
 }
 function getBps(action) {
@@ -105,18 +115,26 @@ export function* getVoteIndexPageUsdPricePost () {
 
 
 
-export function* getNodesIDInfo(){
+export function* getNodesIDInfo(action){
     try{
         const response = yield call(getNodesInfo);
         let accountDic = {};
+
         response.bp_info_list.map((bp)=>{
             accountDic[bp.producer_name] = {
                 logo:bp.logo,
                 organization_name : bp.organization_name
             }
         });
+        contributors = response.contributors;
+        needNotrSort = response.needNotrSort;
+        let showLabel = response.showLabel?true:false;
+        yield put({ type: "GET_NODESIDINFO_SUCCESS_REDUCER", data: {accountDic, contributors:response.contributors,showLabel} });
 
-        yield put({ type: "GET_NODESIDINFO_REDUCER", data: {accountDic, contributors:response.contributors} });
+        if(BPS&&contributors){
+            let data = sortBPS();
+            yield put({ type: "VOTEINDEX_SETBPS_SUCCESS_REDUCER", data });
+        }
 
     }catch(err){
 
@@ -133,4 +151,32 @@ function getNodesInfo(){
     }).catch(err=>{
         console.log(err)
     })
+}
+
+
+function sortBPS(){
+
+    if(needNotrSort){
+        return BPS
+    }
+
+    let sortedBPS = [];
+    let normalBPS = [];
+    let contributorBPS = [];
+    let tmpDic = {};
+    BPS.map((bp)=>{
+        if(contributors.indexOf(bp.owner) !== -1 ){
+            tmpDic[bp.owner] = bp;
+        }else{
+            normalBPS.push(bp);
+        }
+    });
+
+    contributors.map((c)=>{
+        contributorBPS.push(tmpDic[c])
+    })
+
+    sortedBPS = contributorBPS.concat(normalBPS);
+    return sortedBPS
+
 }

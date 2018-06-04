@@ -133,7 +133,7 @@ class NodeListPage extends Component {
                         </Text>
                         <View style={[ {zIndex:-1}]}>
                             {
-                                this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground source={developTeam}
+                                this.props.showLabel && this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground source={developTeam}
                                                                                                        style={{
                                                                                                            marginTop:5,
                                                                                                            width: 120, height: 18,
@@ -225,6 +225,7 @@ class NodeListPage extends Component {
                         />
 
                         <NodeListSelectedResultComponent
+                            accountDic = {this.props.accountDic}
                             totalData={this.state.allAsset}
                             navigation={this.props.navigation}
                             isOpen={this.state.isOpenAccountSelect}
@@ -288,6 +289,7 @@ function mapStateToProps( state ) {
         accountInfo: state.VoteIndexPageReducer.accountInfo,
         testData2: state.NodeListPageReducer.testData2,
         totalVoteWeight: state.VoteIndexPageReducer.totalVoteWeight,
+        showLabel: state.VoteIndexPageReducer.showLabel,
 
         accountDic: state.VoteIndexPageReducer.accountDic,
         contributors: state.VoteIndexPageReducer.contributors,

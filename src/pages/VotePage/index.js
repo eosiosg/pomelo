@@ -47,6 +47,7 @@ class VotePage extends Component {
       // console.log("is submit success value IsSubmitSuccess: ",IsSubmitSuccess, " this.props.IsSubmitSuccess: ",this.props.IsSubmitSuccess)
       if (IsSubmitSuccess && IsSubmitSuccess != this.props.IsSubmitSuccess) {
         // 投票成功，重新获取AccountInfo，重置IsSubmitSuccess
+
           this.props.onDispatchGetVoteBpsPost({...this.state.accountPri})
           this.props.getAccountInfo({...this.state.accountPri});
       }
@@ -199,7 +200,7 @@ class VotePage extends Component {
                                 return <View key = {index}
                                              style={styles.contentBodyBP}>
                                     <Text style={styles.contentBodyBPName}>
-                                        { votingC.owner }
+                                        {this.props.accountDic[votingC.owner] ? this.props.accountDic[votingC.owner].organization_name:votingC.owner}
                                     </Text>
                                     {/*<View style={styles.contentBodyBPDeleteContainer}>*/}
                                         {/*<TouchableHighlight id={index}*/}
@@ -359,6 +360,7 @@ function mapStateToProps(state) {
         CurrencyBalance: state.VoteIndexPageReducer.CurrencyBalance,
         BPs: state.VoteIndexPageReducer.BPs,
         selectedNodeList : state.NodeListPageReducer.selectedNodeList,
+        accountDic: state.VoteIndexPageReducer.accountDic,
 
         IsSubmitSuccess : state.VotePageReducer.IsSubmitSuccess,
         votingList: state.VotePageReducer.votingList,
