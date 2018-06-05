@@ -5,6 +5,8 @@
 const initState = {
     allAsset: [],
     accountName: "",
+    mainNetInfo:{domains:[]},
+    testNetInfo:{domains:[]},
 };
 export default function HomePageReducer (state = initState, action) {
     switch (action.type) {

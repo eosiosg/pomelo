@@ -80,8 +80,6 @@ class HomePage extends Component {
     const PleaseCancel = I18n.t( "HomePage PleaseCancel" );
 
 
-    console.log(this.props.mainNetInfo.domains.length)
-
     return (
         <SafeAreaView style={[{flex:1}]}>
           <View style={styles.bodyBox}>
