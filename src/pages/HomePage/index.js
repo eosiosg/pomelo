@@ -14,6 +14,8 @@ import { styles } from "./style";
 import { getEventEmitter, isSetLocalStorageAESKey } from "../../setup";
 import {ModalYNStyles as styleModal} from "../../style/style";
 
+const MAIN_NET_NAME = 'mainNetInfo';
+const TEST_NET_NAME = 'testNetInfo';
 
 class HomePage extends Component {
 
@@ -40,6 +42,7 @@ class HomePage extends Component {
           biometryType: null,
           needUpdate:false,
             netChosen:'',
+            showTestAlert:false,
         };
 
         fetch(getNetInfoURL).then((res)=>{
@@ -85,21 +88,21 @@ class HomePage extends Component {
           <View style={styles.bodyBox}>
             <ScrollView>
               <View style={{}}>
-                  <TouchableOpacity disable={this.props.mainNetInfo.domains.length} onPress={() => {this.checkNet('mainNetInfo')}}>
+                  <TouchableOpacity disable={this.props.mainNetInfo.chain_id} onPress={() => {this.setNet('mainNetInfo')}}>
                       <Icon
                           style={[ {
                               marginLeft: 10,
                           } ]}
                           name={this.state.netChosen == 'mainNetInfo' ? 'md-radio-button-on' : 'md-radio-button-off'}
                           size={33}
-                          color={!this.props.mainNetInfo.domains.length?'blue':'red'}>
+                          color={this.props.mainNetInfo.chain_id?'blue':'red'}>
                       </Icon>
                       <View style={{flex:1}}>
                           <Text>Main Net</Text>
                       </View>
                   </TouchableOpacity>
 
-                  <TouchableOpacity onPress={() => {this.checkNet('testNetInfo')}}>
+                  <TouchableOpacity onPress={() => {this.setNet('testNetInfo')}}>
                       <Icon
                           style={[ {
                               marginLeft: 10,
@@ -109,7 +112,7 @@ class HomePage extends Component {
                           color={'blue'}>
                       </Icon>
                       <View style={{flex:1}}>
-                          <Text>tesst Net</Text>
+                          <Text>Test Net</Text>
                       </View>
 
                   </TouchableOpacity>
@@ -192,6 +195,33 @@ class HomePage extends Component {
                   </View>
                 </View>
               </Modal>
+
+
+                <Modal animationType='slide'
+                       transparent={true}
+                       onShow={() => {}}
+                       onRequestClose={() => {}}
+                       visible={this.state.showTestAlert} >
+                    <View style={styleModal.modalStyle}>
+                        <View style={styleModal.subView}>
+                            <Text style={styleModal.titleText}>dafasdf</Text>
+                            <Text style={styleModal.contentText}>afadsfadsfadsfasf</Text>
+                            <View style={styleModal.horizontalLine} />
+                            <View style={styleModal.buttonView}>
+                                <TouchableOpacity style={styleModal.buttonStyle} onPress={() => {this.setState({showTestAlert:false})}}>
+                                    <Text style={styleModal.buttonText}>cancel</Text>
+                                </TouchableOpacity>
+                                <View style={styleModal.verticalLine} />
+                                <TouchableOpacity style={styleModal.buttonStyle} onPress={() => {this.OpenVoteWeb()}}>
+                                    <Text style={styleModal.buttonText}>I will try</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
+
+
+
               <View style={{height : 80}}></View>
             </ScrollView>
             <TouchableOpacity style={styles.bottomContent} onPress={this.goSubmit}>
@@ -202,11 +232,32 @@ class HomePage extends Component {
       );
   }
 
-  checkNet = (netChosen) => {
+  setNet = (netChosen) => {
+      if(netChosen==MAIN_NET_NAME&&!this.props.mainNetInfo.chain_id){
+          Toast.show('Main net not online, try test net',{position:30})
+          return
+      }
+      let useTestNet = false;
+      if(netChosen==TEST_NET_NAME){
+          useTestNet = true
+      }
       this.setState({
           netChosen,
+          showTestAlert : useTestNet
       })
   }
+
+    OpenUpdateUrl = () => {
+        this.setState({
+            showTestAlert : false
+        })
+        Linking.canOpenURL(this.downLoadUrl).then(supported => {
+            supported ? Linking.openURL(this.downLoadUrl) : '';
+        }).catch(err => {
+            console.log(err);
+        });
+    };
+
 
   isNeedInputPassword = () => {
     if (!isSetLocalStorageAESKey()) {
@@ -237,9 +288,9 @@ class HomePage extends Component {
   };
 
   // 打开升级更新链接
-  OpenUpdateUrl = () => {
+  OpenVoteWeb = () => {
     Linking.canOpenURL(this.downLoadUrl).then(supported => {
-      supported ? Linking.openURL(this.downLoadUrl) : console.log("不支持下载更新");
+      supported ? Linking.openURL('http://vote.eosio.sg/') : '';
     }).catch(err => {
       console.log(err);
     });
@@ -281,7 +332,6 @@ class HomePage extends Component {
 
   //submit wallet data
   goSubmit = () =>{
-      console.log('aaaaaaaaaaaaaaa');
       if(!this.state.netChosen){
           Toast.show('Please selet net',{position:30})
           return
@@ -298,11 +348,8 @@ class HomePage extends Component {
       return;
     }
 
-    console.log(this.state.netChosen);
-      console.log('above is net chosen');
 
       let whichNet = this.state.netChosen;
-      console.log(this.props[whichNet]);
     if(!this.props[whichNet]){
         return
     }
