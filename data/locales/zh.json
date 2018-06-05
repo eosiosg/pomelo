@@ -74,6 +74,10 @@
   "HomePage NoAccountFound" : "没有找到相关账户",
   "HomePage SomethingWrong" : "网络错误",
   "HomePage InvalidPrivateKey" : "无效的私钥",
+  "HomePage Testnet Dialog Title" : "友情提示",
+  "HomePage Testnet Dialog Desc" : "请使用我们的测试网站http://vote.eosio.sg生成一个测试用的私钥",
+  "HomePage Testnet Dialog Cancel" : "关闭",
+  "HomePage Testnet Dialog OK" : "继续",
 
   "WalletPage changeWallet": "更换账户",
   "WalletPage totalAssets": "总余额",

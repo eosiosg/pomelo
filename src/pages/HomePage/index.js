@@ -204,16 +204,16 @@ class HomePage extends Component {
                        visible={this.state.showTestAlert} >
                     <View style={styleModal.modalStyle}>
                         <View style={styleModal.subView}>
-                            <Text style={styleModal.titleText}>dafasdf</Text>
-                            <Text style={styleModal.contentText}>afadsfadsfadsfasf</Text>
+                            <Text style={styleModal.titleText}>{I18n.t("HomePage Testnet Dialog Title")}</Text>
+                            <Text style={styleModal.contentText}>{I18n.t("HomePage Testnet Dialog Desc")}</Text>
                             <View style={styleModal.horizontalLine} />
                             <View style={styleModal.buttonView}>
                                 <TouchableOpacity style={styleModal.buttonStyle} onPress={() => {this.setState({showTestAlert:false})}}>
-                                    <Text style={styleModal.buttonText}>cancel</Text>
+                                    <Text style={styleModal.buttonText}>{I18n.t("HomePage Testnet Dialog Cancel")}</Text>
                                 </TouchableOpacity>
                                 <View style={styleModal.verticalLine} />
                                 <TouchableOpacity style={styleModal.buttonStyle} onPress={() => {this.OpenVoteWeb()}}>
-                                    <Text style={styleModal.buttonText}>I will try</Text>
+                                    <Text style={styleModal.buttonText}>{I18n.t("HomePage Testnet Dialog OK")}</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
