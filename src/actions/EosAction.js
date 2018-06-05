@@ -1,26 +1,47 @@
 import { chainId } from '../../config/configParams';
-let nodeAddress = '';
+let nodeAddress = 'http://13.251.3.82:8888';
+import { storage } from "../utils/storage";
+import { put, call} from "redux-saga/effects";
+
+
 
 import { nodeAddressList as nodes } from '../../config/configParams';
 let nodeAddressList = [].concat(nodes);
-nodeAddressList.sort(function(a, b){return 0.5 - Math.random()});
 
-nodeAddress = nodeAddressList[0];
 
-export function GetEOS( accountPrivateKey ) {
+async function getConfig(accountPrivateKey){
+
+    console.log('===========: get storage');
+    let config = await storage.load({key: "HomePageNetStorage"}).then( ( ret ) => {
+        if ( ret ) {
+            console.log('===========: ', ret);
+            if ( ret && ret.netURL ) {
+                return {
+                    keyProvider: accountPrivateKey, // WIF string or array of keys..
+                    httpEndpoint: ret.netURL,
+                    expireInSeconds: 60,
+                    broadcast: true,
+                    debug: false,
+                    sign: true,
+                    chainId: ret.chain_id,
+                };
+
+            }
+        }
+    }).catch( err => {
+        console.log(err);
+    });
+    return config
+}
+
+export async function GetEOS( accountPrivateKey ) {
+
     try {
-    const Eos = require( 'eosjs' );
-    const config = {
-      keyProvider: accountPrivateKey, // WIF string or array of keys..
-      httpEndpoint: nodeAddress,
-      expireInSeconds: 60,
-      broadcast: true,
-      debug: false,
-      sign: true,
-      chainId: chainId,
-    };
-    let eos = Eos.Testnet( config );
-    return eos;
+        const Eos = require( 'eosjs' );
+        let config = await getConfig(accountPrivateKey);
+        let eos = Eos.Testnet( config );
+        return eos;
+
   } catch ( error ) {
     return null;
   }

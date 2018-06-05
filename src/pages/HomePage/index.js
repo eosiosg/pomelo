@@ -1,18 +1,19 @@
 // 引入公共组件
 import React, { Component } from "react";
 import {connect} from "react-redux";
-import { ScrollView, View, Text, TextInput, Image, TouchableOpacity, Dimensions, Modal, CheckBox, AlertIOS, SafeAreaView, Linking } from "react-native";
+import { ScrollView, View, Text, TextInput, Image, TouchableOpacity, Dimensions, Modal, AlertIOS, SafeAreaView, Linking, Switch } from "react-native";
 import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 import Toast from "react-native-root-toast";
+import Icon from "react-native-vector-icons/Ionicons";
 import I18n from "../../../I18n";
 var compareVersions = require('compare-versions');
-import  { updatingDetectURL } from '../../../config/configParams' ;
-
+import  { updatingDetectURL, versionNumber, getNetInfoURL } from '../../../config/configParams' ;
+import { Radio} from 'antd-mobile';
 // 自定义组件
 import { styles } from "./style";
 import { getEventEmitter, isSetLocalStorageAESKey } from "../../setup";
 import {ModalYNStyles as styleModal} from "../../style/style";
-import {versionNumber} from '../../../config/configParams';
+
 
 class HomePage extends Component {
 
@@ -31,13 +32,23 @@ class HomePage extends Component {
           TextInputAutoFocus : true,
           name : "",
           key : "" ,
+          whichNet:"",
           show : false,
           ItemData :[],
           accountPrivateKey : "",
           walletValue : "",
           biometryType: null,
           needUpdate:false,
+            netChosen:'',
         };
+
+        fetch(getNetInfoURL).then((res)=>{
+            return res.json()
+        }).then((res)=>{
+            this.props.onDispatchMainNetInfo(res);
+        }).catch(err=>{
+            console.log('err',err);
+        })
     }
 
   componentWillReceiveProps( nextProps ) {
@@ -49,14 +60,15 @@ class HomePage extends Component {
   }
 
   componentWillMount() {
-    this.isNeedInputPassword();
-
+        this.isNeedInputPassword();
       getEventEmitter().on('checkPasswordSuccess', () => {
           this.isNeedUpdate();
           this.isHadImportPrivateKey();
       });
   }
-  componentDidMount() {}
+  componentDidMount() {
+
+  }
 
   render() {
     const privateKeyIntl = I18n.t( "HomePage privateKey" );
@@ -67,10 +79,44 @@ class HomePage extends Component {
     const PleaseSure = I18n.t( "HomePage PleaseSure" );
     const PleaseCancel = I18n.t( "HomePage PleaseCancel" );
 
+
+    console.log(this.props.mainNetInfo.domains.length)
+
     return (
         <SafeAreaView style={[{flex:1}]}>
           <View style={styles.bodyBox}>
             <ScrollView>
+              <View style={{}}>
+                  <TouchableOpacity disable={this.props.mainNetInfo.domains.length} onPress={() => {this.checkNet('mainNetInfo')}}>
+                      <Icon
+                          style={[ {
+                              marginLeft: 10,
+                          } ]}
+                          name={this.state.netChosen == 'mainNetInfo' ? 'md-radio-button-on' : 'md-radio-button-off'}
+                          size={33}
+                          color={!this.props.mainNetInfo.domains.length?'blue':'red'}>
+                      </Icon>
+                      <View style={{flex:1}}>
+                          <Text>Main Net</Text>
+                      </View>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity onPress={() => {this.checkNet('testNetInfo')}}>
+                      <Icon
+                          style={[ {
+                              marginLeft: 10,
+                          } ]}
+                          name={this.state.netChosen == 'testNetInfo' ? 'md-radio-button-on' : 'md-radio-button-off'}
+                          size={33}
+                          color={'blue'}>
+                      </Icon>
+                      <View style={{flex:1}}>
+                          <Text>tesst Net</Text>
+                      </View>
+
+                  </TouchableOpacity>
+
+              </View>
               <View>
                 <Text style={styles.contentBoxTitle}>{privateKeyIntl}</Text>
                 <TextInput
@@ -158,6 +204,12 @@ class HomePage extends Component {
       );
   }
 
+  checkNet = (netChosen) => {
+      this.setState({
+          netChosen,
+      })
+  }
+
   isNeedInputPassword = () => {
     if (!isSetLocalStorageAESKey()) {
       this.props.navigation.navigate("PasswordInputPage")
@@ -219,16 +271,24 @@ class HomePage extends Component {
     storage.save({
       key: 'HomePageStorage',
       data: encryptObjectToString({
+          netChosen:this.state.netChosen,
         accountName: data,
         accountPrivateKey: this.state.key,
       }),
     }).then(() => {
+
       this.props.navigation.navigate("VoteIndexPage");
     });
   };
 
   //submit wallet data
   goSubmit = () =>{
+      console.log('aaaaaaaaaaaaaaa');
+      if(!this.state.netChosen){
+          Toast.show('Please selet net',{position:30})
+          return
+      }
+
     this.setState({
       ItemData : []
     });
@@ -239,6 +299,23 @@ class HomePage extends Component {
       });
       return;
     }
+
+    console.log(this.state.netChosen);
+      console.log('above is net chosen');
+
+      let whichNet = this.state.netChosen;
+      console.log(this.props[whichNet]);
+    if(!this.props[whichNet]){
+        return
+    }
+    let url = getUrl(this.props[whichNet]['domains']);
+    storage.save({
+          key: 'HomePageNetStorage',
+          data: {
+              chain_id: this.props[whichNet]['chain_id'],
+              netURL: url
+          }
+      })
 
     this.props.onDispatchGetAccountNames(this.state.key);
   };
@@ -253,10 +330,13 @@ class HomePage extends Component {
 
 }
 
+
+
 // 挂载中间件到组件；
 function mapDispatchToProps(dispatch) {
     return {
         onDispatchGetAccountNames: (data) => dispatch({ type: "HOME_ACCOUNT_NAME" ,data}),
+        onDispatchMainNetInfo: (data) => dispatch({ type: "HOME_MAINNETINFO_REDUCER" ,data}),
 
     };
 }
@@ -264,7 +344,27 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
     return {
       accountNames: state.HomePageReducer.accountNames,
+      mainNetInfo: state.HomePageReducer.mainNetInfo,
+      testNetInfo: state.HomePageReducer.testNetInfo,
     };
 }
 
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+
+
+
+
+const getUrl = (nodeAddressList) => {
+    nodeAddressList.sort(function(a, b){return 0.5 - Math.random()});
+    return  nodeAddressList[0]
+}
+
+
+// "plugins": [
+//     ["import", {
+//         "style" : "css",
+//         "libraryName": "antd-mobile"
+//     }]
+// ]

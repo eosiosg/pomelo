@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@tradle/react-native-http": "^2.0.0",
+    "antd-mobile": "^2.1.11",
     "assert": "^1.4.1",
     "browserify-zlib": "^0.1.4",
     "buffer": "^4.9.1",
@@ -43,6 +44,7 @@
     "punycode": "^1.4.1",
     "querystring-es3": "^0.2.1",
     "react": "16.3.1",
+    "react-dom": "^16.4.0",
     "react-intl": "^2.4.0",
     "react-native": "~0.55.2",
     "react-native-crypto": "^2.1.2",

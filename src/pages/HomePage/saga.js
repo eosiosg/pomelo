@@ -27,17 +27,19 @@ export function* getHomeAccountName (action) {
       });
   }
 }
-function getAccountName(data) {
+async function getAccountName(privateKey) {
   let {ecc} = Eos.modules;
-    let isValidPrivateKey = ecc.isValidPrivate(data);
+    let isValidPrivateKey = ecc.isValidPrivate(privateKey);
     if(!isValidPrivateKey){
         Toast.show(invalidPriKey,{
             position: 200,
         });
       return false
     }
-  let accountPublicKey = ecc.privateToPublic(data);
-  const eos = GetEOS(data);
+  let accountPublicKey = ecc.privateToPublic(privateKey);
+
+  const eos = await GetEOS(privateKey);
+
   return eos.getKeyAccounts( {'public_key':accountPublicKey} ).then(( result ,error ) => {
       return result;
   }).catch(err=>{

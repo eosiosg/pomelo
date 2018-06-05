@@ -20,6 +20,13 @@ export default function HomePageReducer (state = initState, action) {
         return Object.assign({}, state, {
             "accountNames": action.data
         });
+    case "HOME_MAINNETINFO_REDUCER":
+        console.log('main net info');
+        console.log(action.data);
+        return Object.assign({}, state, {
+            mainNetInfo : action.data[0],
+            testNetInfo : action.data[1]
+        });
     default:
         return state;
     }

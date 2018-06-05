@@ -8,8 +8,8 @@ export function* getUnDelegatebwPageAccountPost(action) {
     yield put({ type: "UNDELEGATEBW_SETACCOUNTINFO_REDUCER", data: response });
   } catch (err) {}
 }
-function getAccount(action) {
-  const eos = GetEOS(action.data.accountPrivateKey);
+async function getAccount(action) {
+  const eos = await GetEOS(action.data.accountPrivateKey);
   return eos.getAccount( { 'account_name': action.data.accountName } ).then( result => result );
 }
 
@@ -27,8 +27,8 @@ export function* getUnDelegatebwPageConfirmPost (action) {
       yield put({type:"UNDELEGATE_FAIL_REDUCER"});
   }
 }
-function undelegatebw(action) {
-  const eos = GetEOS(action.accountPrivateKey);
+async function undelegatebw(action) {
+  const eos = await GetEOS(action.accountPrivateKey);
   return eos.transaction( tr => {
     tr.undelegatebw(action.data);
   } ).then( function ( result ) {

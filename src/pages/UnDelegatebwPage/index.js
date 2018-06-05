@@ -173,6 +173,7 @@ class UnDelegatebwPage extends Component {
           unstake_cpu_quantity: Number(this.state.CPU) + " EOS",
         };
         const nav = this.props.navigation;
+
         this.props.onDispatchUnDelegateBwPost(data, nav, accountPrivateKey);
       }
     }).catch( err => {

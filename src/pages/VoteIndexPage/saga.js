@@ -16,8 +16,8 @@ export function* getVoteIndexPageAccountInfoPost(action) {
     } catch (err) {}
 }
 
-function getAccountByEos(action) {
-  const eos = GetEOS(action.data.accountPrivateKey);
+async function getAccountByEos(action) {
+  const eos = await GetEOS(action.data.accountPrivateKey);
   return eos.getAccount( { 'account_name': action.data.accountName } ).then(( result ) => {
       return result;
     });
@@ -31,9 +31,11 @@ export function* getVoteIndexPageCurrencyBalancePost (action) {
     yield put({ type: "VOTEINDEX_SETCURRENCYBALANCE_REDUCER", data: response });
   } catch (err) {}
 }
-function getCurrencyBalance(action) {
-  const eos = GetEOS(action.data.accountPrivateKey);
+async function getCurrencyBalance(action) {
+  const eos = await GetEOS(action.data.accountPrivateKey);
+  console.log('aaaaaaa currency', action.data.accountName, eos)
   return eos.getCurrencyBalance( { "code": "eosio.token", "account": action.data.accountName }).then(( res ) => {
+      console.log('!!!!!: ',res)
       if(!res){
         return 0
       }else if(!res.length){
@@ -53,8 +55,8 @@ export function* getVoteIndexPageRefundsPost (action) {
 
   }
 }
-function getRefunds(action) {
-  const eos = GetEOS(action.data.accountPrivateKey);
+async function getRefunds(action) {
+  const eos = await GetEOS(action.data.accountPrivateKey);
   return eos.getTableRows({
     'json': true,
     'code': 'eosio',
@@ -77,17 +79,18 @@ export function* getVoteIndexPageBpsPost (action) {
   try {
     const response = yield call(getBps, action);
     BPS = response.rows;
-      yield put({ type: "VOTEINDEX_GETBPS_SUCCESS_REDUCER", total_producer_vote_weight:response.total_producer_vote_weight});
 
+      yield put({ type: "VOTEINDEX_GETBPS_SUCCESS_REDUCER", total_producer_vote_weight:response.total_producer_vote_weight});
       if(BPS&&contributors){
           let data = sortBPS();
           yield put({ type: "VOTEINDEX_SETBPS_SUCCESS_REDUCER", data });
       }
   } catch (err) {}
 }
-function getBps(action) {
-  const eos = GetEOS(action.data.accountPrivateKey);
+async function getBps(action) {
+  const eos = await GetEOS(action.data.accountPrivateKey);
   return eos.getProducers( { json: true } ).then( result => {
+      console.log('get bps !!! : ', result)
       return result;
   } );
 }
@@ -164,6 +167,8 @@ function sortBPS(){
     let normalBPS = [];
     let contributorBPS = [];
     let tmpDic = {};
+
+
     BPS.map((bp)=>{
         if(contributors.indexOf(bp.owner) !== -1 ){
             tmpDic[bp.owner] = bp;
@@ -173,10 +178,11 @@ function sortBPS(){
     });
 
     contributors.map((c)=>{
-        contributorBPS.push(tmpDic[c])
+        tmpDic[c]&&contributorBPS.push(tmpDic[c])
     })
 
     sortedBPS = contributorBPS.concat(normalBPS);
+
     return sortedBPS
 
 }

@@ -19,8 +19,8 @@ export function* postVotingList(action) {
     }
 }
 
-function voteProducers(account = {}, producers = ['eosiomeetone']) {
-    let eos = GetEOS(account.accountPrivateKey);
+async function voteProducers(account = {}, producers = ['eosiomeetone']) {
+    let eos = await GetEOS(account.accountPrivateKey);
     return eos.voteproducer( {
         voter: account.accountName,
         proxy: '',
