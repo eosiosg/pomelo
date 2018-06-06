@@ -2,9 +2,14 @@
  * HomeReducer
  *
  */
+
+import {MAIN_NET_NAME, TEST_NET_NAME} from './index';
+
+
 const initState = {
     allAsset: [],
     accountName: "",
+    accountNames: [],
     mainNetInfo:{domains:[]},
     testNetInfo:{domains:[]},
 };
@@ -19,15 +24,21 @@ export default function HomePageReducer (state = initState, action) {
             "accountName": action.data
         });
     case "HOME_SETACCOUNTNAMES_REDUCER":
+        console.log('acount name:', action.data)
         return Object.assign({}, state, {
-            "accountNames": action.data
+            "accountNames": action.data.account_names
         });
+    case "HOME_DELACCOUNTNAMES_REDUCER":
+        return Object.assign({}, state, {
+            "accountNames": []
+        });
+
     case "HOME_MAINNETINFO_REDUCER":
-        console.log('main net info');
-        console.log(action.data);
+        let defaultNet = action.data[0].chain_id?MAIN_NET_NAME:TEST_NET_NAME;
         return Object.assign({}, state, {
             mainNetInfo : action.data[0],
-            testNetInfo : action.data[1]
+            testNetInfo : action.data[1],
+            defaultNet
         });
     default:
         return state;

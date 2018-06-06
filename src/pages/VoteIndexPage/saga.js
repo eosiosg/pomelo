@@ -33,9 +33,7 @@ export function* getVoteIndexPageCurrencyBalancePost (action) {
 }
 async function getCurrencyBalance(action) {
   const eos = await GetEOS(action.data.accountPrivateKey);
-  console.log('aaaaaaa currency', action.data.accountName, eos)
   return eos.getCurrencyBalance( { "code": "eosio.token", "account": action.data.accountName }).then(( res ) => {
-      console.log('!!!!!: ',res)
       if(!res){
         return 0
       }else if(!res.length){
@@ -90,7 +88,6 @@ export function* getVoteIndexPageBpsPost (action) {
 async function getBps(action) {
   const eos = await GetEOS(action.data.accountPrivateKey);
   return eos.getProducers( { json: true } ).then( result => {
-      console.log('get bps !!! : ', result)
       return result;
   } );
 }

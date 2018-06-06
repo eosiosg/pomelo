@@ -14,8 +14,12 @@ import { styles } from "./style";
 import { getEventEmitter, isSetLocalStorageAESKey } from "../../setup";
 import {ModalYNStyles as styleModal} from "../../style/style";
 
-const MAIN_NET_NAME = 'mainNetInfo';
-const TEST_NET_NAME = 'testNetInfo';
+
+const MAINNET = require('../../images/mainnet.png');
+const TESTNET = require('../../images/testnet.png');
+
+export const MAIN_NET_NAME = 'mainNetInfo';
+export const TEST_NET_NAME = 'testNetInfo';
 
 class HomePage extends Component {
 
@@ -24,6 +28,8 @@ class HomePage extends Component {
       const { state, setParams } = navigation;
       const { params } = state;
       return {
+
+          headerLeft:null,
           title: I18n.t( "HomePage importWallet" ),
       };
   };
@@ -33,8 +39,6 @@ class HomePage extends Component {
         this.state = {
           TextInputAutoFocus : true,
           name : "",
-          key : "" ,
-          whichNet:"",
           show : false,
           ItemData :[],
           accountPrivateKey : "",
@@ -45,25 +49,25 @@ class HomePage extends Component {
             showTestAlert:false,
         };
 
-        fetch(getNetInfoURL).then((res)=>{
-            return res.json()
-        }).then((res)=>{
-            this.props.onDispatchMainNetInfo(res);
-        }).catch(err=>{
-            console.log('err',err);
-        })
+      fetch(getNetInfoURL).then((res)=>{
+          return res.json()
+      }).then((res)=>{
+          this.props.onDispatchMainNetInfo(res);
+      }).catch(err=>{
+          console.log('err',err);
+      })
     }
 
   componentWillReceiveProps( nextProps ) {
-   if(nextProps.accountNames){
+   if(nextProps.defaultNet){
      this.setState({
-       ItemData :  nextProps.accountNames.account_names
+         netChosen :  nextProps.defaultNet
      })
    }
   }
 
   componentWillMount() {
-        this.isNeedInputPassword();
+      this.isNeedInputPassword();
       getEventEmitter().on('checkPasswordSuccess', () => {
           this.isNeedUpdate();
           this.isHadImportPrivateKey();
@@ -82,69 +86,67 @@ class HomePage extends Component {
     const PleaseSure = I18n.t( "HomePage PleaseSure" );
     const PleaseCancel = I18n.t( "HomePage PleaseCancel" );
 
-
     return (
         <SafeAreaView style={[{flex:1}]}>
           <View style={styles.bodyBox}>
             <ScrollView>
-              <View style={{}}>
-                  <TouchableOpacity disable={this.props.mainNetInfo.chain_id} onPress={() => {this.setNet('mainNetInfo')}}>
-                      <Icon
-                          style={[ {
-                              marginLeft: 10,
-                          } ]}
-                          name={this.state.netChosen == 'mainNetInfo' ? 'md-radio-button-on' : 'md-radio-button-off'}
-                          size={33}
-                          color={this.props.mainNetInfo.chain_id?'blue':'red'}>
-                      </Icon>
-                      <View style={{flex:1}}>
-                          <Text>Main Net</Text>
-                      </View>
-                  </TouchableOpacity>
+              <View style={styles.netContainer}>]
+                      <TouchableOpacity style={[styles.netButtonContainer,{borderWidth:this.state.netChosen == 'mainNetInfo'?1:0}]}
+                                        disable={this.props.mainNetInfo.chain_id}
+                                        onPress={() => {this.setNet('mainNetInfo')}}>
+                          <View style={styles.netNameContainer}>
+                              <Text style={styles.netName}>{this.props.mainNetInfo.name}</Text>
+                          </View>
+                          <View style={styles.netImageContainer}>
+                              <Image source={MAINNET}  style={styles.netImg}/>
+                          </View>
+                      </TouchableOpacity>
 
-                  <TouchableOpacity onPress={() => {this.setNet('testNetInfo')}}>
-                      <Icon
-                          style={[ {
-                              marginLeft: 10,
-                          } ]}
-                          name={this.state.netChosen == 'testNetInfo' ? 'md-radio-button-on' : 'md-radio-button-off'}
-                          size={33}
-                          color={'blue'}>
-                      </Icon>
-                      <View style={{flex:1}}>
-                          <Text>Test Net</Text>
-                      </View>
-
-                  </TouchableOpacity>
+                      <TouchableOpacity style={[styles.netButtonContainer,{marginLeft:10},{borderWidth:this.state.netChosen == 'testNetInfo'?1:0}]}
+                                        onPress={() => {this.setNet('testNetInfo')}}>
+                          <View style={styles.netNameContainer} >
+                              <Text style={styles.netName}>{this.props.testNetInfo.name}</Text>
+                          </View>
+                          <View style={styles.netImageContainer}>
+                              <Image source={TESTNET}  style={styles.netImg}/>
+                          </View>
+                      </TouchableOpacity>
 
               </View>
+
+
               <View>
                 <Text style={styles.contentBoxTitle}>{privateKeyIntl}</Text>
                 <TextInput
                   style={styles.conItemTextInput}
                   placeholder={Hint}
                   placeholderTextColor={"#999"}
-                  onChangeText={(key) => this.setState({key})}
+                  onChangeText={(accountPrivateKey) => this.setState({accountPrivateKey})}
+                  value={this.state.accountPrivateKey}
                   underlineColorAndroid={"transparent"}
                 />
               </View>
-              <View  style={{display : this.state.ItemData.length > 0 ? "flex" : "none"}}>
-                <Text style={styles.contentItemTitle}>{choiceAccountIntl}</Text>
-                <View style={styles.contentItemBox}>
-                  {this.state.ItemData.map((v , i) => (
-                  <TouchableOpacity onPress={() => {this.goWallet(v)}}  key={ i}>
-                    <View style={styles.contentItem} >
-                      <Text  style={styles.contentItemText} >
-                        {v|| ""}
-                      </Text>
-                      <View>
-                          <Image source={require("./image/arrow-right-account.png")}  style={styles.contentBoxImg}/>
-                      </View>
+
+                {
+                    this.props.accountNames&&<View  style={{display : this.props.accountNames.length > 0 ? "flex" : "none"}}>
+                        <Text style={styles.contentItemTitle}>{choiceAccountIntl}</Text>
+                        <View style={styles.contentItemBox}>
+                            {this.props.accountNames.map((v , i) => (
+                                <TouchableOpacity onPress={() => {this.goWallet(v)}}  key={ i}>
+                                    <View style={styles.contentItem} >
+                                        <Text  style={styles.contentItemText} >
+                                            {v||""}
+                                        </Text>
+                                        <View>
+                                            <Image source={require("./image/arrow-right-account.png")}  style={styles.contentBoxImg}/>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                            ))}
+                        </View>
                     </View>
-                  </TouchableOpacity>
-                  ))}
-                </View>
-              </View>
+                }
+
               <Modal
                 animationType='slide'
                 transparent={true}
@@ -177,6 +179,7 @@ class HomePage extends Component {
                   </View>
                 </View>
               </Modal>
+
               <Modal animationType='slide' transparent={true} visible={this.state.needUpdate} onShow={() => {}} onRequestClose={() => {}} >
                 <View style={styleModal.modalStyle}>
                   <View style={styleModal.subView}>
@@ -220,8 +223,6 @@ class HomePage extends Component {
                     </View>
                 </Modal>
 
-
-
               <View style={{height : 80}}></View>
             </ScrollView>
             <TouchableOpacity style={styles.bottomContent} onPress={this.goSubmit}>
@@ -234,16 +235,22 @@ class HomePage extends Component {
 
   setNet = (netChosen) => {
       if(netChosen==MAIN_NET_NAME&&!this.props.mainNetInfo.chain_id){
-          Toast.show('Main net not online, try test net',{position:30})
+          Toast.show('Main net is not ready, try Testnet',{position:30})
           return
       }
-      let useTestNet = false;
+      let clickTestNet = false;
       if(netChosen==TEST_NET_NAME){
-          useTestNet = true
+          clickTestNet = true
+      }
+      let currentNet = this.state.netChosen;
+      if(netChosen !== currentNet){
+          console.log('change net');
+          this.props.onDispatchDelAccountNames();
       }
       this.setState({
           netChosen,
-          showTestAlert : useTestNet
+          accountPrivateKey:'',
+          showTestAlert : clickTestNet
       })
   }
 
@@ -289,7 +296,7 @@ class HomePage extends Component {
 
   // 打开升级更新链接
   OpenVoteWeb = () => {
-    Linking.canOpenURL(this.downLoadUrl).then(supported => {
+    Linking.canOpenURL('http://vote.eosio.sg/').then(supported => {
       supported ? Linking.openURL('http://vote.eosio.sg/') : '';
     }).catch(err => {
       console.log(err);
@@ -304,7 +311,7 @@ class HomePage extends Component {
         if ( ret && ret.accountPrivateKey ) {
           //判断来自哪个页面的跳转
           if ( this.props.navigation.state.params ) {
-            this.setState( { key: "" } );
+            this.setState( { accountPrivateKey: "" } );
           } else {
             this.props.navigation.navigate( "VoteIndexPage" );
           }
@@ -322,10 +329,11 @@ class HomePage extends Component {
       data: encryptObjectToString({
           netChosen:this.state.netChosen,
         accountName: data,
-        accountPrivateKey: this.state.key,
+        accountPrivateKey: this.state.accountPrivateKey,
       }),
     }).then(() => {
-
+        // this.setState({ItemData:[]});
+        this.props.onDispatchDelAccountNames();
       this.props.navigation.navigate("VoteIndexPage");
     });
   };
@@ -333,23 +341,23 @@ class HomePage extends Component {
   //submit wallet data
   goSubmit = () =>{
       if(!this.state.netChosen){
-          Toast.show('Please selet net',{position:30})
+          Toast.show('Please choose the net to connect',{position:30})
           return
       }
 
-    this.setState({
-      ItemData : []
-    });
+    // this.setState({
+    //   ItemData : []
+    // });
+      this.props.onDispatchDelAccountNames();
 
-    if (!this.state.key){
-      this.setState({
-        show : true
-      });
-      return;
-    }
+    // if (!this.state.accountPrivateKey){
+    //   this.setState({
+    //     show : true
+    //   });
+    //   return;
+    // }
 
-
-      let whichNet = this.state.netChosen;
+    let whichNet = this.state.netChosen;
     if(!this.props[whichNet]){
         return
     }
@@ -360,9 +368,9 @@ class HomePage extends Component {
               chain_id: this.props[whichNet]['chain_id'],
               netURL: url
           }
-      })
+    })
 
-    this.props.onDispatchGetAccountNames(this.state.key);
+    this.props.onDispatchGetAccountNames(this.state.accountPrivateKey);
   };
 
   //  modal
@@ -376,13 +384,12 @@ class HomePage extends Component {
 }
 
 
-
 // 挂载中间件到组件；
 function mapDispatchToProps(dispatch) {
     return {
         onDispatchGetAccountNames: (data) => dispatch({ type: "HOME_ACCOUNT_NAME" ,data}),
         onDispatchMainNetInfo: (data) => dispatch({ type: "HOME_MAINNETINFO_REDUCER" ,data}),
-
+        onDispatchDelAccountNames: () => dispatch({ type: "HOME_DELACCOUNTNAMES_REDUCER" }),
     };
 }
 
@@ -391,14 +398,12 @@ function mapStateToProps(state) {
       accountNames: state.HomePageReducer.accountNames,
       mainNetInfo: state.HomePageReducer.mainNetInfo,
       testNetInfo: state.HomePageReducer.testNetInfo,
+        defaultNet: state.HomePageReducer.defaultNet,
     };
 }
 
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
-
-
 
 
 const getUrl = (nodeAddressList) => {

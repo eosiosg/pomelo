@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     alignItems : "center",
   },
   contentBoxTitle :{
-    fontSize: 14,
+    fontSize: 16,
     color: "#323232",
     lineHeight: 25,
     paddingTop : 15,
@@ -28,6 +28,47 @@ const styles = StyleSheet.create({
     position: "relative",
     marginBottom: 15,
   },
+
+    netContainer:{
+        flex:1, flexDirection:'row',
+      paddingTop:13,
+        paddingBottom:10,
+        paddingLeft:12,
+        paddingRight:12,
+    },
+    netButtonContainer:{
+        flexDirection:'row',
+      flex:1,
+        backgroundColor:'#fff',
+        justifyContent: "space-between",
+      borderColor:'#000',
+        height:80,
+    },
+    netNameContainer:{
+        flexDirection:'row',
+        alignItems:'flex-end',
+        justifyContent:'flex-start',
+        paddingLeft:10,
+        paddingBottom:10,
+        flex:7,
+    },
+    netName:{
+      fontSize:18,
+    },
+    netImageContainer:{
+        flex:3,
+        justifyContent: 'center',
+        alignItems: 'center',
+        // alignItems:'stretch',
+        paddingBottom:15,
+        paddingTop:15,
+    },
+    netImg:{
+      flex:1,
+        resizeMode: 'contain',
+        // height:'100%',
+        // width:40,
+    },
   contentBoxImg :{
     height :20,
   },
