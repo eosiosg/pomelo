@@ -21,7 +21,6 @@
   "DelegatebwPage CPU": "CPU",
   "DelegatebwPage Network": "Network",
   "DelegatebwPage Rule": "规则*",
-
   "DelegatebwPage Rule1": "· 投票会使用一些你的CPU和Network资源",
   "DelegatebwPage Rule2": "· 投票产生的权重，会随着时间递减",
   "DelegatebwPage Rule3": "· 你可以在任何时候选择'赎回资源'，此项操作将会减少你给节点的投票，EOS将会在3天后退回你的账户",
@@ -78,6 +77,8 @@
   "HomePage Testnet Dialog Desc" : "请使用我们的测试网站http://vote.eosio.sg生成一个测试用的私钥",
   "HomePage Testnet Dialog Cancel" : "关闭",
   "HomePage Testnet Dialog OK" : "继续",
+  "HomePage Mainnet not ready" : "主网尚未就绪，请选择测试网络进行体验",
+  "HomePage Choose one net" : "请请选择一个网络进行连接",
 
   "WalletPage changeWallet": "更换账户",
   "WalletPage totalAssets": "总余额",
@@ -104,5 +105,4 @@
   "Password Clear" : "清除密码",
   "Password Invalid" : "两次输入的密码不一致",
   "Password Incorrect" : "密码错误"
-
 }

@@ -43,7 +43,7 @@ class HomePage extends Component {
           walletValue : "",
           biometryType: null,
           needUpdate:false,
-            netChosen:'',
+            netChosen:null,
             showTestAlert:false,
         };
 
@@ -56,13 +56,13 @@ class HomePage extends Component {
       })
     }
 
-  componentWillReceiveProps( nextProps ) {
-   if(nextProps.defaultNet){
-     this.setState({
-         netChosen :  nextProps.defaultNet
-     })
-   }
-  }
+  // componentWillReceiveProps( nextProps ) {
+  //  if(nextProps.defaultNet&&this.props.defaultNet!=nextProps.defaultNet){
+  //    this.setState({
+  //        netChosen :  nextProps.defaultNet
+  //    })
+  //  }
+  // }
 
   componentWillMount() {
       this.isNeedInputPassword();
@@ -84,14 +84,24 @@ class HomePage extends Component {
     const PleaseSure = I18n.t( "HomePage PleaseSure" );
     const PleaseCancel = I18n.t( "HomePage PleaseCancel" );
 
+    const getBorderWidth = (netName) => {
+        if(this.state.netChosen){
+            return netName == this.state.netChosen?1:0
+        }else if(this.props.defaultNet){
+            return this.props.defaultNet == netName?1:0
+        }else{
+            return 0
+        }
+    }
+
     return (
         <SafeAreaView style={[{flex:1}]}>
           <View style={styles.bodyBox}>
             <ScrollView>
               <View style={styles.netContainer}>
-                      <TouchableOpacity style={[styles.netButtonContainer,{borderWidth:this.state.netChosen == 'mainNetInfo'?1:0}]}
+                      <TouchableOpacity style={[styles.netButtonContainer,{borderWidth:getBorderWidth(MAIN_NET_NAME)}]}
                                         disable={this.props.mainNetInfo.chain_id}
-                                        onPress={() => {this.setNet('mainNetInfo')}}>
+                                        onPress={() => {this.setNet(MAIN_NET_NAME)}}>
                           <View style={styles.netNameContainer}>
                               <Text style={styles.netName}>{this.props.mainNetInfo.name}</Text>
                           </View>
@@ -100,8 +110,8 @@ class HomePage extends Component {
                           </View>
                       </TouchableOpacity>
 
-                      <TouchableOpacity style={[styles.netButtonContainer,{marginLeft:10},{borderWidth:this.state.netChosen == 'testNetInfo'?1:0}]}
-                                        onPress={() => {this.setNet('testNetInfo')}}>
+                      <TouchableOpacity style={[styles.netButtonContainer,{marginLeft:10},{borderWidth:getBorderWidth(TEST_NET_NAME)}]}
+                                        onPress={() => {this.setNet(TEST_NET_NAME)}}>
                           <View style={styles.netNameContainer} >
                               <Text style={styles.netName}>{this.props.testNetInfo.name}</Text>
                           </View>
@@ -246,6 +256,7 @@ class HomePage extends Component {
           accountPrivateKey = '';
           this.props.onDispatchDelAccountNames();
       }
+      console.log('aaadf',netChosen),
       this.setState({
           netChosen,
           accountPrivateKey,
@@ -340,7 +351,7 @@ class HomePage extends Component {
   //submit wallet data
   goSubmit = () =>{
       if(!this.state.netChosen){
-          Toast.show('Please choose the net to connect',{position:30})
+          Toast.show(I18n.t('HomePage Choose one net'),{position:30})
           return
       }
 
@@ -399,11 +410,3 @@ const getUrl = (nodeAddressList) => {
     nodeAddressList.sort(function(a, b){return 0.5 - Math.random()});
     return  nodeAddressList[0]
 }
-
-
-// "plugins": [
-//     ["import", {
-//         "style" : "css",
-//         "libraryName": "antd-mobile"
-//     }]
-// ]

@@ -39,7 +39,6 @@
   "UnDelegatebwPage Confirm": "Confirm",
   "UnDelegatebwPage Available": "Available",
 
-
   "VotePage account" : "Account",
   "VotePage vote" : "Vote",
   "VotePage vote_success" : "Successful",
@@ -58,8 +57,6 @@
   "VotePage Rule1": "· Vote will use a little CPU + Network stake;",
   "VotePage Rule2": "· The voting weight will decrease over time;",
   "VotePage Rule3": "· Could Undelegate Bandwidth anytime，which will deduct corresponding votes from voted producers, and EOS will refund to account 3 days later;",
-
-
 
   "Producers List Title" : "Producers List",
   "Producers List Vote" : "Vote",
@@ -80,7 +77,8 @@
   "HomePage Testnet Dialog Desc" : "Please use our testnet portal http://vote.eosio.sg to generate a testing private key.",
   "HomePage Testnet Dialog Cancel" : "Close",
   "HomePage Testnet Dialog OK" : "Continue",
-  "HomePage Mainnet not ready" : "Main net is not ready, pls try Testnet",
+  "HomePage Mainnet not ready" : "Main net is not ready, please try Testnet",
+  "HomePage Choose one net" : "Please choose one Net to connect",
 
   "WalletPage changeWallet" : "Change Wallet",
   "WalletPage totalAssets" : "Total Assets",

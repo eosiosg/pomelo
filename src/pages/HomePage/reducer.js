@@ -10,6 +10,7 @@ const initState = {
     allAsset: [],
     accountName: "",
     accountNames: [],
+    defaultNet:"",
     mainNetInfo:{domains:[]},
     testNetInfo:{domains:[]},
 };
