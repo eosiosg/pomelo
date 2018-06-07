@@ -1,1 +1,1 @@
-react-native run-android --variant=release
+react-native run-android

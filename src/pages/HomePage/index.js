@@ -4,11 +4,9 @@ import {connect} from "react-redux";
 import { ScrollView, View, Text, TextInput, Image, TouchableOpacity, Dimensions, Modal, AlertIOS, SafeAreaView, Linking, Switch } from "react-native";
 import { decryptObject, encryptObjectToString, storage } from "../../utils/storage";
 import Toast from "react-native-root-toast";
-import Icon from "react-native-vector-icons/Ionicons";
 import I18n from "../../../I18n";
 var compareVersions = require('compare-versions');
 import  { updatingDetectURL, versionNumber, getNetInfoURL } from '../../../config/configParams' ;
-import { Radio} from 'antd-mobile';
 // 自定义组件
 import { styles } from "./style";
 import { getEventEmitter, isSetLocalStorageAESKey } from "../../setup";
@@ -90,7 +88,7 @@ class HomePage extends Component {
         <SafeAreaView style={[{flex:1}]}>
           <View style={styles.bodyBox}>
             <ScrollView>
-              <View style={styles.netContainer}>]
+              <View style={styles.netContainer}>
                       <TouchableOpacity style={[styles.netButtonContainer,{borderWidth:this.state.netChosen == 'mainNetInfo'?1:0}]}
                                         disable={this.props.mainNetInfo.chain_id}
                                         onPress={() => {this.setNet('mainNetInfo')}}>
@@ -235,7 +233,7 @@ class HomePage extends Component {
 
   setNet = (netChosen) => {
       if(netChosen==MAIN_NET_NAME&&!this.props.mainNetInfo.chain_id){
-          Toast.show('Main net is not ready, try Testnet',{position:30})
+          Toast.show(I18n.t('HomePage Mainnet not ready'),{position:30})
           return
       }
       let clickTestNet = false;
@@ -243,13 +241,14 @@ class HomePage extends Component {
           clickTestNet = true
       }
       let currentNet = this.state.netChosen;
+      var accountPrivateKey = this.state.accountPrivateKey;
       if(netChosen !== currentNet){
-          console.log('change net');
+          accountPrivateKey = '';
           this.props.onDispatchDelAccountNames();
       }
       this.setState({
           netChosen,
-          accountPrivateKey:'',
+          accountPrivateKey,
           showTestAlert : clickTestNet
       })
   }
@@ -345,17 +344,7 @@ class HomePage extends Component {
           return
       }
 
-    // this.setState({
-    //   ItemData : []
-    // });
       this.props.onDispatchDelAccountNames();
-
-    // if (!this.state.accountPrivateKey){
-    //   this.setState({
-    //     show : true
-    //   });
-    //   return;
-    // }
 
     let whichNet = this.state.netChosen;
     if(!this.props[whichNet]){

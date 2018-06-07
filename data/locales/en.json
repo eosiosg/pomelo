@@ -80,6 +80,7 @@
   "HomePage Testnet Dialog Desc" : "Please use our testnet portal http://vote.eosio.sg to generate a testing private key.",
   "HomePage Testnet Dialog Cancel" : "Close",
   "HomePage Testnet Dialog OK" : "Continue",
+  "HomePage Mainnet not ready" : "Main net is not ready, pls try Testnet",
 
   "WalletPage changeWallet" : "Change Wallet",
   "WalletPage totalAssets" : "Total Assets",
