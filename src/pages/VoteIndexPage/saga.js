@@ -48,15 +48,14 @@ async function getCurrencyBalance(action) {
 export function* getVoteIndexPageRefundsPost (action) {
   try {
     const response = yield call(getRefunds, action);
-    console.log('-------------------')
-    console.log(response);
+
+    // let response = {refunds: 0, request_time: null, refundMoneyDetail: {cpu:0,net:0}};
     yield put({ type: "VOTEINDEX_SETREFUNDS_REDUCER", data: response });
   } catch (err) {
-
+      err => err
   }
 }
 async function getRefunds(action) {
-    console.log('!!!!! refunds!!!!')
   const eos = await GetEOS(action.data.accountPrivateKey);
   return eos.getTableRows({
     'json': true,
@@ -71,7 +70,9 @@ async function getRefunds(action) {
     const request_time = result.rows[0] ? result.rows[0].request_time : null;
     return { refunds, request_time, refundMoneyDetail };
   }).catch(
-      err=>err
+      err=>{
+          console.log(err);
+      }
   );
 }
 
@@ -90,9 +91,8 @@ export function* getVoteIndexPageBpsPost (action) {
 }
 async function getBps(action) {
   const eos = await GetEOS(action.data.accountPrivateKey);
-  return eos.getProducers( { json: true, limit:5 } ).then( result => {
-      console.log("bps")
-      console.log("bps：" , result)
+
+  return eos.getProducers( { json: true, limit:999 } ).then( result => {
       return result;
   } );
 }

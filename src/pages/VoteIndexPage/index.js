@@ -182,7 +182,7 @@ class VoteIndexPage extends Component {
     render() {
 
 
-        const votedByMeProducers = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info.producers : [];
+      const votedByMeProducers = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info.producers : [];
 
       const { account_name, total_resources, self_delegated_bandwidth } = this.props.accountInfo;
       const { ram_bytes } = total_resources;

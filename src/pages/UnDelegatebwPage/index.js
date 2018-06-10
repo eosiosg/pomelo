@@ -56,19 +56,13 @@ class UnDelegatebwPage extends Component {
 
         const { self_delegated_bandwidth } = this.props.accountInfo;
 
-        console.log('================================');
-        console.log('delegate accountinfo: ', this.props.accountInfo)
-        console.log('delegate bandwith: ', self_delegated_bandwidth)
-        console.log('================================');
-
-
         let { cpu_weight, net_weight } = self_delegated_bandwidth ? self_delegated_bandwidth : { cpu_weight: "0 EOS", net_weight: "0 EOS"};
         this.cpu_weight = cpu_weight.split(' ')[0];
         this.net_weight = net_weight.split(' ')[0];
         const Stake = Number(this.cpu_weight) + Number(this.net_weight);
 
-        const CPU_placeholder = this.cpu_weight + " " + I18n.t("UnDelegatebwPage Available");
-        const Network_placeholder = this.net_weight + " " + I18n.t("UnDelegatebwPage Available");
+        const CPU_placeholder = "< " + this.cpu_weight + " " + I18n.t("UnDelegatebwPage Available");
+        const Network_placeholder = "< " + this.net_weight + " " + I18n.t("UnDelegatebwPage Available");
 
         const StakeCountIntl = I18n.t("UnDelegatebwPage StakeCount");
         const StakeCountInfoIntl = I18n.t("UnDelegatebwPage StakeCountInfo");

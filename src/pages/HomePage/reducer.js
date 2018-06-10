@@ -36,12 +36,7 @@ export default function HomePageReducer (state = initState, action) {
 
     case "HOME_MAINNETINFO_REDUCER":
 
-
         let defaultNet = action.data[0].chain_id?MAIN_NET_NAME:TEST_NET_NAME;
-
-        console.log('-------------------------')
-        console.log(defaultNet, action.data[0])
-
         return Object.assign({}, state, {
             mainNetInfo : action.data[0],
             testNetInfo : action.data[1],
