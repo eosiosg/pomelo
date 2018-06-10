@@ -48,12 +48,15 @@ async function getCurrencyBalance(action) {
 export function* getVoteIndexPageRefundsPost (action) {
   try {
     const response = yield call(getRefunds, action);
+    console.log('-------------------')
+    console.log(response);
     yield put({ type: "VOTEINDEX_SETREFUNDS_REDUCER", data: response });
   } catch (err) {
 
   }
 }
 async function getRefunds(action) {
+    console.log('!!!!! refunds!!!!')
   const eos = await GetEOS(action.data.accountPrivateKey);
   return eos.getTableRows({
     'json': true,
@@ -87,7 +90,9 @@ export function* getVoteIndexPageBpsPost (action) {
 }
 async function getBps(action) {
   const eos = await GetEOS(action.data.accountPrivateKey);
-  return eos.getProducers( { json: true } ).then( result => {
+  return eos.getProducers( { json: true, limit:5 } ).then( result => {
+      console.log("bps")
+      console.log("bps：" , result)
       return result;
   } );
 }

@@ -55,6 +55,13 @@ class UnDelegatebwPage extends Component {
     render() {
 
         const { delegated_bandwidth } = this.props.accountInfo;
+
+        console.log('================================');
+        console.log('delegate accountinfo: ', this.props.accountInfo)
+        console.log('delegate bandwith: ', delegated_bandwidth)
+        console.log('================================');
+
+
         let { cpu_weight, net_weight } = delegated_bandwidth ? delegated_bandwidth : { cpu_weight: "0 EOS", net_weight: "0 EOS"};
         this.cpu_weight = cpu_weight.split(' ')[0];
         this.net_weight = net_weight.split(' ')[0];

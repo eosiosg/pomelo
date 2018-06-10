@@ -39,7 +39,7 @@ export async function GetEOS( accountPrivateKey ) {
     try {
         const Eos = require( 'eosjs' );
         let config = await getConfig(accountPrivateKey);
-        let eos = Eos.Testnet( config );
+        let eos = Eos( config );
         return eos;
 
   } catch ( error ) {
