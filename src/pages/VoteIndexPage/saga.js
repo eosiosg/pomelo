@@ -87,7 +87,7 @@ export function* getVoteIndexPageBpsPost (action) {
 }
 async function getBps(action) {
   const eos = await GetEOS(action.data.accountPrivateKey);
-  return eos.getProducers( { json: true } ).then( result => {
+  return eos.getProducers( { json: true, limit:500 } ).then( result => {
       return result;
   } );
 }

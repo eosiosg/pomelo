@@ -56,13 +56,13 @@ class HomePage extends Component {
       })
     }
 
-  // componentWillReceiveProps( nextProps ) {
-  //  if(nextProps.defaultNet&&this.props.defaultNet!=nextProps.defaultNet){
-  //    this.setState({
-  //        netChosen :  nextProps.defaultNet
-  //    })
-  //  }
-  // }
+  componentWillReceiveProps( nextProps ) {
+   if(!this.state.netChosen){
+     this.setState({
+         netChosen :  nextProps.defaultNet
+     })
+   }
+  }
 
   componentWillMount() {
       this.isNeedInputPassword();
@@ -256,7 +256,6 @@ class HomePage extends Component {
           accountPrivateKey = '';
           this.props.onDispatchDelAccountNames();
       }
-      console.log('aaadf',netChosen),
       this.setState({
           netChosen,
           accountPrivateKey,

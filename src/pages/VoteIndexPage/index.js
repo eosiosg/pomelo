@@ -184,9 +184,9 @@ class VoteIndexPage extends Component {
 
         const votedByMeProducers = this.props.accountInfo.voter_info ? this.props.accountInfo.voter_info.producers : [];
 
-      const { account_name, total_resources, delegated_bandwidth } = this.props.accountInfo;
+      const { account_name, total_resources, self_delegated_bandwidth } = this.props.accountInfo;
       const { ram_bytes } = total_resources;
-      const { cpu_weight, net_weight } = delegated_bandwidth ? delegated_bandwidth : { cpu_weight: "0 EOS", net_weight: "0 EOS"};
+      const { cpu_weight, net_weight } = self_delegated_bandwidth ? self_delegated_bandwidth : { cpu_weight: "0 EOS", net_weight: "0 EOS"};
       const stake = Number(net_weight.split(' ')[0]) + Number(cpu_weight.split(' ')[0]);
       const CurrencyBalance = (this.props.CurrencyBalance).toFixed(2);
       const Refunds = this.props.Refunds;
@@ -362,7 +362,7 @@ function mapStateToProps(state) {
     // console.log('crrency balance: ', state.VoteIndexPageReducer.CurrencyBalance);
     // console.log('Refunds: ', state.VoteIndexPageReducer.Refunds);
     // console.log('totalVoteWeight: ', state.VoteIndexPageReducer.totalVoteWeight);
-    // console.log('delegated_bandwidth: ', state.VoteIndexPageReducer.accountInfo.delegated_bandwidth);
+    // console.log('self_delegated_bandwidth: ', state.VoteIndexPageReducer.accountInfo.self_delegated_bandwidth);
 
     return {
         accountInfo: state.VoteIndexPageReducer.accountInfo,

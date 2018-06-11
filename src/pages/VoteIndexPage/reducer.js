@@ -5,7 +5,7 @@
 const initState = {
   accountInfo: {
     account_name: "",
-    delegated_bandwidth: {
+    self_delegated_bandwidth: {
       cpu_weight: "",
       net_weight: "",
     },
