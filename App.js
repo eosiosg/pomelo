@@ -15,6 +15,7 @@ import DelegatebwPage from "./src/pages/DelegatebwPage";
 import UnDelegatebwPage from "./src/pages/UnDelegatebwPage";
 import NodeListPage from "./src/pages/NodeListPage";
 import ChangeNodeConnection from "./src/pages/ChangeNodeConnection";
+import ClaimRewardsPage from "./src/pages/ClaimRewardsPage";
 import I18n from "./I18n";
 // Navigator
 const Navigator = StackNavigator(
@@ -26,6 +27,7 @@ const Navigator = StackNavigator(
         NodeListPage: { screen: NodeListPage },
         DelegatebwPage: { screen: DelegatebwPage },
         UnDelegatebwPage: { screen: UnDelegatebwPage },
+        ClaimRewardsPage: { screen: ClaimRewardsPage },
     },
     {
         navigationOptions: {

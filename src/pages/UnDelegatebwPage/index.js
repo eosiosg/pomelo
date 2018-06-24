@@ -27,30 +27,6 @@ class UnDelegatebwPage extends Component {
         };
     }
 
-    // componentWillReceiveProps( nextProps ) {
-    //
-    //     if(nextProps.needGetUserInfo&&nextProps.needGetUserInfo!==this.props.needGetUserInfo){
-    //         this.props.setNeedGetUserInfoFalse();
-    //         storage.load({key: "HomePageStorage"}).then((ret1) => {
-    //             if (ret1) {
-    //                 const ret = decryptObject( ret1 );
-    //                 const accountPrivateKey = ret.accountPrivateKey;
-    //                 const accountName = ret.accountName;
-    //                 const data = {
-    //                     accountPrivateKey,
-    //                     accountName,
-    //                 };
-    //                 this.props.onDispatchGetAccountInfoPost(data);
-    //                 this.props.onDispatchGetRefundsPost(data);
-    //                 this.props.onDispatchGetCurrencyBalancePost(data);
-    //             }
-    //         }).catch( err => {
-    //             console.log(err);
-    //         });
-    //     }
-    //
-    // }
-
 
     render() {
 
@@ -74,7 +50,7 @@ class UnDelegatebwPage extends Component {
                 {
                     this.props.loading&&<LoadingView text="Waiting"/>
                 }
-            <View style={[styles.bodyBox,{flex:1}]}>
+            {/*<View style={[styles.bodyBox,{flex:1}]}>*/}
               <ScrollView>
                 <View style={[countStyles.countBox]}>
                   <View style={[countStyles.countItem, {borderBottomWidth: 0,}]}>
@@ -129,7 +105,7 @@ class UnDelegatebwPage extends Component {
                 <View style={btnStyles.btnBox}>
                     <Text style={btnStyles.btn} onPress={() => this.UnDelegatebwConfirmFn()}>{ConfirmIntl}</Text>
                 </View>
-            </View>
+            {/*</View>*/}
             </SafeAreaView>
         );
     }

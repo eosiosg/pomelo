@@ -88,6 +88,7 @@ class PasswordCheckComponent extends React.Component {
 
 
     checkPassword( password ) {
+
         setStorageAESKey( password );
 
         storage.load( { key: "PasswordInputPage" } ).then( ( ret1 ) => {

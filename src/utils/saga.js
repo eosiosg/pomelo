@@ -4,6 +4,7 @@ import { postVotingList } from "../pages/VotePage/saga";
 import { getVoteIndexPageAccountInfoPost, getVoteIndexPageCurrencyBalancePost, getVoteIndexPageRefundsPost, getVoteIndexPageBpsPost, getVoteIndexPageUsdPricePost,getNodesIDInfo } from "../pages/VoteIndexPage/saga";
 import { getDelegatebwPageAccountInfoPost, getDelegatebwPageCurrencyBalancePost, getDelegatebwPageConfirmPost } from "../pages/DelegatebwPage/saga";
 import { getUnDelegatebwPageAccountPost, getUnDelegatebwPageConfirmPost } from "../pages/UnDelegatebwPage/saga";
+import { claimRewards } from "../pages/ClaimRewardsPage/saga";
 
 /**
  * saga根函数，注册到store中；
@@ -22,4 +23,5 @@ export default function* SagaInit() {
     yield takeLatest("DELEGATEBW_CONFIRM_POST", getDelegatebwPageConfirmPost);
     yield takeLatest("UNDELEGATEBW_ACCOUNTINFO_POST", getUnDelegatebwPageAccountPost);
     yield takeLatest("UNDELEGATEBW_CONFIRM_POST", getUnDelegatebwPageConfirmPost);
+    yield takeLatest("CLAIMREWARDS_CLAIM_POST", claimRewards);
 }

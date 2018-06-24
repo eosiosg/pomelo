@@ -131,7 +131,7 @@ const ruleStyles = StyleSheet.create({
 });
 const btnStyles = StyleSheet.create({
   btnBox: {
-    position : "absolute",
+    // position : "absolute",
     bottom : 5,
     width : "96%",
     left: "2%",

@@ -104,5 +104,7 @@
   "Password Clear" : "Clear Passwords",
   "Password Invalid" : "Password is not the same",
   "Password Set Success" : "Password set success",
-  "Password Incorrect" : "Password is incorrect"
+  "Password Incorrect" : "Password is incorrect",
+
+  "ClaimRewards Title" : "Claim Rewards"
 }

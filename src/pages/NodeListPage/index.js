@@ -12,6 +12,7 @@ import { decryptObject, encryptObjectToString, storage } from "../../utils/stora
 const developTeam = require('../../images/developTeamBackground.png');
 import I18n from "../../../I18n";
 import { defaultLogoUrl } from '../../../config/configParams';
+import Toast from "react-native-root-toast";
 
 class NodeListPage extends Component {
     static navigationOptions = ( props ) => {
@@ -75,14 +76,23 @@ class NodeListPage extends Component {
         //     Toast.show( 'Please select Node' );
         //     return;
         // }
+
+        if(selectedNodes.length>30){
+            Toast.show( 'You can select 30 BPs at most',{position:36} );
+            return
+        }
+
         this.props.onDispatchSetSelectedNodeListDataPost( selectedNodes );
         this.props.navigation.navigate( "VotePage", { selectedNodeList: selectedNodes } );
     }
 
     addNode( nodeItem, index ) {
+
+        let selectedData = this.state.selectedData + 1;
+
         let allAsset = [].concat( this.state.allAsset );
         allAsset[ index ].voting = true;
-        let selectedData = this.state.selectedData + 1;
+
         this.setState( {
             allAsset,
             selectedData
@@ -132,19 +142,31 @@ class NodeListPage extends Component {
 
                         </Text>
                         <View style={[ {zIndex:-1}]}>
-                            {
-                                this.props.showLabel && this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground source={developTeam}
-                                                                                                       style={{
-                                                                                                           marginTop:5,
-                                                                                                           width: 120, height: 18,
-                                                                                                           paddingLeft: 5,
-                                                                                                           paddingRight: 5,
-                                                                                                       }}>
-                                    <Text style={{textAlign: "center", lineHeight: 18, fontSize:12, color: 'white'}}>
-                                        {I18n.t("Global Development Team")}
-                                    </Text>
-                                </ImageBackground>
-                            }
+                            <Text style={{
+                                      marginTop:5,
+                                      width: 80,
+                                      height: 18,
+                                      color:'#000',
+                                      paddingLeft: 5,
+                                      fontFamily:"Times New Roman",
+                                      fontStyle:"italic",
+                                      paddingRight: 5,
+                                  }}>
+                                Ranking: {item.rank + 1}
+                            </Text>
+                            {/*{*/}
+                                {/*this.props.showLabel && this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground source={developTeam}*/}
+                                                                                                       {/*style={{*/}
+                                                                                                           {/*marginTop:5,*/}
+                                                                                                           {/*width: 120, height: 18,*/}
+                                                                                                           {/*paddingLeft: 5,*/}
+                                                                                                           {/*paddingRight: 5,*/}
+                                                                                                       {/*}}>*/}
+                                    {/*<Text style={{textAlign: "center", lineHeight: 18, fontSize:12, color: 'white'}}>*/}
+                                        {/*{I18n.t("Global Development Team")}*/}
+                                    {/*</Text>*/}
+                                {/*</ImageBackground>*/}
+                            {/*}*/}
                         </View>
                     </View>
                     <Text numberOfLines={1}

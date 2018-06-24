@@ -58,6 +58,7 @@ class VoteIndexPage extends Component {
                     this.props.onDispatchGetAccountInfoPost(data);
                     this.props.onDispatchGetRefundsPost(data);
                     this.props.onDispatchGetCurrencyBalancePost(data);
+                    this.props.onDispatchGetVoteBpsPost(data);
                 }
             }).catch( err => {
               console.log(err);
@@ -129,20 +130,33 @@ class VoteIndexPage extends Component {
                     </Text>
 
                     <View style={[ {zIndex:-1}]}>
-                        {
-                           this.props.showLabel && this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground  source={developTeam}
-                                                                                                    style={{
-                                                                                                        marginTop:5,
-                                width: 130, height: 18,
-                                paddingLeft: 10,
-                                paddingRight: 10,
-                            }}>
-                                <Text style={{textAlign: "center", lineHeight: 18, fontSize:12, color: 'white'}}>
 
-                                    {I18n.t("Global Development Team")}
-                                </Text>
-                            </ImageBackground>
-                        }
+                        <Text style={{
+                            marginTop:5,
+                            width: 80,
+                            height: 18,
+                            color:'#000',
+                            paddingLeft: 5,
+                            fontFamily:"Times New Roman",
+                            fontStyle:"italic",
+                            paddingRight: 5,
+                        }}>
+                            Ranking: {item.rank + 1}
+                        </Text>
+                        {/*{*/}
+                           {/*this.props.showLabel && this.props.contributors.indexOf(item.owner) !== -1 && <ImageBackground  source={developTeam}*/}
+                                                                                                    {/*style={{*/}
+                                                                                                        {/*marginTop:5,*/}
+                                {/*width: 130, height: 18,*/}
+                                {/*paddingLeft: 10,*/}
+                                {/*paddingRight: 10,*/}
+                            {/*}}>*/}
+                                {/*<Text style={{textAlign: "center", lineHeight: 18, fontSize:12, color: 'white'}}>*/}
+
+                                    {/*{I18n.t("Global Development Team")}*/}
+                                {/*</Text>*/}
+                            {/*</ImageBackground>*/}
+                        {/*}*/}
                     </View>
                 </View>
                 <Text numberOfLines={1}
@@ -205,6 +219,8 @@ class VoteIndexPage extends Component {
       const RevoteIntl = I18n.t("VoteIndexPage Revote");
       const VotedBpsIntl = I18n.t("VoteIndexPage VotedBps");
 
+      const BPSelfInfo = BPs.filter(BP => BP.owner == account_name);
+
         return (
             <SafeAreaView style={[{flex:1}]}>
             <View style={styles.bodyBox}>
@@ -256,6 +272,18 @@ class VoteIndexPage extends Component {
                       </View>
                     </View>
                   </View>
+
+                    {
+                        BPSelfInfo.length > 0 && <View style={voteStyles.contentVoteBox}>
+                            <View style={voteStyles.voteItemList}>
+                                <TouchableOpacity style={[voteStyles.voteItem,{borderTopWidth: 0,}]} onPress={() => {this.props.navigation.navigate("ClaimRewardsPage", {BPSelfInfo:BPSelfInfo[0]})}}>
+                                    <Text>Claim Rewards</Text>
+                                    <Image style={[voteStyles.voteItemActionIcon, {width: 16, height: 20,}]} source={arrowRightAccount} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    }
+
                   <View style={voteStyles.contentVoteBox}>
                     <Text style={voteStyles.voteTitle}>{VoteIntl}</Text>
                     <Text style={voteStyles.voteDesc}>{VoteDescIntl}</Text>

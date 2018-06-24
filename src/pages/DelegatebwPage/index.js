@@ -53,8 +53,6 @@ class DelegatebwPage extends Component {
       const ConfirmIntl = I18n.t("DelegatebwPage Confirm");
 
 
-
-
         return (
             <SafeAreaView style={[{flex:1}]}>
                 {

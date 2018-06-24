@@ -219,7 +219,7 @@ class VotePage extends Component {
                 </View>
             </ScrollView>
 
-                <View style = {[styles.footerView,]}>
+                <View style = {[styles.footerView]}>
                     <Text style={styles.footerSubmit}
                           onPress={this._setNoticeModalShow.bind(this)}>
                         {submit}

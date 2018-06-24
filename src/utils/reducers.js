@@ -5,6 +5,8 @@ import VoteIndexPageReducer from "../pages/VoteIndexPage/reducer";
 import DelegatebwPageReducer from "../pages/DelegatebwPage/reducer";
 import UnDelegatebwPageReducer from "../pages/UnDelegatebwPage/reducer";
 import PasswordInputPageReducer from "../pages/PasswordInputPage/reducer";
+import ClaimRewardsReducer from "../pages/ClaimRewardsPage/reducer";
+
 
 const reducers = {
     HomePageReducer,
@@ -13,7 +15,8 @@ const reducers = {
     VoteIndexPageReducer,
     DelegatebwPageReducer,
     UnDelegatebwPageReducer,
-    PasswordInputPageReducer
+    PasswordInputPageReducer,
+    ClaimRewardsReducer
 };
 
 export default reducers;

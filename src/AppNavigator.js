@@ -7,6 +7,7 @@ import DelegatebwPage from "./pages/DelegatebwPage";
 import NodeListPage from "./pages/NodeListPage";
 import ChangeNodeConnection from "./pages/ChangeNodeConnection";
 import UnDelegatebwPage from "./pages/UnDelegatebwPage";
+import ClaimRewardsPage from "./pages/ClaimRewardsPage";
 
 export const AppNavigator = StackNavigator(
     {
@@ -18,6 +19,7 @@ export const AppNavigator = StackNavigator(
         ChangeNodeConnection: { screen: ChangeNodeConnection },
         UnDelegatebwPage: { screen: UnDelegatebwPage },
         PasswordInputPage: { screen: PasswordInputPage },
+        ClaimRewardsPage: { screen: ClaimRewardsPage },
     },
     {
         navigationOptions: {

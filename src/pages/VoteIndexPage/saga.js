@@ -34,6 +34,7 @@ export function* getVoteIndexPageCurrencyBalancePost (action) {
 async function getCurrencyBalance(action) {
   const eos = await GetEOS(action.data.accountPrivateKey);
   return eos.getCurrencyBalance( { "code": "eosio.token", "account": action.data.accountName }).then(( res ) => {
+
       if(!res){
         return 0
       }else if(!res.length){
@@ -166,11 +167,11 @@ function sortBPS(){
     let tmpDic = {};
 
 
-    BPS.map((bp)=>{
+    BPS.map((bp, rank)=>{
         if(contributors.indexOf(bp.owner) !== -1 ){
-            tmpDic[bp.owner] = bp;
+            tmpDic[bp.owner] = {...bp, rank};
         }else{
-            normalBPS.push(bp);
+            normalBPS.push({...bp, rank});
         }
     });
 
