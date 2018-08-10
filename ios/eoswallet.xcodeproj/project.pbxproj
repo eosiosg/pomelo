@@ -26,6 +26,8 @@
 		4F5306CB1A444CA9B2658BEF /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37F44F880B79467A8C952AC6 /* FontAwesome.ttf */; };
 		5A571E956424441599B3A0BD /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44C428EA52CA425997CE8846 /* SimpleLineIcons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		7416D4E9211197B700CF716A /* libreact-native-camera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7416D4E8211197B700CF716A /* libreact-native-camera.a */; };
+		7416D56C21119F3500CF716A /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7416D56B21119F3500CF716A /* libReactNativePermissions.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		87B42434FC764AF886466612 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F0904CEC21F7465FB3E04F8D /* Zocial.ttf */; };
 		8E7856127701490B83E05477 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63DBBD0BEBC24A6E8D71468B /* MaterialCommunityIcons.ttf */; };
@@ -376,6 +378,8 @@
 		6FF48AA6D5CD8B5524114B3C /* libPods-eoswalletTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-eoswalletTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		71830E1E28C1441A9D98F1E5 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/ios/RNI18n.xcodeproj"; sourceTree = "<group>"; };
 		72FE9B829D584235958C8B6C /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		7416D4E8211197B700CF716A /* libreact-native-camera.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-camera.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7416D56B21119F3500CF716A /* libReactNativePermissions.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactNativePermissions.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		74BB8F5C20C4241E00073A12 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -405,6 +409,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7416D56C21119F3500CF716A /* libReactNativePermissions.a in Frameworks */,
+				7416D4E9211197B700CF716A /* libreact-native-camera.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -550,6 +556,8 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7416D56B21119F3500CF716A /* libReactNativePermissions.a */,
+				7416D4E8211197B700CF716A /* libreact-native-camera.a */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
 				D60B592D09542CDDCE395B7F /* libPods-eoswallet.a */,
 				6FF48AA6D5CD8B5524114B3C /* libPods-eoswalletTests.a */,

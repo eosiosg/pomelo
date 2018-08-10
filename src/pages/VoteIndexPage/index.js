@@ -38,8 +38,6 @@ class VoteIndexPage extends Component {
           cuntDownTime: "0d 00h",
           IsModalShow: false,
         };
-
-
     }
 
     componentWillReceiveProps( nextProps ) {

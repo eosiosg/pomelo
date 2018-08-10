@@ -28,7 +28,7 @@ export default function ClaimRewardsReducer (state = initState, action) {
                 position: 36,
             });
             return Object.assign({}, state, {
-                "isClaiming": false
+              "isClaiming": false
             });
 
         default:

@@ -1,7 +1,7 @@
 // 引入公共组件
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaView } from "react-native";
+import {ScrollView, Text, View, Image, TouchableOpacity, TextInput, SafeAreaView, Linking } from "react-native";
 // 自定义组件
 import Toast from "react-native-root-toast";
 import I18n from "../../../I18n";
@@ -13,6 +13,9 @@ const NoNegative = I18n.t("DelegatebwPage NoNegative");
 const UseValidValue = I18n.t("DelegatebwPage UseValidValue");
 const NoEnoughBW = I18n.t("DelegatebwPage NoEnoughBW");
 const Available = I18n.t("DelegatebwPage Available");
+
+import QRCodeScanner from 'react-native-qrcode-scanner';
+// import { RNCamera } from 'react-native-camera';
 
 class DelegatebwPage extends Component {
     static navigationOptions = ( props ) => {
@@ -52,6 +55,81 @@ class DelegatebwPage extends Component {
       // const Rule4Intl = I18n.t("DelegatebwPage Rule4");
       const ConfirmIntl = I18n.t("DelegatebwPage Confirm");
 
+
+
+
+
+      // return <View style={styles.container}>
+      //   <RNCamera
+      //     ref={ref => {
+      //       this.camera = ref;
+      //     }}
+      //     style = {styles.preview}
+      //     type={RNCamera.Constants.Type.back}
+      //     flashMode={RNCamera.Constants.FlashMode.on}
+      //     permissionDialogTitle={'Permission to use camera'}
+      //     permissionDialogMessage={'We need your permission to use your camera phone'}
+      //   />
+      //   <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center',}}>
+      //     <TouchableOpacity
+      //       onPress={this.takePicture.bind(this)}
+      //       style = {styles.capture}
+      //     >
+      //       <Text style={{fontSize: 14}}> SNAP </Text>
+      //     </TouchableOpacity>
+      //   </View>
+      // </View>
+
+
+
+
+
+
+
+
+
+      // const styless = StyleSheet.create({
+      //   centerText: {
+      //     flex: 1,
+      //     fontSize: 18,
+      //     padding: 32,
+      //     color: '#777',
+      //   },
+      //   textBold: {
+      //     fontWeight: '500',
+      //     color: '#000',
+      //   },
+      //   buttonText: {
+      //     fontSize: 21,
+      //     color: 'rgb(0,122,255)',
+      //   },
+      //   buttonTouchable: {
+      //     padding: 16,
+      //   },
+      // });
+
+      // onSuccess(e){
+      //   Linking
+      //     .openURL(e.data)
+      //     .catch(err => console.error('An error occured', err));
+      // }
+
+
+//       return (
+//   <QRCodeScanner
+//     // onRead={this.onSuccess.bind(this)}
+//     topContent={
+//       <Text style={styles.centerText}>
+//         Go to <Text style={styless.textBold}>wikipedia.org/wiki/QR_code</Text> on your computer and scan the QR code.
+//       </Text>
+//     }
+//     bottomContent={
+//       <TouchableOpacity style={styless.buttonTouchable}>
+//         <Text style={styless.buttonText}>OK. Got it!</Text>
+//       </TouchableOpacity>
+//     }
+//   />
+// )
 
         return (
             <SafeAreaView style={[{flex:1}]}>

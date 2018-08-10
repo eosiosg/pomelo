@@ -19,6 +19,18 @@ target 'eoswallet' do
   common_pods
 
 #pod 'rn-splash-screen', :path => '../node_modules/rn-splash-screen'
+pod 'React', :path => '../node_modules/react-native'
+
+pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+
+
+
+
+
+
+pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
+pod 'ReactNativePermissions', :path => '../node_modules/react-native-permissions'
 
 #  target 'eoswalletTests' do
 #    inherit! :search_paths

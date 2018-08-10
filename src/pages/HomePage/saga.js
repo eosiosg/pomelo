@@ -8,7 +8,6 @@ const noAccount = I18n.t( "HomePage NoAccountFound" );
 const somethingWrong = I18n.t( "HomePage SomethingWrong" );
 const invalidPriKey = I18n.t( "HomePage InvalidPrivateKey" );
 
-
 export function* getHomeAccountName (action) {
   try {
       const response = yield call(getAccountName , action.data);
