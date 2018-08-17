@@ -48,7 +48,6 @@ export function* getDelegatebwPageConfirmPost (action) {
   }
 }
 async function delegatebw(action) {
-
   const eos = await GetEOS(action.accountPrivateKey);
   return eos.transaction( tr => {
     tr.delegatebw(action.data);
